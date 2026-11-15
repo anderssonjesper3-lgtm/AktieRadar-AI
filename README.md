@@ -1,0 +1,2 @@
+# AktieRadar-AI
+Aktieradar

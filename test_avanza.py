@@ -3,19 +3,16 @@ from fastmcp import Client
 from avanza_mcp import mcp
 
 async def main():
-    print("AktieRadar AI - Avanza test 2")
-    print("Soker efter Saab B...")
+    print("AktieRadar AI - Avanza test 3")
+    print("Hamtar riktig kurs for Saab B...")
 
     async with Client(mcp) as client:
         result = await client.call_tool(
-            "search_instruments",
-            {
-                "query": "Saab",
-                "instrument_type": "stock"
-            }
+            "get_stock_quote",
+            {"order_book_id": "5401"}
         )
 
-        print("Sokresultat:")
+        print("RESULTAT:")
         print(result.structured_content)
 
 asyncio.run(main())

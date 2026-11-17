@@ -31,7 +31,74 @@ def calculate_ema(values, period):
 
     return result
 
+def calculate_rsi(values, period=14):
+    result = [None] * len(values)
 
+    if len(values) <= period:
+        return result
+
+    changes = [
+        values[i] - values[i - 1]
+        for i in range(1, len(values))
+    ]
+
+    gains = [max(change, 0) for change in changes]
+    losses = [max(-change, 0) for change in changes]
+
+    avg_gain = sum(gains[:period]) / period
+    avg_loss = sum(losses[:period]) / period
+
+    def rsi_value(gain, loss):
+        if gain == 0 and loss == 0:
+            return 50.0
+        if loss == 0:
+            return 100.0
+        rs = gain / loss
+        return 100 - 100 / (1 + rs)
+
+    result[period] = rsi_value(avg_gain, avg_loss)
+
+    for i in range(period + 1, len(values)):
+        avg_gain = (
+            avg_gain * (period - 1) + gains[i - 1]
+        ) / period
+
+        avg_loss = (
+            avg_loss * (period - 1) + losses[i - 1]
+        ) / period
+
+        result[i] = rsi_value(avg_gain, avg_loss)
+
+    return result
+
+
+def calculate_macd(values):
+    ema12 = calculate_ema(values, 12)
+    ema26 = calculate_ema(values, 26)
+
+    macd = [None] * len(values)
+
+    for i in range(len(values)):
+        if ema12[i] is not None and ema26[i] is not None:
+            macd[i] = ema12[i] - ema26[i]
+
+    valid = [v for v in macd if v is not None]
+    signal_valid = calculate_ema(valid, 9)
+
+    signal = [None] * len(values)
+    histogram = [None] * len(values)
+
+    j = 0
+    for i, value in enumerate(macd):
+        if value is not None:
+            signal[i] = signal_valid[j]
+
+            if signal[i] is not None:
+                histogram[i] = value - signal[i]
+
+            j += 1
+
+    return macd, signal, histogram
 async def main():
     print("AktieRadar AI - Avanza test 8")
     print("Beraknar EMA 9 och EMA 21...")
@@ -120,7 +187,19 @@ async def main():
 
     ema9 = calculate_ema(closes, 9)
     ema21 = calculate_ema(closes, 21)
+rsi14 = calculate_rsi(closes, 14)
+    macd, macd_signal, macd_hist = calculate_macd(closes)
 
+    print("\nSENASTE FEM RSI- OCH MACD-VARDENA:")
+
+    for i in range(max(0, len(candles) - 5), len(candles)):
+        print(
+            candles[i]["time"].strftime("%H:%M"),
+            "RSI:", round(rsi14[i], 2) if rsi14[i] is not None else None,
+            "MACD:", round(macd[i], 4) if macd[i] is not None else None,
+            "SIGNAL:", round(macd_signal[i], 4) if macd_signal[i] is not None else None,
+            "HIST:", round(macd_hist[i], 4) if macd_hist[i] is not None else None
+        )
     print("KOMPLETTA LJUS:", len(candles))
     print("OVERHOPPADE PERIODER:", len(skipped))
     print("OVERHOPPADE TIDER:", skipped)

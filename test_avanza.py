@@ -1,19 +1,21 @@
-import requests
+import asyncio
+from fastmcp import Client
+from avanza_mcp import mcp
 
-url = "https://www.avanza.se/_api/market-guide/stock/"
+async def main():
+    print("AktieRadar AI - Avanza test 2")
+    print("Soker efter Saab B...")
 
-print("AktieRadar AI – testar Avanza")
+    async with Client(mcp) as client:
+        result = await client.call_tool(
+            "search_instruments",
+            {
+                "query": "Saab",
+                "instrument_type": "stock"
+            }
+        )
 
-try:
-    response = requests.get(url, timeout=10)
+        print("Sokresultat:")
+        print(result.structured_content)
 
-    print("HTTP-status:", response.status_code)
-
-    if response.ok:
-        print("Kontakt med servern lyckades!")
-        print("Svarstyp:", response.headers.get("Content-Type"))
-    else:
-        print("Servern svarade, men anropet godkändes inte.")
-
-except requests.RequestException as error:
-    print("Kunde inte ansluta:", error)
+asyncio.run(main())

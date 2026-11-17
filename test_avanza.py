@@ -187,7 +187,7 @@ async def main():
 
     ema9 = calculate_ema(closes, 9)
     ema21 = calculate_ema(closes, 21)
-rsi14 = calculate_rsi(closes, 14)
+    rsi14 = calculate_rsi(closes, 14)
     macd, macd_signal, macd_hist = calculate_macd(closes)
 
     print("\nSENASTE FEM RSI- OCH MACD-VARDENA:")

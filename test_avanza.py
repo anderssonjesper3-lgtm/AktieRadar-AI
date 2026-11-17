@@ -3,19 +3,21 @@ from fastmcp import Client
 from avanza_mcp import mcp
 
 async def main():
-    print("AktieRadar AI - Avanza test 4")
-    print("Undersoker historiska kursdata...")
+    print("AktieRadar AI - Avanza test 5")
+    print("Hamtar dagens kurshistorik for Saab B...")
 
     async with Client(mcp) as client:
-        tools = await client.list_tools()
+        result = await client.call_tool(
+            "get_stock_chart",
+            {
+                "order_book_id": "5401",
+                "time_period": "today",
+                "offset": 0,
+                "limit": 5
+            }
+        )
 
-        for tool in tools:
-            if tool.name == "get_stock_chart":
-                print("FUNKTION:", tool.name)
-                print("BESKRIVNING:", tool.description)
-                print("INSTÄLLNINGAR:", tool.inputSchema)
-                return
-
-        print("Funktionen hittades inte.")
+        print("RESULTAT:")
+        print(result.structured_content)
 
 asyncio.run(main())

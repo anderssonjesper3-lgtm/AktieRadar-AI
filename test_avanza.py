@@ -569,7 +569,7 @@ async def main():
                 "GODKAND TID:",
                 candles[i]["time"].strftime("%H:%M")
             )
-     print("\nPOANG + LOKALT DATASKYDD:")
+    print("\nPOANG + LOKALT DATASKYDD:")
 
     for i, item in enumerate(scores):
         if item is None:

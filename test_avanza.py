@@ -273,6 +273,47 @@ def inspect_missing_minutes(raw_candles, skipped_times):
             "SAKNADE MINUTER:",
             missing
         )    
+def check_data_quality(groups):
+    print("\nAKTIERADAR AI - DATASKYDD:")
+
+    complete = 0
+    incomplete = 0
+
+    for start, group in sorted(groups.items()):
+        actual_minutes = {
+            dt.replace(second=0, microsecond=0)
+            for dt, _ in group
+        }
+
+        expected_minutes = {
+            start.replace(minute=start.minute + i)
+            for i in range(5)
+        }
+
+        if actual_minutes == expected_minutes:
+            complete += 1
+        else:
+            incomplete += 1
+
+    total = complete + incomplete
+
+    if total == 0:
+        print("STATUS: INGEN DATA")
+        return False
+
+    quality = complete / total * 100
+
+    print("KOMPLETTA:", complete)
+    print("OFULLSTANDIGA:", incomplete)
+    print("DATAKVALITET:", round(quality, 1), "%")
+
+    if incomplete == 0:
+        print("STATUS: ALLA PERIODER KOMPLETTA")
+        return True
+    else:
+        print("STATUS: DATA-LUCKOR UPPTACKTA")
+        print("SIGNALER KRAVER EXTRA KONTROLL")
+        return False        
 async def main():
     print("AktieRadar AI - Avanza test 8")
     print("Beraknar EMA 9 och EMA 21...")
@@ -480,6 +521,9 @@ async def main():
     print("KOMPLETTA LJUS:", len(candles))
     print("OVERHOPPADE PERIODER:", len(skipped))
     print("OVERHOPPADE TIDER:", skipped)
+    data_quality_ok = check_data_quality(groups)
+    print("DATASKYDD GODKANT:", data_quality_ok)
+
     print("\nSAKNADE MINUTER I VARJE PERIOD:")
 
     for start, group in sorted(groups.items()):

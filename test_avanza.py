@@ -386,7 +386,7 @@ async def main():
             found += 1
 
     print("ANTAL MONSTER:", found)   
-     scores = calculate_signal_scores(
+    scores = calculate_signal_scores(
         candles,
         ema9,
         ema21,

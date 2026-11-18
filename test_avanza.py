@@ -327,7 +327,23 @@ def check_buy_signal(score, data_quality_ok):
     if score >= 50:
         return "VAKTA - INTRESSANT LAGE"
 
-    return "AVVAKTA"        
+    return "AVVAKTA"   
+def check_local_data_quality(candles, index, lookback=20):
+    if index < lookback - 1:
+        return False
+
+    from datetime import timedelta
+
+    start_index = index - lookback + 1
+
+    for i in range(start_index + 1, index + 1):
+        previous = candles[i - 1]["time"]
+        current = candles[i]["time"]
+
+        if current - previous != timedelta(minutes=5):
+            return False
+
+    return True    
 async def main():
     print("AktieRadar AI - Avanza test 8")
     print("Beraknar EMA 9 och EMA 21...")
@@ -537,6 +553,22 @@ async def main():
     print("OVERHOPPADE TIDER:", skipped)
     data_quality_ok = check_data_quality(groups)
     print("DATASKYDD GODKANT:", data_quality_ok)
+    print("\nAKTIERADAR AI - LOKALT DATASKYDD:")
+
+    local_ok = [
+        check_local_data_quality(candles, i)
+        for i in range(len(candles))
+    ]
+
+    print("GODKANDA LJUS:", sum(local_ok))
+    print("BLOCKERADE LJUS:", len(local_ok) - sum(local_ok))
+
+    for i in range(len(candles)):
+        if local_ok[i]:
+            print(
+                "GODKAND TID:",
+                candles[i]["time"].strftime("%H:%M")
+            )
     print("\nAKTIERADAR AI - SIGNALSPARR:")
 
     if valid_scores:

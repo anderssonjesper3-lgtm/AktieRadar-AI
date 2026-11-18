@@ -248,7 +248,31 @@ def calculate_signal_scores(
             "reasons": reasons
         })
 
-    return scores    
+    return scores 
+def inspect_missing_minutes(raw_candles, skipped_times):
+    print("\nKONTROLL AV DATA-LUCKOR:")
+
+    from datetime import timedelta
+
+    available = {
+        candle["time"].replace(second=0, microsecond=0)
+        for candle in raw_candles
+    }
+
+    for start in skipped_times:
+        missing = []
+
+        for minute in range(5):
+            expected = start + timedelta(minutes=minute)
+
+            if expected not in available:
+                missing.append(expected.strftime("%H:%M"))
+
+        print(
+            start.strftime("%H:%M"),
+            "SAKNADE MINUTER:",
+            missing
+        )    
 async def main():
     print("AktieRadar AI - Avanza test 8")
     print("Beraknar EMA 9 och EMA 21...")
@@ -456,7 +480,32 @@ async def main():
     print("KOMPLETTA LJUS:", len(candles))
     print("OVERHOPPADE PERIODER:", len(skipped))
     print("OVERHOPPADE TIDER:", skipped)
+    print("\nSAKNADE MINUTER I VARJE PERIOD:")
 
+    for start, group in sorted(groups.items()):
+        if start.strftime("%H:%M") not in skipped:
+            continue
+
+        actual = {
+            dt.strftime("%H:%M")
+            for dt, _ in group
+        }
+
+        expected = [
+            start.replace(minute=start.minute + i).strftime("%H:%M")
+            for i in range(5)
+        ]
+
+        missing = [
+            minute for minute in expected
+            if minute not in actual
+        ]
+
+        print(
+            start.strftime("%H:%M"),
+            "SAKNAS:", missing,
+            "FINNS:", sorted(actual)
+        )
     print("\nSENASTE FEM EMA-VARDENA:")
 
     for i in range(max(0, len(candles) - 5), len(candles)):

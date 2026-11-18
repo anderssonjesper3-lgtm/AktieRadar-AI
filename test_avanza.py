@@ -99,6 +99,40 @@ def calculate_macd(values):
             j += 1
 
     return macd, signal, histogram
+def calculate_relative_volume(candles, period=20):
+    result = [None] * len(candles)
+
+    for i in range(period, len(candles)):
+        # Jämför med de 20 föregående ljusen
+        previous = candles[i-period:i]
+
+        # Beräkna bara när alla ljus är sammanhängande
+        continuous = all(
+            (
+                previous[j]["time"] -
+                previous[j-1]["time"]
+            ).total_seconds() == 300
+            for j in range(1, len(previous))
+        )
+
+        continuous = continuous and (
+            candles[i]["time"] -
+            previous[-1]["time"]
+        ).total_seconds() == 300
+
+        if not continuous:
+            continue
+
+        average_volume = sum(
+            c["volume"] for c in previous
+        ) / period
+
+        if average_volume > 0:
+            result[i] = (
+                candles[i]["volume"] / average_volume
+            )
+
+    return result
 async def main():
     print("AktieRadar AI - Avanza test 8")
     print("Beraknar EMA 9 och EMA 21...")
@@ -200,6 +234,26 @@ async def main():
             "SIGNAL:", round(macd_signal[i], 4) if macd_signal[i] is not None else None,
             "HIST:", round(macd_hist[i], 4) if macd_hist[i] is not None else None
         )
+    relative_volume = calculate_relative_volume(candles)
+
+    print("\nSENASTE FEM VOLYMVARDENA:")
+
+    for i in range(max(0, len(candles) - 5), len(candles)):
+        rv = relative_volume[i]
+
+        if rv is None:
+            print(
+                candles[i]["time"].strftime("%H:%M"),
+                "Volym:", candles[i]["volume"],
+                "Relativ volym: EJ BERAKNAD"
+            )
+        else:
+            print(
+                candles[i]["time"].strftime("%H:%M"),
+                "Volym:", candles[i]["volume"],
+                "Relativ volym:", round(rv, 2),
+                "STARK VOLYM:", rv > 1.5
+            )    
     print("KOMPLETTA LJUS:", len(candles))
     print("OVERHOPPADE PERIODER:", len(skipped))
     print("OVERHOPPADE TIDER:", skipped)

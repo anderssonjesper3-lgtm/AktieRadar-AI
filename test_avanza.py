@@ -313,7 +313,21 @@ def check_data_quality(groups):
     else:
         print("STATUS: DATA-LUCKOR UPPTACKTA")
         print("SIGNALER KRAVER EXTRA KONTROLL")
-        return False        
+        return False     
+def check_buy_signal(score, data_quality_ok):
+    if not data_quality_ok:
+        return "BLOCKERAD - DATAKVALITET"
+
+    if score is None:
+        return "BLOCKERAD - INDIKATORER SAKNAS"
+
+    if score >= 70:
+        return "KOP? - KANDIDAT"
+
+    if score >= 50:
+        return "VAKTA - INTRESSANT LAGE"
+
+    return "AVVAKTA"        
 async def main():
     print("AktieRadar AI - Avanza test 8")
     print("Beraknar EMA 9 och EMA 21...")
@@ -523,7 +537,22 @@ async def main():
     print("OVERHOPPADE TIDER:", skipped)
     data_quality_ok = check_data_quality(groups)
     print("DATASKYDD GODKANT:", data_quality_ok)
+    print("\nAKTIERADAR AI - SIGNALSPARR:")
 
+    if valid_scores:
+        best_score = max(
+            item["score"] for item in valid_scores
+        )
+    else:
+        best_score = None
+
+    signal_status = check_buy_signal(
+        best_score,
+        data_quality_ok
+    )
+
+    print("HOGSTA POANG:", best_score)
+    print("SIGNALSTATUS:", signal_status)
     print("\nSAKNADE MINUTER I VARJE PERIOD:")
 
     for start, group in sorted(groups.items()):

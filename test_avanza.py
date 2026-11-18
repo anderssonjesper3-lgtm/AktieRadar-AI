@@ -133,6 +133,51 @@ def calculate_relative_volume(candles, period=20):
             )
 
     return result
+def detect_candlestick_patterns(candles):
+    results = []
+
+    for i, candle in enumerate(candles):
+        op = candle["open"]
+        cl = candle["close"]
+        hi = candle["high"]
+        lo = candle["low"]
+
+        body = abs(cl - op)
+        upper_wick = hi - max(op, cl)
+        lower_wick = min(op, cl) - lo
+
+        # Gron hammer enligt var ursprungliga strategi
+        hammer = (
+            cl > op
+            and lower_wick >= 2 * max(body, 0.01)
+            and upper_wick <= max(body, 0.01)
+        )
+
+        engulfing = False
+
+        if i > 0:
+            previous = candles[i - 1]
+
+            # Jamfor bara intilliggande 5-minutersljus
+            consecutive = (
+                candle["time"] - previous["time"]
+            ).total_seconds() == 300
+
+            engulfing = (
+                consecutive
+                and cl > op
+                and previous["close"] < previous["open"]
+                and cl >= previous["open"]
+                and op <= previous["close"]
+            )
+
+        results.append({
+            "time": candle["time"],
+            "hammer": hammer,
+            "engulfing": engulfing
+        })
+
+    return results    
 async def main():
     print("AktieRadar AI - Avanza test 8")
     print("Beraknar EMA 9 och EMA 21...")
@@ -254,6 +299,22 @@ async def main():
                 "Relativ volym:", round(rv, 2),
                 "STARK VOLYM:", rv > 1.5
             )    
+    patterns = detect_candlestick_patterns(candles)
+
+    print("\nCANDLESTICK-MONSTER:")
+
+    found = 0
+
+    for pattern in patterns:
+        if pattern["engulfing"] or pattern["hammer"]:
+            print(
+                pattern["time"].strftime("%H:%M"),
+                "ENGULFING:", pattern["engulfing"],
+                "HAMMER:", pattern["hammer"]
+            )
+            found += 1
+
+    print("ANTAL MONSTER:", found)        
     print("KOMPLETTA LJUS:", len(candles))
     print("OVERHOPPADE PERIODER:", len(skipped))
     print("OVERHOPPADE TIDER:", skipped)

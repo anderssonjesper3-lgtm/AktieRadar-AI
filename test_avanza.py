@@ -569,6 +569,19 @@ async def main():
                 "GODKAND TID:",
                 candles[i]["time"].strftime("%H:%M")
             )
+     print("\nPOANG + LOKALT DATASKYDD:")
+
+    for i, item in enumerate(scores):
+        if item is None:
+            continue
+
+        if item["score"] >= 40:
+            print(
+                item["time"].strftime("%H:%M"),
+                "POANG:", item["score"],
+                "LOKALT SKYDD:", local_ok[i],
+                "STATUS: ENDAST TEST"
+            )        
     print("\nAKTIERADAR AI - SIGNALSPARR:")
 
     if valid_scores:

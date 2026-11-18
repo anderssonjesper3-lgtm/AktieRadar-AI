@@ -177,7 +177,78 @@ def detect_candlestick_patterns(candles):
             "engulfing": engulfing
         })
 
-    return results    
+    return results   
+def calculate_signal_scores(
+    candles, ema9, ema21, rsi14,
+    macd_hist, relative_volume, patterns
+):
+    scores = []
+
+    for i, candle in enumerate(candles):
+        score = 0
+        reasons = []
+
+        # Vi behöver tillräcklig historik.
+        if i == 0:
+            scores.append(None)
+            continue
+
+        required = (
+            ema9[i], ema21[i],
+            rsi14[i], rsi14[i - 1],
+            macd_hist[i], macd_hist[i - 1],
+            relative_volume[i]
+        )
+
+        if any(value is None for value in required):
+            scores.append(None)
+            continue
+
+        # Bullish engulfing: 20 poang
+        if patterns[i]["engulfing"]:
+            score += 20
+            reasons.append("Engulfing")
+
+        # Hammer: 15 poang
+        if patterns[i]["hammer"]:
+            score += 15
+            reasons.append("Hammer")
+
+        # RSI stiger och ligger mellan 50 och 70: 15
+        if (
+            50 < rsi14[i] < 70
+            and rsi14[i] > rsi14[i - 1]
+        ):
+            score += 15
+            reasons.append("Stark RSI")
+
+        # MACD-histogram positivt och stigande: 15
+        if (
+            macd_hist[i] > 0
+            and macd_hist[i] > macd_hist[i - 1]
+        ):
+            score += 15
+            reasons.append("Stark MACD")
+
+        # Volym over 1,5 ganger genomsnittet: 20
+        if relative_volume[i] > 1.5:
+            score += 20
+            reasons.append("Stark volym")
+
+        # Kurs over EMA9 och EMA9 over EMA21: 10
+        if (
+            candle["close"] > ema9[i] > ema21[i]
+        ):
+            score += 10
+            reasons.append("Positiv EMA-trend")
+
+        scores.append({
+            "time": candle["time"],
+            "score": score,
+            "reasons": reasons
+        })
+
+    return scores    
 async def main():
     print("AktieRadar AI - Avanza test 8")
     print("Beraknar EMA 9 och EMA 21...")
@@ -314,7 +385,47 @@ async def main():
             )
             found += 1
 
-    print("ANTAL MONSTER:", found)        
+    print("ANTAL MONSTER:", found)   
+     scores = calculate_signal_scores(
+        candles,
+        ema9,
+        ema21,
+        rsi14,
+        macd_hist,
+        relative_volume,
+        patterns
+    )
+
+    print("\nAKTIERADAR AI - SIGNALPOANG:")
+
+    valid_scores = [
+        item for item in scores
+        if item is not None
+    ]
+
+    print("ANTAL BERAKNADE:", len(valid_scores))
+
+    for item in valid_scores:
+        if item["score"] >= 50:
+            print(
+                item["time"].strftime("%H:%M"),
+                "POANG:", item["score"],
+                "ORSAKER:", ", ".join(item["reasons"])
+            )
+
+    print("\nHOGSTA POANG:")
+    if valid_scores:
+        best = max(
+            valid_scores,
+            key=lambda item: item["score"]
+        )
+        print(
+            best["time"].strftime("%H:%M"),
+            "POANG:", best["score"],
+            "ORSAKER:", ", ".join(best["reasons"])
+        )
+    else:
+        print("Inga tillforlitliga poang kunde beraknas")
     print("KOMPLETTA LJUS:", len(candles))
     print("OVERHOPPADE PERIODER:", len(skipped))
     print("OVERHOPPADE TIDER:", skipped)

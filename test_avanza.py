@@ -404,7 +404,34 @@ async def main():
     ]
 
     print("ANTAL BERAKNADE:", len(valid_scores))
+    print("\nFELSOKNING AV POANG:")
 
+    print("TOTALT LJUS:", len(candles))
+
+    print(
+        "EMA9 SAKNAS:",
+        sum(x is None for x in ema9)
+    )
+
+    print(
+        "EMA21 SAKNAS:",
+        sum(x is None for x in ema21)
+    )
+
+    print(
+        "RSI SAKNAS:",
+        sum(x is None for x in rsi14)
+    )
+
+    print(
+        "MACD SAKNAS:",
+        sum(x is None for x in macd_hist)
+    )
+
+    print(
+        "RELATIV VOLYM SAKNAS:",
+        sum(x is None for x in relative_volume)
+    )
     for item in valid_scores:
         if item["score"] >= 50:
             print(

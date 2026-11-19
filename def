@@ -621,7 +621,13 @@ async def main():
         )
     else:
         best_score = None
+    latest_score = (
+        scores[-1]["score"]
+        if scores and scores[-1] is not None
+        else None
+    )
 
+    print("SENASTE POANG:", latest_score)
     signal_status = check_buy_signal(
         best_score,
         data_quality_ok

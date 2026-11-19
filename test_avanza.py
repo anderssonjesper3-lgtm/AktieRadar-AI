@@ -446,6 +446,15 @@ async def main():
     print("AKTUELL TID UTC:", datetime.now(timezone.utc))
     svensk_tid = datetime.now(ZoneInfo("Europe/Stockholm"))
     print("AKTUELL TID SVERIGE:", svensk_tid)
+    borsen_oppen = (
+        svensk_tid.weekday() < 5
+        and (9, 0) <= (svensk_tid.hour, svensk_tid.minute) < (17, 30)
+    )
+
+    if borsen_oppen:
+        print("BORSSTATUS: NORMAL HANDELSTID")
+    else:
+        print("BORSSTATUS: UTANFOR NORMAL HANDELSTID")
     print("SENASTE STAPELNS TID:", candles[-1]["time"] if candles else "INGA STAPLAR")
     if candles:
         senaste_tid = candles[-1]["time"]

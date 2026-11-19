@@ -366,7 +366,7 @@ async def main():
             print("HISTORIKTEST - UPPLÖSNING:")
             print("RESOLUTION:", data.get("metadata", {}).get("resolution"))
             print("ANTAL OHLC:", len(data.get("data", {}).get("ohlc", [])))
-             if offset == 0:
+            if offset == 0:
                 print("SVARETS NYCKLAR:", list(data.keys()))
                 print("METADATA:", data.get("data", {}).get("metadata"))
                 print("FORSTA KURSPUNKT:", data.get("data", {}).get("ohlc", [])[:1])

@@ -441,7 +441,10 @@ async def main():
     ema21 = calculate_ema(closes, 21)
     rsi14 = calculate_rsi(closes, 14)
     macd, macd_signal, macd_hist = calculate_macd(closes)
-
+    print("AKTIERADAR - TIDSKONTROLL:")
+    print("AKTUELL TID UTC:", datetime.now(timezone.utc))
+    print("AKTIERADAR - TIDSKONTROLL:")
+    print("AKTUELL TID UTC:", datetime.now(timezone.utc))
     print("\nSENASTE FEM RSI- OCH MACD-VARDENA:")
 
     for i in range(max(0, len(candles) - 5), len(candles)):

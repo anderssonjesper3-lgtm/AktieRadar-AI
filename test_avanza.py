@@ -364,7 +364,7 @@ async def main():
 
             data = result.structured_content
             print("HISTORIKTEST - UPPLÖSNING:")
-            print("RESOLUTION:", data.get("metadata", {}).get("resolution"))
+            print("RESOLUTION:", data.get("data", {}).get("metadata", {}).get("resolution", {}).get("chartResolution"))
             print("ANTAL OHLC:", len(data.get("data", {}).get("ohlc", [])))
             if offset == 0:
                 print("SVARETS NYCKLAR:", list(data.keys()))

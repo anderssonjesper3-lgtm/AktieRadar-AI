@@ -363,7 +363,7 @@ async def main():
             )
 
             data = result.structured_content
-            print("HISTORIKTEST - UPPLÖSNING:")
+            print("KURSDATA - UPPLÖSNING:")
             print("RESOLUTION:", data.get("data", {}).get("metadata", {}).get("resolution", {}).get("chartResolution"))
             print("ANTAL OHLC:", len(data.get("data", {}).get("ohlc", [])))
             if offset == 0:

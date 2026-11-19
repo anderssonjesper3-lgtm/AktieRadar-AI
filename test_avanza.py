@@ -351,7 +351,7 @@ async def main():
     points = []
 
     async with Client(mcp) as client:
-        for offset in range(0, 300, 100):
+        for offset in range(0, 1000, 100):
             result = await client.call_tool(
                 "get_stock_chart",
                 {

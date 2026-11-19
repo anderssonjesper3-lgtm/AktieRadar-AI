@@ -356,7 +356,7 @@ async def main():
                 "get_stock_chart",
                 {
                     "order_book_id": "5401",
-                    "time_period": "one week",
+                    "time_period": "one_week",
                     "offset": offset,
                     "limit": 100
                 }

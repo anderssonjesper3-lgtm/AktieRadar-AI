@@ -356,13 +356,17 @@ async def main():
                 "get_stock_chart",
                 {
                     "order_book_id": "5401",
-                    "time_period": "today",
+                    "time_period": "one week",
                     "offset": offset,
                     "limit": 100
                 }
             )
 
             data = result.structured_content
+            print("HISTORIKTEST - UPPLÖSNING:")
+            print("RESOLUTION:", data.get("metadata", {}).get("resolution"))
+            print("ANTAL OHLC:", len(data.get("data", {}).get("ohlc", [])))
+
             points.extend(
                 data.get("data", {}).get("ohlc", [])
             )

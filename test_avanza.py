@@ -444,6 +444,10 @@ async def main():
     print("AKTIERADAR - TIDSKONTROLL:")
     print("AKTUELL TID UTC:", datetime.now(timezone.utc))
     print("SENASTE STAPELNS TID:", candles[-1]["time"] if candles else "INGA STAPLAR")
+    if candles:
+        senaste_tid = candles[-1]["time"]
+        alder_minuter = (datetime.now(timezone.utc) - senaste_tid).total_seconds() / 60
+        print("KURSDATANS ALDER (MINUTER):", round(alder_minuter, 1))
     print("\nSENASTE FEM RSI- OCH MACD-VARDENA:")
 
     for i in range(max(0, len(candles) - 5), len(candles)):

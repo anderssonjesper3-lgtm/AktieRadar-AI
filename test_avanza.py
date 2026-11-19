@@ -443,7 +443,7 @@ async def main():
     macd, macd_signal, macd_hist = calculate_macd(closes)
     print("AKTIERADAR - TIDSKONTROLL:")
     print("AKTUELL TID UTC:", datetime.now(timezone.utc))
-  
+    print("SENASTE STAPELNS TID:", candles[-1]["time"] if candles else "INGA STAPLAR")
     print("\nSENASTE FEM RSI- OCH MACD-VARDENA:")
 
     for i in range(max(0, len(candles) - 5), len(candles)):

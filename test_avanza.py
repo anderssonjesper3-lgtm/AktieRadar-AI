@@ -448,6 +448,10 @@ async def main():
         senaste_tid = candles[-1]["time"]
         alder_minuter = (datetime.now(timezone.utc) - senaste_tid).total_seconds() / 60
         print("KURSDATANS ALDER (MINUTER):", round(alder_minuter, 1))
+        if alder_minuter > 15:
+            print("DATASTATUS: GAMMAL KURSDATA")
+        else:
+            print("DATASTATUS: INOM 15 MINUTER")
     print("\nSENASTE FEM RSI- OCH MACD-VARDENA:")
 
     for i in range(max(0, len(candles) - 5), len(candles)):

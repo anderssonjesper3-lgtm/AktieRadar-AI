@@ -460,7 +460,9 @@ async def main():
         senaste_tid = candles[-1]["time"]
         alder_minuter = (datetime.now(timezone.utc) - senaste_tid).total_seconds() / 60
         print("KURSDATANS ALDER (MINUTER):", round(alder_minuter, 1))
-        if alder_minuter > 15:
+        if not borsen_oppen:
+            print("DATASTATUS: UTANFOR NORMAL HANDELSTID")
+        elif alder_minuter > 15:
             print("DATASTATUS: GAMMAL KURSDATA")
         else:
             print("DATASTATUS: INOM 15 MINUTER")

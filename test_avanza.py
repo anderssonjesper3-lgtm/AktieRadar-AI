@@ -444,6 +444,8 @@ async def main():
     macd, macd_signal, macd_hist = calculate_macd(closes)
     print("AKTIERADAR - TIDSKONTROLL:")
     print("AKTUELL TID UTC:", datetime.now(timezone.utc))
+    svensk_tid = datetime.now(ZoneInfo("Europe/Stockholm"))
+    print("AKTUELL TID SVERIGE:", svensk_tid)
     print("SENASTE STAPELNS TID:", candles[-1]["time"] if candles else "INGA STAPLAR")
     if candles:
         senaste_tid = candles[-1]["time"]

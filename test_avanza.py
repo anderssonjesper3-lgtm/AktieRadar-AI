@@ -626,7 +626,10 @@ async def main():
         best_score,
         data_quality_ok
     )
-
+    if not borsen_oppen:
+        signal_status = "BLOCKERAD - UTANFOR HANDELSTID"
+    elif not candles or alder_minuter > 15:
+        signal_status = "BLOCKERAD - GAMMAL KURSDATA"
     print("HOGSTA POANG:", best_score)
     print("SIGNALSTATUS:", signal_status)
     print("\nSAKNADE MINUTER I VARJE PERIOD:")

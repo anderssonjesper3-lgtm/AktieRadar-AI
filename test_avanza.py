@@ -721,7 +721,8 @@ async def main():
         latest_score,
         latest_data_ok
     )
-    
+    if not stapel_fardig:
+        signal_status = "BLOCKERAD - STAPEL EJ FARDIG"
     if not borsen_oppen:
         signal_status = "BLOCKERAD - UTANFOR HANDELSTID"
     elif not candles or alder_minuter > 15:

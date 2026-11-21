@@ -183,6 +183,15 @@ def calculate_signal_scores(
     candles, ema9, ema21, rsi14,
     macd_hist, relative_volume, patterns
 ):
+    print("\nSENASTE STAPELNS INDIKATORER:")
+    if candles:
+        i = len(candles) - 1
+        print("EMA9:", ema9[i])
+        print("EMA21:", ema21[i])
+        print("RSI14:", rsi14[i])
+        print("MACD HIST:", macd_hist[i])
+        print("RELATIV VOLYM:", relative_volume[i])
+        
     scores = []
 
     for i, candle in enumerate(candles):

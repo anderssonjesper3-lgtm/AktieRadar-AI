@@ -400,7 +400,9 @@ async def main():
                 "has_more", False
             ):
                 break
-
+    print("\nKONTROLL AV DUBBLETTER:")
+    print("HAMTADE POSTER:", len(points))
+    print("UNIKA MINUTER:", len(set(p["timestamp"] for p in points)))
     unique = {p["timestamp"]: p for p in points}
     points = sorted(
         unique.values(),

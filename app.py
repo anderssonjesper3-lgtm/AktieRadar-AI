@@ -1,69 +1,82 @@
-"""AktieRadar AI 4.0 – ten-stock market overview; never invents market data."""
+"""AktieRadar 5.0 dashboard. Market data never synthesized."""
 import asyncio
 from datetime import datetime, timezone
-import streamlit as st
 import pandas as pd
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import streamlit as st
 from multi_engine import companies, analyze_all
 from news_scanner import scan
 from order_analysis import parse_order_amount, order_ratio
+from test_avanza_forbattrad import calculate_ema, calculate_rsi, calculate_macd, SWEDEN
 
-st.set_page_config(page_title='AktieRadar AI 4.0 – Marknadsöversikt', page_icon='📡', layout='wide')
-st.title('📡 AktieRadar AI 4.0')
-st.caption('MARKNADSÖVERSIKT · 10 BOLAG · NYHETER + MOMENTUM · 5-MINUTERSANALYS')
-st.warning('Indikativa bevakningssignaler, inte handelsråd. Ingen automatisk orderläggning. Endast verifierad kursdata används.')
-watchlist = companies()
-@st.cache_data(ttl=120, show_spinner=False)
-def market_snapshot():
-    return asyncio.run(analyze_all())
-@st.cache_data(ttl=180, show_spinner=False)
-def news_snapshot():
-    return scan({'companies':companies()})
-if st.button('🔄 Uppdatera bevakningen'):
-    market_snapshot.clear(); news_snapshot.clear(); st.rerun()
-with st.spinner('Kontrollerar kursdata och nyhetsflöden...'):
-    results = market_snapshot()
-    try:
-        articles, failures = news_snapshot()
+st.set_page_config(page_title='AktieRadar AI 5.0',page_icon='📡',layout='wide')
+st.markdown('''<style>
+.stApp{background:#0c1525;color:#edf3ff}div[data-testid="stMetric"]{background:#17253b;border:1px solid #293a51;border-radius:14px;padding:16px}
+div.stButton>button{background:#17253b;color:#f3f7ff;border:1px solid #30435c;border-radius:12px;min-height:56px;width:100%;text-align:left}
+div.stButton>button:hover{background:#244e58;color:white;border-color:#55e0c4}
+</style>''',unsafe_allow_html=True)
+st.title('📡 AktieRadar AI 5.0')
+st.caption('MARKNADSÖVERSIKT · 10 AKTIER · FEMMINUTERSLJUS · NYHETER · DATAKONTROLL')
+st.warning('Analysverktyg – inga handelsråd eller automatiska köp. Kurser kan vara fördröjda.')
+watchlist=companies()
+@st.cache_data(ttl=120,show_spinner=False)
+def market_snapshot():return asyncio.run(analyze_all())
+@st.cache_data(ttl=180,show_spinner=False)
+def news_snapshot():return scan({'companies':companies()})
+if st.button('🔄 Uppdatera alla datakällor'):
+    market_snapshot.clear();news_snapshot.clear();st.rerun()
+with st.spinner('Kontrollerar aktier och nyheter...'):
+    try:results=market_snapshot()
     except Exception as exc:
-        articles, failures = [], [('Nyhetsbevakning',str(exc))]
-active = sum(1 for r in results if r['error'] is None)
-buy = sum(1 for r in results if r['signal'] and r['signal']['kind']=='KÖP-KANDIDAT')
-c1,c2,c3,c4=st.columns(4)
-c1.metric('Bolag på listan',len(results)); c2.metric('Kursdata fungerar',active); c3.metric('KÖP-KANDIDAT',buy); c4.metric('Nyheter senaste 24h',len(articles))
-if active<len(results):
-    st.info(f'{len(results)-active} bolag saknar verifierad kursdatakoppling. De kan INTE få tekniska VAKTA/KÖP-signaler förrän ID och data verifierats.')
-if not any(c.get('feeds') for c in watchlist):
-    st.info('Nyhetsflöden är ännu inte konfigurerade. Nyhetsrutan visar därför inga faktiska rubriker.')
-if failures:
-    st.error('Nyhetsflödesfel: '+', '.join(str(f[0]) for f in failures))
-st.subheader('📊 Aktieradar')
-rows=[]
-for r in results:
-    signal=r['signal']
-    rows.append({'Aktie':r['company'],'Ticker':r['ticker'],'Signal':signal['kind'] if signal else ('DATA SAKNAS' if r['error'] else 'AVVAKTA'), 'Kurs (SEK)':round(signal['close'],2) if signal else None,'Poäng':signal['score'] if signal else None,'Datastatus':r['error'] or r['status']})
-st.dataframe(pd.DataFrame(rows),use_container_width=True,hide_index=True)
-selected=st.selectbox('Välj aktie för detaljer', [c['name'] for c in watchlist])
-company=next(c for c in watchlist if c['name']==selected)
-r=next(x for x in results if x['company']==selected)
-st.subheader(selected)
-if r['error']:
-    st.warning(r['error'])
-else:
-    st.write('Teknisk bedömning:',r['status'])
-    if r['signal']:
-        st.write('Orsaker:',', '.join(map(str,r['signal']['reasons'])))
-    if r['candles']:
-        df=pd.DataFrame(r['candles'])
-        st.line_chart(df.set_index('time')['close'])
-st.subheader('📰 Order och nyheter')
+        st.error(f'Kursanalysen kunde inte starta: {exc}');st.stop()
+    try:articles,failures=news_snapshot()
+    except Exception as exc:articles,failures=[],[('Nyhetsbevakning',str(exc))]
+by_name={r['company']:r for r in results}
+ready=sum(bool(r.get('candles')) and not r.get('error') for r in results)
+buys=sum(bool(r['signal']) and r['signal']['kind']=='KÖP-KANDIDAT' for r in results)
+watch=sum(bool(r['signal']) and 'VAKTA' in r['signal']['kind'] for r in results)
+a,b,c,d=st.columns(4)
+a.metric('Bevakade aktier',len(watchlist));b.metric('Kursdata tillgänglig',f'{ready}/{len(watchlist)}');c.metric('Köpkandidater',buys);d.metric('Vakta',watch)
+if not any(c.get('feeds') for c in watchlist):st.info('Nyhetsflöden är inte anslutna. Inga nyheter har verifierats.')
+if failures:st.error('Nyhetskällor med fel: '+', '.join(x[0] for x in failures))
+st.subheader('🎯 Välj aktie')
+if 'selected_stock' not in st.session_state:st.session_state.selected_stock=watchlist[0]['name']
+ordered=sorted(watchlist,key=lambda c: {'KÖP-KANDIDAT':0,'VAKTA':1,'MORGON-VAKTA':2}.get((by_name.get(c['name']) or {}).get('signal',{}).get('kind') if (by_name.get(c['name']) or {}).get('signal') else '',3))
+for i in range(0,len(ordered),5):
+    cols=st.columns(5)
+    for col,c in zip(cols,ordered[i:i+5]):
+        r=by_name.get(c['name'],{});s=r.get('signal');status=s['kind'] if s else ('DATA SAKNAS' if r.get('error') else 'AVVAKTA')
+        if col.button(f"{c['name']}\n\n{status}",key='stock_'+c['ticker']):st.session_state.selected_stock=c['name']
+selected=st.session_state.selected_stock
+c=next(c for c in watchlist if c['name']==selected);r=by_name[selected]
+st.divider();st.subheader(f"📊 {selected} · {c['ticker']}")
+st.write('Datastatus:',r.get('error') or r['status'])
+if r.get('signal'):
+    s=r['signal'];st.info(f"{s['kind']} · {s['score'] if s['score'] is not None else 'Poäng saknas'} · {', '.join(map(str,s['reasons']))}")
+if r['candles']:
+    df=pd.DataFrame(r['candles']).sort_values('time');close=df['close'].tolist()
+    df['EMA 9']=calculate_ema(close,9);df['EMA 21']=calculate_ema(close,21)
+    fig=make_subplots(rows=3,cols=1,shared_xaxes=True,vertical_spacing=.05,row_heights=[.65,.18,.17],subplot_titles=('5-minutersljus','Volym','RSI 14'))
+    fig.add_trace(go.Candlestick(x=df.time,open=df.open,high=df.high,low=df.low,close=df.close,name='OHLC'),row=1,col=1)
+    fig.add_trace(go.Scatter(x=df.time,y=df['EMA 9'],name='EMA 9',line=dict(color='#f5c76b')),row=1,col=1)
+    fig.add_trace(go.Scatter(x=df.time,y=df['EMA 21'],name='EMA 21',line=dict(color='#4c91e8')),row=1,col=1)
+    fig.add_trace(go.Bar(x=df.time,y=df.volume,name='Volym',marker_color='#4ba3a5'),row=2,col=1)
+    fig.add_trace(go.Scatter(x=df.time,y=calculate_rsi(close,14),name='RSI 14',line=dict(color='#b58bea')),row=3,col=1)
+    fig.update_layout(template='plotly_dark',paper_bgcolor='#0c1525',plot_bgcolor='#0c1525',height=650,xaxis_rangeslider_visible=False,margin=dict(l=10,r=10,t=55,b=10))
+    st.plotly_chart(fig,use_container_width=True)
+    macd,signal,hist=calculate_macd(close)
+    st.caption(f"MACD histogram (senaste): {hist[-1]:.4f}" if hist and hist[-1] is not None else 'MACD: otillräcklig historik')
+    st.caption(f"Senaste färdiga ljus: {df.time.iloc[-1]} · Antal: {len(df)} · Luckor: {r.get('gaps','okänt')}")
+else:st.warning('Ingen verifierad komplett femminutersstapel att visa.')
+st.subheader('📰 Nyheter och order')
 items=[a for a in articles if a['company']==selected]
-if not items:
-    st.caption('Inga verifierat inlästa nyheter för bolaget i den aktuella bevakningen.')
+if not items:st.caption('Inga verifierat inlästa nyheter i anslutna flöden.')
 for a in items:
     st.markdown(f"**{a['category']}** · [{a['title']}]({a['url']})")
-    amount=parse_order_amount(a['title'])
-    ratio=order_ratio(amount,company.get('annual_revenue_sek'))
-    if amount is not None:
-        st.write(f'Identifierat belopp i rubriken: {amount:,.0f} SEK. Kontrollera originalkällan.')
-    st.write(f'Ordervärde / årsomsättning: {ratio:.1f} %' if ratio is not None else 'Orderns relativa storlek: kan inte beräknas utan verifierat ordervärde och årsomsättning.')
-st.caption('GitHub Actions kör schemalagd analys separat. Streamlit visar en aktuell ögonblicksbild vid omladdning.')
+    amount=parse_order_amount(a['title']);ratio=order_ratio(amount,c.get('annual_revenue_sek'))
+    if amount is not None:st.write(f'Belopp upptäckt i rubrik: {amount:,.0f} kr (ej bekräftat ordervärde)')
+    st.caption(f'Preliminär beloppskvot: {ratio:.2f} % – kontrollera originaltexten' if ratio is not None else 'Relativ orderstorlek kan inte verifieras')
+with st.expander('🛠️ Kontrollcentral – alla aktier'):
+    st.dataframe(pd.DataFrame([{'Bolag':x['company'],'Avanza-ID':next((c.get('order_book_id') for c in watchlist if c['name']==x['company']),None),'5-minutersljus':len(x['candles']),'Luckor':x.get('gaps'),'Signal':x['signal']['kind'] if x['signal'] else '–','Datastatus':x['error'] or x['status']} for x in results]),hide_index=True,use_container_width=True)
+    st.caption('ID:n verifieras separat med verify_sources.py. Streamlit uppdateras vid omladdning; schemalagda jobb körs separat.')

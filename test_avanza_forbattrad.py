@@ -308,13 +308,13 @@ def build_candles(points):
     return candles, gaps
 
 
-async def fetch_points():
+async def fetch_points(order_book_id=None):
     points = []
     resolutions = set()
     async with Client(mcp) as client:
         for page in range(MAX_PAGES):
             result = await client.call_tool("get_stock_chart", {
-                "order_book_id": ORDER_BOOK_ID,
+                "order_book_id": order_book_id or ORDER_BOOK_ID,
                 "time_period": "today",
                 "offset": page * MINUTE_LIMIT,
                 "limit": MINUTE_LIMIT,

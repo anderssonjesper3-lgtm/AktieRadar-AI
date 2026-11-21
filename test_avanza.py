@@ -629,7 +629,7 @@ async def main():
 
     print("SENASTE POANG:", latest_score)
     signal_status = check_buy_signal(
-        best_score,
+        latest_score,
         data_quality_ok
     )
     if not borsen_oppen:

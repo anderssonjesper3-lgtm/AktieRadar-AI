@@ -691,7 +691,9 @@ async def main():
             lookback=21
         )
     )
-
+    print("SENASTE DATA GODKAND:", latest_data_ok)
+    print("SENASTE RELATIVA VOLYM:", relative_volume[-1] if relative_volume else None)
+    
     signal_status = check_buy_signal(
         latest_score,
         latest_data_ok

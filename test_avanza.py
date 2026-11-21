@@ -692,6 +692,20 @@ async def main():
         )
     )
     print("SENASTE DATA GODKAND:", latest_data_ok)
+    consecutive = 0
+
+    for i in range(len(candles) - 1, -1, -1):
+        if (
+            i < len(candles) - 1
+            and (
+                candles[i + 1]["time"] - candles[i]["time"]
+            ).total_seconds() != 300
+        ):
+            break
+
+        consecutive += 1
+
+    print("SAMMANHANGANDE STAPLAR:", consecutive, "AV 21")
     print("SENASTE 21 STAPLARNAS TIDER:")
     for candle in candles[-21:]:
         print(candle["time"].strftime("%H:%M"))

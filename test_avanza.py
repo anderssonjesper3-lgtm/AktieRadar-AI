@@ -424,6 +424,23 @@ async def main():
 
         if dt.strftime("%Y-%m-%d %H:%M") == "2026-11-20 15:46":
             print("MINUTEN 15:46 FINNS I RÅDATA:", p)
+    print("\nKURSPUNKTER RUNT 15:46:")
+
+    for p in points:
+        dt = datetime.fromtimestamp(
+            p["timestamp"] / 1000,
+            tz=timezone.utc
+        ).astimezone(SWEDEN)
+
+        if (
+            dt.strftime("%Y-%m-%d") == "2026-11-20"
+            and "15:43" <= dt.strftime("%H:%M") <= "15:49"
+        ):
+            print(
+                dt.strftime("%H:%M"),
+                "KURS:", p["close"],
+                "VOLYM:", p.get("totalVolumeTraded")
+            )
     groups = defaultdict(list)
 
     for point in points:

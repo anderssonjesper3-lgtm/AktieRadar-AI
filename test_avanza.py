@@ -513,6 +513,12 @@ async def main():
     print("SENASTE STAPELNS TID:", candles[-1]["time"] if candles else "INGA STAPLAR")
     if candles:
         senaste_tid = candles[-1]["time"]
+        from datetime import timedelta
+
+        stapel_slut = senaste_tid + timedelta(minutes=5)
+        stapel_fardig = datetime.now(timezone.utc) >= stapel_slut
+
+        print("SENASTE STAPEL FARDIG:", stapel_fardig)
         alder_minuter = (datetime.now(timezone.utc) - senaste_tid).total_seconds() / 60
         print("KURSDATANS ALDER (MINUTER):", round(alder_minuter, 1))
         if not borsen_oppen:

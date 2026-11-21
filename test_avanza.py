@@ -123,10 +123,17 @@ def calculate_relative_volume(candles, period=20):
 
         if not continuous:
             if i == len(candles) - 1:
-                print(
-                    "RELATIV VOLYM BLOCKERAD:",
-                    "TIDSLUCKA I DE SENASTE 20 STAPLARNA"
-                )
+                for j in range(i - period + 1, i + 1):
+                    previous_time = candles[j - 1]["time"]
+                    current_time = candles[j]["time"]
+
+                    if (current_time - previous_time).total_seconds() != 300:
+                        print(
+                            "TIDSLUCKA MELLAN:",
+                            previous_time,
+                            "OCH",
+                            current_time
+                        )
             continue
 
         average_volume = sum(

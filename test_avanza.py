@@ -511,6 +511,8 @@ async def main():
     else:
         print("BORSSTATUS: UTANFOR NORMAL HANDELSTID")
     print("SENASTE STAPELNS TID:", candles[-1]["time"] if candles else "INGA STAPLAR")
+    stapel_fardig = False
+    
     if candles:
         senaste_tid = candles[-1]["time"]
         from datetime import timedelta

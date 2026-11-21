@@ -3,10 +3,7 @@
     {
       "name": "Saab B",
       "ticker": "SAAB B",
-      "aliases": [
-        "Saab AB",
-        "Saab"
-      ],
+      "aliases": ["Saab AB", "Saab"],
       "order_book_id": "5401",
       "annual_revenue_sek": null,
       "feeds": []
@@ -14,93 +11,72 @@
     {
       "name": "Acconeer",
       "ticker": "ACCON",
-      "aliases": [
-        "Acconeer"
-      ],
-      "order_book_id": null,
+      "aliases": ["Acconeer"],
+      "order_book_id": "808452",
       "annual_revenue_sek": null,
       "feeds": []
     },
     {
       "name": "PowerCell Sweden",
       "ticker": "PCELL",
-      "aliases": [
-        "PowerCell Sweden",
-        "PowerCell"
-      ],
-      "order_book_id": null,
+      "aliases": ["PowerCell Sweden", "PowerCell"],
+      "order_book_id": "527998",
       "annual_revenue_sek": null,
       "feeds": []
     },
     {
       "name": "Scandinavian Astor Group",
       "ticker": "ASTOR",
-      "aliases": [
-        "Scandinavian Astor Group",
-        "Astor Group"
-      ],
-      "order_book_id": null,
+      "aliases": ["Scandinavian Astor Group", "Astor Group"],
+      "order_book_id": "1523003",
       "annual_revenue_sek": null,
       "feeds": []
     },
     {
       "name": "Ovzon",
       "ticker": "OVZON",
-      "aliases": [
-        "Ovzon"
-      ],
-      "order_book_id": null,
+      "aliases": ["Ovzon"],
+      "order_book_id": "852674",
       "annual_revenue_sek": null,
       "feeds": []
     },
     {
       "name": "GomSpace",
       "ticker": "GOMX",
-      "aliases": [
-        "GomSpace"
-      ],
-      "order_book_id": null,
+      "aliases": ["GomSpace"],
+      "order_book_id": "667935",
       "annual_revenue_sek": null,
       "feeds": []
     },
     {
       "name": "AAC Clyde Space",
       "ticker": "AAC",
-      "aliases": [
-        "AAC Clyde Space"
-      ],
-      "order_book_id": null,
+      "aliases": ["AAC Clyde Space"],
+      "order_book_id": "717421",
       "annual_revenue_sek": null,
       "feeds": []
     },
     {
       "name": "MilDef",
       "ticker": "MILDEF",
-      "aliases": [
-        "MilDef Group",
-        "MilDef"
-      ],
-      "order_book_id": null,
+      "aliases": ["MilDef Group", "MilDef"],
+      "order_book_id": "1235164",
       "annual_revenue_sek": null,
       "feeds": []
     },
     {
       "name": "INVISIO",
       "ticker": "IVSO",
-      "aliases": [
-        "INVISIO"
-      ],
-      "order_book_id": null,
+      "aliases": ["INVISIO"],
+      "order_book_id": "43788",
       "annual_revenue_sek": null,
       "feeds": []
     },
     {
       "name": "Clavister",
       "ticker": "CLAV",
-      "aliases": [
-        "Clavister"
-      ],
-      "order_book_id": null,
+      "aliases": ["Clavister"],
+      "order_book_id": "480188",
       "annual_revenue_sek": null,
       "feeds": []
     }

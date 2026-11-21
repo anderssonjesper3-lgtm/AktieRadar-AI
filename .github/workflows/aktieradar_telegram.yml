@@ -2,13 +2,13 @@ name: AktieRadar AI - Saab Telegram
 
 on:
   schedule:
-    # GitHub Actions uses UTC; covers 09:00-17:30 Stockholm in winter and summer.
-    # Python checks Swedish local time before analyzing/sending.
+    # UTC: covers Swedish 09:00-17:30 during both CET and CEST.
+    # Python applies exact Swedish local trading-hour checks.
     - cron: '*/5 7-16 * * 1-5'
   workflow_dispatch:
     inputs:
       mode:
-        description: 'test = Telegram test, dry-run = analysis only, live = real signals'
+        description: 'test = Telegram-test, dry-run = analys utan notis, live = riktiga signaler'
         required: true
         default: test
         type: choice
@@ -19,35 +19,32 @@ on:
 
 permissions:
   contents: read
+  actions: write
 
+# Queue instead of canceling an in-flight notification after Telegram sends.
 concurrency:
   group: aktieradar-saab-telegram
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   bevaka:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Check out repository
+      - name: Hamta koden
         uses: actions/checkout@v4
-      - name: Set up Python
+      - name: Installera Python 3.12
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install dependencies
-        run: pip install fastmcp avanza-mcp
-      - name: Restore notification history (best effort)
-        uses: actions/cache/restore@v4
-        with:
-          path: telegram_signal_state.json
-          key: aktieradar-saab-signals-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            aktieradar-saab-signals-
-      - name: Analyze Saab and optionally notify Telegram
+      - name: Installera beroenden
+        run: python -m pip install fastmcp avanza-mcp
+      - name: Analysera Saab och skicka eventuella notiser
         env:
+          GH_TOKEN: ${{ github.token }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          AKTIERADAR_COOLDOWN_MINUTES: '30'
           MODE: ${{ github.event_name == 'schedule' && 'live' || inputs.mode }}
         run: |
           if [ "$MODE" = 'test' ]; then
@@ -57,9 +54,3 @@ jobs:
           else
             python aktieradar_telegram.py
           fi
-      - name: Save notification history (best effort)
-        if: success() && hashFiles('telegram_signal_state.json') != ''
-        uses: actions/cache/save@v4
-        with:
-          path: telegram_signal_state.json
-          key: aktieradar-saab-signals-${{ github.run_id }}-${{ github.run_attempt }}

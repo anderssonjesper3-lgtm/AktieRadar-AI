@@ -373,6 +373,12 @@ async def main():
     points = []
 
     async with Client(mcp) as client:
+        tools = await client.list_tools()
+
+        for tool in tools:
+            if tool.name == "get_stock_chart":
+                print("\nAVANZA VERKTYGSPARAMETRAR:")
+                print(tool.inputSchema)
         for offset in range(0, 1000, 100):
             result = await client.call_tool(
                 "get_stock_chart",

@@ -23,4 +23,4 @@ jobs:
         run: python -m pip install requests fastmcp avanza-mcp
 
       - name: Kor Avanza-testet
-        run: python test_avanza.py
+        run: python test_avanza_forbattrad.py

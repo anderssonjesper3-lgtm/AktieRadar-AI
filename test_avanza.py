@@ -406,7 +406,16 @@ async def main():
         unique.values(),
         key=lambda p: p["timestamp"]
     )
+    print("\nKONTROLL AV MINUTEN 15:46:")
 
+    for p in points:
+        dt = datetime.fromtimestamp(
+            p["timestamp"] / 1000,
+            tz=timezone.utc
+        ).astimezone(SWEDEN)
+
+        if dt.strftime("%Y-%m-%d %H:%M") == "2026-11-20 15:46":
+            print("MINUTEN 15:46 FINNS I RÅDATA:", p)
     groups = defaultdict(list)
 
     for point in points:

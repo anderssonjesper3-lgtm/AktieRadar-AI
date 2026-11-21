@@ -1,0 +1,43 @@
+name: Testa Telegram-notis
+
+on:
+  workflow_dispatch:
+
+jobs:
+  send-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Skicka testmeddelande till Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import urllib.parse
+          import urllib.request
+
+          token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
+          chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
+          if not token or not chat_id:
+              raise SystemExit('Saknar TELEGRAM_BOT_TOKEN eller TELEGRAM_CHAT_ID i GitHub Secrets.')
+
+          payload = urllib.parse.urlencode({
+              'chat_id': chat_id,
+              'text': '🎉 AktieRadar AI: Testnotisen fungerar! 📈🔔',
+          }).encode('utf-8')
+          request = urllib.request.Request(
+              f'https://api.telegram.org/bot{token}/sendMessage',
+              data=payload,
+              method='POST',
+          )
+          try:
+              with urllib.request.urlopen(request, timeout=20) as response:
+                  result = json.load(response)
+          except Exception as exc:
+              raise SystemExit(f'Telegram-anropet misslyckades ({type(exc).__name__}). Kontrollera Secrets och botchatten.') from None
+          if not result.get('ok'):
+              raise SystemExit('Telegram svarade utan bekräftelse.')
+          print('Testmeddelandet skickades! Kontrollera Telegram på mobilen.')
+          PY

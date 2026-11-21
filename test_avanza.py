@@ -696,7 +696,7 @@ async def main():
         latest_score,
         latest_data_ok
     )
-    )
+    
     if not borsen_oppen:
         signal_status = "BLOCKERAD - UTANFOR HANDELSTID"
     elif not candles or alder_minuter > 15:

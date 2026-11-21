@@ -1,0 +1,65 @@
+name: AktieRadar AI - Saab Telegram
+
+on:
+  schedule:
+    # GitHub Actions uses UTC; covers 09:00-17:30 Stockholm in winter and summer.
+    # Python checks Swedish local time before analyzing/sending.
+    - cron: '*/5 7-16 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'test = Telegram test, dry-run = analysis only, live = real signals'
+        required: true
+        default: test
+        type: choice
+        options:
+          - test
+          - dry-run
+          - live
+
+permissions:
+  contents: read
+
+concurrency:
+  group: aktieradar-saab-telegram
+  cancel-in-progress: false
+
+jobs:
+  bevaka:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install fastmcp avanza-mcp
+      - name: Restore notification history (best effort)
+        uses: actions/cache/restore@v4
+        with:
+          path: telegram_signal_state.json
+          key: aktieradar-saab-signals-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            aktieradar-saab-signals-
+      - name: Analyze Saab and optionally notify Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          MODE: ${{ github.event_name == 'schedule' && 'live' || inputs.mode }}
+        run: |
+          if [ "$MODE" = 'test' ]; then
+            python aktieradar_telegram.py --test
+          elif [ "$MODE" = 'dry-run' ]; then
+            python aktieradar_telegram.py --dry-run
+          else
+            python aktieradar_telegram.py
+          fi
+      - name: Save notification history (best effort)
+        if: success() && hashFiles('telegram_signal_state.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: telegram_signal_state.json
+          key: aktieradar-saab-signals-${{ github.run_id }}-${{ github.run_attempt }}

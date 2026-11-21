@@ -692,6 +692,9 @@ async def main():
         )
     )
     print("SENASTE DATA GODKAND:", latest_data_ok)
+    print("SENASTE 21 STAPLARNAS TIDER:")
+    for candle in candles[-21:]:
+        print(candle["time"].strftime("%H:%M"))
     print("SENASTE RELATIVA VOLYM:", relative_volume[-1] if relative_volume else None)
     
     signal_status = check_buy_signal(

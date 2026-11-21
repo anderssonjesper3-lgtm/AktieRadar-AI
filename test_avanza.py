@@ -683,9 +683,19 @@ async def main():
     )
 
     print("SENASTE POANG:", latest_score)
+    latest_data_ok = (
+        len(candles) >= 21
+        and check_local_data_quality(
+            candles,
+            len(candles) - 1,
+            lookback=21
+        )
+    )
+
     signal_status = check_buy_signal(
         latest_score,
-        data_quality_ok
+        latest_data_ok
+    )
     )
     if not borsen_oppen:
         signal_status = "BLOCKERAD - UTANFOR HANDELSTID"

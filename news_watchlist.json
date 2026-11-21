@@ -1,0 +1,108 @@
+{
+  "companies": [
+    {
+      "name": "Saab B",
+      "ticker": "SAAB B",
+      "aliases": [
+        "Saab AB",
+        "Saab"
+      ],
+      "order_book_id": "5401",
+      "annual_revenue_sek": null,
+      "feeds": []
+    },
+    {
+      "name": "Acconeer",
+      "ticker": "ACCON",
+      "aliases": [
+        "Acconeer"
+      ],
+      "order_book_id": null,
+      "annual_revenue_sek": null,
+      "feeds": []
+    },
+    {
+      "name": "PowerCell Sweden",
+      "ticker": "PCELL",
+      "aliases": [
+        "PowerCell Sweden",
+        "PowerCell"
+      ],
+      "order_book_id": null,
+      "annual_revenue_sek": null,
+      "feeds": []
+    },
+    {
+      "name": "Scandinavian Astor Group",
+      "ticker": "ASTOR",
+      "aliases": [
+        "Scandinavian Astor Group",
+        "Astor Group"
+      ],
+      "order_book_id": null,
+      "annual_revenue_sek": null,
+      "feeds": []
+    },
+    {
+      "name": "Ovzon",
+      "ticker": "OVZON",
+      "aliases": [
+        "Ovzon"
+      ],
+      "order_book_id": null,
+      "annual_revenue_sek": null,
+      "feeds": []
+    },
+    {
+      "name": "GomSpace",
+      "ticker": "GOMX",
+      "aliases": [
+        "GomSpace"
+      ],
+      "order_book_id": null,
+      "annual_revenue_sek": null,
+      "feeds": []
+    },
+    {
+      "name": "AAC Clyde Space",
+      "ticker": "AAC",
+      "aliases": [
+        "AAC Clyde Space"
+      ],
+      "order_book_id": null,
+      "annual_revenue_sek": null,
+      "feeds": []
+    },
+    {
+      "name": "MilDef",
+      "ticker": "MILDEF",
+      "aliases": [
+        "MilDef Group",
+        "MilDef"
+      ],
+      "order_book_id": null,
+      "annual_revenue_sek": null,
+      "feeds": []
+    },
+    {
+      "name": "INVISIO",
+      "ticker": "IVSO",
+      "aliases": [
+        "INVISIO"
+      ],
+      "order_book_id": null,
+      "annual_revenue_sek": null,
+      "feeds": []
+    },
+    {
+      "name": "Clavister",
+      "ticker": "CLAV",
+      "aliases": [
+        "Clavister"
+      ],
+      "order_book_id": null,
+      "annual_revenue_sek": null,
+      "feeds": []
+    }
+  ]
+}

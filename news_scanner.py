@@ -1,0 +1,113 @@
+"""Conservative RSS/Atom announcement scanner. Headlines are WATCH only, never buy signals."""
+import hashlib
+import json
+import re
+from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
+from html import unescape
+from pathlib import Path
+from urllib.parse import urlparse
+from urllib.request import Request, urlopen
+import xml.etree.ElementTree as ET
+
+CONFIG_PATH = Path(__file__).with_name('news_watchlist.json')
+KEYWORDS = ('order', 'orders', 'beställning', 'beställningar', 'kontrakt', 'contract',
+            'avtal', 'agreement', 'ramavtal', 'framework agreement', 'upphandling')
+RISK_WORDS = ('emission', 'företrädesemission', 'nyemission', 'bankruptcy', 'konkurs',
+              'vinstvarning', 'profit warning', 'finansiering', 'financing')
+
+
+def load_config(path=CONFIG_PATH):
+    config = json.loads(Path(path).read_text(encoding='utf-8'))
+    if not isinstance(config, dict) or not isinstance(config.get('companies'), list):
+        raise ValueError('Ogiltig nyhetsbevakningslista')
+    for company in config['companies']:
+        if not company.get('name') or not company.get('aliases'):
+            raise ValueError('Bolag behöver namn och sökord')
+        for feed in company.get('feeds', []):
+            parsed = urlparse(feed)
+            if parsed.scheme != 'https' or not parsed.hostname:
+                raise ValueError('Nyhetsflöden måste ha giltiga HTTPS-adresser')
+    return config
+
+
+def parse_date(raw):
+    if not raw:
+        return None
+    try:
+        d = parsedate_to_datetime(raw)
+    except (TypeError, ValueError):
+        try:
+            d = datetime.fromisoformat(raw.replace('Z', '+00:00'))
+        except (TypeError, ValueError):
+            return None
+    return d.replace(tzinfo=timezone.utc) if d.tzinfo is None else d.astimezone(timezone.utc)
+
+
+def extract_items(xml_bytes):
+    root = ET.fromstring(xml_bytes)
+    entries = []
+    for node in root.iter():
+        if node.tag.split('}')[-1] not in ('item', 'entry'):
+            continue
+        fields = {}
+        for child in node:
+            key = child.tag.split('}')[-1]
+            if key == 'link':
+                fields['link'] = child.attrib.get('href') or (child.text or '')
+            elif key in ('title', 'pubDate', 'published', 'updated', 'description', 'summary'):
+                fields[key] = ''.join(child.itertext()).strip()
+        entries.append({'title': unescape(fields.get('title', '')),
+                        'link': fields.get('link', ''),
+                        'date': parse_date(fields.get('pubDate') or fields.get('published') or fields.get('updated')),
+                        'description': unescape(fields.get('description') or fields.get('summary') or '')})
+    return entries
+
+
+def has_phrase(text, phrase):
+    return bool(re.search(r'(?<!\w)' + re.escape(phrase.casefold()) + r'(?!\w)', text.casefold()))
+
+
+def classify_news(item, company, now, max_age_hours=24):
+    published = item.get('date')
+    if published is None or not timedelta(0) <= now - published <= timedelta(hours=max_age_hours):
+        return None
+    link = item.get('link', '')
+    parsed = urlparse(link)
+    if parsed.scheme != 'https' or not parsed.hostname:
+        return None
+    text = item.get('title', '') + ' ' + item.get('description', '')
+    if not any(has_phrase(text, alias) for alias in company['aliases']):
+        return None
+    if any(has_phrase(text, word) for word in RISK_WORDS):
+        category = 'RISKNYHET'
+    elif any(has_phrase(text, word) for word in KEYWORDS):
+        category = 'ORDER/AVTAL – GRANSKA'
+    else:
+        return None
+    key = hashlib.sha256((company['name'] + '\n' + link).encode()).hexdigest()[:24]
+    return {'kind': 'NYHET-VAKTA', 'category': category, 'company': company['name'],
+            'title': item['title'][:180], 'url': link, 'published': published,
+            'id': 'NEWS:' + key}
+
+
+def scan(config=None, now=None, fetch=None):
+    config = config if config is not None else load_config()
+    now = now or datetime.now(timezone.utc)
+    def default_fetch(url):
+        with urlopen(Request(url, headers={'User-Agent': 'AktieRadar/4.0 NewsMonitor'}), timeout=15) as r:
+            return r.read(2_000_000)
+    fetch = fetch or default_fetch
+    results = []
+    failures = []
+    for company in config['companies']:
+        for url in company.get('feeds', []):
+            try:
+                for item in extract_items(fetch(url)):
+                    match = classify_news(item, company, now)
+                    if match:
+                        results.append(match)
+            except Exception as exc:
+                failures.append((company['name'], type(exc).__name__))
+    unique = {item['id']: item for item in results}
+    return list(unique.values()), failures

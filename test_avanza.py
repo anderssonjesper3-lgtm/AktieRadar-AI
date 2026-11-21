@@ -338,7 +338,7 @@ def check_data_quality(groups):
         return False     
 def check_buy_signal(score, data_quality_ok):
     if not data_quality_ok:
-        return "BLOCKERAD - DATAKVALITET"
+        return "BLOCKERAD - OTILLRACKLIG SAMMANHANGANDE DATA"
 
     if score is None:
         return "BLOCKERAD - INDIKATORER SAKNAS"

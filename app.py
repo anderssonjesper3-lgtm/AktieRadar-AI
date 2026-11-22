@@ -10,6 +10,7 @@ from multi_engine import companies, analyze_all
 from news_scanner import scan
 from order_analysis import parse_order_amount, order_ratio
 from news_analysis import analyze_news
+from news_history import update_history
 from test_avanza_forbattrad import calculate_ema, calculate_rsi, calculate_macd, SWEDEN
 from performance import load_journal, record_signal, update_open_trades, summary as journal_summary, trades_csv
 from aktieradar_telegram import market_session
@@ -19,7 +20,10 @@ st.set_page_config(page_title='AktieRadar AI 6.0',page_icon='📡',layout='wide'
 st.markdown('''<style>
 .stApp{background:#0c1525;color:#edf3ff}div[data-testid="stMetric"]{background:#17253b;border:1px solid #293a51;border-radius:14px;padding:16px}
 div.stButton>button{background:#17253b;color:#f3f7ff !important;border:1px solid #30435c;border-radius:12px;min-height:56px;width:100%;text-align:left;font-weight:600}\n.stButton>button p,.stButton>button span,.stButton>button div{color:#f3f7ff !important;opacity:1 !important}\n.stButton>button:disabled{color:#dce7f5 !important;opacity:.85}
-div.stButton>button:hover{background:#244e58;color:white;border-color:#55e0c4}
+div.stButton>button:hover{background:#244e58;color:#f7fbff;border-color:#55e0c4}
+div.stDownloadButton>button,div.stLinkButton>a,div.stFormSubmitButton>button{color:#f3f7ff !important}
+div.stDownloadButton>button p,div.stLinkButton>a p,div.stFormSubmitButton>button p{color:#f3f7ff !important;opacity:1 !important}
+div[data-testid="stBaseButton-secondary"],div[data-testid="stBaseButton-primary"]{color:#f3f7ff !important}
 </style>''',unsafe_allow_html=True)
 st.title('📡 AktieRadar AI 6.0')
 st.caption('MARKNADSÖVERSIKT · 10 AKTIER · FEMMINUTERSLJUS · NYHETER · SIGNALJOURNAL · DATAKONTROLL')
@@ -36,8 +40,13 @@ with st.spinner('Kontrollerar aktier och nyheter...'):
     try:results=market_snapshot()
     except Exception as exc:
         st.error(f'Kursanalysen kunde inte starta: {exc}');st.stop()
-    try:articles,failures=news_snapshot()
-    except Exception as exc:articles,failures=[],[('Nyhetsbevakning',str(exc))]
+    try:
+        articles,failures=news_snapshot()
+        news_archive=update_history(articles)
+    except Exception as exc:
+        articles,failures=[],[('Nyhetsbevakning',str(exc))]
+        try: news_archive=update_history([])
+        except Exception: news_archive=[]
 by_name={r['company']:r for r in results}
 ready=sum(bool(r.get('candles')) and not r.get('error') for r in results)
 buys=sum(bool(r['signal']) and r['signal']['kind']=='KÖP-KANDIDAT' for r in results)
@@ -76,12 +85,24 @@ if r['candles']:
     st.caption(f"Senaste färdiga ljus: {df.time.iloc[-1]} · Antal: {len(df)} · Luckor: {r.get('gaps','okänt')}")
 else:st.warning('Ingen verifierad komplett femminutersstapel att visa.')
 st.subheader('📰 Nyheter och order')
-items=[a for a in articles if a['company']==selected]
-if not items:st.caption('Inga verifierat inlästa nyheter i anslutna flöden.')
+items=[a for a in news_archive if a.get('company')==selected]
 if not items:
-    st.caption('Inga verifierat inlästa nyheter i anslutna flöden.')
+    st.caption('Inga arkiverade nyheter för aktien ännu. Nyheter hämtas från verifierade anslutna flöden.')
 else:
-    for idx, article in enumerate(sorted(items, key=lambda x: x.get('published') or datetime.min.replace(tzinfo=timezone.utc), reverse=True)):
+    items=sorted(items, key=lambda x: x.get('published') or '', reverse=True)
+    latest=items[0]
+    st.markdown('**SENASTE NYHET**')
+    st.markdown(f"**{latest['category']}** · [{latest['title']}]({latest['url']})")
+    latest_analysis=analyze_news(latest,c)
+    st.write(f"Nyhetsbedömning: **{latest_analysis['view']}** · {latest_analysis['impact']}")
+    st.write(latest_analysis['forward_hypothesis'])
+    if len(items)>1:
+        with st.expander(f"🗂️ Nyhetshistorik ({len(items)-1} äldre nyheter)"):
+            for article in items[1:]:
+                st.markdown(f"**{article.get('published') or 'Publiceringstid saknas'}** · [{article['title']}]({article['url']})")
+                analysis=analyze_news(article,c)
+                st.caption(f"{analysis['view']} · {analysis['impact']}")
+    for idx, article in enumerate([]):
         st.markdown(f"**{article['category']}** · [{article['title']}]({article['url']})")
         analysis = analyze_news(article, c)
         st.write(f"Nyhetsbedömning: **{analysis['view']}** · {analysis['impact']}")
@@ -94,14 +115,7 @@ else:
         with st.expander("Visa resonemang och framåthypotes"):
             st.write(analysis['forward_hypothesis'])
             for caveat in analysis['caveats']: st.caption("• " + caveat)
-    if st.button("🧪 Kör historiskt nyhetstest på senaste inlästa nyheten", key="historical_news_test"):
-        article = sorted(items, key=lambda x: x.get('published') or datetime.min.replace(tzinfo=timezone.utc), reverse=True)[0]
-        result = analyze_news(article, c)
-        st.session_state["historical_news_result"] = result
-    if st.session_state.get("historical_news_result"):
-        result = st.session_state["historical_news_result"]
-        st.success("Historisk testanalys sparad i sessionen – bedömningen bygger bara på texten som fanns i nyhetsflödet.")
-        st.json({k:v for k,v in result.items() if k not in ("url",)})
+    st.caption("Historikens beständighet beror på värdplattformens lagring. Exportera eller anslut beständig lagring innan den används som långtidsarkiv.")
 with st.expander('🛠️ Kontrollcentral – alla aktier'):
     st.dataframe(pd.DataFrame([{'Bolag':x['company'],'Avanza-ID':next((c.get('order_book_id') for c in watchlist if c['name']==x['company']),None),'5-minutersljus':len(x['candles']),'Luckor':x.get('gaps'),'Signal':x['signal']['kind'] if x['signal'] else '–','Datastatus':x['error'] or x['status']} for x in results]),hide_index=True,use_container_width=True)
     st.caption('ID:n verifieras separat med verify_sources.py. Streamlit uppdateras vid omladdning; schemalagda jobb körs separat.')

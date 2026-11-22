@@ -69,7 +69,7 @@ class _CompanyNewsHTMLParser(HTMLParser):
         re.compile(r'\b(\d{1,2}\s+[A-Za-z]{3,9},?\s+20\d{2}(?:\s+at\s+\d{1,2}:\d{2})?)\b', re.I),
         re.compile(r'\b([A-Za-z]{3,9}\s+\d{1,2},?\s+20\d{2})\b', re.I),
     )
-    ARTICLE_HINTS = ('news', 'press', 'release', 'investor', 'announcement', '/a/')
+    ARTICLE_HINTS = ('news', 'press', 'release', 'investor', 'announcement', 'article', '/a/')
 
     def __init__(self, base_url):
         super().__init__(convert_charrefs=True)
@@ -122,7 +122,6 @@ class _CompanyNewsHTMLParser(HTMLParser):
 
     def items(self):
         text = ''.join(self.parts)
-        # Rebuild offsets against normalized text using each anchor's visible text.
         results, seen = [], set()
         for anchor in self.anchors:
             title = ' '.join(' '.join(anchor['text']).split())

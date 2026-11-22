@@ -92,22 +92,35 @@ def classify_news(item, company, now, max_age_hours=24):
 
 
 def scan(config=None, now=None, fetch=None):
+    """Fetch each unique RSS feed once, then match its items to configured issuers."""
     config = config if config is not None else load_config()
     now = now or datetime.now(timezone.utc)
+
     def default_fetch(url):
-        with urlopen(Request(url, headers={'User-Agent': 'AktieRadar/4.0 NewsMonitor'}), timeout=15) as r:
-            return r.read(2_000_000)
+        request = Request(url, headers={'User-Agent': 'AktieRadar/6.0 NewsMonitor'})
+        with urlopen(request, timeout=15) as response:
+            return response.read(2_000_000)
+
     fetch = fetch or default_fetch
-    results = []
-    failures = []
+    feed_companies = {}
     for company in config['companies']:
         for url in company.get('feeds', []):
-            try:
-                for item in extract_items(fetch(url)):
-                    match = classify_news(item, company, now)
-                    if match:
-                        results.append(match)
-            except Exception as exc:
-                failures.append((company['name'], type(exc).__name__))
+            feed_companies.setdefault(url, []).append(company)
+
+    results = []
+    failures = []
+    for url, companies in feed_companies.items():
+        try:
+            items = extract_items(fetch(url))
+        except Exception as exc:
+            names = ', '.join(company['name'] for company in companies)
+            failures.append((names, type(exc).__name__))
+            continue
+        for item in items:
+            for company in companies:
+                match = classify_news(item, company, now)
+                if match:
+                    results.append(match)
+
     unique = {item['id']: item for item in results}
     return list(unique.values()), failures

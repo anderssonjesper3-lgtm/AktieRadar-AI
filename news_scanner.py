@@ -80,6 +80,9 @@ class _CompanyNewsHTMLParser(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        for date_attr in ('datetime', 'data-date', 'content'):
+            if attrs.get(date_attr):
+                self.parts.append(' ' + str(attrs[date_attr]) + ' ')
         if tag.lower() == 'a' and attrs.get('href'):
             self.active = {'href': attrs['href'], 'start': sum(map(len, self.parts)), 'text': []}
 
@@ -106,7 +109,8 @@ class _CompanyNewsHTMLParser(HTMLParser):
                     # Handle common English dates without a timezone.
                     for fmt in ('%d %B %Y', '%d %b %Y', '%d %B, %Y', '%d %b, %Y',
                                 '%B %d %Y', '%B %d, %Y', '%b %d %Y', '%b %d, %Y',
-                                '%d %b, %Y at %H:%M', '%d %B, %Y at %H:%M'):
+                                '%d %b, %Y at %H:%M', '%d %B, %Y at %H:%M',
+                                '%d %b %Y %H:%M', '%d %B %Y %H:%M'):
                         try:
                             parsed = datetime.strptime(match.group(1), fmt).replace(tzinfo=timezone.utc)
                             break

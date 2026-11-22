@@ -5,6 +5,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import streamlit as st
+from streamlit_autorefresh import st_autorefresh
 from multi_engine import companies, analyze_all
 from news_scanner import scan
 from order_analysis import parse_order_amount, order_ratio
@@ -21,11 +22,12 @@ div.stButton>button:hover{background:#244e58;color:white;border-color:#55e0c4}
 </style>''',unsafe_allow_html=True)
 st.title('📡 AktieRadar AI 6.0')
 st.caption('MARKNADSÖVERSIKT · 10 AKTIER · FEMMINUTERSLJUS · NYHETER · SIGNALJOURNAL · DATAKONTROLL')
+st_autorefresh(interval=300_000, key='aktieradar_5min_refresh')
 st.warning('Analysverktyg – inga handelsråd eller automatiska köp. Kurser kan vara fördröjda.')
 watchlist=companies()
-@st.cache_data(ttl=120,show_spinner=False)
+@st.cache_data(ttl=240,show_spinner=False)
 def market_snapshot():return asyncio.run(analyze_all())
-@st.cache_data(ttl=180,show_spinner=False)
+@st.cache_data(ttl=240,show_spinner=False)
 def news_snapshot():return scan({'companies':companies()})
 if st.button('🔄 Uppdatera alla datakällor'):
     market_snapshot.clear();news_snapshot.clear();st.rerun()
@@ -41,7 +43,7 @@ buys=sum(bool(r['signal']) and r['signal']['kind']=='KÖP-KANDIDAT' for r in res
 watch=sum(bool(r['signal']) and 'VAKTA' in r['signal']['kind'] for r in results)
 a,b,c,d=st.columns(4)
 a.metric('Bevakade aktier',len(watchlist));b.metric('Kursdata tillgänglig',f'{ready}/{len(watchlist)}');c.metric('Köpkandidater',buys);d.metric('Vakta',watch)
-if not any(c.get('feeds') for c in watchlist):st.info('Nyhetsflöden är inte anslutna. Inga nyheter har verifierats.')
+if any(not c.get('feeds') for c in watchlist):st.warning('Nyhetsbevakning saknar verifierat flöde för: '+', '.join(c['name'] for c in watchlist if not c.get('feeds')))
 if failures:st.error('Nyhetskällor med fel: '+', '.join(x[0] for x in failures))
 st.subheader('🎯 Välj aktie')
 if 'selected_stock' not in st.session_state:st.session_state.selected_stock=watchlist[0]['name']

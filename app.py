@@ -224,6 +224,7 @@ try:
         os.environ['AKTIERADAR_JOURNAL_TOKEN'] = st.secrets['AKTIERADAR_JOURNAL_TOKEN']
     if 'AKTIERADAR_JOURNAL_REPO' in st.secrets:
         os.environ['AKTIERADAR_JOURNAL_REPO'] = st.secrets['AKTIERADAR_JOURNAL_REPO']
+    os.environ.setdefault('AKTIERADAR_JOURNAL_REPO', 'anderssonjesper3-lgtm/AktieRadar-AI')
     journal, _ = read_shared()
 except Exception as exc:
     journal_error = str(exc)

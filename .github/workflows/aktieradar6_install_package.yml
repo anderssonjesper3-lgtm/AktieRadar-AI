@@ -1,0 +1,55 @@
+name: AktieRadar AI 6.0 - Install package on development branch
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aktieradar6-package-install
+  cancel-in-progress: false
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout 6.0 development branch
+        uses: actions/checkout@v4
+        with:
+          ref: aktieradar-6.0
+      - name: Verify and unpack the tested package
+        shell: bash
+        run: |
+          set -euo pipefail
+          PACKAGE="AktieRadar_AI_6_0_LAYOUT_AND_CI_UPDATE_2026-11-22_v3.zip"
+          test -f "$PACKAGE" || { echo "::error::Upload $PACKAGE to the aktieradar-6.0 branch first."; exit 1; }
+          mkdir -p .ar6-package
+          unzip -q "$PACKAGE" -d .ar6-package
+          SOURCE=".ar6-package/AktieRadar-AI-6.0"
+          test -f "$SOURCE/app.py"
+          test -f "$SOURCE/multi_runner.py"
+          test -f "$SOURCE/performance.py"
+          test -d "$SOURCE/tests"
+          # Install package files at repository root; keep the existing
+          # 5.0 production branch untouched. Preserve the package archive
+          # only until the installation commit has been created.
+          cp -a "$SOURCE/." .
+          rm -rf .ar6-package
+          rm -f "$PACKAGE"
+      - name: Commit complete 6.0 package to development branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No package changes to commit."
+            exit 0
+          fi
+          git commit -m "Install AktieRadar AI 6.0 package on development branch"
+          git push origin HEAD:aktieradar-6.0

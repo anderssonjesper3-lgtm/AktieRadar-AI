@@ -119,7 +119,9 @@ def extract_items(xml_bytes, source_url=None):
         entries.append({'title': unescape(fields.get('title', '')),
                         'link': fields.get('link', ''),
                         'date': parse_date(fields.get('pubDate') or fields.get('published') or fields.get('updated')),
-                        'description': unescape(fields.get('description') or fields.get('summary') or '')})
+                        'description': unescape(fields.get('description') or fields.get('summary') or ''),
+                        'metadata': ' '.join(' '.join(node.itertext()).split()) + ' ' +
+                                    ' '.join(str(v) for el in node.iter() for v in el.attrib.values())})
     return entries
 
 
@@ -127,17 +129,24 @@ def has_phrase(text, phrase):
     return bool(re.search(r'(?<!\w)' + re.escape(phrase.casefold()) + r'(?!\w)', text.casefold()))
 
 
-def classify_news(item, company, now, max_age_hours=24):
+def classify_news_detailed(item, company, now, max_age_hours=24):
     published = item.get('date')
-    if published is None or not timedelta(0) <= now - published <= timedelta(hours=max_age_hours):
-        return None
+    if published is None:
+        return None, 'datum_saknas'
+    age = now - published
+    if not timedelta(0) <= age <= timedelta(hours=max_age_hours):
+        return None, 'utanför_datumintervall'
     link = item.get('link', '')
     parsed = urlparse(link)
     if parsed.scheme != 'https' or not parsed.hostname:
-        return None
+        return None, 'ogiltig_länk'
     text = item.get('title', '') + ' ' + item.get('description', '')
-    if item.get('_feed_company') != company['name'] and not any(has_phrase(text, alias) for alias in company['aliases']):
-        return None
+    issuer_text = text + ' ' + item.get('metadata', '')
+    issuer_match = item.get('_feed_company') == company['name'] or any(
+        has_phrase(issuer_text, alias) for alias in company['aliases']
+    )
+    if not issuer_match:
+        return None, 'bolag_matchar_inte'
     if any(has_phrase(text, word) for word in RISK_WORDS):
         category = 'RISKNYHET'
     elif any(has_phrase(text, word) for word in KEYWORDS):
@@ -145,11 +154,16 @@ def classify_news(item, company, now, max_age_hours=24):
     elif item.get('_feed_company') == company['name']:
         category = 'BOLAGSNYHET – GRANSKA'
     else:
-        return None
+        return None, 'ingen_relevant_nyhetskategori'
     key = hashlib.sha256((company['name'] + '\n' + link).encode()).hexdigest()[:24]
     return {'kind': 'NYHET-VAKTA', 'category': category, 'company': company['name'],
             'title': item['title'][:180], 'description': item.get('description', '')[:4000], 'url': link, 'published': published,
-            'id': 'NEWS:' + key}
+            'id': 'NEWS:' + key}, 'match'
+
+
+def classify_news(item, company, now, max_age_hours=24):
+    match, _ = classify_news_detailed(item, company, now, max_age_hours=max_age_hours)
+    return match
 
 
 def scan_detailed(config=None, now=None, fetch=None, max_age_hours=24):
@@ -183,14 +197,18 @@ def scan_detailed(config=None, now=None, fetch=None, max_age_hours=24):
             diagnostics.append({'feed': url, 'companies': names, 'status': 'FEL', 'raw_items': 0, 'matched': 0, 'error': type(exc).__name__})
             continue
         before_count = len(results)
+        rejects = {'datum_saknas': 0, 'utanför_datumintervall': 0, 'ogiltig_länk': 0,
+                   'bolag_matchar_inte': 0, 'ingen_relevant_nyhetskategori': 0}
         for item in items:
             for company in companies:
-                match = classify_news(item, company, now, max_age_hours=max_age_hours)
+                match, reason = classify_news_detailed(item, company, now, max_age_hours=max_age_hours)
                 if match:
                     results.append(match)
+                elif reason in rejects:
+                    rejects[reason] += 1
         diagnostics.append({'feed': url, 'companies': ', '.join(c['name'] for c in companies),
                             'status': 'OK', 'raw_items': raw_count,
-                            'matched': len(results) - before_count, 'error': ''})
+                            'matched': len(results) - before_count, **rejects, 'error': ''})
 
     unique = {item['id']: item for item in results}
     return list(unique.values()), failures, diagnostics

@@ -13,7 +13,7 @@ from test_avanza_forbattrad import calculate_ema, calculate_rsi, calculate_macd,
 st.set_page_config(page_title='AktieRadar AI 5.0',page_icon='📡',layout='wide')
 st.markdown('''<style>
 .stApp{background:#0c1525;color:#edf3ff}div[data-testid="stMetric"]{background:#17253b;border:1px solid #293a51;border-radius:14px;padding:16px}
-div.stButton>button{background:#17253b;color:#f3f7ff;border:1px solid #30435c;border-radius:12px;min-height:56px;width:100%;text-align:left}
+div.stButton>button{background:#17253b;color:#f3f7ff !important;border:1px solid #30435c;border-radius:12px;min-height:56px;width:100%;text-align:left;font-weight:650}\n.stButton>button p,.stButton>button span,.stButton>button div{color:#f3f7ff !important;opacity:1 !important}\n.stButton>button:disabled{color:#dce7f5 !important;opacity:.9}\n.stDownloadButton>button,.stDownloadButton>button p{color:#f3f7ff !important}
 div.stButton>button:hover{background:#244e58;color:white;border-color:#55e0c4}
 </style>''',unsafe_allow_html=True)
 st.title('📡 AktieRadar AI 5.0')
@@ -69,6 +69,19 @@ if r['candles']:
     st.caption(f"MACD histogram (senaste): {hist[-1]:.4f}" if hist and hist[-1] is not None else 'MACD: otillräcklig historik')
     st.caption(f"Senaste färdiga ljus: {df.time.iloc[-1]} · Antal: {len(df)} · Luckor: {r.get('gaps','okänt')}")
 else:st.warning('Ingen verifierad komplett femminutersstapel att visa.')
+st.subheader('📰 Förhandsvisning: nya nyhetsanalysen')
+st.caption('DESIGNDEMO · Exempeltext, inte en verklig eller verifierad nyhet. Ingen handelssignal.')
+with st.container(border=True):
+    st.markdown('**SENASTE NYHET · DEMO**')
+    st.markdown('**Exempelbolaget tecknar ett nytt leveransavtal**')
+    st.caption('Exempelrubrik · publiceringstid och källa visas här när riktiga data finns')
+    st.write('**Nyhetsbedömning:** Möjligen positiv – kräver bekräftelse från kurs och volym.')
+    st.write('**Framåthypotes:** Om kursen stiger med högre volym efter publiceringen kan momentum fortsätta. Detta är inte en prognos.')
+    if st.button('🧪 Förhandsvisa nyhetstest', key='preview_news_test'):
+        st.info('Här ska vi jämföra en tidsstämplad nyhetsbedömning med verifierade historiska kursdata. Testresultat visas först när dessa finns.')
+    with st.expander('🗂️ Så kommer nyhetshistoriken att visas'):
+        st.caption('Äldre verifierade nyheter listas med datum, källa och bedömning. Inga exempel presenteras som verkliga nyheter.')
+st.caption('Detta är en visuell förhandsvisning i 5.0. Den fullständiga nyhetsmotorn utvecklas separat i 6.0.')
 st.subheader('📰 Nyheter och order')
 items=[a for a in articles if a['company']==selected]
 if not items:st.caption('Inga verifierat inlästa nyheter i anslutna flöden.')

@@ -24,6 +24,34 @@ div.stButton>button:hover{background:#244e58;color:#f7fbff;border-color:#55e0c4}
 div.stDownloadButton>button,div.stLinkButton>a,div.stFormSubmitButton>button{color:#f3f7ff !important}
 div.stDownloadButton>button p,div.stLinkButton>a p,div.stFormSubmitButton>button p{color:#f3f7ff !important;opacity:1 !important}
 div[data-testid="stBaseButton-secondary"],div[data-testid="stBaseButton-primary"]{color:#f3f7ff !important}
+
+/* Consistent high-contrast text throughout AktieRadar 6.0 */
+.stApp, .stApp p, .stApp span, .stApp label, .stApp li,
+.stApp h1, .stApp h2, .stApp h3, .stApp h4,
+.stApp [data-testid="stMarkdownContainer"],
+.stApp [data-testid="stMetricLabel"],
+.stApp [data-testid="stMetricValue"],
+.stApp [data-testid="stMetricDelta"],
+.stApp [data-testid="stCaptionContainer"],
+.stApp [data-testid="stWidgetLabel"],
+.stApp [data-testid="stExpander"] summary,
+.stApp [data-testid="stExpander"] summary p {
+    color: #f3f7ff !important;
+    opacity: 1 !important;
+}
+.stApp div.stButton > button,
+.stApp div.stButton > button *,
+.stApp div.stDownloadButton > button,
+.stApp div.stDownloadButton > button * {
+    color: #f3f7ff !important;
+    opacity: 1 !important;
+}
+.stApp div[data-testid="stDataFrame"] { color-scheme: dark; }
+.stApp a { color: #91e9ff !important; }
+.stApp a:hover { color: #d1f8ff !important; }
+.stApp input, .stApp textarea, .stApp select {
+    color: #f3f7ff !important;
+}
 </style>''',unsafe_allow_html=True)
 st.title('📡 AktieRadar AI 6.0')
 st.caption('MARKNADSÖVERSIKT · 10 AKTIER · FEMMINUTERSLJUS · NYHETER · SIGNALJOURNAL · DATAKONTROLL')

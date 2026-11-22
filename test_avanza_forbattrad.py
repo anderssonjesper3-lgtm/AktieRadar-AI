@@ -242,28 +242,15 @@ def check_buy_signal(score, data_quality_ok):
     return "AVVAKTA"
 
 def check_local_data_quality(candles, index, lookback=20):
-    if index < lookback - 1:
-        return False
+    """Require enough real traded bars; natural no-trade intervals are not errors."""
+    return index >= lookback - 1
 
-    from datetime import timedelta
-
-    start_index = index - lookback + 1
-
-    for i in range(start_index + 1, index + 1):
-        previous = candles[i - 1]["time"]
-        current = candles[i]["time"]
-
-        if current - previous != timedelta(minutes=5):
-            return False
-
-    return True
 
 def calculate_relative_volume(candles, period=20):
+    """Compare this traded 5-minute bar with the previous active traded bars."""
     result = [None] * len(candles)
     for i in range(period, len(candles)):
         window = candles[i-period:i+1]
-        if not check_local_data_quality(candles, i, lookback=period+1):
-            continue
         avg = sum(c["volume"] for c in window[:-1]) / period
         if avg > 0:
             result[i] = window[-1]["volume"] / avg
@@ -271,40 +258,45 @@ def calculate_relative_volume(candles, period=20):
 
 
 def consecutive_count(candles):
-    if not candles:
-        return 0
-    count = 1
-    for i in range(len(candles)-1, 0, -1):
-        if candles[i]["time"] - candles[i-1]["time"] != timedelta(minutes=5):
-            break
-        count += 1
-    return count
+    """Number of observed active 5-minute bars, not wall-clock consecutive slots."""
+    return len(candles)
 
 
 def build_candles(points):
+    """Aggregate all real minute records in each 5-minute bucket.
+
+    A bucket with 1-5 observed minute records is retained. Missing records are
+    not synthesized; source_minutes records how much real input was available.
+    """
     groups = defaultdict(dict)
-    for p in points:
-        dt = datetime.fromtimestamp(p["timestamp"] / 1000, tz=timezone.utc).astimezone(SWEDEN)
+    for point in points:
+        dt = datetime.fromtimestamp(
+            point["timestamp"] / 1000, tz=timezone.utc
+        ).astimezone(SWEDEN)
         minute = dt.replace(second=0, microsecond=0)
         start = minute.replace(minute=(minute.minute // 5) * 5)
-        groups[start][minute] = p
+        groups[start][minute] = point
 
     candles, gaps = [], []
     for start, minutes in sorted(groups.items()):
-        expected = [start + timedelta(minutes=j) for j in range(5)]
-        missing = [m for m in expected if m not in minutes]
-        if missing:
-            gaps.append((start, missing))
+        values = [minutes[key] for key in sorted(minutes)]
+        if not values:
             continue
-        values = [minutes[m] for m in expected]
         candles.append({
             "time": start,
             "open": values[0]["open"],
-            "high": max(v["high"] for v in values),
-            "low": min(v["low"] for v in values),
+            "high": max(value["high"] for value in values),
+            "low": min(value["low"] for value in values),
             "close": values[-1]["close"],
-            "volume": sum(v.get("totalVolumeTraded", 0) for v in values),
+            "volume": sum(value.get("totalVolumeTraded", 0) for value in values),
+            "source_minutes": len(values),
+            "last_trade_time": max(
+                datetime.fromtimestamp(value["timestamp"] / 1000, tz=timezone.utc).astimezone(SWEDEN)
+                for value in values
+            ),
         })
+        if len(values) < 5:
+            gaps.append((start, [f"{5-len(values)} saknade minutposter; naturlig/okänd lucka"]))
     return candles, gaps
 
 

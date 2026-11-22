@@ -86,10 +86,10 @@ def classify(candles, now):
     if not market_session(now):
         return None, 'Utanför tillåten handelstid / börshelgdag'
     last = candles[-1]
-    end = last['time'] + timedelta(minutes=5)
+    end = last.get('last_trade_time', last['time'] + timedelta(minutes=5))
     age = (now - end).total_seconds() / 60
-    if last['time'].date() != now.date() or not 0 <= age <= MAX_AGE_MINUTES:
-        return None, 'DATA FÖR GAMMAL - senaste stapeln är inte aktuell'
+    if end.date() != now.date() or not 0 <= age <= MAX_AGE_MINUTES:
+        return None, 'DATA FÖR GAMMAL - senaste faktiska avslutet är inte aktuellt'
     if morning_signal(candles, continuous):
         return {'kind': 'MORGON-VAKTA', 'time': last['time'], 'close': last['close'],
                 'score': None, 'reasons': ['Prisuppgång', 'Grön 5-minutersstapel',

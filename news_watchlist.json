@@ -49,11 +49,14 @@
       "ticker": "ASTOR",
       "aliases": [
         "Scandinavian Astor Group",
-        "Astor Group"
+        "Astor Group",
+        "Astor"
       ],
       "order_book_id": "1523003",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://www.mfn.se/all/a/scandinavian-astor-group.iframe"
+      ]
     },
     {
       "name": "Ovzon",

@@ -17,8 +17,8 @@ st.markdown('''<style>
 div.stButton>button{background:#17253b;color:#f3f7ff;border:1px solid #30435c;border-radius:12px;min-height:56px;width:100%;text-align:left}
 div.stButton>button:hover{background:#244e58;color:white;border-color:#55e0c4}
 </style>''',unsafe_allow_html=True)
-st.title('📡 AktieRadar AI 5.0')
-st.caption('MARKNADSÖVERSIKT · 10 AKTIER · FEMMINUTERSLJUS · NYHETER · DATAKONTROLL')
+st.title('📡 AktieRadar AI 6.0')
+st.caption('MARKNADSÖVERSIKT · 10 AKTIER · FEMMINUTERSLJUS · NYHETER · SIGNALJOURNAL · DATAKONTROLL')
 st.warning('Analysverktyg – inga handelsråd eller automatiska köp. Kurser kan vara fördröjda.')
 watchlist=companies()
 @st.cache_data(ttl=120,show_spinner=False)

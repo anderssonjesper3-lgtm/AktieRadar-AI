@@ -52,6 +52,18 @@ div[data-testid="stBaseButton-secondary"],div[data-testid="stBaseButton-primary"
 .stApp input, .stApp textarea, .stApp select {
     color: #f3f7ff !important;
 }
+
+/* Restore legible dark foreground on Streamlit's pale alert backgrounds. */
+.stApp div[data-testid="stAlert"],
+.stApp div[data-testid="stAlert"] p,
+.stApp div[data-testid="stAlert"] span,
+.stApp div[data-testid="stAlert"] li,
+.stApp div[data-testid="stAlert"] strong,
+.stApp div[data-testid="stAlert"] [data-testid="stMarkdownContainer"] {
+    color: #17253b !important;
+    opacity: 1 !important;
+}
+.stApp div[data-testid="stAlert"] a { color: #125a83 !important; }
 </style>''',unsafe_allow_html=True)
 st.title('📡 AktieRadar AI 6.0')
 st.caption('MARKNADSÖVERSIKT · 10 AKTIER · FEMMINUTERSLJUS · NYHETER · SIGNALJOURNAL · DATAKONTROLL')

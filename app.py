@@ -10,7 +10,7 @@ from multi_engine import companies, analyze_all
 from news_scanner import scan
 from order_analysis import parse_order_amount, order_ratio
 from news_analysis import analyze_news
-from news_history import update_history
+from news_history import update_history, load_history
 from test_avanza_forbattrad import calculate_ema, calculate_rsi, calculate_macd, SWEDEN
 from performance import load_journal, record_signal, update_open_trades, summary as journal_summary, trades_csv
 from aktieradar_telegram import market_session
@@ -62,6 +62,19 @@ watchlist=companies()
 def market_snapshot():return asyncio.run(analyze_all())
 @st.cache_data(ttl=240,show_spinner=False)
 def news_snapshot():return scan({'companies':companies()})
+st.caption('🟢 Skarp RSS-inhämtning är aktiv i appen när källorna svarar. Historisk import är separat och skickar inga Telegram-larm.')
+if st.button('🗂️ Importera tillgängliga nyheter från senaste 30 dagarna (utan larm)', key='historical_import'):
+    with st.spinner('Läser tillgängliga RSS-poster och sparar historik...'):
+        try:
+            older, history_failures = scan({'companies': companies()}, max_age_hours=24*30)
+            before = len(load_history())
+            stored = update_history(older)
+            st.success(f'Historisk import klar: {len(older)} matchande RSS-poster, {len(stored)-before} nya arkivposter.')
+            if history_failures:
+                st.warning('Källor som inte svarade: ' + ', '.join(name for name, _ in history_failures))
+            st.info('RSS-flöden innehåller inte nödvändigtvis 30 dagars historik. Inga Telegram-larm skickades.')
+        except Exception as exc:
+            st.error(f'Historisk import misslyckades: {exc}')
 if st.button('🔄 Uppdatera alla datakällor'):
     market_snapshot.clear();news_snapshot.clear();st.rerun()
 with st.spinner('Kontrollerar aktier och nyheter...'):

@@ -1,33 +1,38 @@
-# AktieRadar AI – Saab B v0.2
+# AktieRadar AI 6.0 – utvecklingsversion
 
-En webbaserad Streamlit-prototyp som översätter användarens **Saab B Momentum Scanner v1** från Pine Script v6 till Python.
+AktieRadar AI är ett analys- och bevakningsverktyg för svenska aktier. Det visar indikativa VAKTA- och KÖP-KANDIDAT-signaler baserade på verifierade Avanza-kurser. Verktyget lägger **inga riktiga order** och signaler är inte investeringsråd.
 
-## Vad den gör
-- EMA 9/21, Wilder RSI 14, MACD 12/26/9 och volym-SMA 20.
-- Bullish engulfing, hammer, 15-minuterstrend och poängsystemet 0–100.
-- VAKTA-händelser och KÖP på avslutade femminutersstaplar.
-- Graf och export av signaler.
-- Syntetisk demodata, eller valfri CSV med femminuterskurser.
+## Funktioner
+- Översikt för tio konfigurerade aktier med femminutersstaplar.
+- EMA 9/21, RSI 14, MACD och candlestick-/volymanalys.
+- Kontroll av instrument-ID, kompletta staplar, datakvalitet och handelstid.
+- Nyhetsmodul som bara klassificerar nyheter från uttryckligen konfigurerade HTTPS RSS/Atom-flöden. Utan verifierade flöden visas nyhetsstatus som ej ansluten/okänd; den får inte tolkas som att inga risknyheter finns.
+- Telegramnotiser med dubblettskydd och historikreserv före utskick.
+- Simulerad signaljournal: 5 000 kr per affär, mål +2 %, stop -1 %, courtage 0,25 % (minst 1 kr) och slippage 0,10 % per sida. Journalen är pappershandel, inte backtest eller faktisk portföljhistorik.
 
-## Starta lokalt
-Installera Python (helst 3.10+) och kör i projektmappen:
-
+## Starta
 ```bash
-python3 -m pip install -r requirements.txt
-python3 -m streamlit run app.py
+python -m pip install -r requirements.txt
+python -m streamlit run app.py
 ```
 
-## Publicera som webbsida
-Lägg `app.py`, `scanner.py` och `requirements.txt` i ett privat eller publikt GitHub-repo. Skapa sedan en app på Streamlit Community Cloud och välj `app.py` som startfil. Publicering och kostnader beror på tjänstens aktuella villkor. Ladda inte upp privata kontouppgifter eller känsliga CSV-filer i ett publikt repo.
-
-## CSV-format
-```csv
-timestamp,open,high,low,close,volume
-2026-11-12 09:00:00,100.0,100.2,99.8,100.1,5000
-2026-11-12 09:05:00,100.1,100.5,100.0,100.4,7200
+## Tester
+```bash
+python -m pytest -q
+python -m compileall -q .
 ```
+GitHub Actions kör tester, kompilering och release-audit på grenen `aktieradar-6.0`.
 
-Använd verkliga **5-minuters OHLCV-staplar**, där `timestamp` är stapelns **starttid** i svensk lokal börstid. Behåll minst några dagars historik för indikatoruppvärmning. Ladda bara upp avslutade staplar för att jämföra signalerna med TradingView. Marknadsdata och rättigheter måste kontrolleras separat.
+## Viktiga driftkrav före live
+1. Verifiera varje Avanza-ID och att data är aktuell under ordinarie handelstid. Ett lyckat API-anrop bevisar inte i sig realtidsdata.
+2. Konfigurera och provkör officiella/auktoriserade nyhetsflöden för respektive bolag. Nuvarande watchlist saknar verifierade RSS/Atom-URL:er; inga feed-adresser ska gissas.
+3. Kör Telegram-test, därefter dry-run och kontrollera Secrets samt signalhistorik innan live-läge.
+4. Signaljournalen skrivs till `signal_journal.json` på appens filsystem. Den filen kan försvinna vid omstart/omdeploy på ephemerala värdar. Exportera CSV eller anslut beständig lagring innan den används som långsiktig statistik.
+5. Bekräfta börskalender, courtage, slippage och signalernas beteende med historiska data och i skuggläge. Simulerade affärer är förenklade: mål/stop avgörs av senast hämtade färdiga femminutersstängning och kan inte modellera intrabar ordningsföljd.
+6. Ingen automatisk orderläggning ingår.
 
-## Viktiga begränsningar
-Ingen realtidskälla, ingen Avanza-inloggning, ingen orderläggning och inga historiska vinst-/förlustberäkningar. Syntetiska kurser och signaler är enbart test. TradingViews exakta indikatorstartvärden och sessionsregler kan ge små skillnader; jämför mot Pine innan användning. VAKTA kan intrabar fladdra i TradingView; den här versionen beräknar endast avslutade staplar.
+## Konfiguration av nyhetsflöden
+Redigera `news_watchlist.json`. Lägg bara till HTTPS RSS/Atom-adresser som har verifierats mot bolagets officiella investerar-/pressida eller annan uttryckligen godkänd källa. Alias ska vara bolagsspecifika för att minska felmatchningar.
+
+## Säkerhet
+Lägg aldrig in Avanza-inloggning, Telegram-token eller andra hemligheter i koden. Använd GitHub Secrets/variabler där så krävs. Behåll produktionens 5.0-gren orörd tills utvecklingsversionen är verifierad.

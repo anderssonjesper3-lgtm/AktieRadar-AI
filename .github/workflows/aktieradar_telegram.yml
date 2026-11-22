@@ -1,10 +1,7 @@
 name: AktieRadar AI - Saab Telegram
 
 on:
-  schedule:
-    # UTC: covers Swedish 09:00-17:30 during both CET and CEST.
-    # Python applies exact Swedish local trading-hour checks.
-    - cron: '*/5 7-16 * * 1-5'
+  # Legacy workflow: manual-only backup, no scheduled duplicate alerts.
   workflow_dispatch:
     inputs:
       mode:

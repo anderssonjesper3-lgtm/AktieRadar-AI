@@ -5,16 +5,30 @@ import re
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from html import unescape
+from html.parser import HTMLParser
+from urllib.parse import urljoin
 from pathlib import Path
 from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 import xml.etree.ElementTree as ET
 
 CONFIG_PATH = Path(__file__).with_name('news_watchlist.json')
-KEYWORDS = ('order', 'orders', 'beställning', 'beställningar', 'kontrakt', 'contract',
-            'avtal', 'agreement', 'ramavtal', 'framework agreement', 'upphandling')
-RISK_WORDS = ('emission', 'företrädesemission', 'nyemission', 'bankruptcy', 'konkurs',
-              'vinstvarning', 'profit warning', 'finansiering', 'financing')
+KEYWORDS = (
+    'order', 'orders', 'beställning', 'beställningar', 'kontrakt', 'contract',
+    'avtal', 'agreement', 'ramavtal', 'framework agreement', 'upphandling',
+    'förvärv', 'acquisition', 'acquires', 'acquired', 'merger', 'fusion',
+    'strategiskt samarbete', 'strategic partnership', 'samarbete', 'partnership',
+    'investering', 'investment', 'expansion', 'kapacitetsökning', 'ny kund',
+    'new customer', 'letter of intent', 'avsiktsförklaring', 'memorandum of understanding',
+    'delårsrapport', 'årsredovisning', 'interim report', 'annual report',
+    'vd', 'ceo', 'cfo', 'nyemission', 'riktad emission', 'share issue',
+)
+RISK_WORDS = (
+    'företrädesemission', 'nyemission', 'bankruptcy', 'konkurs',
+    'vinstvarning', 'profit warning', 'nedskrivning', 'impairment',
+    'förlust', 'loss', 'återkallelse', 'recall', 'utredning', 'investigation',
+    'försening', 'delay', 'avbokning', 'cancellation', 'insolvens', 'insolvency',
+)
 
 
 def load_config(path=CONFIG_PATH):
@@ -44,8 +58,53 @@ def parse_date(raw):
     return d.replace(tzinfo=timezone.utc) if d.tzinfo is None else d.astimezone(timezone.utc)
 
 
-def extract_items(xml_bytes):
-    root = ET.fromstring(xml_bytes)
+class _MFNHTMLParser(HTMLParser):
+    """Small, conservative parser for MFN's public company news archive page."""
+    DATE_RE = re.compile(r'\\b(20\\d{2}-\\d{2}-\\d{2} \\d{2}:\\d{2}(?::\\d{2})?)\\b')
+
+    def __init__(self, base_url):
+        super().__init__(convert_charrefs=True)
+        self.base_url = base_url
+        self.context = ''
+        self.href = None
+        self.anchor_text = []
+        self.items = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag.lower() == 'a':
+            attrs = dict(attrs)
+            self.href = attrs.get('href')
+            self.anchor_text = []
+
+    def handle_data(self, data):
+        if self.href is not None:
+            self.anchor_text.append(data)
+        else:
+            self.context = (self.context + ' ' + data)[-500:]
+
+    def handle_endtag(self, tag):
+        if tag.lower() != 'a' or self.href is None:
+            return
+        title = ' '.join(' '.join(self.anchor_text).split())
+        href = urljoin(self.base_url, self.href)
+        match = self.DATE_RE.search(self.context)
+        if title and match and '/a/' in href and urlparse(href).hostname:
+            self.items.append({
+                'title': unescape(title), 'link': href,
+                'date': parse_date(match.group(1)), 'description': '',
+            })
+        self.href = None
+        self.anchor_text = []
+        self.context = ''
+
+
+def extract_items(xml_bytes, source_url=None):
+    raw = xml_bytes.decode('utf-8', errors='replace') if isinstance(xml_bytes, bytes) else str(xml_bytes)
+    if '<html' in raw[:1000].casefold() or 'mfn.se/all/a/' in (source_url or ''):
+        parser = _MFNHTMLParser(source_url or 'https://www.mfn.se/')
+        parser.feed(raw)
+        return parser.items
+    root = ET.fromstring(raw.encode('utf-8'))
     entries = []
     for node in root.iter():
         if node.tag.split('}')[-1] not in ('item', 'entry'):
@@ -77,7 +136,7 @@ def classify_news(item, company, now, max_age_hours=24):
     if parsed.scheme != 'https' or not parsed.hostname:
         return None
     text = item.get('title', '') + ' ' + item.get('description', '')
-    if not any(has_phrase(text, alias) for alias in company['aliases']):
+    if item.get('_feed_company') != company['name'] and not any(has_phrase(text, alias) for alias in company['aliases']):
         return None
     if any(has_phrase(text, word) for word in RISK_WORDS):
         category = 'RISKNYHET'
@@ -111,7 +170,9 @@ def scan(config=None, now=None, fetch=None, max_age_hours=24):
     failures = []
     for url, companies in feed_companies.items():
         try:
-            items = extract_items(fetch(url))
+            items = extract_items(fetch(url), source_url=url)
+            if len(companies) == 1:
+                items = [dict(item, _feed_company=companies[0]['name']) for item in items]
         except Exception as exc:
             names = ', '.join(company['name'] for company in companies)
             failures.append((names, type(exc).__name__))

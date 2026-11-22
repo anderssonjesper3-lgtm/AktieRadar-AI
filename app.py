@@ -88,6 +88,14 @@ st.subheader('📰 Nyheter och order')
 items=[a for a in news_archive if a.get('company')==selected]
 if not items:
     st.caption('Inga arkiverade nyheter för aktien ännu. Nyheter hämtas från verifierade anslutna flöden.')
+    if st.toggle('🎨 Visa nyhetsanalys – designexempel', key='news_design_demo'):
+        with st.container(border=True):
+            st.markdown('**DEMO – INTE EN VERKLIG NYHET**')
+            st.markdown('### Exempelbolaget tecknar ett nytt leveransavtal')
+            st.caption('Påhittad rubrik · riktig källa och tid visas när nyheter hämtats')
+            st.info('Nyhetsbedömning: PRELIMINÄRT POSITIV · invänta kurs- och volymbekräftelse')
+            st.write('Framåthypotes: Positivt momentum är möjligt om marknaden bekräftar nyheten med stigande kurs och volym.')
+            st.caption('Historisk träffsäkerhet kan inte beräknas utan verifierade kursdata.')
 else:
     items=sorted(items, key=lambda x: x.get('published') or '', reverse=True)
     latest=items[0]

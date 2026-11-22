@@ -1,9 +1,7 @@
 name: AktieRadar AI 6.0 - Saab signal alerts
 
 on:
-  schedule:
-    # GitHub cron uses UTC; Python enforces Swedish exchange hours.
-    - cron: '*/5 7-16 * * 1-5'
+  # Legacy workflow: manual-only backup, no scheduled duplicate alerts.
   workflow_dispatch:
     inputs:
       mode:

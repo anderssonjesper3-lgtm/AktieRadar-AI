@@ -133,14 +133,9 @@ def detect_candlestick_patterns(candles):
         if i > 0:
             previous = candles[i - 1]
 
-            # Jamfor bara intilliggande 5-minutersljus
-            consecutive = (
-                candle["time"] - previous["time"]
-            ).total_seconds() == 300
-
+            # Compare consecutive observed traded bars; wall-clock gaps are natural.
             engulfing = (
-                consecutive
-                and cl > op
+                cl > op
                 and previous["close"] < previous["open"]
                 and cl >= previous["open"]
                 and op <= previous["close"]

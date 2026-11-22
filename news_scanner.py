@@ -87,7 +87,7 @@ def classify_news(item, company, now, max_age_hours=24):
         return None
     key = hashlib.sha256((company['name'] + '\n' + link).encode()).hexdigest()[:24]
     return {'kind': 'NYHET-VAKTA', 'category': category, 'company': company['name'],
-            'title': item['title'][:180], 'url': link, 'published': published,
+            'title': item['title'][:180], 'description': item.get('description', '')[:4000], 'url': link, 'published': published,
             'id': 'NEWS:' + key}
 
 

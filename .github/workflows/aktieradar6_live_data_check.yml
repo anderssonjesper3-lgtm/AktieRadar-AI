@@ -1,0 +1,32 @@
+name: AktieRadar 6.0 - Avanza ID and live-data verification
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: aktieradar-6.0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install project dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Verify all configured Avanza instruments and data
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: python verify_avanza.py --config news_watchlist.json --output avanza_verification_report.json
+      - name: Upload verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aktieradar-avanza-verification
+          path: avanza_verification_report.json
+          if-no-files-found: warn

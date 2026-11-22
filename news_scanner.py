@@ -152,7 +152,7 @@ def classify_news(item, company, now, max_age_hours=24):
             'id': 'NEWS:' + key}
 
 
-def scan(config=None, now=None, fetch=None, max_age_hours=24):
+def scan_detailed(config=None, now=None, fetch=None, max_age_hours=24):
     """Fetch each unique RSS feed once, then match its items to configured issuers."""
     config = config if config is not None else load_config()
     now = now or datetime.now(timezone.utc)
@@ -170,20 +170,32 @@ def scan(config=None, now=None, fetch=None, max_age_hours=24):
 
     results = []
     failures = []
+    diagnostics = []
     for url, companies in feed_companies.items():
         try:
             items = extract_items(fetch(url), source_url=url)
+            raw_count = len(items)
             if len(companies) == 1:
                 items = [dict(item, _feed_company=companies[0]['name']) for item in items]
         except Exception as exc:
             names = ', '.join(company['name'] for company in companies)
             failures.append((names, type(exc).__name__))
+            diagnostics.append({'feed': url, 'companies': names, 'status': 'FEL', 'raw_items': 0, 'matched': 0, 'error': type(exc).__name__})
             continue
+        before_count = len(results)
         for item in items:
             for company in companies:
                 match = classify_news(item, company, now, max_age_hours=max_age_hours)
                 if match:
                     results.append(match)
+        diagnostics.append({'feed': url, 'companies': ', '.join(c['name'] for c in companies),
+                            'status': 'OK', 'raw_items': raw_count,
+                            'matched': len(results) - before_count, 'error': ''})
 
     unique = {item['id']: item for item in results}
-    return list(unique.values()), failures
+    return list(unique.values()), failures, diagnostics
+
+
+def scan(config=None, now=None, fetch=None, max_age_hours=24):
+    matches, failures, _ = scan_detailed(config=config, now=now, fetch=fetch, max_age_hours=max_age_hours)
+    return matches, failures

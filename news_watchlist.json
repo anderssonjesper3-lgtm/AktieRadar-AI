@@ -10,10 +10,9 @@
       "order_book_id": "5401",
       "annual_revenue_sek": null,
       "feeds": [
-        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
-      ]
+        "https://www.saab.com/newsroom"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "Acconeer",
@@ -24,10 +23,9 @@
       "order_book_id": "808452",
       "annual_revenue_sek": null,
       "feeds": [
-        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
-      ]
+        "https://acconeer.com/investor_page/home/press-releases/"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "PowerCell Sweden",
@@ -39,10 +37,9 @@
       "order_book_id": "527998",
       "annual_revenue_sek": null,
       "feeds": [
-        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
-      ]
+        "https://powercellgroup.com/investor/"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "Scandinavian Astor Group",
@@ -56,7 +53,8 @@
       "annual_revenue_sek": null,
       "feeds": [
         "https://www.mfn.se/all/a/scandinavian-astor-group"
-      ]
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "Ovzon",
@@ -67,10 +65,9 @@
       "order_book_id": "852674",
       "annual_revenue_sek": null,
       "feeds": [
-        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
-      ]
+        "https://www.ovzon.com/en/section/investors/press-releases/"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "GomSpace",
@@ -81,10 +78,9 @@
       "order_book_id": "667935",
       "annual_revenue_sek": null,
       "feeds": [
-        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
-      ]
+        "https://gomspace.com/investor/news/press-releases/"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "AAC Clyde Space",
@@ -95,10 +91,9 @@
       "order_book_id": "717421",
       "annual_revenue_sek": null,
       "feeds": [
-        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
-      ]
+        "https://investor.aac-clyde.space/press-releases"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "MilDef",
@@ -110,10 +105,9 @@
       "order_book_id": "1235164",
       "annual_revenue_sek": null,
       "feeds": [
-        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
-      ]
+        "https://investors.mildef.com/news-room/press-releases/?lang=en&m-page=0"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "INVISIO",
@@ -124,10 +118,9 @@
       "order_book_id": "43788",
       "annual_revenue_sek": null,
       "feeds": [
-        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
-      ]
+        "https://corp.invisio.com/news-and-events/press-releases/"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "Clavister",
@@ -138,10 +131,9 @@
       "order_book_id": "480188",
       "annual_revenue_sek": null,
       "feeds": [
-        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
-        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
-      ]
+        "https://www.clavister.com/company/investor-relations/"
+      ],
+      "source_type": "official_investor_relations"
     }
   ]
 }

@@ -211,7 +211,7 @@ def scan_detailed(config=None, now=None, fetch=None, max_age_hours=24):
             {'title': (item.get('title') or '')[:140],
              'published': item.get('date').isoformat() if item.get('date') else 'SAKNAS',
              'url': item.get('link', '')[:220]}
-            for item in items[:5]
+            for item in items[:20]
         ]
         diagnostics.append({'feed': url, 'companies': ', '.join(c['name'] for c in companies),
                             'status': 'OK', 'raw_items': raw_count,

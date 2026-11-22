@@ -76,22 +76,24 @@ def morning_signal(candles, continuous):
 
 
 def classify(candles, now):
+    # Fail closed on missing or sparse data before considering market-session
+    # or morning-watch conditions. A single candle must never trigger a signal.
+    if not candles:
+        return None, 'DATA SAKNAS - inga kompletta staplar'
+    continuous = consecutive_count(candles)
+    if continuous < LOOKBACK:
+        return None, f'DATABLOCKERAD - för få sammanhängande staplar ({continuous}/{LOOKBACK})'
     if not market_session(now):
         return None, 'Utanför tillåten handelstid / börshelgdag'
-    if not candles:
-        return None, 'Inga kompletta staplar'
     last = candles[-1]
     end = last['time'] + timedelta(minutes=5)
     age = (now - end).total_seconds() / 60
     if last['time'].date() != now.date() or not 0 <= age <= MAX_AGE_MINUTES:
-        return None, 'För gammal, framtida eller ofullständig kursdata'
-    continuous = consecutive_count(candles)
+        return None, 'DATA FÖR GAMMAL - senaste stapeln är inte aktuell'
     if morning_signal(candles, continuous):
         return {'kind': 'MORGON-VAKTA', 'time': last['time'], 'close': last['close'],
                 'score': None, 'reasons': ['Prisuppgång', 'Grön 5-minutersstapel',
                                           'Volymökning minst 1,5 gånger']}, 'Morgonbevakning'
-    if continuous < LOOKBACK:
-        return None, f'För få sammanhängande staplar ({continuous}/{LOOKBACK})'
     closes = [c['close'] for c in candles]
     ema9, ema21 = calculate_ema(closes, 9), calculate_ema(closes, 21)
     rsi = calculate_rsi(closes, 14)

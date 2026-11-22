@@ -7,7 +7,7 @@ from plotly.subplots import make_subplots
 import streamlit as st
 from streamlit_autorefresh import st_autorefresh
 from multi_engine import companies, analyze_all
-from news_scanner import scan
+from news_scanner import scan, scan_detailed
 from order_analysis import parse_order_amount, order_ratio
 from news_analysis import analyze_news
 from news_history import update_history, load_history
@@ -72,13 +72,13 @@ st.warning('Analysverktyg – inga handelsråd eller automatiska köp. Kurser ka
 watchlist=companies()
 @st.cache_data(ttl=240,show_spinner=False)
 def market_snapshot():return asyncio.run(analyze_all())
-@st.cache_data(ttl=240,show_spinner=False)
-def news_snapshot():return scan({'companies':companies()})
+@st.cache_data(ttl=60,show_spinner=False)
+def news_snapshot():return scan_detailed({'companies':companies()}, max_age_hours=24*30)
 st.caption('🟢 Skarp RSS-inhämtning är aktiv i appen när källorna svarar. Historisk import är separat och skickar inga Telegram-larm.')
 if st.button('🗂️ Importera tillgängliga nyheter från senaste 30 dagarna (utan larm)', key='historical_import'):
     with st.spinner('Läser tillgängliga RSS-poster och sparar historik...'):
         try:
-            older, history_failures = scan({'companies': companies()}, max_age_hours=24*30)
+            older, history_failures, _ = scan_detailed({'companies': companies()}, max_age_hours=24*30)
             before = len(load_history())
             stored = update_history(older)
             st.success(f'Historisk import klar: {len(older)} matchande RSS-poster, {len(stored)-before} nya arkivposter.')
@@ -94,10 +94,10 @@ with st.spinner('Kontrollerar aktier och nyheter...'):
     except Exception as exc:
         st.error(f'Kursanalysen kunde inte starta: {exc}');st.stop()
     try:
-        articles,failures=news_snapshot()
+        articles,failures,news_diagnostics=news_snapshot()
         news_archive=update_history(articles)
     except Exception as exc:
-        articles,failures=[],[('Nyhetsbevakning',str(exc))]
+        articles,failures,news_diagnostics=[],[('Nyhetsbevakning',str(exc))],[]
         try: news_archive=update_history([])
         except Exception: news_archive=[]
 by_name={r['company']:r for r in results}
@@ -108,6 +108,19 @@ a,b,c,d=st.columns(4)
 a.metric('Bevakade aktier',len(watchlist));b.metric('Kursdata tillgänglig',f'{ready}/{len(watchlist)}');c.metric('Köpkandidater',buys);d.metric('Vakta',watch)
 if any(not c.get('feeds') for c in watchlist):st.warning('Nyhetsbevakning saknar verifierat flöde för: '+', '.join(c['name'] for c in watchlist if not c.get('feeds')))
 if failures:st.error('Nyhetskällor med fel: '+', '.join(x[0] for x in failures))
+with st.expander('🛰️ Diagnostik för nyhetskällor', expanded=bool(failures)):
+    if news_diagnostics:
+        st.dataframe(pd.DataFrame(news_diagnostics).rename(columns={
+            'feed':'Nyhetsflöde','companies':'Bolag','status':'Status',
+            'raw_items':'Råa poster','matched':'Matchade nyheter','error':'Fel'
+        }),hide_index=True,use_container_width=True)
+        st.caption('Råa poster visar vad källan levererade. Matchade nyheter har passerat bolagsmatchning, datumkontroll och nyhetsfilter.')
+    else:
+        st.info('Ingen källdiagnostik tillgänglig ännu. Tryck på Uppdatera alla datakällor.')
+    if articles:
+        st.caption(f'{len(articles)} nyheter matchade i aktuell 30-dagars skanning.')
+    else:
+        st.caption('Inga nyheter har matchat ännu. Kontrollera råa poster och källfel ovan.')
 st.subheader('🎯 Välj aktie')
 if 'selected_stock' not in st.session_state:st.session_state.selected_stock=watchlist[0]['name']
 ordered=sorted(watchlist,key=lambda c: {'KÖP-KANDIDAT':0,'VAKTA':1,'MORGON-VAKTA':2}.get((by_name.get(c['name']) or {}).get('signal',{}).get('kind') if (by_name.get(c['name']) or {}).get('signal') else '',3))
@@ -140,7 +153,7 @@ else:st.warning('Ingen verifierad komplett femminutersstapel att visa.')
 st.subheader('📰 Nyheter och order')
 items=[a for a in news_archive if a.get('company')==selected]
 if not items:
-    st.caption('Inga arkiverade nyheter för aktien ännu. Nyheter hämtas från verifierade anslutna flöden.')
+    st.caption('Inga arkiverade nyheter för aktien ännu. Kontrollera nyhetskällediagnostiken ovan för att se om flödet svarar och levererar poster.')
     if st.toggle('🎨 Visa nyhetsanalys – designexempel', key='news_design_demo'):
         with st.container(border=True):
             st.markdown('**DEMO – INTE EN VERKLIG NYHET**')
@@ -154,6 +167,7 @@ else:
     latest=items[0]
     st.markdown('**SENASTE NYHET**')
     st.markdown(f"**{latest['category']}** · [{latest['title']}]({latest['url']})")
+    st.caption(f"Publicerad: {latest.get('published') or 'Okänt datum'} · Källa: {latest.get('url','').split('/')[2] if latest.get('url') else 'Okänd'}")
     latest_analysis=analyze_news(latest,c)
     st.write(f"Nyhetsbedömning: **{latest_analysis['view']}** · {latest_analysis['impact']}")
     st.write(latest_analysis['forward_hypothesis'])

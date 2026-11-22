@@ -49,15 +49,17 @@ jobs:
               blockers.append("Dashboard in development branch is still labelled/versioned 5.0; complete and verify 6.0 UI before release.")
           if missing_files:
               blockers.append("Missing 6.0 performance/journal module(s): " + ", ".join(missing_files))
-          if not companies or any(not c.get("feeds") for c in companies):
-              blockers.append("One or more companies have no configured news feeds; news monitoring is not live for all watchlist shares.")
+          uncovered = [c.get("name", "unknown") for c in companies if not c.get("feeds")]
+          if uncovered:
+              blockers.append("No verified RSS feed configured for: " + ", ".join(uncovered) + ". These issuers are not covered by automated news scanning.")
           if len(companies) != 10:
               blockers.append(f"Expected 10 watchlist companies; found {len(companies)}.")
           report = {
               "branch": "aktieradar-6.0",
               "automated_tests_passed": True,
               "company_count": len(companies),
-              "configured_news_feed_count": sum(len(c.get("feeds", [])) for c in companies),
+              "configured_news_feed_count": len({url for company in companies for url in company.get("feeds", [])}),
+              "companies_without_news_feeds": uncovered,
               "missing_required_files": missing_files,
               "production_ready": not blockers,
               "release_blockers": blockers,

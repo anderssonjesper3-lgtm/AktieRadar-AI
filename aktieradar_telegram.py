@@ -360,7 +360,7 @@ def process_multi_live(dry_run=False):
     technical = asyncio.run(analyze_all(watchlist, now=now))
     articles, failures = scan({'companies': watchlist}, now=now.astimezone(timezone.utc))
     if failures:
-        raise RuntimeError('Nyhetskällfel – köpbeslut blockeras: ' + ', '.join(x[0] for x in failures))
+        print('Nyhetskällfel; nya KÖP-signaler nedgraderas:', ', '.join(x[0] for x in failures))
     by_ticker = {c['ticker']: c for c in watchlist}
     news_by_ticker = {c['ticker']: [] for c in watchlist}
     for article in articles:
@@ -380,6 +380,9 @@ def process_multi_live(dry_run=False):
             print('BLOCKERAD:', ticker, result.get('error') or result.get('status'))
             continue
         candles = result['candles']; last = candles[-1]
+        if result.get('status', '').startswith('DATA FÖR GAMMAL') or not result.get('signal') and 'DATA FÖR GAMMAL' in result.get('status', ''):
+            print('Inga aktuella kurser:', ticker)
+            continue
         prices[ticker] = float(last['close']); candles_by_ticker[ticker] = candles
         signal = result.get('signal')
         if signal:
@@ -389,9 +392,9 @@ def process_multi_live(dry_run=False):
             risks = [n for n in analyses if n['view'] == 'NEGATIV']
             positives = [n for n in analyses if n['view'] in ('POSITIV','PRELIMINÄRT POSITIV')]
             signal['news_status'] = f'{len(analyses)} analyserade nyheter'
-            if risks and signal['kind'] == 'KÖP-KANDIDAT':
+            if (risks or failures) and signal['kind'] == 'KÖP-KANDIDAT':
                 signal['kind'] = 'VAKTA-RISKGRANSKNING'
-                signal['reasons'] = list(signal.get('reasons', [])) + ['Negativ bolagsnyhet – manuell granskning']
+                signal['reasons'] = list(signal.get('reasons', [])) + ['Negativ eller otillgänglig nyhetskälla – manuell granskning']
             elif positives:
                 signal['reasons'] = list(signal.get('reasons', [])) + ['Positiv nyhet – teknisk bekräftelse krävs']
             print('SIGNAL:', ticker, signal['kind'], signal['score'], signal['news_status'])
@@ -399,7 +402,7 @@ def process_multi_live(dry_run=False):
                 record_signal(company['name'], ticker, signal, path=journal_path)
                 process_live(signal)
     if not dry_run:
-        before = load_journal(journal_path)
+        before = shared
         closed = update_open_trades(prices, candles_by_ticker=candles_by_ticker, now=now, path=journal_path)
         after = load_journal(journal_path)
         if after != shared:

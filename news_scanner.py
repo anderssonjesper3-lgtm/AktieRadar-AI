@@ -65,9 +65,9 @@ class _CompanyNewsHTMLParser(HTMLParser):
     A page that cannot be parsed produces zero items and remains visible in diagnostics.
     """
     DATE_PATTERNS = (
-        re.compile(r'\\b(20\\d{2}[-.]\\d{2}[-.]\\d{2}(?:[ T]\\d{2}:\\d{2}(?::\\d{2})?(?:Z|[+-]\\d{2}:?\\d{2})?)?)\\b'),
-        re.compile(r'\\b(\\d{1,2}\\s+[A-Za-z]{3,9},?\\s+20\\d{2}(?:\\s+at\\s+\\d{1,2}:\\d{2})?)\\b', re.I),
-        re.compile(r'\\b([A-Za-z]{3,9}\\s+\\d{1,2},?\\s+20\\d{2})\\b', re.I),
+        re.compile(r'\b(20\d{2}[-.]\d{2}[-.]\d{2}(?:[ T]\d{2}:\d{2}(?::\d{2})?(?:Z|[+-]\d{2}:?\d{2})?)?)\b'),
+        re.compile(r'\b(\d{1,2}\s+[A-Za-z]{3,9},?\s+20\d{2}(?:\s+at\s+\d{1,2}:\d{2})?)\b', re.I),
+        re.compile(r'\b([A-Za-z]{3,9}\s+\d{1,2},?\s+20\d{2})\b', re.I),
     )
     ARTICLE_HINTS = ('news', 'press', 'release', 'investor', 'announcement', '/a/')
 

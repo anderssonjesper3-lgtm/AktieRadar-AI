@@ -66,7 +66,7 @@ div[data-testid="stBaseButton-secondary"],div[data-testid="stBaseButton-primary"
 .stApp div[data-testid="stAlert"] a { color: #125a83 !important; }
 </style>''',unsafe_allow_html=True)
 st.title('📡 AktieRadar AI 6.0')
-st.caption('MARKNADSÖVERSIKT · 10 AKTIER · FEMMINUTERSLJUS · NYHETER · SIGNALJOURNAL · DATAKONTROLL')
+st.caption('MARKNADSÖVERSIKT · 10 AKTIER · OFFICIELLA BOLAGSKÄLLOR · NYHETER · SIGNALJOURNAL · DATAKONTROLL')
 st_autorefresh(interval=300_000, key='aktieradar_5min_refresh')
 st.warning('Analysverktyg – inga handelsråd eller automatiska köp. Kurser kan vara fördröjda.')
 watchlist=companies()
@@ -74,7 +74,7 @@ watchlist=companies()
 def market_snapshot():return asyncio.run(analyze_all())
 @st.cache_data(ttl=60,show_spinner=False)
 def news_snapshot():return scan_detailed({'companies':companies()}, max_age_hours=24*30)
-st.caption('🟢 Skarp RSS-inhämtning är aktiv i appen när källorna svarar. Historisk import är separat och skickar inga Telegram-larm.')
+st.caption('🟢 Nyhetsbevakningen prioriterar nu respektive bolags officiella IR-/pressida. HTML-sidor och RSS läses separat från historisk import; historisk import skickar inga Telegram-larm.')
 if st.button('🗂️ Importera tillgängliga nyheter från senaste 30 dagarna (utan larm)', key='historical_import'):
     with st.spinner('Läser tillgängliga RSS-poster och sparar historik...'):
         try:
@@ -170,6 +170,10 @@ if r['candles']:
     st.caption(f"Senaste färdiga ljus: {df.time.iloc[-1]} · Antal: {len(df)} · Luckor: {r.get('gaps','okänt')}")
 else:st.warning('Ingen verifierad komplett femminutersstapel att visa.')
 st.subheader('📰 Nyheter och order')
+selected_source = next((x for x in c.get('feeds', []) if x.startswith('https://')), None)
+if selected_source:
+    st.caption('Officiell nyhetskälla för ' + selected + ': ' + selected_source)
+    st.markdown(f'[Öppna bolagets officiella nyhetssida]({selected_source})')
 items=[a for a in news_archive if a.get('company')==selected]
 if not items:
     st.caption('Inga arkiverade nyheter för aktien ännu. Kontrollera nyhetskällediagnostiken ovan för att se om flödet svarar och levererar poster.')

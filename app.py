@@ -102,19 +102,16 @@ else:
                 st.markdown(f"**{article.get('published') or 'Publiceringstid saknas'}** · [{article['title']}]({article['url']})")
                 analysis=analyze_news(article,c)
                 st.caption(f"{analysis['view']} · {analysis['impact']}")
-    for idx, article in enumerate([]):
-        st.markdown(f"**{article['category']}** · [{article['title']}]({article['url']})")
-        analysis = analyze_news(article, c)
-        st.write(f"Nyhetsbedömning: **{analysis['view']}** · {analysis['impact']}")
-        if analysis['order_amount_sek'] is not None:
-            st.write(f"Identifierat belopp: {analysis['order_amount_sek']:,.0f} kr")
-        if analysis['order_revenue_pct'] is not None:
-            st.write(f"Order/årsomsättning: **{analysis['order_revenue_pct']:.2f} %**")
-        else:
-            st.caption("Order/omsättningskvot: kan inte verifieras med tillgängliga bolagsdata.")
-        with st.expander("Visa resonemang och framåthypotes"):
-            st.write(analysis['forward_hypothesis'])
-            for caveat in analysis['caveats']: st.caption("• " + caveat)
+    if st.button("🧪 Testa senaste nyhetens framåthypotes", key="historical_news_test"):
+        st.session_state["historical_news_result"] = {
+            "company": selected, "news_id": latest.get("id"),
+            "analysis": latest_analysis,
+        }
+    previous=st.session_state.get("historical_news_result")
+    if previous and previous.get("company")==selected and previous.get("news_id")==latest.get("id"):
+        st.info("Framåthypotesen är beräknad utifrån nyhetens rubrik och RSS-beskrivning. "
+                "Verkligt historiskt kursutfall är ännu inte verifierat – detta är inte ett färdigt backtest.")
+        st.json({k:str(v) for k,v in previous["analysis"].items() if k != "url"})
     st.caption("Historikens beständighet beror på värdplattformens lagring. Exportera eller anslut beständig lagring innan den används som långtidsarkiv.")
 with st.expander('🛠️ Kontrollcentral – alla aktier'):
     st.dataframe(pd.DataFrame([{'Bolag':x['company'],'Avanza-ID':next((c.get('order_book_id') for c in watchlist if c['name']==x['company']),None),'5-minutersljus':len(x['candles']),'Luckor':x.get('gaps'),'Signal':x['signal']['kind'] if x['signal'] else '–','Datastatus':x['error'] or x['status']} for x in results]),hide_index=True,use_container_width=True)

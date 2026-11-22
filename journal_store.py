@@ -19,15 +19,15 @@ EMPTY = {"version": 1, "events": [], "trades": []}
 def _config():
     repo = os.getenv("AKTIERADAR_JOURNAL_REPO") or os.getenv("GITHUB_REPOSITORY")
     token = os.getenv("AKTIERADAR_JOURNAL_TOKEN") or os.getenv("GH_TOKEN")
-    if not repo or "/" not in repo or not token:
-        raise RuntimeError("Gemensam journal kräver GitHub-repo och läs-/skrivtoken")
+    if not repo or "/" not in repo:
+        raise RuntimeError("Gemensam journal kräver GitHub-repo")
     return repo, token
 
 
 def _request(method, url, token, payload=None):
     body = json.dumps(payload).encode("utf-8") if payload is not None else None
     req = Request(url, data=body, method=method, headers={
-        "Authorization": "Bearer " + token,
+        **({"Authorization": "Bearer " + token} if token else {}),
         "Accept": "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
         "User-Agent": "AktieRadar-6.0-Journal",

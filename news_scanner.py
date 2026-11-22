@@ -58,53 +58,108 @@ def parse_date(raw):
     return d.replace(tzinfo=timezone.utc) if d.tzinfo is None else d.astimezone(timezone.utc)
 
 
-class _MFNHTMLParser(HTMLParser):
-    """Small, conservative parser for MFN's public company news archive page."""
-    DATE_RE = re.compile(r'\b(20\d{2}-\d{2}-\d{2} \d{2}:\d{2}(?::\d{2})?)\b')
+class _CompanyNewsHTMLParser(HTMLParser):
+    """Extract dated article links from official investor/press-release pages.
+
+    It uses nearby visible publication dates and article-like links only.
+    A page that cannot be parsed produces zero items and remains visible in diagnostics.
+    """
+    DATE_PATTERNS = (
+        re.compile(r'\\b(20\\d{2}[-.]\\d{2}[-.]\\d{2}(?:[ T]\\d{2}:\\d{2}(?::\\d{2})?(?:Z|[+-]\\d{2}:?\\d{2})?)?)\\b'),
+        re.compile(r'\\b(\\d{1,2}\\s+[A-Za-z]{3,9},?\\s+20\\d{2}(?:\\s+at\\s+\\d{1,2}:\\d{2})?)\\b', re.I),
+        re.compile(r'\\b([A-Za-z]{3,9}\\s+\\d{1,2},?\\s+20\\d{2})\\b', re.I),
+    )
+    ARTICLE_HINTS = ('news', 'press', 'release', 'investor', 'announcement', '/a/')
 
     def __init__(self, base_url):
         super().__init__(convert_charrefs=True)
         self.base_url = base_url
-        self.context = ''
-        self.href = None
-        self.anchor_text = []
-        self.items = []
+        self.parts = []
+        self.anchors = []
+        self.active = None
 
     def handle_starttag(self, tag, attrs):
-        if tag.lower() == 'a':
-            attrs = dict(attrs)
-            self.href = attrs.get('href')
-            self.anchor_text = []
+        attrs = dict(attrs)
+        if tag.lower() == 'a' and attrs.get('href'):
+            self.active = {'href': attrs['href'], 'start': sum(map(len, self.parts)), 'text': []}
 
     def handle_data(self, data):
-        if self.href is not None:
-            self.anchor_text.append(data)
-        else:
-            self.context = (self.context + ' ' + data)[-500:]
+        if not data:
+            return
+        self.parts.append(data)
+        if self.active is not None:
+            self.active['text'].append(data)
 
     def handle_endtag(self, tag):
-        if tag.lower() != 'a' or self.href is None:
-            return
-        title = ' '.join(' '.join(self.anchor_text).split())
-        href = urljoin(self.base_url, self.href)
-        match = self.DATE_RE.search(self.context)
-        if title and match and '/a/' in href and urlparse(href).hostname and urlparse(href).hostname.endswith('mfn.se'):
-            self.items.append({
-                'title': unescape(title), 'link': href,
-                'date': parse_date(match.group(1)), 'description': '',
+        if tag.lower() == 'a' and self.active is not None:
+            self.active['end'] = sum(map(len, self.parts))
+            self.anchors.append(self.active)
+            self.active = None
+
+    @staticmethod
+    def _date_near(text):
+        candidates = []
+        for pattern in _CompanyNewsHTMLParser.DATE_PATTERNS:
+            for match in pattern.finditer(text):
+                parsed = parse_date(match.group(1))
+                if parsed is None:
+                    # Handle common English dates without a timezone.
+                    for fmt in ('%d %B %Y', '%d %b %Y', '%d %B, %Y', '%d %b, %Y',
+                                '%B %d %Y', '%B %d, %Y', '%b %d %Y', '%b %d, %Y',
+                                '%d %b, %Y at %H:%M', '%d %B, %Y at %H:%M'):
+                        try:
+                            parsed = datetime.strptime(match.group(1), fmt).replace(tzinfo=timezone.utc)
+                            break
+                        except ValueError:
+                            pass
+                if parsed:
+                    candidates.append((match.start(), parsed))
+        return candidates
+
+    def items(self):
+        text = ' '.join(' '.join(self.parts).split())
+        # Rebuild offsets against normalized text using each anchor's visible text.
+        results, seen = [], set()
+        for anchor in self.anchors:
+            title = ' '.join(' '.join(anchor['text']).split())
+            href = urljoin(self.base_url, anchor['href'])
+            parsed_url = urlparse(href)
+            if (len(title) < 18 or parsed_url.scheme != 'https' or not parsed_url.hostname
+                    or parsed_url.hostname != urlparse(self.base_url).hostname
+                    or href in seen):
+                continue
+            path = parsed_url.path.casefold()
+            if not any(hint in path for hint in self.ARTICLE_HINTS):
+                continue
+            # Date text is usually adjacent to the headline card. Use a bounded
+            # window around the link; no date means no fabricated timestamp.
+            start = max(0, anchor['start'] - 450)
+            finish = min(len(text), anchor['end'] + 250)
+            nearby = text[start:finish]
+            dates = self._date_near(nearby)
+            if not dates:
+                continue
+            # The closest date to the center of the anchor window is the safest match.
+            center = max(0, anchor['start'] - start)
+            date_pos, published = min(dates, key=lambda pair: abs(pair[0] - center))
+            seen.add(href)
+            results.append({
+                'title': unescape(title), 'link': href, 'date': published,
+                'description': nearby[:1500],
             })
-        self.href = None
-        self.anchor_text = []
-        # Keep recent surrounding text: MFN places the publication timestamp
-        # in a sibling element immediately before each headline anchor.
+        return results
 
 
 def extract_items(xml_bytes, source_url=None):
     raw = xml_bytes.decode('utf-8', errors='replace') if isinstance(xml_bytes, bytes) else str(xml_bytes)
-    if '<html' in raw[:1000].casefold() or 'mfn.se/all/a/' in (source_url or ''):
-        parser = _MFNHTMLParser(source_url or 'https://www.mfn.se/')
+    if '<html' in raw[:3000].casefold() or '<!doctype html' in raw[:3000].casefold():
+        parser = _CompanyNewsHTMLParser(source_url or 'https://example.invalid/')
         parser.feed(raw)
-        return parser.items
+        return parser.items()
+    if 'mfn.se/' in (source_url or '') and '<' in raw[:1000]:
+        parser = _CompanyNewsHTMLParser(source_url)
+        parser.feed(raw)
+        return parser.items()
     root = ET.fromstring(raw.encode('utf-8'))
     entries = []
     for node in root.iter():

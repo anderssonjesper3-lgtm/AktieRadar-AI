@@ -88,14 +88,15 @@ class _MFNHTMLParser(HTMLParser):
         title = ' '.join(' '.join(self.anchor_text).split())
         href = urljoin(self.base_url, self.href)
         match = self.DATE_RE.search(self.context)
-        if title and match and '/a/' in href and urlparse(href).hostname:
+        if title and match and '/a/' in href and urlparse(href).hostname and urlparse(href).hostname.endswith('mfn.se'):
             self.items.append({
                 'title': unescape(title), 'link': href,
                 'date': parse_date(match.group(1)), 'description': '',
             })
         self.href = None
         self.anchor_text = []
-        self.context = ''
+        # Keep recent surrounding text: MFN places the publication timestamp
+        # in a sibling element immediately before each headline anchor.
 
 
 def extract_items(xml_bytes, source_url=None):
@@ -206,9 +207,16 @@ def scan_detailed(config=None, now=None, fetch=None, max_age_hours=24):
                     results.append(match)
                 elif reason in rejects:
                     rejects[reason] += 1
+        samples = [
+            {'title': (item.get('title') or '')[:140],
+             'published': item.get('date').isoformat() if item.get('date') else 'SAKNAS',
+             'url': item.get('link', '')[:220]}
+            for item in items[:5]
+        ]
         diagnostics.append({'feed': url, 'companies': ', '.join(c['name'] for c in companies),
                             'status': 'OK', 'raw_items': raw_count,
-                            'matched': len(results) - before_count, **rejects, 'error': ''})
+                            'matched': len(results) - before_count, **rejects,
+                            'sample_headlines': samples, 'error': ''})
 
     unique = {item['id']: item for item in results}
     return list(unique.values()), failures, diagnostics

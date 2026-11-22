@@ -12,7 +12,7 @@ from order_analysis import parse_order_amount, order_ratio
 from news_analysis import analyze_news
 from news_history import update_history, load_history
 from test_avanza_forbattrad import calculate_ema, calculate_rsi, calculate_macd, SWEDEN
-from performance import load_journal, record_signal, update_open_trades, summary as journal_summary, trades_csv
+from performance import load_journal, record_signal, update_open_trades, evaluate_smart_exit, summary as journal_summary, trades_csv
 from aktieradar_telegram import market_session
 from test_avanza_forbattrad import MAX_AGE_MINUTES
 
@@ -230,7 +230,10 @@ try:
                 age = (journal_now - (bar_time + pd.Timedelta(minutes=5))).total_seconds() / 60
                 if bar_time.date() == journal_now.date() and 0 <= age <= MAX_AGE_MINUTES:
                     current_prices[row['ticker']] = float(bar['close'])
-    update_open_trades(current_prices)
+    current_candles = {row['ticker']: row['candles'] for row in results
+                       if row.get('candles') and not row.get('error')
+                       and row['ticker'] in current_prices}
+    update_open_trades(current_prices, candles_by_ticker=current_candles)
     for company, result in zip(watchlist, results):
         if result.get('signal') and not result.get('error'):
             record_signal(company['name'], company['ticker'], result['signal'])
@@ -241,7 +244,7 @@ except Exception as exc:
 
 st.divider()
 st.subheader('📒 Signaljournal och simulerade affärer')
-st.caption('Pappershandel – inga riktiga köp eller sälj. Standard: 5 000 kr, mål +2 %, stop -1 %, courtage 0,25 % (minst 1 kr) och slippage 0,10 % per sida. Endast färdiga staplar används.')
+st.caption('Pappershandel – inga riktiga köp eller sälj. Standard: 5 000 kr, stop-loss -1 % och teknisk SÄLJ-signal. Ingen automatisk vinsthemtagning vid +2 %. Courtage 0,25 % (minst 1 kr) och slippage 0,10 % per sida. Endast färdiga staplar används.')
 if journal_error:
     st.error('Signaljournalen kunde inte uppdateras: ' + journal_error)
 else:
@@ -254,6 +257,8 @@ else:
     x5.metric('Realiserat netto', str(round(stats['realized_pnl_sek'], 2)) + ' kr')
     if journal['trades']:
         trades = pd.DataFrame(journal['trades'])
+        if 'exit_signal_status' not in trades.columns:
+            trades['exit_signal_status'] = trades['status'].map(lambda x: 'AVSLUTAD' if x == 'CLOSED' else 'BEHÅLL – inväntar signal')
         st.dataframe(trades.sort_values('entry_time', ascending=False), use_container_width=True, hide_index=True)
         closed = trades[trades['status'] == 'CLOSED'].copy()
         if not closed.empty:
@@ -264,4 +269,5 @@ else:
         st.download_button('Exportera affärer (CSV)', data=trades_csv(journal), file_name='aktieradar_signaljournal.csv', mime='text/csv')
     else:
         st.info('Inga KÖP-KANDIDATER har ännu registrerats.')
+    st.caption('Öppna affärer följs tills teknisk SÄLJ-KANDIDAT bekräftas eller stop-loss -1 % nås. +2 % är endast en resultatnivå, inte en säljordernivå.')
     st.caption('Signaljournalen sparas i signal_journal.json. Exportera regelbundet om driftmiljön saknar beständig lagring.')

@@ -142,6 +142,8 @@ def classify_news(item, company, now, max_age_hours=24):
         category = 'RISKNYHET'
     elif any(has_phrase(text, word) for word in KEYWORDS):
         category = 'ORDER/AVTAL – GRANSKA'
+    elif item.get('_feed_company') == company['name']:
+        category = 'BOLAGSNYHET – GRANSKA'
     else:
         return None
     key = hashlib.sha256((company['name'] + '\n' + link).encode()).hexdigest()[:24]

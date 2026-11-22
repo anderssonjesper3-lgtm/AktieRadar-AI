@@ -195,8 +195,8 @@ def state_check():
     print('STATE CHECK OK: GitHub-variabeln kan läsas, skrivas och verifieras.')
 
 
-def should_notify(signal, events):
-    event_id = f"SAAB-B:{signal['kind']}:{signal['time'].isoformat()}"
+def should_notify(signal, events, ticker='SAAB B'):
+    event_id = f"{ticker}:{signal['kind']}:{signal['time'].isoformat()}"
     for e in events:
         if e['id'] == event_id:
             return False, 'Samma stapel är redan reserverad/skickad', event_id
@@ -241,7 +241,8 @@ def format_message(signal):
 
 def process_live(signal):
     state = read_state(create=True, migrate=True)  # initialize or migrate legacy signal history safely
-    notify, reason, event_id = should_notify(signal, state['events'])
+    ticker = signal.get('ticker', 'SAAB B')
+    notify, reason, event_id = should_notify(signal, state['events'], ticker)
     print('Dubblettkontroll:', reason)
     if not notify:
         return
@@ -339,12 +340,67 @@ def process_news(dry_run=False):
         print('Nyhetsnotis skickad:', match['id'])
 
 
+def process_multi_live(dry_run=False):
+    """Run the shared 10-company technical/news/exit pipeline."""
+    from multi_engine import analyze_all, companies
+    from news_scanner import scan
+    from news_analysis import analyze_news
+    from performance import record_signal, update_open_trades
+    now = datetime.now(SWEDEN)
+    if not market_session(now):
+        print('Ingen tiobolagskörning: börsen stängd.')
+        return
+    watchlist = companies()
+    technical = asyncio.run(analyze_all(watchlist, now=now))
+    articles, failures = scan({'companies': watchlist}, now=now.astimezone(timezone.utc))
+    if failures:
+        raise RuntimeError('Nyhetskällfel – köpbeslut blockeras: ' + ', '.join(x[0] for x in failures))
+    by_ticker = {c['ticker']: c for c in watchlist}
+    news_by_ticker = {c['ticker']: [] for c in watchlist}
+    for article in articles:
+        company = next((c for c in watchlist if c['name'] == article['company']), None)
+        if company:
+            news_by_ticker[company['ticker']].append(analyze_news(article, company))
+    prices, candles_by_ticker = {}, {}
+    for result in technical:
+        ticker = result.get('ticker')
+        if result.get('error') or not result.get('candles'):
+            print('BLOCKERAD:', ticker, result.get('error') or result.get('status'))
+            continue
+        candles = result['candles']; last = candles[-1]
+        prices[ticker] = float(last['close']); candles_by_ticker[ticker] = candles
+        signal = result.get('signal')
+        if signal:
+            company = by_ticker[ticker]
+            signal = dict(signal, company=company['name'], ticker=ticker)
+            analyses = news_by_ticker.get(ticker, [])
+            risks = [n for n in analyses if n['view'] == 'NEGATIV']
+            positives = [n for n in analyses if n['view'] in ('POSITIV','PRELIMINÄRT POSITIV')]
+            signal['news_status'] = f'{len(analyses)} analyserade nyheter'
+            if risks and signal['kind'] == 'KÖP-KANDIDAT':
+                signal['kind'] = 'VAKTA-RISKGRANSKNING'
+                signal['reasons'] = list(signal.get('reasons', [])) + ['Negativ bolagsnyhet – manuell granskning']
+            elif positives:
+                signal['reasons'] = list(signal.get('reasons', [])) + ['Positiv nyhet – teknisk bekräftelse krävs']
+            print('SIGNAL:', ticker, signal['kind'], signal['score'], signal['news_status'])
+            if not dry_run:
+                record_signal(company['name'], ticker, signal)
+                process_live(signal)
+    if not dry_run:
+        closed = update_open_trades(prices, candles_by_ticker=candles_by_ticker, now=now)
+        print('Simulerade affärer stängda:', closed)
+    else:
+        print('DRY RUN – journal/Telegram ändrades inte.')
+
+
 def main():
     parser = argparse.ArgumentParser()
     group = parser.add_mutually_exclusive_group()
     group.add_argument('--test', action='store_true')
     group.add_argument('--dry-run', action='store_true')
     group.add_argument('--state-check', action='store_true')
+    group.add_argument('--multi-live', action='store_true', help='Gemensam tiobolagsmotor, Telegram och journal')
+    group.add_argument('--multi-dry-run', action='store_true', help='Testa tiobolagsmotor utan journal eller Telegram')
     group.add_argument('--news-scan', action='store_true', help='Nyhetsbevakning utan köporder')
     group.add_argument('--news-dry-run', action='store_true', help='Testa nyhetsflöden utan notis')
     args = parser.parse_args()
@@ -354,6 +410,9 @@ def main():
         return
     if args.state_check:
         state_check()
+        return
+    if args.multi_live or args.multi_dry_run:
+        process_multi_live(dry_run=args.multi_dry_run)
         return
     if args.news_scan or args.news_dry_run:
         process_news(dry_run=args.news_dry_run)

@@ -240,7 +240,7 @@ def format_message(signal):
 
 
 def process_live(signal):
-    state = read_state()  # fail closed if state-check has not initialized it
+    state = read_state(create=True, migrate=True)  # initialize or migrate legacy signal history safely
     notify, reason, event_id = should_notify(signal, state['events'])
     print('Dubblettkontroll:', reason)
     if not notify:

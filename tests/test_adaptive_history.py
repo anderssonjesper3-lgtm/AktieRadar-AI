@@ -31,8 +31,13 @@ def test_single_observed_bar_is_not_blocked_for_missing_consecutive_history(monk
 
 
 def test_six_observed_bars_can_create_watch_across_natural_gaps(monkeypatch):
-    now = datetime(2026, 11, 23, 10, 0, tzinfo=TZ)
-    candles = make_candles(6, now - timedelta(minutes=8))
+    start = datetime(2026, 11, 23, 9, 0, tzinfo=TZ)
+    offsets = [0, 5, 10, 45, 50, 55]
+    candles = make_candles(6, start)
+    for row, minute in zip(candles, offsets):
+        row["time"] = start + timedelta(minutes=minute)
+        row["last_trade_time"] = row["time"] + timedelta(minutes=1)
+    now = candles[-1]["last_trade_time"] + timedelta(minutes=1)
     candles[-1]["volume"] = 500
     candles[-1]["open"] = candles[-1]["close"] - 1
     monkeypatch.setattr(engine, "market_session", lambda _: True)

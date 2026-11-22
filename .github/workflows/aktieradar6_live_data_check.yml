@@ -2,6 +2,13 @@ name: AktieRadar 6.0 - Avanza ID and live-data verification
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - aktieradar-6.0
+    paths:
+      - 'verify_avanza.py'
+      - 'news_watchlist.json'
+      - '.github/workflows/aktieradar6_live_data_check.yml'
 
 permissions:
   contents: read

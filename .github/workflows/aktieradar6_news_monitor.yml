@@ -1,8 +1,7 @@
 name: AktieRadar AI 6.0 - News monitor
 
 on:
-  schedule:
-    - cron: '*/5 7-16 * * 1-5'
+  # Legacy workflow: manual-only backup, no scheduled duplicate alerts.
   workflow_dispatch:
     inputs:
       mode:

@@ -201,7 +201,7 @@ def should_notify(signal, events, ticker='SAAB B'):
         if e['id'] == event_id:
             return False, 'Samma stapel är redan reserverad/skickad', event_id
     for e in reversed(events):
-        if e['kind'] != signal['kind']:
+        if e['kind'] != signal['kind'] or not e['id'].startswith(f'{ticker}:'):
             continue
         try:
             prior = datetime.fromisoformat(e['time'])

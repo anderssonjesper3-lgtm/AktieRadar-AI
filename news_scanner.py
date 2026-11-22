@@ -60,7 +60,7 @@ def parse_date(raw):
 
 class _MFNHTMLParser(HTMLParser):
     """Small, conservative parser for MFN's public company news archive page."""
-    DATE_RE = re.compile(r'\\b(20\\d{2}-\\d{2}-\\d{2} \\d{2}:\\d{2}(?::\\d{2})?)\\b')
+    DATE_RE = re.compile(r'\b(20\d{2}-\d{2}-\d{2} \d{2}:\d{2}(?::\d{2})?)\b')
 
     def __init__(self, base_url):
         super().__init__(convert_charrefs=True)

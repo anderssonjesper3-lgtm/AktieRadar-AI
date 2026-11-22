@@ -10,7 +10,7 @@
       "order_book_id": "5401",
       "annual_revenue_sek": null,
       "feeds": [
-        "https://www.saab.com/newsroom"
+        "https://www.saab.com/newsroom/press-releases"
       ],
       "source_type": "official_investor_relations"
     },
@@ -37,7 +37,7 @@
       "order_book_id": "527998",
       "annual_revenue_sek": null,
       "feeds": [
-        "https://powercellgroup.com/investor/"
+        "https://powercellgroup.com/investor/press-releases/"
       ],
       "source_type": "official_investor_relations"
     },
@@ -65,7 +65,7 @@
       "order_book_id": "852674",
       "annual_revenue_sek": null,
       "feeds": [
-        "https://www.ovzon.com/en/section/investors/press-releases/"
+        "https://www.ovzon.com/en/section/investors/press-releases/?y=all"
       ],
       "source_type": "official_investor_relations"
     },
@@ -91,7 +91,7 @@
       "order_book_id": "717421",
       "annual_revenue_sek": null,
       "feeds": [
-        "https://investor.aac-clyde.space/press-releases"
+        "https://investor.aac-clyde.space/en/press-releases"
       ],
       "source_type": "official_investor_relations"
     },

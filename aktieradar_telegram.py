@@ -299,6 +299,10 @@ def enrich_signal_with_news(signal, context):
 
 def process_news(dry_run=False):
     """Send announcement WATCH notices, separate from technical buy candidates."""
+    now_local = datetime.now(SWEDEN)
+    if not market_session(now_local):
+        print('Ingen nyhetsskanning: utanför svensk börshandel eller börshelgdag.')
+        return
     from news_scanner import load_config, scan
     config = load_config()
     feeds = sum(len(c.get('feeds', [])) for c in config['companies'])

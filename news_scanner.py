@@ -117,14 +117,14 @@ class _CompanyNewsHTMLParser(HTMLParser):
         return candidates
 
     def items(self):
-        text = ' '.join(' '.join(self.parts).split())
+        text = ''.join(self.parts)
         # Rebuild offsets against normalized text using each anchor's visible text.
         results, seen = [], set()
         for anchor in self.anchors:
             title = ' '.join(' '.join(anchor['text']).split())
             href = urljoin(self.base_url, anchor['href'])
             parsed_url = urlparse(href)
-            if (len(title) < 18 or parsed_url.scheme != 'https' or not parsed_url.hostname
+            if (len(title) < 12 or parsed_url.scheme != 'https' or not parsed_url.hostname
                     or parsed_url.hostname != urlparse(self.base_url).hostname
                     or href in seen):
                 continue

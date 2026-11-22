@@ -110,11 +110,30 @@ if any(not c.get('feeds') for c in watchlist):st.warning('Nyhetsbevakning saknar
 if failures:st.error('Nyhetskällor med fel: '+', '.join(x[0] for x in failures))
 with st.expander('🛰️ Diagnostik för nyhetskällor', expanded=bool(failures)):
     if news_diagnostics:
-        st.dataframe(pd.DataFrame(news_diagnostics).rename(columns={
+        diagnostic_frame = pd.DataFrame(news_diagnostics).rename(columns={
             'feed':'Nyhetsflöde','companies':'Bolag','status':'Status',
-            'raw_items':'Råa poster','matched':'Matchade nyheter','error':'Fel'
-        }),hide_index=True,use_container_width=True)
-        st.caption('Råa poster visar vad källan levererade. Matchade nyheter har passerat bolagsmatchning, datumkontroll och nyhetsfilter.')
+            'raw_items':'Råa poster','matched':'Matchade nyheter','error':'Fel',
+            'datum_saknas':'Datum saknas','utanför_datumintervall':'Utanför datumintervall',
+            'ogiltig_länk':'Ogiltig länk','bolag_matchar_inte':'Bolagsmatchning saknas',
+            'ingen_relevant_nyhetskategori':'Ej relevant kategori'
+        })
+        sample_rows = []
+        for entry in news_diagnostics:
+            for sample in entry.get('sample_headlines', []):
+                sample_rows.append({
+                    'Källa': entry.get('feed',''),
+                    'Rubrik': sample.get('title',''),
+                    'Publicerad': sample.get('published',''),
+                    'Länk': sample.get('url','')
+                })
+        if 'sample_headlines' in diagnostic_frame.columns:
+            diagnostic_frame = diagnostic_frame.drop(columns=['sample_headlines'])
+        st.dataframe(diagnostic_frame,hide_index=True,use_container_width=True)
+        st.caption('Avvisningsräknare summeras per bolag och källa; samma RSS-post kan därför räknas i flera bolagsmatchningar.')
+        if sample_rows:
+            with st.expander('🔎 Visa exempel på råa rubriker från varje källa'):
+                st.dataframe(pd.DataFrame(sample_rows),hide_index=True,use_container_width=True)
+        st.caption('Råa rubriker visar vad källan faktiskt levererade. Vi kan nu kontrollera titel, publiceringstid och länk innan vi ändrar matchningsreglerna.')
     else:
         st.info('Ingen källdiagnostik tillgänglig ännu. Tryck på Uppdatera alla datakällor.')
     if articles:

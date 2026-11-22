@@ -66,23 +66,25 @@ def market_session(now):
 
 
 def morning_signal(candles, continuous):
-    if not (6 <= continuous < LOOKBACK):
+    """Early watch-only setup using observed bars; no wall-clock continuity required."""
+    if continuous < 6:
         return False
     recent = candles[-6:]
-    avg = sum(c['volume'] for c in recent[:-1]) / 5
-    return (avg > 0 and recent[-1]['volume'] / avg >= 1.5
-            and recent[-1]['close'] > recent[-4]['close']
-            and recent[-1]['close'] > recent[-1]['open'])
+    baseline = [bar['volume'] for bar in recent[:-1] if bar.get('volume', 0) > 0]
+    if len(baseline) < 3:
+        return False
+    avg = sum(baseline) / len(baseline)
+    current = recent[-1]
+    return (avg > 0 and current['volume'] / avg >= 1.5
+            and current['close'] > recent[-4]['close']
+            and current['close'] > current['open'])
 
 
 def classify(candles, now):
-    # Fail closed on missing or sparse data before considering market-session
-    # or morning-watch conditions. A single candle must never trigger a signal.
+    # Count observed traded bars, never require wall-clock adjacency.
     if not candles:
-        return None, 'DATA SAKNAS - inga kompletta staplar'
-    continuous = consecutive_count(candles)
-    if continuous < LOOKBACK:
-        return None, f'DATABLOCKERAD - för få sammanhängande staplar ({continuous}/{LOOKBACK})'
+        return None, 'DATA SAKNAS - inga observerade staplar'
+    observed = consecutive_count(candles)
     if not market_session(now):
         return None, 'Utanför tillåten handelstid / börshelgdag'
     last = candles[-1]
@@ -90,11 +92,15 @@ def classify(candles, now):
     age = (now - end).total_seconds() / 60
     if end.date() != now.date() or not 0 <= age <= MAX_AGE_MINUTES:
         return None, 'DATA FÖR GAMMAL - senaste faktiska avslutet är inte aktuellt'
-    if morning_signal(candles, continuous):
+
+    # Early observations may create WATCH only. Full technical BUY scoring waits
+    # until EMA21, RSI14, MACD signal and a volume baseline are all computable.
+    if morning_signal(candles, observed):
         return {'kind': 'MORGON-VAKTA', 'time': last['time'], 'close': last['close'],
                 'score': None, 'reasons': ['Prisuppgång', 'Grön 5-minutersstapel',
-                                          'Volymökning minst 1,5 gånger']}, 'Morgonbevakning'
-    closes = [c['close'] for c in candles]
+                                          'Volymökning mot tidigare observerade staplar']}, \
+               f'Morgonbevakning ({observed} observerade staplar)'
+    closes = [bar['close'] for bar in candles]
     ema9, ema21 = calculate_ema(closes, 9), calculate_ema(closes, 21)
     rsi = calculate_rsi(closes, 14)
     _, _, hist = calculate_macd(closes)
@@ -103,7 +109,8 @@ def classify(candles, now):
     scores = calculate_signal_scores(candles, ema9, ema21, rsi, hist, rv, patterns)
     current = scores[-1] if scores else None
     if current is None:
-        return None, 'Indikatorerna saknar tillräcklig historik'
+        return None, (f'INDIKATORER BYGGER HISTORIK ({observed} observerade staplar; '
+                      'köpsignal kräver tillräcklig EMA/RSI/MACD/volymhistorik)')
     status = check_buy_signal(current['score'], True)
     if status.startswith('KOP'):
         kind = 'KÖP-KANDIDAT'

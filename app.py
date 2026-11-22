@@ -218,26 +218,13 @@ with st.expander('🛠️ Kontrollcentral – alla aktier'):
 # Persistent paper-trade journal (no real orders).
 journal_error = None
 try:
-    current_prices = {}
-    journal_now = datetime.now(SWEDEN)
-    if market_session(journal_now):
-        for row in results:
-            if row.get('candles') and not row.get('error'):
-                bar = row['candles'][-1]
-                bar_time = bar['time']
-                if bar_time.tzinfo is None:
-                    bar_time = bar_time.replace(tzinfo=SWEDEN)
-                age = (journal_now - (bar_time + pd.Timedelta(minutes=5))).total_seconds() / 60
-                if bar_time.date() == journal_now.date() and 0 <= age <= MAX_AGE_MINUTES:
-                    current_prices[row['ticker']] = float(bar['close'])
-    current_candles = {row['ticker']: row['candles'] for row in results
-                       if row.get('candles') and not row.get('error')
-                       and row['ticker'] in current_prices}
-    update_open_trades(current_prices, candles_by_ticker=current_candles)
-    for company, result in zip(watchlist, results):
-        if result.get('signal') and not result.get('error'):
-            record_signal(company['name'], company['ticker'], result['signal'])
-    journal = load_journal()
+    from journal_store import read_shared
+    import os
+    if 'AKTIERADAR_JOURNAL_TOKEN' in st.secrets:
+        os.environ['AKTIERADAR_JOURNAL_TOKEN'] = st.secrets['AKTIERADAR_JOURNAL_TOKEN']
+    if 'AKTIERADAR_JOURNAL_REPO' in st.secrets:
+        os.environ['AKTIERADAR_JOURNAL_REPO'] = st.secrets['AKTIERADAR_JOURNAL_REPO']
+    journal, _ = read_shared()
 except Exception as exc:
     journal_error = str(exc)
     journal = {'version': 1, 'events': [], 'trades': []}
@@ -270,4 +257,4 @@ else:
     else:
         st.info('Inga KÖP-KANDIDATER har ännu registrerats.')
     st.caption('Öppna affärer följs tills teknisk SÄLJ-KANDIDAT bekräftas eller stop-loss -1 % nås. +2 % är endast en resultatnivå, inte en säljordernivå.')
-    st.caption('Signaljournalen sparas i signal_journal.json. Exportera regelbundet om driftmiljön saknar beständig lagring.')
+    st.caption('Journalen läses från GitHub och uppdateras endast av den schemalagda roboten. Appen gör inga egna simulerade affärer.')

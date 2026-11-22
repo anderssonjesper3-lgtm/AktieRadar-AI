@@ -1,4 +1,4 @@
-"""AktieRadar 5.0 dashboard. Market data never synthesized."""
+"""AktieRadar AI 6.0 dashboard. Market data never synthesized."""
 import asyncio
 from datetime import datetime, timezone
 import pandas as pd
@@ -9,8 +9,9 @@ from multi_engine import companies, analyze_all
 from news_scanner import scan
 from order_analysis import parse_order_amount, order_ratio
 from test_avanza_forbattrad import calculate_ema, calculate_rsi, calculate_macd, SWEDEN
+from performance import load_journal, record_signal, update_open_trades, summary as journal_summary, trades_csv
 
-st.set_page_config(page_title='AktieRadar AI 5.0',page_icon='📡',layout='wide')
+st.set_page_config(page_title='AktieRadar AI 6.0',page_icon='📡',layout='wide')
 st.markdown('''<style>
 .stApp{background:#0c1525;color:#edf3ff}div[data-testid="stMetric"]{background:#17253b;border:1px solid #293a51;border-radius:14px;padding:16px}
 div.stButton>button{background:#17253b;color:#f3f7ff;border:1px solid #30435c;border-radius:12px;min-height:56px;width:100%;text-align:left}

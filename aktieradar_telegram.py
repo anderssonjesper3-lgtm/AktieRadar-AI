@@ -349,6 +349,9 @@ def process_multi_live(dry_run=False):
     from news_scanner import scan
     from news_analysis import analyze_news
     from performance import record_signal, update_open_trades, load_journal
+    from journal_store import read_shared, write_shared
+    from pathlib import Path
+    import tempfile
     now = datetime.now(SWEDEN)
     if not market_session(now):
         print('Ingen tiobolagskörning: börsen stängd.')
@@ -364,6 +367,12 @@ def process_multi_live(dry_run=False):
         company = next((c for c in watchlist if c['name'] == article['company']), None)
         if company:
             news_by_ticker[company['ticker']].append(analyze_news(article, company))
+    # Load one durable shared journal before processing signals; never use runner-local history.
+    if not dry_run:
+        shared, shared_sha = read_shared()
+        journal_dir = tempfile.TemporaryDirectory()
+        journal_path = Path(journal_dir.name) / 'journal.json'
+        journal_path.write_text(json.dumps(shared, ensure_ascii=False), encoding='utf-8')
     prices, candles_by_ticker = {}, {}
     for result in technical:
         ticker = result.get('ticker')
@@ -387,12 +396,15 @@ def process_multi_live(dry_run=False):
                 signal['reasons'] = list(signal.get('reasons', [])) + ['Positiv nyhet – teknisk bekräftelse krävs']
             print('SIGNAL:', ticker, signal['kind'], signal['score'], signal['news_status'])
             if not dry_run:
-                record_signal(company['name'], ticker, signal)
+                record_signal(company['name'], ticker, signal, path=journal_path)
                 process_live(signal)
     if not dry_run:
-        before = load_journal()
-        closed = update_open_trades(prices, candles_by_ticker=candles_by_ticker, now=now)
-        after = load_journal()
+        before = load_journal(journal_path)
+        closed = update_open_trades(prices, candles_by_ticker=candles_by_ticker, now=now, path=journal_path)
+        after = load_journal(journal_path)
+        if after != shared:
+            write_shared(after, shared_sha)
+        journal_dir.cleanup()
         print('Simulerade affärer stängda:', closed)
         before_ids = {t.get('id') for t in before.get('trades', []) if t.get('status') == 'CLOSED'}
         for trade in after.get('trades', []):

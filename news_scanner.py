@@ -91,7 +91,7 @@ def classify_news(item, company, now, max_age_hours=24):
             'id': 'NEWS:' + key}
 
 
-def scan(config=None, now=None, fetch=None):
+def scan(config=None, now=None, fetch=None, max_age_hours=24):
     """Fetch each unique RSS feed once, then match its items to configured issuers."""
     config = config if config is not None else load_config()
     now = now or datetime.now(timezone.utc)
@@ -118,7 +118,7 @@ def scan(config=None, now=None, fetch=None):
             continue
         for item in items:
             for company in companies:
-                match = classify_news(item, company, now)
+                match = classify_news(item, company, now, max_age_hours=max_age_hours)
                 if match:
                     results.append(match)
 

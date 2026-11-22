@@ -229,15 +229,18 @@ def telegram_send(message):
 
 
 def format_message(signal):
-    symbol = '🟢' if signal['kind'] == 'KÖP-KANDIDAT' else '🟡'
-    score = f"{signal['score']}/100" if signal['score'] is not None else 'Ej beräknad (morgon)'
-    return (f"{symbol} AktieRadar AI {VERSION} – {signal['kind']} | Saab B\n"
-            f"Stapel: {signal['time']:%Y-%m-%d %H:%M} svensk tid\n"
-            f"Kurs vid stapel: {signal['close']:.2f} kr\nPoäng: {score}\n"
-            f"Orsaker: {', '.join(map(str, signal['reasons']))}\n"
-            f"Nyhetsstatus: {signal.get('news_status', 'ej kontrollerad')}\n"
-            'Analys, inte handelsråd. Kontrollera aktuell kurs och spread före beslut.')
-
+    kind = signal['kind']
+    symbol = '🟢' if kind == 'KÖP-KANDIDAT' else ('🔴' if 'SÄLJ' in kind else '🟡')
+    score_value = signal.get('score')
+    score = f"{score_value}/100" if score_value is not None else 'Ej beräknad'
+    company = signal.get('company', 'Saab B')
+    ticker = signal.get('ticker', 'SAAB B')
+    return (f"{symbol} AktieRadar AI {VERSION} – {kind} | {company} ({ticker})\\n"
+            f"Tid: {signal['time']:%Y-%m-%d %H:%M} svensk tid\\n"
+            f"Kurs: {signal['close']:.2f} kr\\nPoäng: {score}\\n"
+            f"Orsaker: {', '.join(map(str, signal.get('reasons', [])))}\\n"
+            f"Nyhetsstatus: {signal.get('news_status', 'ej kontrollerad')}\\n"
+            'Pappersanalys, inte handelsråd. Kontrollera aktuell kurs och spread före beslut.')
 
 def process_live(signal):
     state = read_state(create=True, migrate=True)  # initialize or migrate legacy signal history safely
@@ -345,7 +348,7 @@ def process_multi_live(dry_run=False):
     from multi_engine import analyze_all, companies
     from news_scanner import scan
     from news_analysis import analyze_news
-    from performance import record_signal, update_open_trades
+    from performance import record_signal, update_open_trades, load_journal
     now = datetime.now(SWEDEN)
     if not market_session(now):
         print('Ingen tiobolagskörning: börsen stängd.')
@@ -387,8 +390,24 @@ def process_multi_live(dry_run=False):
                 record_signal(company['name'], ticker, signal)
                 process_live(signal)
     if not dry_run:
+        before = load_journal()
         closed = update_open_trades(prices, candles_by_ticker=candles_by_ticker, now=now)
+        after = load_journal()
         print('Simulerade affärer stängda:', closed)
+        before_ids = {t.get('id') for t in before.get('trades', []) if t.get('status') == 'CLOSED'}
+        for trade in after.get('trades', []):
+            if trade.get('status') == 'CLOSED' and trade.get('id') not in before_ids:
+                exit_signal = {
+                    'kind': 'SÄLJ',
+                    'company': trade.get('company', trade.get('ticker')),
+                    'ticker': trade['ticker'],
+                    'time': now,
+                    'close': float(trade.get('exit_price') or prices.get(trade['ticker'], 0)),
+                    'score': None,
+                    'reasons': [trade.get('exit_reason') or 'Smart Exit'] + trade.get('exit_signal_reasons', []),
+                    'news_status': 'positionsbevakning'
+                }
+                process_live(exit_signal)
     else:
         print('DRY RUN – journal/Telegram ändrades inte.')
 

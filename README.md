@@ -6,7 +6,8 @@ AktieRadar AI är ett analys- och bevakningsverktyg för svenska aktier. Det vis
 - Översikt för tio konfigurerade aktier med femminutersstaplar.
 - EMA 9/21, RSI 14, MACD och candlestick-/volymanalys.
 - Kontroll av instrument-ID, kompletta staplar, datakvalitet och handelstid.
-- Nyhetsmodul som bara klassificerar nyheter från uttryckligen konfigurerade HTTPS RSS/Atom-flöden. Utan verifierade flöden visas nyhetsstatus som ej ansluten/okänd; den får inte tolkas som att inga risknyheter finns.
+- Nyhetsmodul som bevakar tre officiella Nasdaq RSS-flöden (Main Markets Notices, First North Notices och Nasdaq Nordic News Releases). Flödena hämtas en gång per körning och matchas mot nio av tio bevakade bolag. Astor Group handlas på NGM och saknar ännu verifierat automatiskt flöde; bolaget är därför uttryckligen obevakat i nyhetsmotorn tills en godkänd MFN/Cision-källa har verifierats.
+- Separat GitHub Actions-arbetsflöde är konfigurerat för femminuterskontroll på vardagar. Schemalagda GitHub Actions körs endast från repositoryts standardgren; arbetsflödet på `aktieradar-6.0` börjar därför inte köras automatiskt förrän grenen har slagits ihop/aktiverats som standardgren. Nasdaq anger att RSS uppdateras nära realtid och att CNS-flödet har en minsta rekommenderad pollningsfrekvens på 30 sekunder; fem minuter är en försiktig intervallinställning.
 - Telegramnotiser med dubblettskydd och historikreserv före utskick.
 - Simulerad signaljournal: 5 000 kr per affär, mål +2 %, stop -1 %, courtage 0,25 % (minst 1 kr) och slippage 0,10 % per sida. Journalen är pappershandel, inte backtest eller faktisk portföljhistorik.
 

@@ -3,31 +3,54 @@
     {
       "name": "Saab B",
       "ticker": "SAAB B",
-      "aliases": ["Saab AB", "Saab"],
+      "aliases": [
+        "Saab AB",
+        "Saab"
+      ],
       "order_book_id": "5401",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
+      ]
     },
     {
       "name": "Acconeer",
       "ticker": "ACCON",
-      "aliases": ["Acconeer"],
+      "aliases": [
+        "Acconeer"
+      ],
       "order_book_id": "808452",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
+      ]
     },
     {
       "name": "PowerCell Sweden",
       "ticker": "PCELL",
-      "aliases": ["PowerCell Sweden", "PowerCell"],
+      "aliases": [
+        "PowerCell Sweden",
+        "PowerCell"
+      ],
       "order_book_id": "527998",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
+      ]
     },
     {
       "name": "Scandinavian Astor Group",
       "ticker": "ASTOR",
-      "aliases": ["Scandinavian Astor Group", "Astor Group"],
+      "aliases": [
+        "Scandinavian Astor Group",
+        "Astor Group"
+      ],
       "order_book_id": "1523003",
       "annual_revenue_sek": null,
       "feeds": []
@@ -35,50 +58,87 @@
     {
       "name": "Ovzon",
       "ticker": "OVZON",
-      "aliases": ["Ovzon"],
+      "aliases": [
+        "Ovzon"
+      ],
       "order_book_id": "852674",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
+      ]
     },
     {
       "name": "GomSpace",
       "ticker": "GOMX",
-      "aliases": ["GomSpace"],
+      "aliases": [
+        "GomSpace"
+      ],
       "order_book_id": "667935",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
+      ]
     },
     {
       "name": "AAC Clyde Space",
       "ticker": "AAC",
-      "aliases": ["AAC Clyde Space"],
+      "aliases": [
+        "AAC Clyde Space"
+      ],
       "order_book_id": "717421",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
+      ]
     },
     {
       "name": "MilDef",
       "ticker": "MILDEF",
-      "aliases": ["MilDef Group", "MilDef"],
+      "aliases": [
+        "MilDef Group",
+        "MilDef"
+      ],
       "order_book_id": "1235164",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
+      ]
     },
     {
       "name": "INVISIO",
       "ticker": "IVSO",
-      "aliases": ["INVISIO"],
+      "aliases": [
+        "INVISIO"
+      ],
       "order_book_id": "43788",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
+      ]
     },
     {
       "name": "Clavister",
       "ticker": "CLAV",
-      "aliases": ["Clavister"],
+      "aliases": [
+        "Clavister"
+      ],
       "order_book_id": "480188",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://api.news.eu.nasdaq.com/news/rss/mainMarketNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/firstNorthNotices",
+        "https://api.news.eu.nasdaq.com/news/rss/nasdaqNordicNews"
+      ]
     }
   ]
 }

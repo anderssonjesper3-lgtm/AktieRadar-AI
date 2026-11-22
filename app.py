@@ -10,6 +10,8 @@ from news_scanner import scan
 from order_analysis import parse_order_amount, order_ratio
 from test_avanza_forbattrad import calculate_ema, calculate_rsi, calculate_macd, SWEDEN
 from performance import load_journal, record_signal, update_open_trades, summary as journal_summary, trades_csv
+from aktieradar_telegram import market_session
+from test_avanza_forbattrad import MAX_AGE_MINUTES
 
 st.set_page_config(page_title='AktieRadar AI 6.0',page_icon='📡',layout='wide')
 st.markdown('''<style>
@@ -85,7 +87,18 @@ with st.expander('🛠️ Kontrollcentral – alla aktier'):
 # Persistent paper-trade journal (no real orders).
 journal_error = None
 try:
-    current_prices = {r['ticker']: float(r['candles'][-1]['close']) for r in results if r.get('candles') and not r.get('error')}
+    current_prices = {}
+    journal_now = datetime.now(SWEDEN)
+    if market_session(journal_now):
+        for row in results:
+            if row.get('candles') and not row.get('error'):
+                bar = row['candles'][-1]
+                bar_time = bar['time']
+                if bar_time.tzinfo is None:
+                    bar_time = bar_time.replace(tzinfo=SWEDEN)
+                age = (journal_now - (bar_time + pd.Timedelta(minutes=5))).total_seconds() / 60
+                if bar_time.date() == journal_now.date() and 0 <= age <= MAX_AGE_MINUTES:
+                    current_prices[row['ticker']] = float(bar['close'])
     update_open_trades(current_prices)
     for company, result in zip(watchlist, results):
         if result.get('signal') and not result.get('error'):

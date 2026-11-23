@@ -57,7 +57,9 @@ def main():
         }
     news=report.get('news')
     report['verified_live']=bool(health) and all(
-        x['five_min_candles']>0 and not x['error'] for x in health
+        x['five_min_candles']>=6 and not x['error'] and
+        x['age_after_close_minutes'] is not None and
+        0 <= x['age_after_close_minutes'] <= 20 for x in health
     ) and (news is None or (news['configured_feeds']>0 and
         news['parsed_sources']==news['configured_feeds'] and not news['failures']))
     Path(a.output).write_text(json.dumps(report,ensure_ascii=False,indent=2,default=str),encoding='utf-8')

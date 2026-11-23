@@ -9,6 +9,8 @@ from streamlit_autorefresh import st_autorefresh
 import importlib
 import kryptoradar.engine as crypto_engine
 importlib.reload(crypto_engine)
+import kryptoradar.strategy_compare as crypto_compare
+importlib.reload(crypto_compare)
 import kryptoradar.backtest as crypto_backtest
 importlib.reload(crypto_backtest)
 PAIRS = crypto_engine.PAIRS
@@ -18,6 +20,7 @@ paper_trade = crypto_engine.paper_trade
 evaluate_positions = crypto_engine.evaluate_positions
 performance_summary = crypto_engine.performance_summary
 replay = crypto_backtest.replay
+compare_strategies = crypto_compare.compare
 
 
 st.markdown("""<style>
@@ -89,6 +92,19 @@ for name, pair in PAIRS.items():
                 path.write_text(json.dumps(journal, indent=2))
             except OSError as exc:
                 st.error("Journalen kunde inte sparas: " + str(exc))
+st.subheader("🔬 Jämför tre strategier")
+st.caption("Snabb momentum, trendföljning och rekylköp. Första 60 % av ljusen är träningsperiod, sista 40 % är separat testperiod. Inga parametrar anpassas efter testperioden.")
+if st.button("Jämför strategier på BTC, ETH och SOL"):
+    for name, pair in PAIRS.items():
+        try:
+            data = fetch_candles(pair)
+            results = compare_strategies(data, stake=stake, fee_pct=fee, slippage_pct=slip, stop_pct=stop)
+            st.markdown("**" + name + "**")
+            st.dataframe(pd.DataFrame(results), use_container_width=True, hide_index=True)
+            if all(r["Test: affärer"] == 0 for r in results):
+                st.info("Inga avslutade affärer i testperioden. Ingen slutsats om träffsäkerhet.")
+        except Exception as exc:
+            st.error(f'{name}: Strategijämförelsen kunde inte köras: {exc}')
 st.subheader("🧪 Historisk utvärdering – separerad från livejournalen")
 st.caption("Kör en historisk simulering på Krakens tillgängliga minutljus. Köp/sälj fylls hypotetiskt vid NÄSTA ljus öppning, med avgift och slippage. Resultatet är inte en framåtblickande verifiering.")
 if st.button("Kör historiskt test för BTC, ETH och SOL"):

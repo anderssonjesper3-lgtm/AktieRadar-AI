@@ -103,7 +103,10 @@ def classify(candles, now):
     if current is None:
         return None, 'Indikatorerna saknar tillräcklig historik'
     status = check_buy_signal(current['score'], True)
-    if status.startswith('KOP'):
+    if status.startswith('KOP') and not current.get('volume_verified', False):
+        kind = 'VAKTA'
+        current = dict(current, reasons=list(current['reasons']) + ['Volym ej verifierad – köp blockerat'])
+    elif status.startswith('KOP'):
         kind = 'KÖP-KANDIDAT'
     elif status.startswith('VAKTA'):
         kind = 'VAKTA'

@@ -3,6 +3,10 @@ on:
   push:
     paths:
       - '.github/workflows/aktieradar_5_diagnostics.yml'
+      - 'news_scanner.py'
+      - 'news_watchlist.json'
+      - 'test_avanza_forbattrad.py'
+      - 'multi_engine.py'
   workflow_dispatch:
 permissions:
   contents: read

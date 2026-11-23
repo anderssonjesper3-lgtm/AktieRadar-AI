@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - '.github/workflows/aktieradar_5_diagnostics.yml'
+      - 'verify_sources.py'
       - 'news_scanner.py'
       - 'news_watchlist.json'
       - 'test_avanza_forbattrad.py'

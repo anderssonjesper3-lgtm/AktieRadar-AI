@@ -235,11 +235,11 @@ def format_message(signal):
     score = f"{score_value}/100" if score_value is not None else 'Ej beräknad'
     company = signal.get('company', 'Saab B')
     ticker = signal.get('ticker', 'SAAB B')
-    return (f"{symbol} AktieRadar AI {VERSION} – {kind} | {company} ({ticker})\\n"
-            f"Tid: {signal['time']:%Y-%m-%d %H:%M} svensk tid\\n"
-            f"Kurs: {signal['close']:.2f} kr\\nPoäng: {score}\\n"
-            f"Orsaker: {', '.join(map(str, signal.get('reasons', [])))}\\n"
-            f"Nyhetsstatus: {signal.get('news_status', 'ej kontrollerad')}\\n"
+    return (f"{symbol} AktieRadar AI {VERSION} – {kind} | {company} ({ticker})\n"
+            f"Tid: {signal['time']:%Y-%m-%d %H:%M} svensk tid\n"
+            f"Kurs: {signal['close']:.2f} kr\nPoäng: {score}\n"
+            f"Orsaker: {', '.join(map(str, signal.get('reasons', [])))}\n"
+            f"Nyhetsstatus: {signal.get('news_status', 'ej kontrollerad')}\n"
             'Pappersanalys, inte handelsråd. Kontrollera aktuell kurs och spread före beslut.')
 
 def process_live(signal):

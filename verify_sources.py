@@ -53,7 +53,7 @@ def main():
             'configured_stocks':len(health_rows),
             'stocks_with_candles':sum(x['five_min_candles']>0 for x in health_rows),
             'stocks_with_usable_signals':sum(x['signal_kind'] is not None for x in health_rows),
-            'stocks_with_errors':sum(bool(x['error']) for x in health),
+            'stocks_with_errors':sum(bool(x['error']) for x in health_rows),
         }
     news=report.get('news')
     report['verified_live']=bool(health_rows) and all(

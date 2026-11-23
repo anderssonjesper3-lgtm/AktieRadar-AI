@@ -108,6 +108,9 @@ buys=sum(bool(r['signal']) and r['signal']['kind']=='KÖP-KANDIDAT' for r in res
 watch=sum(bool(r['signal']) and 'VAKTA' in r['signal']['kind'] for r in results)
 a,b,c,d=st.columns(4)
 a.metric('Bevakade aktier',len(watchlist));b.metric('Aktuell kursdata',f'{ready}/{len(watchlist)}');c.metric('Köpkandidater',buys);d.metric('Vakta',watch)
+with st.expander('🔎 Kursdatadiagnostik – alla 10 aktier', expanded=(ready == 0)):
+    st.caption('Visar antal hämtade minutposter, senaste avslut och datans ålder. Inga köp tillåts på inaktuell data.')
+    st.dataframe([{'Aktie':r['company'], 'Minutposter':r.get('raw_points',0), 'Senaste stapel':r.get('last_bar_time') or 'saknas', 'Senaste avslut':r.get('last_trade_time') or 'saknas', 'Ålder (min)':r.get('data_age_minutes'), 'Aktuell':bool(r.get('data_fresh')), 'Fel/orsak':r.get('error') or r.get('data_reason') or r.get('status')} for r in results], hide_index=True, use_container_width=True)
 if any(not c.get('feeds') for c in watchlist):st.warning('Nyhetsbevakning saknar verifierat flöde för: '+', '.join(c['name'] for c in watchlist if not c.get('feeds')))
 if failures:st.error('Nyhetskällor med fel: '+', '.join(x[0] for x in failures))
 with st.expander('🛰️ Diagnostik för nyhetskällor', expanded=bool(failures)):

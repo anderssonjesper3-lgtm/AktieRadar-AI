@@ -6,3 +6,5 @@ avanza-mcp
 plotly>=5.20,<7
 pytest>=8,<10
 streamlit-autorefresh>=1.0.1,<2
+
+requests>=2.31,<3

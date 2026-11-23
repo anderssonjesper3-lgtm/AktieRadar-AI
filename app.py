@@ -69,6 +69,8 @@ st.title('📡 AktieRadar AI 6.0')
 st.caption('MARKNADSÖVERSIKT · 10 AKTIER · OFFICIELLA BOLAGSKÄLLOR · NYHETER · SIGNALJOURNAL · DATAKONTROLL')
 st_autorefresh(interval=300_000, key='aktieradar_5min_refresh')
 st.warning('Analysverktyg – inga handelsråd eller automatiska köp. Kurser kan vara fördröjda.')
+if not market_session(datetime.now(SWEDEN)):
+    st.info('⏰ Börsen är stängd just nu. Tekniska signaler kan saknas eller visas som gamla tills nya verifierade femminutersstaplar finns efter öppning. Historik ska inte raderas.')
 watchlist=companies()
 @st.cache_data(ttl=240,show_spinner=False)
 def market_snapshot():return asyncio.run(analyze_all())
@@ -220,10 +222,15 @@ journal_error = None
 try:
     from journal_store import read_shared
     import os
-    if 'AKTIERADAR_JOURNAL_TOKEN' in st.secrets:
-        os.environ['AKTIERADAR_JOURNAL_TOKEN'] = st.secrets['AKTIERADAR_JOURNAL_TOKEN']
-    if 'AKTIERADAR_JOURNAL_REPO' in st.secrets:
-        os.environ['AKTIERADAR_JOURNAL_REPO'] = st.secrets['AKTIERADAR_JOURNAL_REPO']
+    try:
+        token = st.secrets.get('AKTIERADAR_JOURNAL_TOKEN')
+        repo = st.secrets.get('AKTIERADAR_JOURNAL_REPO')
+    except Exception:
+        token, repo = None, None
+    if token:
+        os.environ['AKTIERADAR_JOURNAL_TOKEN'] = token
+    if repo:
+        os.environ['AKTIERADAR_JOURNAL_REPO'] = repo
     os.environ.setdefault('AKTIERADAR_JOURNAL_REPO', 'anderssonjesper3-lgtm/AktieRadar-AI')
     journal, _ = read_shared()
 except Exception as exc:
@@ -234,7 +241,7 @@ st.divider()
 st.subheader('📒 Signaljournal och simulerade affärer')
 st.caption('Pappershandel – inga riktiga köp eller sälj. Standard: 5 000 kr, stop-loss -1 % och teknisk SÄLJ-signal. Ingen automatisk vinsthemtagning vid +2 %. Courtage 0,25 % (minst 1 kr) och slippage 0,10 % per sida. Endast färdiga staplar används.')
 if journal_error:
-    st.error('Signaljournalen kunde inte uppdateras: ' + journal_error)
+    st.error('Signaljournalen kunde inte läsas (ingen historik har raderats): ' + journal_error)
 else:
     stats = journal_summary(journal)
     x1, x2, x3, x4, x5 = st.columns(5)

@@ -263,14 +263,15 @@ def check_local_data_quality(candles, index, lookback=20):
     return True
 
 def calculate_relative_volume(candles, period=20):
+    """Compare observed 5-minute trading buckets; no synthetic zero-volume buckets."""
     result = [None] * len(candles)
     for i in range(period, len(candles)):
-        window = candles[i-period:i+1]
-        if not check_local_data_quality(candles, i, lookback=period+1):
+        previous = candles[i-period:i]
+        if not all(c.get("volume_verified", False) for c in previous + [candles[i]]):
             continue
-        avg = sum(c["volume"] for c in window[:-1]) / period
-        if avg > 0:
-            result[i] = window[-1]["volume"] / avg
+        average = sum(c["volume"] for c in previous) / period
+        if average > 0:
+            result[i] = candles[i]["volume"] / average
     return result
 
 
@@ -286,6 +287,7 @@ def consecutive_count(candles):
 
 
 def build_candles(points):
+    """Aggregate observed trades into five-minute buckets without inventing missing minutes."""
     groups = defaultdict(dict)
     for p in points:
         dt = datetime.fromtimestamp(p["timestamp"] / 1000, tz=timezone.utc).astimezone(SWEDEN)
@@ -299,15 +301,23 @@ def build_candles(points):
         missing = [m for m in expected if m not in minutes]
         if missing:
             gaps.append((start, missing))
+        values = [minutes[m] for m in sorted(minutes)]
+        # Sparse buckets are observations, not claims of continuous trading.
+        if not values or any(
+            not all(isinstance(v.get(key), (int, float)) for key in ("open", "high", "low", "close"))
+            for v in values
+        ):
             continue
-        values = [minutes[m] for m in expected]
         candles.append({
             "time": start,
             "open": values[0]["open"],
             "high": max(v["high"] for v in values),
             "low": min(v["low"] for v in values),
             "close": values[-1]["close"],
-            "volume": sum(v.get("totalVolumeTraded", 0) for v in values),
+            "volume": sum(v.get("totalVolumeTraded") or 0 for v in values),
+            "observed_minutes": len(values),
+            "volume_verified": all(isinstance(v.get("totalVolumeTraded"), (int, float)) for v in values),
+            "partial_observation": bool(missing),
         })
     return candles, gaps
 

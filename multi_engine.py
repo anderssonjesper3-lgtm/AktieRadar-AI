@@ -16,12 +16,15 @@ def validate_company(c):
 async def analyze_company(c, now=None):
     now = now or datetime.now(SWEDEN)
     error = validate_company(c)
-    result = {'company':c['name'], 'ticker':c.get('ticker',''), 'status':'DATA SAKNAS', 'signal':None, 'candles':[], 'error':error, 'data_age_minutes':None, 'last_trade_time':None, 'data_fresh':False, 'data_reason':None}
+    result = {'company':c['name'], 'ticker':c.get('ticker',''), 'status':'DATA SAKNAS', 'signal':None, 'candles':[], 'error':error, 'data_age_minutes':None, 'last_trade_time':None, 'data_fresh':False, 'data_reason':None, 'raw_points':0, 'last_bar_time':None}
     if error:
         return result
     try:
         points, _ = await fetch_points(order_book_id=str(c['order_book_id']))
         candles, gaps = build_candles(points)
+        result['raw_points'] = len(points)
+        if candles:
+            result['last_bar_time'] = candles[-1]['time'].isoformat()
         signal, status = classify(candles, now)
         if candles:
             last = candles[-1]

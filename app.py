@@ -13,6 +13,7 @@ from multi_engine import companies
 from news_scanner import scan, scan_detailed
 from order_analysis import parse_order_amount, order_ratio
 from news_analysis import analyze_news
+from news_momentum import evaluate_news_momentum
 from news_history import update_history, load_history
 from test_avanza_forbattrad import calculate_ema, calculate_rsi, calculate_macd, SWEDEN
 from performance import load_journal, record_signal, update_open_trades, evaluate_smart_exit, summary as journal_summary, trades_csv
@@ -118,6 +119,21 @@ elif fresh == 0:
     st.caption('Historiska kursljus finns, men inga av de senaste avsluten är verifierat inom 20 minuter. Analysen visar tillgänglig historik utan nya köpsignaler.')
 if any(not c.get('feeds') for c in watchlist):st.warning('Nyhetsbevakning saknar verifierat flöde för: '+', '.join(c['name'] for c in watchlist if not c.get('feeds')))
 if failures:st.error('Nyhetskällor med fel: '+', '.join(x[0] for x in failures))
+st.subheader('🧭 Nyhet → momentum → signal')
+st.caption('En positiv bolagsnyhet sätter aktien under bevakning. KÖP-KANDIDAT kräver bekräftade observerade kursljus och volym. Ingen order läggs.')
+news_signal_rows = []
+for company in watchlist:
+    result = by_name.get(company['name'], {})
+    assessment = evaluate_news_momentum(company, articles, result.get('candles') or [], now=datetime.now(SWEDEN))
+    news_signal_rows.append({
+        'Aktie': company['name'],
+        'Nyhetsmomentum': assessment['kind'],
+        'Reaktion %': assessment.get('move_pct'),
+        'Datans ålder (min)': assessment.get('age_minutes'),
+        'Bedömning': assessment.get('reason'),
+    })
+st.dataframe(pd.DataFrame(news_signal_rows), hide_index=True, use_container_width=True)
+st.caption('Fördröjda ljus kan ge en sen signal. Kontrollera aktuell kurs och spread i Avanza; simulering använder inte den gamla ljuskursen som exekvering.')
 st.subheader('🎯 Välj aktie')
 if 'selected_stock' not in st.session_state:st.session_state.selected_stock=watchlist[0]['name']
 ordered=sorted(watchlist,key=lambda c: {'KÖP-KANDIDAT':0,'VAKTA':1,'MORGON-VAKTA':2}.get((by_name.get(c['name']) or {}).get('signal',{}).get('kind') if (by_name.get(c['name']) or {}).get('signal') else '',3))
@@ -130,6 +146,12 @@ selected=st.session_state.selected_stock
 c=next(c for c in watchlist if c['name']==selected);r=by_name[selected]
 st.divider();st.subheader(f"📊 {selected} · {c['ticker']}")
 st.write('Datastatus:',r.get('error') or r['status'])
+news_assessment = evaluate_news_momentum(c, articles, r.get('candles') or [], now=datetime.now(SWEDEN))
+if news_assessment.get('news'):
+    st.info('Nyhetsmomentum: ' + news_assessment['kind'] + ' · ' + news_assessment['reason'])
+    if news_assessment.get('move_pct') is not None:
+        st.caption(f"Observerad reaktion efter nyheten: {news_assessment['move_pct']:+.2f} % · Datans ålder: {news_assessment.get('age_minutes', 'okänd')} min")
+
 if r.get('last_trade_time'):
     st.caption(f"Senaste faktiska avslut: {r['last_trade_time']} · Ålder: {r.get('data_age_minutes')} minuter")
 if r.get('data_reason'):

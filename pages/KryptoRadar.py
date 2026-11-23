@@ -5,6 +5,7 @@ import pandas as pd
 import streamlit as st
 from streamlit_autorefresh import st_autorefresh
 from kryptoradar.engine import PAIRS, fetch_candles, analyze, paper_trade, evaluate_positions, performance_summary
+from kryptoradar.backtest import replay
 
 
 st.markdown("""<style>
@@ -39,8 +40,8 @@ stake = st.sidebar.number_input("Belopp per fiktiv affär (USD)", min_value=100,
 fee = st.sidebar.number_input("Courtage per sida (%)", min_value=0.0, value=0.25, step=0.05)
 slip = st.sidebar.number_input("Slippage per sida (%)", min_value=0.0, value=0.10, step=0.05)
 stop = st.sidebar.number_input("Fiktiv stop-loss (%)", min_value=0.1, value=1.0, step=0.1)
-auto = st.sidebar.checkbox("Registrera fiktiva affärer automatiskt", value=False)
-st.sidebar.caption("Journalen lagras i appens lokala filsystem. På molnhosting kan den försvinna vid omstart.")
+auto = st.sidebar.checkbox("Registrera fiktiva affärer automatiskt", value=True)
+st.sidebar.caption("Registrering sker endast medan sidan körs. Journalen lagras lokalt och kan försvinna vid omstart på molnhosting.")
 path = Path(__file__).parent / "paper_journal.json"
 try:
     journal = json.loads(path.read_text()) if path.exists() else []
@@ -65,7 +66,7 @@ for name, pair in PAIRS.items():
     d.metric("Volym mot 20 ljus",f'{s["volume_ratio"]:.2f}×')
     st.caption("Senaste stängda ljus: " + s["timestamp"] + " UTC · Datakälla: Kraken")
     frame = s["frame"].set_index("timestamp")
-    st.line_chart(frame[["close","ema9","ema21"]].tail(120))
+    st.line_chart(frame[["close","ema9","ema21"]].tail(120), color=["#8ddfff","#5ee4b7","#ffbd75"])
     if auto:
         before = len(journal)
         paper_trade(journal,pair,s,fee,slip,stake)
@@ -76,6 +77,25 @@ for name, pair in PAIRS.items():
                 path.write_text(json.dumps(journal, indent=2))
             except OSError as exc:
                 st.error("Journalen kunde inte sparas: " + str(exc))
+st.subheader("🧪 Historisk utvärdering – separerad från livejournalen")
+st.caption("Kör en historisk simulering på Krakens tillgängliga minutljus. Köp/sälj fylls hypotetiskt vid NÄSTA ljus öppning, med avgift och slippage. Resultatet är inte en framåtblickande verifiering.")
+if st.button("Kör historiskt test för BTC, ETH och SOL"):
+    for name, pair in PAIRS.items():
+        try:
+            data = fetch_candles(pair)
+            test = replay(data, stake=stake, fee_pct=fee, slippage_pct=slip, stop_pct=stop)
+            p = test["summary"]
+            st.markdown("**" + name + "**")
+            a,b,c = st.columns(3)
+            a.metric("Avslutade testaffärer",p["trades"])
+            b.metric("Träffsäkerhet",f'{p["win_rate"]:.1f}%')
+            c.metric("Testresultat USD",f'{p["pnl"]:+,.2f}')
+            st.caption(f'Analyserade {len(data)} stängda minutljus. Öppen testposition vid slutet: {"ja" if test["open_position"] else "nej"}.')
+            if test["journal"]:
+                st.dataframe(pd.DataFrame(test["journal"]),hide_index=True,use_container_width=True)
+        except Exception as exc:
+            st.error(f'{name}: Historiskt test kunde inte genomföras: {exc}')
+st.divider()
 st.subheader("📊 Signalutvärdering")
 overall = performance_summary(journal)
 m1,m2,m3,m4 = st.columns(4)

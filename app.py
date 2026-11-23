@@ -111,6 +111,14 @@ a.metric('Bevakade aktier',len(watchlist));b.metric('Aktuell kursdata',f'{ready}
 with st.expander('🔎 Kursdatadiagnostik – alla 10 aktier', expanded=(ready == 0)):
     st.caption('Visar antal hämtade minutposter, senaste avslut och datans ålder. Inga köp tillåts på inaktuell data.')
     st.dataframe([{'Aktie':r['company'], 'Minutposter':r.get('raw_points',0), 'Senaste stapel':r.get('last_bar_time') or 'saknas', 'Senaste avslut':r.get('last_trade_time') or 'saknas', 'Ålder (min)':r.get('data_age_minutes'), 'Aktuell':bool(r.get('data_fresh')), 'Fel/orsak':r.get('error') or r.get('data_reason') or r.get('status')} for r in results], hide_index=True, use_container_width=True)
+    failures_by_reason = {}
+    for r in results:
+        if r.get('error'):
+            failures_by_reason.setdefault(str(r['error']), []).append(r['company'])
+    for reason, affected in failures_by_reason.items():
+        st.error(f"Kurskälla: {reason} · Berörda aktier: {', '.join(affected)}")
+    if ready == 0 and not failures_by_reason:
+        st.warning('Ingen av aktierna har verifierad aktuell kurs. Se senaste avslut och tidsstämplar i tabellen.')
 if any(not c.get('feeds') for c in watchlist):st.warning('Nyhetsbevakning saknar verifierat flöde för: '+', '.join(c['name'] for c in watchlist if not c.get('feeds')))
 if failures:st.error('Nyhetskällor med fel: '+', '.join(x[0] for x in failures))
 with st.expander('🛰️ Diagnostik för nyhetskällor', expanded=bool(failures)):

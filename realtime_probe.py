@@ -31,16 +31,19 @@ def assess_lag(age_minutes):
 async def audit():
     rows = []
     for company in companies():
-        now = datetime.now(SWEDEN)
+        requested_at = datetime.now(SWEDEN)
         row = {"company": company["name"], "ticker": company.get("ticker"),
-               "checked_at": now.isoformat(), "source": "Avanza chart via avanza_mcp"}
+               "requested_at": requested_at.isoformat(), "source": "Avanza chart via avanza_mcp"}
         try:
             points, _ = await fetch_points(str(company["order_book_id"]))
+            received_at = datetime.now(SWEDEN)
+            row['received_at'] = received_at.isoformat()
+            row['request_duration_seconds'] = round((received_at-requested_at).total_seconds(), 2)
             if not points:
                 row.update(status="NO_POINTS", point_count=0)
             else:
-                last = datetime.fromtimestamp(points[-1]["timestamp"] / 1000, tz=SWEDEN)
-                age = round((now - last).total_seconds() / 60, 2)
+                last = datetime.fromtimestamp(max(p['timestamp'] for p in points) / 1000, tz=SWEDEN)
+                age = round((received_at - last).total_seconds() / 60, 2)
                 row.update(status=assess_lag(age), point_count=len(points),
                            last_point=last.isoformat(), age_minutes=age)
         except Exception as exc:

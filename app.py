@@ -74,6 +74,28 @@ with st.expander('🧪 Saab B – experimentell kurskontroll (Yahoo, endast diag
             observed=datetime.fromtimestamp(t,timezone.utc)
             age=(datetime.now(timezone.utc)-observed).total_seconds()
             st.metric('Senaste observerade Saab B-kurs',f'{price:.2f} kr')
+            # Visual-only preview of real observed minute candles; never enter the signal engine.
+            minute_rows=[]
+            q=(chart.get('indicators',{}).get('quote') or [{}])[0]
+            for idx,ts in enumerate(stamps):
+                try:
+                    o,h,l,cl,v=(q.get(k) or [])[idx] for k in ('open','high','low','close','volume')
+                    if all(isinstance(z,(int,float)) and z>0 for z in (o,h,l,cl)):
+                        minute_rows.append({'time':datetime.fromtimestamp(ts,timezone.utc),'open':o,'high':h,'low':l,'close':cl,'volume':v or 0})
+                except (IndexError,TypeError):
+                    continue
+            if minute_rows:
+                minute_df=pd.DataFrame(minute_rows).set_index('time').sort_index()
+                # Exclude the currently forming 5-minute bar; incomplete periods must not be scored.
+                five=minute_df.resample('5min').agg({'open':'first','high':'max','low':'min','close':'last','volume':'sum'})
+                counts=minute_df['close'].resample('5min').count()
+                five=five[counts==5].dropna()
+                st.caption(f'Faktiska minutposter: {len(minute_df)} · Kompletta femminutersstaplar: {len(five)}')
+                if not five.empty:
+                    preview=go.Figure(go.Candlestick(x=five.index,open=five.open,high=five.high,low=five.low,close=five.close,name='Saab B – observationsdata'))
+                    preview.update_layout(template='plotly_dark',height=360,xaxis_rangeslider_visible=False,margin=dict(l=10,r=10,t=20,b=10))
+                    st.plotly_chart(preview,use_container_width=True)
+                    st.caption('Förhandsvisning – inte ansluten till automatisk signalgenerering.')
             st.write(f'Källtidsstämpel (UTC): {observed.isoformat()} · Ålder: {age:.1f} sekunder')
             st.warning('Experimentell källa. Tidsstämpelns ålder bevisar inte exekverbar börskurs eller tillåten användning för handel.')
         except Exception as exc:

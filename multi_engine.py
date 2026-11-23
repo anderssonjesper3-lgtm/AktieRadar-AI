@@ -25,6 +25,9 @@ async def analyze_company(c, now=None):
         result['raw_points'] = len(points)
         if candles:
             result['last_bar_time'] = candles[-1]['time'].isoformat()
+        if not points:
+            result.update(status='INGA MINUTPOSTER FRÅN KURSKÄLLAN', data_reason='Avanza svarade utan minutposter för dagens handel; inga signaler kan verifieras', error=None)
+            return result
         signal, status = classify(candles, now)
         if candles:
             last = candles[-1]

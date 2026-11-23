@@ -144,7 +144,11 @@ class _CompanyNewsHTMLParser(HTMLParser):
                 continue
             # The closest date to the center of the anchor window is the safest match.
             center = max(0, anchor['start'] - start)
-            date_pos, published = min(dates, key=lambda pair: (abs(pair[0] - center), -int(pair[1].hour != 0 or pair[1].minute != 0)))
+            date_pos, published = min(dates, key=lambda pair: abs(pair[0] - center))
+            # If the same publication date also has an explicit time, retain it.
+            precise = [pair for pair in dates if pair[1].date() == published.date() and (pair[1].hour or pair[1].minute)]
+            if precise:
+                date_pos, published = min(precise, key=lambda pair: abs(pair[0] - center))
             seen.add(href)
             results.append({
                 'title': unescape(title), 'link': href, 'date': published,

@@ -57,7 +57,7 @@ def analyze_news(item, company):
 def analyze_analyst_revision(text):
     """Conservative detection of analyst changes, not a price forecast."""
     t = text.casefold()
-    target = bool(re.search(r"\b(riktkurs|price target|target price|kursmål)\b", t))
+    target = bool(re.search(r"\b(riktkurs(?:en|er)?|price target|target price|kursmål(?:et)?)\b", t))
     raised = bool(re.search(r"\b(höjer|höjt|höjd|höjdes|raised|raises|raise|increased|increases|uppjusterar|uppjusterad)\b", t))
     lowered = bool(re.search(r"\b(sänker|sänkt|sänktes|lowered|lowers|lower|cut|cuts|reduced|nedjusterar|nedjusterad)\b", t))
     upgrade = bool(re.search(r"\b(höjer|höjt|uppgraderar|uppgraderad|upgrades|upgraded)\s+(rekommendationen|rekommendation|rating|recommendation)\b", t))

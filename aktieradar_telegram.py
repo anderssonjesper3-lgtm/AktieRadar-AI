@@ -348,6 +348,7 @@ def process_multi_live(dry_run=False):
     from multi_engine import analyze_all, companies
     from news_scanner import scan
     from news_analysis import analyze_news
+    from news_momentum import evaluate_news_momentum
     from performance import record_signal, update_open_trades, load_journal
     from journal_store import read_shared, write_shared
     from pathlib import Path
@@ -385,6 +386,23 @@ def process_multi_live(dry_run=False):
             continue
         prices[ticker] = float(last['close']); candles_by_ticker[ticker] = candles
         signal = result.get('signal')
+        company = by_ticker[ticker]
+        news_check = evaluate_news_momentum(company, articles, candles, now=now)
+        if news_check['kind'] == 'KÖP-KANDIDAT':
+            signal = {'kind': 'KÖP-KANDIDAT', 'time': last['time'],
+                      'close': last['close'], 'score': None,
+                      'reasons': [news_check['reason'],
+                                  'Nyhetsreaktion ' + str(news_check['move_pct']) + ' %',
+                                  'Senaste avslut ' + str(news_check['age_minutes']) + ' min gammalt'],
+                      'news_url': news_check['news']['url'],
+                      'published': news_check['published']}
+        elif signal and signal['kind'] == 'KÖP-KANDIDAT':
+            signal = dict(signal, kind='VAKTA', reasons=list(signal['reasons']) +
+                          ['Teknisk signal utan bekräftad färsk nyhet – köp blockerat'])
+        elif news_check['kind'] == 'NYHET-VAKTA' and not signal:
+            signal = {'kind': 'VAKTA', 'time': last['time'], 'close': last['close'],
+                      'score': None, 'reasons': [news_check['reason']],
+                      'news_url': news_check['news']['url']}
         if signal:
             company = by_ticker[ticker]
             signal = dict(signal, company=company['name'], ticker=ticker)
@@ -399,7 +417,9 @@ def process_multi_live(dry_run=False):
                 signal['reasons'] = list(signal.get('reasons', [])) + ['Positiv nyhet – teknisk bekräftelse krävs']
             print('SIGNAL:', ticker, signal['kind'], signal['score'], signal['news_status'])
             if not dry_run:
-                record_signal(company['name'], ticker, signal, path=journal_path)
+                # Delayed candle close is not a verified executable price.
+                journal_signal = dict(signal, kind='VAKTA') if signal['kind'] == 'KÖP-KANDIDAT' else signal
+                record_signal(company['name'], ticker, journal_signal, path=journal_path)
                 process_live(signal)
     if not dry_run:
         before = shared

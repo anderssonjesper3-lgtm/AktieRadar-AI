@@ -70,6 +70,8 @@ div[data-testid="stBaseButton-secondary"],div[data-testid="stBaseButton-primary"
 .stApp div[data-testid="stAlert"] a { color: #125a83 !important; }
 </style>''',unsafe_allow_html=True)
 st.title('📡 AktieRadar AI 6.0')
+if st.button('₿ Öppna KryptoRadar – Bitcoin, Ethereum och Solana', key='open_kryptoradar'):
+    st.switch_page('pages/KryptoRadar.py')
 st.caption('10 AKTIER · AVANZA MED UPP TILL 20 MIN FÖRDRÖJNING · MOMENTUM · NYHETER · SIGNALJOURNAL')
 st_autorefresh(interval=300_000, key='aktieradar_5min_refresh')
 st.warning('Analysverktyg – inga handelsråd eller automatiska köp. Kurser kan vara fördröjda.')

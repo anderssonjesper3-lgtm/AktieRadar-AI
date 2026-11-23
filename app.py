@@ -7,7 +7,6 @@ from plotly.subplots import make_subplots
 import streamlit as st
 from multi_engine import companies, analyze_all
 from news_scanner import scan
-from order_analysis import parse_order_amount, order_ratio
 from test_avanza_forbattrad import calculate_ema, calculate_rsi, calculate_macd, SWEDEN
 
 st.set_page_config(page_title='AktieRadar AI 5.0',page_icon='📡',layout='wide')
@@ -38,7 +37,9 @@ buys=sum(bool(r['signal']) and r['signal']['kind']=='KÖP-KANDIDAT' for r in res
 watch=sum(bool(r['signal']) and 'VAKTA' in r['signal']['kind'] for r in results)
 a,b,c,d=st.columns(4)
 a.metric('Bevakade aktier',len(watchlist));b.metric('Kursdata tillgänglig',f'{ready}/{len(watchlist)}');c.metric('Köpkandidater',buys);d.metric('Vakta',watch)
-if not any(c.get('feeds') for c in watchlist):st.info('Nyhetsflöden är inte anslutna. Inga nyheter har verifierats.')
+if not any(c.get('feeds') for c in watchlist):st.warning('Nyhetsanalysen är ännu inte ansluten: samtliga 10 aktier saknar konfigurerade RSS-flöden.')
+if ready == 0:
+    st.error('0/10: Ingen aktie har användbara kursstaplar. Se felorsaker i kontrollcentralen. Det är ett anslutningsproblem, inte en negativ marknadssignal.')
 if failures:st.error('Nyhetskällor med fel: '+', '.join(x[0] for x in failures))
 st.subheader('📊 Avanza – fördröjd marknadsanalys')
 st.caption('5-minutersljus · momentum · relativ volym · nyhetsbevakning · högst 20 minuters ålder under handelstid.')
@@ -73,14 +74,12 @@ if r['candles']:
     st.caption(f"MACD histogram (senaste): {hist[-1]:.4f}" if hist and hist[-1] is not None else 'MACD: otillräcklig historik')
     st.caption(f"Senaste färdiga ljus: {df.time.iloc[-1]} · Ålder: {r.get('last_candle_age_minutes','okänt')} min · Antal: {len(df)} · Luckor: {r.get('gaps','okänt')}")
 else:st.warning('Ingen verifierad komplett femminutersstapel att visa.')
-st.subheader('📰 Nyheter och order')
+st.subheader('📰 Nyheter och nyhetssignaler')
 items=[a for a in articles if a['company']==selected]
 if not items:st.caption('Inga verifierat inlästa nyheter i anslutna flöden.')
 for a in items:
     st.markdown(f"**{a['category']}** · [{a['title']}]({a['url']})")
-    amount=parse_order_amount(a['title']);ratio=order_ratio(amount,c.get('annual_revenue_sek'))
-    if amount is not None:st.write(f'Belopp upptäckt i rubrik: {amount:,.0f} kr (ej bekräftat ordervärde)')
-    st.caption(f'Preliminär beloppskvot: {ratio:.2f} % – kontrollera originaltexten' if ratio is not None else 'Relativ orderstorlek kan inte verifieras')
+    st.caption('Nyheten är en bevakningssignal, inte ett verifierat köp- eller säljbeslut.')
 with st.expander('🛠️ Kontrollcentral – alla aktier'):
     st.dataframe(pd.DataFrame([{'Bolag':x['company'],'Avanza-ID':next((c.get('order_book_id') for c in watchlist if c['name']==x['company']),None),'5-minutersljus':len(x['candles']),'Luckor':x.get('gaps'),'Signal':x['signal']['kind'] if x['signal'] else '–','Datastatus':x['error'] or x['status']} for x in results]),hide_index=True,use_container_width=True)
     st.caption('ID:n verifieras separat med verify_sources.py. Streamlit uppdateras vid omladdning; schemalagda jobb körs separat.')

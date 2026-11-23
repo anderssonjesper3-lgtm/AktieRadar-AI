@@ -52,6 +52,32 @@ with st.container(border=True):
         st.write('Avanza SSE: experimentell brygga skapad, kräver autentiserad session och separat drift.')
         st.write('Alternativ minutdatamotor: implementerad och enhetstestad, men inte ansluten till API.')
         st.write('Signaler från ny strömningsmotor: avstängda tills kurskälla, tidsstämplar och licens är verifierade.')
+# Optional public-source diagnostic; not an input to trading signals.
+with st.expander('🧪 Saab B – experimentell kurskontroll (Yahoo, endast diagnostik)'):
+    st.caption('Kursen hämtas på begäran. Ingen realtids- eller handelslicens verifierad. Inte kopplad till VAKTA/KÖP.')
+    if st.button('🔎 Kontrollera senaste Saab B-kurs', key='yahoo_probe_button'):
+        try:
+            import json
+            import urllib.request
+            from datetime import datetime, timezone
+            req=urllib.request.Request('https://query1.finance.yahoo.com/v8/finance/chart/SAAB-B.ST?interval=1m&range=1d',headers={'User-Agent':'Mozilla/5.0','Accept':'application/json'})
+            with urllib.request.urlopen(req,timeout=12) as response:
+                payload=json.load(response)
+            chart=(payload.get('chart',{}).get('result') or [])[0]
+            meta=chart.get('meta',{})
+            stamps=chart.get('timestamp') or []
+            closes=(chart.get('indicators',{}).get('quote') or [{}])[0].get('close') or []
+            valid=[(t,p) for t,p in zip(stamps,closes) if isinstance(p,(int,float)) and p>0]
+            if meta.get('symbol')!='SAAB-B.ST' or meta.get('currency')!='SEK' or not valid:
+                raise ValueError('Instrument, valuta eller kursdata kunde inte verifieras')
+            t,price=valid[-1]
+            observed=datetime.fromtimestamp(t,timezone.utc)
+            age=(datetime.now(timezone.utc)-observed).total_seconds()
+            st.metric('Senaste observerade Saab B-kurs',f'{price:.2f} kr')
+            st.write(f'Källtidsstämpel (UTC): {observed.isoformat()} · Ålder: {age:.1f} sekunder')
+            st.warning('Experimentell källa. Tidsstämpelns ålder bevisar inte exekverbar börskurs eller tillåten användning för handel.')
+        except Exception as exc:
+            st.error(f'Kurskontroll misslyckades: {type(exc).__name__}: {exc}')
 st.subheader('🎯 Välj aktie')
 if 'selected_stock' not in st.session_state:st.session_state.selected_stock=watchlist[0]['name']
 ordered=sorted(watchlist,key=lambda c: {'KÖP-KANDIDAT':0,'VAKTA':1,'MORGON-VAKTA':2}.get((by_name.get(c['name']) or {}).get('signal',{}).get('kind') if (by_name.get(c['name']) or {}).get('signal') else '',3))

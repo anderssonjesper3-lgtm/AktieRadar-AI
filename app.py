@@ -103,11 +103,11 @@ with st.spinner('Kontrollerar aktier och nyheter...'):
         try: news_archive=update_history([])
         except Exception: news_archive=[]
 by_name={r['company']:r for r in results}
-ready=sum(bool(r.get('candles')) and not r.get('error') for r in results)
+ready=sum(bool(r.get('data_fresh')) and not r.get('error') for r in results)
 buys=sum(bool(r['signal']) and r['signal']['kind']=='KÖP-KANDIDAT' for r in results)
 watch=sum(bool(r['signal']) and 'VAKTA' in r['signal']['kind'] for r in results)
 a,b,c,d=st.columns(4)
-a.metric('Bevakade aktier',len(watchlist));b.metric('Kursdata tillgänglig',f'{ready}/{len(watchlist)}');c.metric('Köpkandidater',buys);d.metric('Vakta',watch)
+a.metric('Bevakade aktier',len(watchlist));b.metric('Aktuell kursdata',f'{ready}/{len(watchlist)}');c.metric('Köpkandidater',buys);d.metric('Vakta',watch)
 if any(not c.get('feeds') for c in watchlist):st.warning('Nyhetsbevakning saknar verifierat flöde för: '+', '.join(c['name'] for c in watchlist if not c.get('feeds')))
 if failures:st.error('Nyhetskällor med fel: '+', '.join(x[0] for x in failures))
 with st.expander('🛰️ Diagnostik för nyhetskällor', expanded=bool(failures)):
@@ -154,6 +154,10 @@ selected=st.session_state.selected_stock
 c=next(c for c in watchlist if c['name']==selected);r=by_name[selected]
 st.divider();st.subheader(f"📊 {selected} · {c['ticker']}")
 st.write('Datastatus:',r.get('error') or r['status'])
+if r.get('last_trade_time'):
+    st.caption(f"Senaste faktiska avslut: {r['last_trade_time']} · Ålder: {r.get('data_age_minutes')} minuter")
+if r.get('data_reason'):
+    st.warning('Datakontroll: ' + r['data_reason'] + '. Ingen ny köpsignal ges från denna kurs.')
 if r.get('signal'):
     s=r['signal'];st.info(f"{s['kind']} · {s['score'] if s['score'] is not None else 'Poäng saknas'} · {', '.join(map(str,s['reasons']))}")
 if r['candles']:

@@ -106,13 +106,16 @@ with st.spinner('Kontrollerar aktier och nyheter...'):
         try: news_archive=update_history([])
         except Exception: news_archive=[]
 by_name={r['company']:r for r in results}
-ready=sum(bool(r.get('data_fresh')) and not r.get('error') for r in results)
+ready=sum(bool(r.get('candles')) and not r.get('error') for r in results)
+fresh=sum(bool(r.get('data_fresh')) and not r.get('error') for r in results)
 buys=sum(bool(r['signal']) and r['signal']['kind']=='KÖP-KANDIDAT' for r in results)
 watch=sum(bool(r['signal']) and 'VAKTA' in r['signal']['kind'] for r in results)
 a,b,c,d=st.columns(4)
-a.metric('Bevakade aktier',len(watchlist));b.metric('Aktuell kursdata',f'{ready}/{len(watchlist)}');c.metric('Köpkandidater',buys);d.metric('Vakta',watch)
+a.metric('Bevakade aktier',len(watchlist));b.metric('Kursdata finns',f'{ready}/{len(watchlist)}',help=f'{fresh}/{len(watchlist)} aktier har avslut inom senaste 20 minuterna. Äldre observerade ljus visas också.');c.metric('Köpkandidater',buys);d.metric('Vakta',watch)
 if ready == 0:
-    st.info('Inga aktuella kurser ännu. Senaste kända ljus visas per aktie när de finns. Fördröjning upp till 20 minuter accepteras.')
+    st.info('Inga observerade kursljus har hämtats ännu. Kontrollera att datakällan svarar.')
+elif fresh == 0:
+    st.caption('Historiska kursljus finns, men inga av de senaste avsluten är verifierat inom 20 minuter. Analysen visar tillgänglig historik utan nya köpsignaler.')
 if any(not c.get('feeds') for c in watchlist):st.warning('Nyhetsbevakning saknar verifierat flöde för: '+', '.join(c['name'] for c in watchlist if not c.get('feeds')))
 if failures:st.error('Nyhetskällor med fel: '+', '.join(x[0] for x in failures))
 st.subheader('🎯 Välj aktie')

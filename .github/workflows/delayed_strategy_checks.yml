@@ -1,0 +1,34 @@
+name: Delayed strategy static checks
+on:
+  push:
+    paths:
+      - 'app.py'
+      - 'multi_engine.py'
+      - 'test_avanza_forbattrad.py'
+      - '.github/workflows/delayed_strategy_checks.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile changed modules without installing Avanza
+        run: python -m py_compile app.py multi_engine.py test_avanza_forbattrad.py aktieradar_telegram.py news_scanner.py
+      - name: Check intended source and age gate
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          engine=Path('multi_engine.py').read_text()
+          source=Path('test_avanza_forbattrad.py').read_text()
+          app=Path('app.py').read_text()
+          assert 'MAX_AGE_MINUTES = 20' in source
+          assert 'fetch_points' in engine and 'build_candles' in engine
+          assert 'NYHET-VAKTA' in engine and 'VAKTA-RISKGRANSKNING' in engine
+          assert 'query1.finance.yahoo.com' not in app
+          print('Delayed Avanza strategy static checks passed')
+          PY

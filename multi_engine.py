@@ -36,8 +36,8 @@ async def analyze_company(c, now=None):
             fresh = last_trade.date() == now.date() and 0 <= age <= MAX_AGE_MINUTES
             if not fresh:
                 signal = None
-                status = 'DATA FÖR GAMMAL – senaste faktiska avslutet är inte aktuellt'
-            reason = ('Senaste avslut är äldre än 15 minuter; kan bero på låg handel eller fördröjd källa' if age > MAX_AGE_MINUTES else 'Ingen verifierad aktuell handel idag' if last_trade.date() != now.date() else 'Tidsstämpel ligger i framtiden' if age < 0 else None)
+                status = ('KURSDATA FINNS – MÖJLIGT FÖRDRÖJD CIRKA 15 MIN' if 15 < age <= 25 else 'DATA FÖR GAMMAL – senaste faktiska avslutet är inte aktuellt')
+            reason = ('Kurskällan kan vara cirka 15 minuter fördröjd; inte verifierad realtidsdata' if 15 < age <= 25 else 'Senaste avslut är äldre än 15 minuter; kan bero på låg handel eller fördröjd källa' if age > MAX_AGE_MINUTES else 'Ingen verifierad aktuell handel idag' if last_trade.date() != now.date() else 'Tidsstämpel ligger i framtiden' if age < 0 else None)
             result.update(data_age_minutes=round(age, 1), last_trade_time=last_trade.isoformat(), data_fresh=fresh, data_reason=reason)
         result.update(status=status, signal=signal, candles=candles, error=None, gaps=len(gaps))
     except Exception as exc:

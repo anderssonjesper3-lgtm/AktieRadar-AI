@@ -59,6 +59,7 @@ def paper_trade(journal, symbol, signal, fee_pct=0.25, slippage_pct=0.10, stake=
     event_id = symbol + ":" + signal["timestamp"] + ":" + signal["status"]
     if any(x["event_id"] == event_id for x in journal):
         return journal
+
     open_trade = next((x for x in reversed(journal) if x["symbol"] == symbol and x["action"] == "BUY" and not x.get("closed")), None)
     if signal["status"] == "KÖP-KANDIDAT" and open_trade is None:
         entry = signal["price"] * (1 + slippage_pct/100)
@@ -74,3 +75,40 @@ def paper_trade(journal, symbol, signal, fee_pct=0.25, slippage_pct=0.10, stake=
                         "price":exit_price,"qty":open_trade["qty"],"stake":open_trade["stake"],
                         "closed":True,"pnl":round(pnl,2)})
     return journal
+
+def evaluate_positions(journal, symbol, signal, fee_pct=0.25, slippage_pct=0.10, stop_pct=1.0):
+    """Apply stop or confirmed sell to a paper position; never place orders."""
+    position = next((x for x in reversed(journal)
+                     if x["symbol"] == symbol and x["action"] == "BUY" and not x.get("closed")), None)
+    if position is None:
+        return journal, "INGEN POSITION"
+    move_pct = 100 * (signal["price"] / position["price"] - 1)
+    exit_reason = "STOP-LOSS" if move_pct <= -stop_pct else (
+        "TEKNISK SÄLJSIGNAL" if signal["status"] == "SÄLJ/VARNING" else None)
+    if exit_reason is None:
+        return journal, "BEHÅLL" if move_pct >= 0 else "VAKTA POSITION"
+    event_id = symbol + ":" + signal["timestamp"] + ":EXIT"
+    if any(x["event_id"] == event_id for x in journal):
+        return journal, "REDAN REGISTRERAD"
+    exit_price = signal["price"] * (1 - slippage_pct/100)
+    proceeds = position["qty"] * exit_price * (1-fee_pct/100)
+    pnl = round(proceeds - position["stake"], 2)
+    position["closed"] = True
+    journal.append({"event_id":event_id,"symbol":symbol,"action":"SELL",
+                    "time":signal["timestamp"],"price":exit_price,
+                    "qty":position["qty"],"stake":position["stake"],
+                    "closed":True,"pnl":pnl,"reason":exit_reason,
+                    "entry_time":position["time"]})
+    return journal, "SÄLJ-KANDIDAT"
+
+
+def performance_summary(journal, symbol=None):
+    """Realized outcomes only; open positions excluded from profit and win rate."""
+    trades = [x for x in journal if x.get("action") == "SELL" and x.get("pnl") is not None
+              and (symbol is None or x.get("symbol") == symbol)]
+    wins = sum(float(x["pnl"]) > 0 for x in trades)
+    pnl = sum(float(x["pnl"]) for x in trades)
+    invested = sum(float(x["stake"]) for x in trades)
+    return {"trades":len(trades),"wins":wins,"losses":len(trades)-wins,
+            "win_rate":100*wins/len(trades) if trades else 0.0,
+            "pnl":pnl,"return_pct":100*pnl/invested if invested else 0.0}

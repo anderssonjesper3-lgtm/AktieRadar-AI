@@ -6,7 +6,10 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import streamlit as st
 from streamlit_autorefresh import st_autorefresh
-from multi_engine import companies, analyze_all
+import importlib
+import multi_engine
+importlib.reload(multi_engine)
+from multi_engine import companies
 from news_scanner import scan, scan_detailed
 from order_analysis import parse_order_amount, order_ratio
 from news_analysis import analyze_news
@@ -72,8 +75,8 @@ st.warning('Analysverktyg – inga handelsråd eller automatiska köp. Kurser ka
 if not market_session(datetime.now(SWEDEN)):
     st.info('⏰ Börsen är stängd just nu. Tekniska signaler kan saknas eller visas som gamla tills nya verifierade femminutersstaplar finns efter öppning. Historik ska inte raderas.')
 watchlist=companies()
-@st.cache_data(ttl=120,show_spinner=False)
-def market_snapshot_v2():return asyncio.run(analyze_all())
+@st.cache_data(ttl=90,show_spinner=False)
+def market_snapshot_v3():return asyncio.run(multi_engine.analyze_all())
 @st.cache_data(ttl=60,show_spinner=False)
 def news_snapshot():return scan_detailed({'companies':companies()}, max_age_hours=24*30)
 st.caption('🟢 Nyhetsbevakningen prioriterar nu respektive bolags officiella IR-/pressida. HTML-sidor och RSS läses separat från historisk import; historisk import skickar inga Telegram-larm.')
@@ -90,9 +93,9 @@ if st.button('🗂️ Importera tillgängliga nyheter från senaste 30 dagarna (
         except Exception as exc:
             st.error(f'Historisk import misslyckades: {exc}')
 if st.button('🔄 Uppdatera alla datakällor'):
-    market_snapshot_v2.clear();news_snapshot.clear();st.rerun()
+    market_snapshot_v3.clear();news_snapshot.clear();st.rerun()
 with st.spinner('Kontrollerar aktier och nyheter...'):
-    try:results=market_snapshot_v2()
+    try:results=market_snapshot_v3()
     except Exception as exc:
         st.error(f'Kursanalysen kunde inte starta: {exc}');st.stop()
     try:
@@ -109,7 +112,7 @@ watch=sum(bool(r['signal']) and 'VAKTA' in r['signal']['kind'] for r in results)
 a,b,c,d=st.columns(4)
 a.metric('Bevakade aktier',len(watchlist));b.metric('Aktuell kursdata',f'{ready}/{len(watchlist)}');c.metric('Köpkandidater',buys);d.metric('Vakta',watch)
 with st.expander('🔎 Kursdatadiagnostik – alla 10 aktier', expanded=(ready == 0)):
-    st.caption('Ny kursdatadiagnostik v2. Visar hämtade minutposter, senaste avslut och datans ålder. Inga köp tillåts på inaktuell data.')
+    st.caption('Kursdatadiagnostik v3. Visar hämtade minutposter, senaste avslut och datans ålder. Inga köp tillåts på inaktuell data.')
     st.dataframe([{'Aktie':r['company'], 'Minutposter':r.get('raw_points',0), 'Senaste stapel':r.get('last_bar_time') or 'saknas', 'Senaste avslut':r.get('last_trade_time') or 'saknas', 'Ålder (min)':r.get('data_age_minutes'), 'Aktuell':bool(r.get('data_fresh')), 'Fel/orsak':r.get('error') or r.get('data_reason') or r.get('status')} for r in results], hide_index=True, use_container_width=True)
     failures_by_reason = {}
     for r in results:

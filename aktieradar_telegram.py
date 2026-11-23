@@ -90,8 +90,10 @@ def classify(candles, now):
         return {'kind': 'MORGON-VAKTA', 'time': last['time'], 'close': last['close'],
                 'score': None, 'reasons': ['Prisuppgång', 'Grön 5-minutersstapel',
                                           'Volymökning minst 1,5 gånger']}, 'Morgonbevakning'
-    if continuous < LOOKBACK:
-        return None, f'För få sammanhängande staplar ({continuous}/{LOOKBACK})'
+    if continuous < 6:
+        return None, f'För få sammanhängande senaste staplar ({continuous}/6)'
+    # Technical indicators can use older completed candles across small gaps.
+    # Never invent missing prices or volume; buy needs verified recent volume.
     closes = [c['close'] for c in candles]
     ema9, ema21 = calculate_ema(closes, 9), calculate_ema(closes, 21)
     rsi = calculate_rsi(closes, 14)
@@ -106,6 +108,9 @@ def classify(candles, now):
     if status.startswith('KOP') and not current.get('volume_verified', False):
         kind = 'VAKTA'
         current = dict(current, reasons=list(current['reasons']) + ['Volym ej verifierad – köp blockerat'])
+    elif status.startswith('KOP') and continuous < LOOKBACK:
+        kind = 'VAKTA'
+        current = dict(current, reasons=list(current['reasons']) + ['Kort sammanhängande historik – köp blockerat'])
     elif status.startswith('KOP'):
         kind = 'KÖP-KANDIDAT'
     elif status.startswith('VAKTA'):

@@ -40,6 +40,18 @@ a,b,c,d=st.columns(4)
 a.metric('Bevakade aktier',len(watchlist));b.metric('Kursdata tillgänglig',f'{ready}/{len(watchlist)}');c.metric('Köpkandidater',buys);d.metric('Vakta',watch)
 if not any(c.get('feeds') for c in watchlist):st.info('Nyhetsflöden är inte anslutna. Inga nyheter har verifierats.')
 if failures:st.error('Nyhetskällor med fel: '+', '.join(x[0] for x in failures))
+st.subheader('📡 Realtidsmotor – integrationsstatus')
+with st.container(border=True):
+    st.warning('Experimentell integration. Ingen verifierad strömmande realtidskälla är ansluten ännu.')
+    m1,m2,m3=st.columns(3)
+    m1.metric('Dataleverantör','Avanza historik')
+    m2.metric('Streaming','Ej ansluten')
+    m3.metric('Realtid verifierad','Nej')
+    st.caption('Den befintliga kursanalysen körs separat. Gröna enhetstester är inte ett bevis på livekurser.')
+    with st.expander('🔍 Diagnostik och nästa steg'):
+        st.write('Avanza SSE: experimentell brygga skapad, kräver autentiserad session och separat drift.')
+        st.write('Alternativ minutdatamotor: implementerad och enhetstestad, men inte ansluten till API.')
+        st.write('Signaler från ny strömningsmotor: avstängda tills kurskälla, tidsstämplar och licens är verifierade.')
 st.subheader('🎯 Välj aktie')
 if 'selected_stock' not in st.session_state:st.session_state.selected_stock=watchlist[0]['name']
 ordered=sorted(watchlist,key=lambda c: {'KÖP-KANDIDAT':0,'VAKTA':1,'MORGON-VAKTA':2}.get((by_name.get(c['name']) or {}).get('signal',{}).get('kind') if (by_name.get(c['name']) or {}).get('signal') else '',3))

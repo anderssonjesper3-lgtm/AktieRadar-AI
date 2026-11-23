@@ -8,8 +8,12 @@ from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
-from fastmcp import Client
-from avanza_mcp import mcp
+try:
+    from fastmcp import Client
+    from avanza_mcp import mcp
+except ImportError:
+    Client = None
+    mcp = None
 
 SWEDEN = ZoneInfo("Europe/Stockholm")
 ORDER_BOOK_ID = "5401"
@@ -173,7 +177,6 @@ def calculate_signal_scores(
             ema9[i], ema21[i],
             rsi14[i], rsi14[i - 1],
             macd_hist[i], macd_hist[i - 1],
-            relative_volume[i]
         )
 
         if any(value is None for value in required):
@@ -207,7 +210,7 @@ def calculate_signal_scores(
             reasons.append("Stark MACD")
 
         # Volym over 1,5 ganger genomsnittet: 20
-        if relative_volume[i] > 1.5:
+        if relative_volume[i] is not None and relative_volume[i] > 1.5:
             score += 20
             reasons.append("Stark volym")
 
@@ -221,7 +224,8 @@ def calculate_signal_scores(
         scores.append({
             "time": candle["time"],
             "score": score,
-            "reasons": reasons
+            "reasons": reasons,
+            "volume_verified": relative_volume[i] is not None
         })
 
     return scores
@@ -309,6 +313,8 @@ def build_candles(points):
 
 
 async def fetch_points(order_book_id=None):
+    if Client is None or mcp is None:
+        raise RuntimeError('Avanza MCP saknas i servermiljön; kursflödet är inte anslutet')
     points = []
     resolutions = set()
     async with Client(mcp) as client:

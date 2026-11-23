@@ -20,7 +20,7 @@ def normalize_quote(event, received_at=None):
     if not orderbook or isinstance(price, bool) or not isinstance(price, (int, float)) or price <= 0:
         raise ValueError("Missing orderbookId or valid positive lastPrice")
     received_at = received_at or datetime.now(timezone.utc)
-    source_time = event.get("timestamp") or event.get("time") or event.get("lastUpdated")
+    source_time = event.get("lastPriceUpdated") or event.get("updated") or event.get("timestamp") or event.get("time") or event.get("lastUpdated")
     return {
         "provider": "avanza_unofficial_sse",
         "orderbook_id": str(orderbook),

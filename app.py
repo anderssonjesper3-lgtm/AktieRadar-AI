@@ -69,7 +69,7 @@ div[data-testid="stBaseButton-secondary"],div[data-testid="stBaseButton-primary"
 .stApp div[data-testid="stAlert"] a { color: #125a83 !important; }
 </style>''',unsafe_allow_html=True)
 st.title('📡 AktieRadar AI 6.0')
-st.caption('MARKNADSÖVERSIKT · 10 AKTIER · OFFICIELLA BOLAGSKÄLLOR · NYHETER · SIGNALJOURNAL · DATAKONTROLL')
+st.caption('10 AKTIER · AVANZA MED UPP TILL 20 MIN FÖRDRÖJNING · MOMENTUM · NYHETER · SIGNALJOURNAL')
 st_autorefresh(interval=300_000, key='aktieradar_5min_refresh')
 st.warning('Analysverktyg – inga handelsråd eller automatiska köp. Kurser kan vara fördröjda.')
 if not market_session(datetime.now(SWEDEN)):
@@ -79,7 +79,7 @@ watchlist=companies()
 def market_snapshot_v3():return asyncio.run(multi_engine.analyze_all())
 @st.cache_data(ttl=60,show_spinner=False)
 def news_snapshot():return scan_detailed({'companies':companies()}, max_age_hours=24*30)
-st.caption('🟢 Nyhetsbevakningen prioriterar nu respektive bolags officiella IR-/pressida. HTML-sidor och RSS läses separat från historisk import; historisk import skickar inga Telegram-larm.')
+st.caption('Nyheter hämtas från bolagens officiella press- och investerarsidor. Historisk import skickar inga larm.')
 if st.button('🗂️ Importera tillgängliga nyheter från senaste 30 dagarna (utan larm)', key='historical_import'):
     with st.spinner('Läser tillgängliga RSS-poster och sparar historik...'):
         try:
@@ -111,64 +111,10 @@ buys=sum(bool(r['signal']) and r['signal']['kind']=='KÖP-KANDIDAT' for r in res
 watch=sum(bool(r['signal']) and 'VAKTA' in r['signal']['kind'] for r in results)
 a,b,c,d=st.columns(4)
 a.metric('Bevakade aktier',len(watchlist));b.metric('Aktuell kursdata',f'{ready}/{len(watchlist)}');c.metric('Köpkandidater',buys);d.metric('Vakta',watch)
-with st.expander('🔎 Kursdatadiagnostik – alla 10 aktier', expanded=(ready == 0)):
-    st.caption('Kursdatadiagnostik v3. Visar hämtade minutposter, senaste avslut och datans ålder. Inga köp tillåts på inaktuell data.')
-    st.dataframe([{'Aktie':r['company'], 'Minutposter':r.get('raw_points',0), 'Senaste stapel':r.get('last_bar_time') or 'saknas', 'Senaste avslut':r.get('last_trade_time') or 'saknas', 'Ålder (min)':r.get('data_age_minutes'), 'Aktuell':bool(r.get('data_fresh')), 'Fel/orsak':r.get('error') or r.get('data_reason') or r.get('status')} for r in results], hide_index=True, use_container_width=True)
-    failures_by_reason = {}
-    for r in results:
-        if r.get('error'):
-            failures_by_reason.setdefault(str(r['error']), []).append(r['company'])
-    st.markdown('**Senaste kurstid per aktie (svensk tid)**')
-    for r in results:
-        stamp = r.get('last_trade_time')
-        if stamp:
-            try:
-                stamp = datetime.fromisoformat(stamp).astimezone(SWEDEN).strftime('%H:%M:%S')
-            except (ValueError, TypeError):
-                pass
-        else:
-            stamp = 'saknas'
-        age = r.get('data_age_minutes')
-        age_text = f'{age} min' if age is not None else 'okänd ålder'
-        st.caption(f"{r['company']}: {stamp} · {age_text} · {r.get('raw_points', 0)} minutposter")
-    for reason, affected in failures_by_reason.items():
-        st.error(f"Kurskälla: {reason} · Berörda aktier: {', '.join(affected)}")
-    if ready == 0 and not failures_by_reason:
-        st.warning('Ingen av aktierna har verifierad aktuell kurs. Se senaste avslut och tidsstämplar i tabellen.')
+if ready == 0:
+    st.info('Inga aktuella kurser ännu. Senaste kända ljus visas per aktie när de finns. Fördröjning upp till 20 minuter accepteras.')
 if any(not c.get('feeds') for c in watchlist):st.warning('Nyhetsbevakning saknar verifierat flöde för: '+', '.join(c['name'] for c in watchlist if not c.get('feeds')))
 if failures:st.error('Nyhetskällor med fel: '+', '.join(x[0] for x in failures))
-with st.expander('🛰️ Diagnostik för nyhetskällor', expanded=bool(failures)):
-    if news_diagnostics:
-        diagnostic_frame = pd.DataFrame(news_diagnostics).rename(columns={
-            'feed':'Nyhetsflöde','companies':'Bolag','status':'Status',
-            'raw_items':'Råa poster','matched':'Matchade nyheter','error':'Fel',
-            'datum_saknas':'Datum saknas','utanför_datumintervall':'Utanför datumintervall',
-            'ogiltig_länk':'Ogiltig länk','bolag_matchar_inte':'Bolagsmatchning saknas',
-            'ingen_relevant_nyhetskategori':'Ej relevant kategori'
-        })
-        sample_rows = []
-        for entry in news_diagnostics:
-            for sample in entry.get('sample_headlines', []):
-                sample_rows.append({
-                    'Källa': entry.get('feed',''),
-                    'Rubrik': sample.get('title',''),
-                    'Publicerad': sample.get('published',''),
-                    'Länk': sample.get('url','')
-                })
-        if 'sample_headlines' in diagnostic_frame.columns:
-            diagnostic_frame = diagnostic_frame.drop(columns=['sample_headlines'])
-        st.dataframe(diagnostic_frame,hide_index=True,use_container_width=True)
-        st.caption('Avvisningsräknare summeras per bolag och källa; samma RSS-post kan därför räknas i flera bolagsmatchningar.')
-        if sample_rows:
-            with st.expander('🔎 Visa exempel på råa rubriker från varje källa'):
-                st.dataframe(pd.DataFrame(sample_rows),hide_index=True,use_container_width=True)
-        st.caption('Råa rubriker visar vad källan faktiskt levererade. Vi kan nu kontrollera titel, publiceringstid och länk innan vi ändrar matchningsreglerna.')
-    else:
-        st.info('Ingen källdiagnostik tillgänglig ännu. Tryck på Uppdatera alla datakällor.')
-    if articles:
-        st.caption(f'{len(articles)} nyheter matchade i aktuell 30-dagars skanning.')
-    else:
-        st.caption('Inga nyheter har matchat ännu. Kontrollera råa poster och källfel ovan.')
 st.subheader('🎯 Välj aktie')
 if 'selected_stock' not in st.session_state:st.session_state.selected_stock=watchlist[0]['name']
 ordered=sorted(watchlist,key=lambda c: {'KÖP-KANDIDAT':0,'VAKTA':1,'MORGON-VAKTA':2}.get((by_name.get(c['name']) or {}).get('signal',{}).get('kind') if (by_name.get(c['name']) or {}).get('signal') else '',3))
@@ -200,9 +146,9 @@ if r['candles']:
     st.plotly_chart(fig,use_container_width=True)
     macd,signal,hist=calculate_macd(close)
     st.caption(f"MACD histogram (senaste): {hist[-1]:.4f}" if hist and hist[-1] is not None else 'MACD: otillräcklig historik')
-    st.caption(f"Senaste färdiga ljus: {df.time.iloc[-1]} · Antal: {len(df)} · Luckor: {r.get('gaps','okänt')}")
-else:st.warning('Ingen verifierad komplett femminutersstapel att visa.')
-st.subheader('📰 Nyheter och order')
+    st.caption(f"Senaste färdiga ljus: {df.time.iloc[-1]} · Antal: {len(df)} · Observerade femminutersljus (gles handel tillåts)")
+else:st.caption('Inga observerade femminutersljus att visa ännu.')
+st.subheader('📰 Senaste bolagsnyheter och analys')
 selected_source = next((x for x in c.get('feeds', []) if x.startswith('https://')), None)
 if selected_source:
     st.caption('Officiell nyhetskälla för ' + selected + ': ' + selected_source)
@@ -244,10 +190,6 @@ else:
                 "Verkligt historiskt kursutfall är ännu inte verifierat – detta är inte ett färdigt backtest.")
         st.json({k:str(v) for k,v in previous["analysis"].items() if k != "url"})
     st.caption("Historikens beständighet beror på värdplattformens lagring. Exportera eller anslut beständig lagring innan den används som långtidsarkiv.")
-with st.expander('🛠️ Kontrollcentral – alla aktier'):
-    st.dataframe(pd.DataFrame([{'Bolag':x['company'],'Avanza-ID':next((c.get('order_book_id') for c in watchlist if c['name']==x['company']),None),'5-minutersljus':len(x['candles']),'Luckor':x.get('gaps'),'Signal':x['signal']['kind'] if x['signal'] else '–','Datastatus':x['error'] or x['status']} for x in results]),hide_index=True,use_container_width=True)
-    st.caption('ID:n verifieras separat med verify_sources.py. Streamlit uppdateras vid omladdning; schemalagda jobb körs separat.')
-
 # Persistent paper-trade journal (no real orders).
 journal_error = None
 try:

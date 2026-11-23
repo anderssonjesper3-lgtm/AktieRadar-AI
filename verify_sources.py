@@ -47,19 +47,19 @@ def main():
     if a.health:report['market_health']=asyncio.run(health())
     if a.news:
         cfg=companies(); articles, failures, diagnostics=scan_detailed({'companies':cfg});report['news']={'configured_feeds':sum(len(c.get('feeds',[])) for c in cfg),'matching_articles':len(articles),'failures':failures,'sources':diagnostics,'parsed_sources':sum(d['raw_items']>0 for d in diagnostics)}
-    health=report.get('market_health',[])
-    if health:
+    health_rows=report.get('market_health',[])
+    if health_rows:
         report['market_summary']={
-            'configured_stocks':len(health),
-            'stocks_with_candles':sum(x['five_min_candles']>0 for x in health),
+            'configured_stocks':len(health_rows),
+            'stocks_with_candles':sum(x['five_min_candles']>0 for x in health_rows),
             'stocks_with_usable_signals':sum(x['signal_kind'] is not None for x in health),
             'stocks_with_errors':sum(bool(x['error']) for x in health),
         }
     news=report.get('news')
-    report['verified_live']=bool(health) and all(
+    report['verified_live']=bool(health_rows) and all(
         x['five_min_candles']>=6 and not x['error'] and
         x['age_after_close_minutes'] is not None and
-        0 <= x['age_after_close_minutes'] <= 20 for x in health
+        0 <= x['age_after_close_minutes'] <= 20 for x in health_rows
     ) and (news is None or (news['configured_feeds']>0 and
         news['parsed_sources']==news['configured_feeds'] and not news['failures']))
     Path(a.output).write_text(json.dumps(report,ensure_ascii=False,indent=2,default=str),encoding='utf-8')

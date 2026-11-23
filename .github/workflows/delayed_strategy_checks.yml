@@ -7,6 +7,7 @@ on:
       - 'runtime.txt'
       - 'multi_engine.py'
       - 'test_avanza_forbattrad.py'
+      - 'aktieradar_telegram.py'
       - '.github/workflows/delayed_strategy_checks.yml'
   workflow_dispatch:
 permissions:
@@ -32,6 +33,20 @@ jobs:
           PY
       - name: Compile changed modules without installing Avanza
         run: python -m py_compile app.py multi_engine.py test_avanza_forbattrad.py aktieradar_telegram.py news_scanner.py
+      - name: Check sparse trading candles
+        run: |
+          python - <<'PY'
+          from datetime import datetime, timezone
+          from test_avanza_forbattrad import build_candles, calculate_relative_volume
+          base = datetime(2026, 11, 23, 9, 0, tzinfo=timezone.utc).timestamp()*1000
+          points = [{'timestamp': int(base + m*60000), 'open':100+m, 'high':101+m, 'low':99+m, 'close':100+m, 'totalVolumeTraded':10} for m in (0,2,5,9)]
+          candles, gaps = build_candles(points)
+          assert len(candles)==2 and len(gaps)==2
+          assert [c['observed_minutes'] for c in candles]==[2,2]
+          assert candles[0]['volume']==20 and candles[1]['volume']==20
+          assert all(c['partial_observation'] for c in candles)
+          print('Sparse-trading candle aggregation passed')
+          PY
       - name: Check intended source and age gate
         run: |
           python - <<'PY'

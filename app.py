@@ -115,6 +115,19 @@ with st.expander('🔎 Kursdatadiagnostik – alla 10 aktier', expanded=(ready =
     for r in results:
         if r.get('error'):
             failures_by_reason.setdefault(str(r['error']), []).append(r['company'])
+    st.markdown('**Senaste kurstid per aktie (svensk tid)**')
+    for r in results:
+        stamp = r.get('last_trade_time')
+        if stamp:
+            try:
+                stamp = datetime.fromisoformat(stamp).astimezone(SWEDEN).strftime('%H:%M:%S')
+            except (ValueError, TypeError):
+                pass
+        else:
+            stamp = 'saknas'
+        age = r.get('data_age_minutes')
+        age_text = f'{age} min' if age is not None else 'okänd ålder'
+        st.caption(f"{r['company']}: {stamp} · {age_text} · {r.get('raw_points', 0)} minutposter")
     for reason, affected in failures_by_reason.items():
         st.error(f"Kurskälla: {reason} · Berörda aktier: {', '.join(affected)}")
     if ready == 0 and not failures_by_reason:

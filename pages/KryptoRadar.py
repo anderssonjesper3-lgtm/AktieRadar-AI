@@ -4,8 +4,20 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 from streamlit_autorefresh import st_autorefresh
-from kryptoradar.engine import PAIRS, fetch_candles, analyze, paper_trade, evaluate_positions, performance_summary
-from kryptoradar.backtest import replay
+# Streamlit keeps Python modules in memory across page reruns and code deploys.
+# Reload the engine before binding symbols to avoid a stale module after updates.
+import importlib
+import kryptoradar.engine as crypto_engine
+importlib.reload(crypto_engine)
+import kryptoradar.backtest as crypto_backtest
+importlib.reload(crypto_backtest)
+PAIRS = crypto_engine.PAIRS
+fetch_candles = crypto_engine.fetch_candles
+analyze = crypto_engine.analyze
+paper_trade = crypto_engine.paper_trade
+evaluate_positions = crypto_engine.evaluate_positions
+performance_summary = crypto_engine.performance_summary
+replay = crypto_backtest.replay
 
 
 st.markdown("""<style>

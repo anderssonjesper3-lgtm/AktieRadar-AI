@@ -16,7 +16,7 @@ ORDER_BOOK_ID = "5401"
 MINUTE_LIMIT = 100
 MAX_PAGES = 20
 LOOKBACK = 21  # aktuell 5-minutersstapel + 20 tidigare
-MAX_AGE_MINUTES = 15
+MAX_AGE_MINUTES = 20
 
 def calculate_ema(values, period):
     # Samma grundprincip som EMA i TradingView:

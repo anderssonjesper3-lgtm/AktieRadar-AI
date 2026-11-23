@@ -3,82 +3,137 @@
     {
       "name": "Saab B",
       "ticker": "SAAB B",
-      "aliases": ["Saab AB", "Saab"],
+      "aliases": [
+        "Saab AB",
+        "Saab"
+      ],
       "order_book_id": "5401",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://www.saab.com/newsroom/press-releases"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "Acconeer",
       "ticker": "ACCON",
-      "aliases": ["Acconeer"],
+      "aliases": [
+        "Acconeer"
+      ],
       "order_book_id": "808452",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://acconeer.com/investor_page/home/press-releases/"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "PowerCell Sweden",
       "ticker": "PCELL",
-      "aliases": ["PowerCell Sweden", "PowerCell"],
+      "aliases": [
+        "PowerCell Sweden",
+        "PowerCell"
+      ],
       "order_book_id": "527998",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://powercellgroup.com/investor/"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "Scandinavian Astor Group",
       "ticker": "ASTOR",
-      "aliases": ["Scandinavian Astor Group", "Astor Group"],
+      "aliases": [
+        "Scandinavian Astor Group",
+        "Astor Group",
+        "Astor"
+      ],
       "order_book_id": "1523003",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://www.mfn.se/all/a/scandinavian-astor-group"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "Ovzon",
       "ticker": "OVZON",
-      "aliases": ["Ovzon"],
+      "aliases": [
+        "Ovzon"
+      ],
       "order_book_id": "852674",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://www.ovzon.com/en/section/investors/press-releases/?regulatory=false"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "GomSpace",
       "ticker": "GOMX",
-      "aliases": ["GomSpace"],
+      "aliases": [
+        "GomSpace"
+      ],
       "order_book_id": "667935",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://gomspace.com/investor/news/press-releases/"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "AAC Clyde Space",
       "ticker": "AAC",
-      "aliases": ["AAC Clyde Space"],
+      "aliases": [
+        "AAC Clyde Space"
+      ],
       "order_book_id": "717421",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://investor.aac-clyde.space/press-releases"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "MilDef",
       "ticker": "MILDEF",
-      "aliases": ["MilDef Group", "MilDef"],
+      "aliases": [
+        "MilDef Group",
+        "MilDef"
+      ],
       "order_book_id": "1235164",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://investors.mildef.com/news-room/press-releases/?lang=en&m-page=0"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "INVISIO",
       "ticker": "IVSO",
-      "aliases": ["INVISIO"],
+      "aliases": [
+        "INVISIO"
+      ],
       "order_book_id": "43788",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://corp.invisio.com/news-and-events/press-releases/"
+      ],
+      "source_type": "official_investor_relations"
     },
     {
       "name": "Clavister",
       "ticker": "CLAV",
-      "aliases": ["Clavister"],
+      "aliases": [
+        "Clavister"
+      ],
       "order_book_id": "480188",
       "annual_revenue_sek": null,
-      "feeds": []
+      "feeds": [
+        "https://www.clavister.com/company/investor-relations/"
+      ],
+      "source_type": "official_investor_relations"
     }
   ]
 }

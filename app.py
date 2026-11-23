@@ -220,7 +220,7 @@ with st.expander('🛠️ Kontrollcentral – alla aktier'):
 # Persistent paper-trade journal (no real orders).
 journal_error = None
 try:
-    from journal_store import read_shared
+    from journal_store import read_public_snapshot
     import os
     try:
         token = st.secrets.get('AKTIERADAR_JOURNAL_TOKEN')
@@ -232,7 +232,7 @@ try:
     if repo:
         os.environ['AKTIERADAR_JOURNAL_REPO'] = repo
     os.environ.setdefault('AKTIERADAR_JOURNAL_REPO', 'anderssonjesper3-lgtm/AktieRadar-AI')
-    journal, _ = read_shared()
+    journal = read_public_snapshot()
 except Exception as exc:
     journal_error = str(exc)
     journal = {'version': 1, 'events': [], 'trades': []}

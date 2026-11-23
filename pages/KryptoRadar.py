@@ -7,8 +7,28 @@ from streamlit_autorefresh import st_autorefresh
 from kryptoradar.engine import PAIRS, fetch_candles, analyze, paper_trade
 
 
-st.markdown("""<style>.stApp{background:#0d1727;color:#eef4ff}
-div[data-testid="stMetric"]{background:#17253b;padding:14px;border-radius:12px}
+st.markdown("""<style>
+.stApp { background:#0d1727; color:#f5f9ff; }
+.stApp p, .stApp span, .stApp label, .stApp li,
+.stApp h1, .stApp h2, .stApp h3,
+.stApp [data-testid="stMarkdownContainer"],
+.stApp [data-testid="stCaptionContainer"],
+.stApp [data-testid="stWidgetLabel"],
+.stApp [data-testid="stMetricLabel"],
+.stApp [data-testid="stMetricValue"],
+.stApp [data-testid="stMetricDelta"],
+.stApp [data-testid="stSidebar"] p,
+.stApp [data-testid="stSidebar"] label { color:#f5f9ff !important; opacity:1 !important; }
+div[data-testid="stMetric"] { background:#17253b; border:1px solid #30445f; padding:14px; border-radius:12px; }
+.stApp div.stButton > button, .stApp div.stDownloadButton > button {
+ background:#213b56; color:#ffffff !important; border:1px solid #6d91b1; font-weight:650;
+}
+.stApp div.stButton > button *, .stApp div.stDownloadButton > button * { color:#ffffff !important; }
+.stApp div.stButton > button:hover, .stApp div.stDownloadButton > button:hover { background:#305879; }
+.stApp div[data-testid="stAlert"], .stApp div[data-testid="stAlert"] * {
+ color:#17253b !important; opacity:1 !important;
+}
+.stApp a { color:#a9eaff !important; }
 </style>""", unsafe_allow_html=True)
 st.title("₿ KryptoRadar")
 st.caption("BTC · ETH · SOL | KRAKEN | STÄNGDA 1-MINUTSLJUS | INGA NYHETER")

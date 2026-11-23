@@ -1,5 +1,6 @@
 """Deterministic, auditable first-pass news analysis. Not an LLM."""
 from datetime import datetime, timezone
+import re
 from order_analysis import parse_order_amount, order_ratio
 
 POSITIVE = ("ny order", "order", "kontrakt", "avtal", "ramavtal", "kund", "leverans",
@@ -19,7 +20,12 @@ def analyze_news(item, company):
     amount = parse_order_amount(title + " " + description)
     revenue = company.get("annual_revenue_sek")
     ratio = order_ratio(amount, revenue)
-    if negative and len(negative) >= len(positive):
+    analyst = analyze_analyst_revision(text)
+    if analyst["direction"] == "NEGATIV":
+        view, impact = "NEGATIV", "Negativ analytikerändring – invänta kursreaktion"
+    elif analyst["direction"] == "POSITIV" and not negative:
+        view, impact = "POSITIV", "Positiv analytikerändring – invänta kursreaktion"
+    elif negative and len(negative) >= len(positive):
         view, impact = "NEGATIV", "Möjlig negativ kurspåverkan"
     elif positive and not negative:
         view, impact = "POSITIV" if not uncertainty else "PRELIMINÄRT POSITIV", "Möjlig positiv kurspåverkan"
@@ -35,6 +41,7 @@ def analyze_news(item, company):
     if uncertainty: caveats.append("Texten innehåller osäkerhetsformuleringar: " + ", ".join(uncertainty))
     caveats.append("Detta är regelbaserad första analys, inte AI-läsning av hela originalartikeln.")
     return {
+        "analyst_revision": analyst,
         "company": company.get("name"), "title": title, "url": item.get("url") or item.get("link"),
         "published": item.get("published") or item.get("date"),
         "analyzed_at": datetime.now(timezone.utc).isoformat(),
@@ -46,3 +53,18 @@ def analyze_news(item, company):
           "Om kursen inte reagerar eller volymen avtar ska nyhetssignalen nedgraderas. "
           "Detta är en hypotes, inte en kursprognos.")
     }
+
+def analyze_analyst_revision(text):
+    """Conservative detection of analyst changes, not a price forecast."""
+    t = text.casefold()
+    target = bool(re.search(r"\b(riktkurs|price target|target price|kursmål)\b", t))
+    raised = bool(re.search(r"\b(höjer|höjt|höjd|höjdes|raised|raises|raise|increased|increases|uppjusterar|uppjusterad)\b", t))
+    lowered = bool(re.search(r"\b(sänker|sänkt|sänktes|lowered|lowers|lower|cut|cuts|reduced|nedjusterar|nedjusterad)\b", t))
+    upgrade = bool(re.search(r"\b(höjer|höjt|uppgraderar|uppgraderad|upgrades|upgraded)\s+(rekommendationen|rekommendation|rating|recommendation)\b", t))
+    downgrade = bool(re.search(r"\b(sänker|sänkt|nedgraderar|nedgraderad|downgrades|downgraded)\s+(rekommendationen|rekommendation|rating|recommendation)\b", t))
+    positive = (target and raised) or upgrade
+    negative = (target and lowered) or downgrade
+    direction = "POSITIV" if positive and not negative else "NEGATIV" if negative and not positive else "OKLAR"
+    return {"direction": direction, "target_changed": target and (raised or lowered),
+            "recommendation_changed": upgrade or downgrade,
+            "note": "Ändrad riktkurs är inte samma sak som ändrad rekommendation."}

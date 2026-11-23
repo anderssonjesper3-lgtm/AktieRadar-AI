@@ -4,7 +4,7 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 from streamlit_autorefresh import st_autorefresh
-from kryptoradar.engine import PAIRS, fetch_candles, analyze, paper_trade
+from kryptoradar.engine import PAIRS, fetch_candles, analyze, paper_trade, evaluate_positions, performance_summary
 
 
 st.markdown("""<style>
@@ -38,6 +38,7 @@ st.sidebar.header("Simulering")
 stake = st.sidebar.number_input("Belopp per fiktiv affär (USD)", min_value=100, value=1000, step=100)
 fee = st.sidebar.number_input("Courtage per sida (%)", min_value=0.0, value=0.25, step=0.05)
 slip = st.sidebar.number_input("Slippage per sida (%)", min_value=0.0, value=0.10, step=0.05)
+stop = st.sidebar.number_input("Fiktiv stop-loss (%)", min_value=0.1, value=1.0, step=0.1)
 auto = st.sidebar.checkbox("Registrera fiktiva affärer automatiskt", value=False)
 st.sidebar.caption("Journalen lagras i appens lokala filsystem. På molnhosting kan den försvinna vid omstart.")
 path = Path(__file__).parent / "paper_journal.json"
@@ -68,11 +69,31 @@ for name, pair in PAIRS.items():
     if auto:
         before = len(journal)
         paper_trade(journal,pair,s,fee,slip,stake)
+        journal, position_status = evaluate_positions(journal,pair,s,fee,slip,stop)
+        st.caption("Fiktiv positionsstatus: " + position_status)
         if len(journal) != before:
             try:
                 path.write_text(json.dumps(journal, indent=2))
             except OSError as exc:
                 st.error("Journalen kunde inte sparas: " + str(exc))
+st.subheader("📊 Signalutvärdering")
+overall = performance_summary(journal)
+m1,m2,m3,m4 = st.columns(4)
+m1.metric("Avslutade affärer", overall["trades"])
+m2.metric("Träffsäkerhet", f'{overall["win_rate"]:.1f}%')
+m3.metric("Realiserat resultat (USD)", f'{overall["pnl"]:+,.2f}')
+m4.metric("Avkastning på avslutade insatser", f'{overall["return_pct"]:+.2f}%')
+for name, pair in PAIRS.items():
+    p = performance_summary(journal, pair)
+    st.caption(f'{name}: {p["trades"]} avslut · {p["wins"]} vinster · {p["losses"]} förluster · {p["pnl"]:+.2f} USD')
+closed = [x for x in journal if x.get("action") == "SELL" and x.get("pnl") is not None]
+if closed:
+    cumulative = pd.DataFrame(closed)[["time","pnl"]].copy()
+    cumulative["time"] = pd.to_datetime(cumulative["time"],utc=True)
+    cumulative = cumulative.sort_values("time")
+    cumulative["Ackumulerat resultat (USD)"] = cumulative["pnl"].cumsum()
+    st.line_chart(cumulative.set_index("time")[["Ackumulerat resultat (USD)"]])
+st.caption("Endast realiserade fiktiva resultat. Öppna positioner ingår inte. Journalen kan försvinna vid omstart på molnhosting.")
 st.subheader("Fiktiv handelsjournal")
 if journal:
     trades = pd.DataFrame(journal)

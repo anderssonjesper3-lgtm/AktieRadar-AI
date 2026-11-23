@@ -68,3 +68,26 @@ def write_shared(data, sha):
     if sha:
         payload["sha"] = sha
     _request("PUT", url, token, payload)
+
+
+def read_public_snapshot():
+    """Read public journal from raw.githubusercontent.com, without GitHub API quota.
+
+    For the read-only Streamlit dashboard only; scheduled writer uses read_shared
+    with GitHub SHA and token so optimistic locking remains intact.
+    """
+    repo = os.getenv("AKTIERADAR_JOURNAL_REPO") or "anderssonjesper3-lgtm/AktieRadar-AI"
+    if repo != "anderssonjesper3-lgtm/AktieRadar-AI":
+        raise RuntimeError("Okänt publikt journalarkiv")
+    url = f"https://raw.githubusercontent.com/{repo}/{quote(BRANCH)}/{JOURNAL_PATH}"
+    request = Request(url, headers={"User-Agent": "AktieRadar-6.0-ReadOnly"})
+    try:
+        with urlopen(request, timeout=20) as response:
+            data = json.load(response)
+    except HTTPError as exc:
+        raise RuntimeError(f"Publika journalen kunde inte läsas (HTTP {exc.code})") from None
+    if (not isinstance(data, dict) or data.get("version") != 1
+            or not isinstance(data.get("events"), list)
+            or not isinstance(data.get("trades"), list)):
+        raise RuntimeError("Publika journalen har ogiltigt format")
+    return data

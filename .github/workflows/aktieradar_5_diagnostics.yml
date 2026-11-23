@@ -8,6 +8,7 @@ on:
       - 'news_watchlist.json'
       - 'test_avanza_forbattrad.py'
       - 'multi_engine.py'
+      - 'verify_sources.py'
   workflow_dispatch:
 permissions:
   contents: read

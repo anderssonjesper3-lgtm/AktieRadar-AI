@@ -1,9 +1,10 @@
 import asyncio
+from multi_engine import analyze_company
 from datetime import datetime, timezone
 import pandas as pd
 import streamlit as st
 from news_scanner import load_config
-from news_ai_pilot import run_news_pilot, smart_exit, simulated_result
+from news_ai_pilot import run_news_pilot, smart_exit, simulated_result, update_paper_journal
 
 st.set_page_config(page_title='AktieRadar News AI', page_icon='📡', layout='wide')
 st.title('📡 AktieRadar News AI')
@@ -71,3 +72,24 @@ with st.expander('Smart Exit och simulerad affär'):
         st.metric('Simulerat netto (%)', net['net_pct'])
     else:
         st.warning('Högsta kurs måste vara minst ingångskurs och aktuell kurs.')
+
+st.subheader('Simulerad signaljournal')
+st.caption('Experimentell sessionsjournal · 5 000 kr per position · fördröjda observationer. Nollställs när sessionen försvinner.')
+journal = st.session_state.setdefault('paper_journal', {})
+observations = {item['company']: item['quote'] for item in result['candidates']}
+async def follow_positions():
+    config = {c['name']: c for c in load_config()['companies']}
+    for name in journal.get('positions', {}):
+        if name not in observations and name in config:
+            observations[name] = await analyze_company(dict(config[name], feeds=[]))
+asyncio.run(follow_positions())
+events = update_paper_journal(journal, result['candidates'], observations)
+for event in events:
+    st.info(f"{event['company']}: {event['kind']} · {event['time']}")
+closed = journal.get('closed', [])
+st.metric('Simulerat netto (kr)', round(sum(t['net_sek'] for t in closed), 2))
+st.metric('Avslutade affärer', len(closed))
+if closed:
+    st.dataframe(pd.DataFrame(closed))
+if journal.get('positions'):
+    st.dataframe(pd.DataFrame(journal['positions'].values()))

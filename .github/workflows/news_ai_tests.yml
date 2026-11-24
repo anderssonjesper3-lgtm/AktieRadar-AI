@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
       - run: pip install -r requirements.txt
       - run: python -m compileall -q news_ai_pilot.py app.py test_news_ai_pilot.py
       - run: python -m unittest -v test_news_ai_pilot

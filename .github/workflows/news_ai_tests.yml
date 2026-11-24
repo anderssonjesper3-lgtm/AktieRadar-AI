@@ -1,0 +1,19 @@
+name: News AI pilot tests
+on:
+  push:
+    branches: [news-ai-pilot]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python -m compileall -q news_ai_pilot.py app.py test_news_ai_pilot.py
+      - run: python -m unittest -v test_news_ai_pilot

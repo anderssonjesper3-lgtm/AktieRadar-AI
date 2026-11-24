@@ -86,7 +86,11 @@ async def follow_positions():
     config = {c['name']: c for c in load_config()['companies']}
     for name in journal.get('positions', {}):
         if name not in observations and name in config:
-            observations[name] = await analyze_company(dict(config[name], feeds=[]))
+            try:
+                observations[name] = await analyze_company(dict(config[name], feeds=[]))
+            except Exception as exc:
+                observations[name] = {'candles': [], 'error': type(exc).__name__}
+                st.warning(f'Kursuppföljning saknas för {name}; nyhetsanalysen påverkas inte.')
 asyncio.run(follow_positions())
 events = update_paper_journal(journal, result['candidates'], observations)
 for event in events:

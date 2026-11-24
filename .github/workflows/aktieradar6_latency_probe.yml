@@ -2,6 +2,12 @@ name: AktieRadar 6.0 - Read-only market latency test
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/aktieradar6_latency_probe.yml'
+  schedule:
+    # UTC: covers 09:00–17:30 Stockholm during winter; extra hours in summer.
+    - cron: '*/30 7-16 * * 1-5'
 
 permissions:
   contents: read
@@ -20,7 +26,10 @@ jobs:
       - name: Install market data dependencies
         run: python -m pip install -r requirements.txt
       - name: Measure source latency for all ten stocks (no trades or Telegram)
-        run: python realtime_probe.py | tee latency_report.jsonl
+        shell: bash
+        run: |
+          set -o pipefail
+          python realtime_probe.py | tee latency_report.jsonl
       - name: Upload latency report
         if: always()
         uses: actions/upload-artifact@v4

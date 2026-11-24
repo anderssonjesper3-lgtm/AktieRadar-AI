@@ -1,6 +1,6 @@
 import unittest
-from datetime import datetime, timezone
-from news_ai_pilot import run_news_pilot, score_news, explain_news, candidate_kind, smart_exit, simulated_result
+from datetime import datetime, timezone, timedelta
+from news_ai_pilot import run_news_pilot, score_news, explain_news, candidate_kind, news_candidate_kind, update_paper_journal, smart_exit, simulated_result
 
 class NewsPilotTests(unittest.IsolatedAsyncioTestCase):
     async def test_only_interesting_verified_issuer_fetches_quotes(self):
@@ -48,6 +48,19 @@ class NewsPilotTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(candidate_kind(q), 'KÖP-KANDIDAT (FÖRDRÖJD)')
         q['last_candle_age_minutes'] = 30
         self.assertEqual(candidate_kind(q), 'NYHET-VAKTA')
+
+    def test_no_pre_news_paper_entry(self):
+        published = datetime(2026, 1, 5, 12, 2, tzinfo=timezone.utc)
+        q = {'candles':[{'time':published-timedelta(minutes=2), 'close':100}],
+             'signal':{'kind':'KÖP-KANDIDAT'}, 'last_candle_age_minutes':15}
+        item = {'company':'Test', 'id':'test', 'published':published,
+                'kind':'KÖP-KANDIDAT (FÖRDRÖJD)', 'quote':q}
+        journal = {}
+        self.assertEqual(news_candidate_kind(q, published), 'NYHET-VAKTA')
+        self.assertEqual(update_paper_journal(journal, [item], {}), [])
+        q['candles'][0]['time'] = published + timedelta(minutes=3)
+        self.assertEqual(news_candidate_kind(q, published), item['kind'])
+        self.assertEqual(len(update_paper_journal(journal, [item], {})), 1)
 
     def test_risk_overrides_positive(self):
         self.assertEqual(score_news({'title':'Receives order', 'description':'letter of intent'})[0],0)

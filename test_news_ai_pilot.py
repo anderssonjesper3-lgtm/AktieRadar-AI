@@ -21,6 +21,12 @@ class NewsPilotTests(unittest.IsolatedAsyncioTestCase):
             calls.append(company['name'])
             return {'candles':[], 'error':'test fixture: no quotes'}
         result = await run_news_pilot(config, now, fetch=lambda url:rss, quote=quote)
+        async def broken_quote(company, now):
+            raise TimeoutError('fixture')
+        failed = await run_news_pilot(config, now, fetch=lambda url:rss, quote=broken_quote)
+        self.assertEqual(len(failed['candidates']), 1)
+        self.assertEqual(failed['candidates'][0]['kind'], 'NYHET-VAKTA')
+        self.assertEqual(failed['candidates'][0]['quote']['error'], 'TimeoutError')
         self.assertEqual(result['eligible_count'], 1)
         self.assertEqual(len(result['candidates']), 1)
         self.assertEqual(calls, ['Testbolag'])

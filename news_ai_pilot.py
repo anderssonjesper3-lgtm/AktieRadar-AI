@@ -43,6 +43,19 @@ def candidate_kind(quote):
         return 'KÖP-KANDIDAT (FÖRDRÖJD)'
     return 'NYHET-VAKTA'
 
+def news_candidate_kind(quote, published):
+    """Require a complete candle starting at or after publication."""
+    if candidate_kind(quote) != 'KÖP-KANDIDAT (FÖRDRÖJD)':
+        return 'NYHET-VAKTA'
+    try:
+        latest = max(c['time'] for c in quote['candles'])
+        if latest.tzinfo is None or published.tzinfo is None or latest < published:
+            return 'NYHET-VAKTA'
+    except (KeyError, TypeError, ValueError, AttributeError):
+        return 'NYHET-VAKTA'
+    return 'KÖP-KANDIDAT (FÖRDRÖJD)'
+
+
 def smart_exit(entry, peak, current, stop_pct=1.0, trail_pct=1.0):
     if min(entry, peak, current, stop_pct, trail_pct) <= 0 or peak < entry:
         raise ValueError('Ogiltiga priser eller riskgränser')
@@ -88,7 +101,7 @@ async def run_news_pilot(config, now=None, fetch=None, quote=None, max_age_hours
                 quotes[name] = {'candles': [], 'error': type(exc).__name__}
         q = quotes[name]
         item['quote'] = q
-        item['kind'] = candidate_kind(q)
+        item['kind'] = news_candidate_kind(q, item['published'])
         item['economic_case'], item['risk'] = explain_news(item, item['score'])
     return {'candidates': list(candidates.values()), 'eligible_count': len(eligible),
             'failures': failures, 'diagnostics': diagnostics, 'quote_count': len(quotes)}
@@ -125,7 +138,7 @@ def update_paper_journal(journal, candidates, observations, fee=0, slippage_pct=
         if item['kind'] != 'KÖP-KANDIDAT (FÖRDRÖJD)' or name in positions or item['id'] in seen:
             continue
         q = item['quote']
-        if candidate_kind(q) != item['kind']:
+        if news_candidate_kind(q, item.get('published')) != item['kind']:
             continue
         candle = max(q['candles'], key=lambda c: c['time'])
         price = float(candle['close'])

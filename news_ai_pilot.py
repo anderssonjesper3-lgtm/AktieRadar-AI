@@ -26,6 +26,14 @@ def score_news(item):
             if re.search(r'(?<!\w)'+re.escape(phrase)+r'(?!\w)', title)]
     return max(hits, default=(0, 'Ingen tydlig positiv katalysator'))
 
+def explain_news(item, score):
+    title = item.get('title', '').casefold()
+    if 'prognos' in title or 'guidance' in title:
+        return 'Höjd prognos kan innebära högre framtida resultat.', 'Kontrollera marginaler, tidigare prognos och marknadens förväntningar.'
+    if any(x in title for x in ('order', 'contract', 'kontrakt')):
+        return 'En bindande order kan öka framtida intäkter och orderstock.', 'Kontrollera ordervärde relativt omsättning, leveranstid och lönsamhet.'
+    return 'Ett regulatoriskt godkännande kan minska kommersiell osäkerhet.', 'Kontrollera villkor, marknadsstorlek och tid till intäkter.'
+
 async def run_news_pilot(config, now=None, fetch=None, quote=None, max_age_hours=24):
     now = now or datetime.now(timezone.utc)
     eligible = [c for c in config['companies']
@@ -55,5 +63,6 @@ async def run_news_pilot(config, now=None, fetch=None, quote=None, max_age_hours
         q = quotes[name]
         item['quote'] = q
         item['kind'] = 'NYHET-VAKTA'
+        item['economic_case'], item['risk'] = explain_news(item, item['score'])
     return {'candidates': list(candidates.values()), 'eligible_count': len(eligible),
             'failures': failures, 'diagnostics': diagnostics, 'quote_count': len(quotes)}

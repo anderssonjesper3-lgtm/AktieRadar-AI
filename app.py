@@ -38,6 +38,11 @@ for item in result['candidates']:
         st.link_button('Originalkälla', item['url'])
         st.caption(f"Publicerad: {item['published']} · VAKTA · Regelpoäng {item['score']}/100 (ej sannolikhet)")
         st.write(item['reason'])
+        st.markdown('**Ekonomisk betydelse**')
+        st.write(item['economic_case'])
+        st.markdown('**Risk att kontrollera**')
+        st.write(item['risk'])
+        st.caption('Regelbaserad bedömning, inte verifierad AI-analys av hela pressmeddelandet.')
         q = item['quote']
         if q.get('error') or not q.get('candles'):
             st.warning(q.get('error') or 'Kursdata saknas')

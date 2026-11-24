@@ -1,60 +1,29 @@
 {
+  "universe_complete": false,
   "companies": [
     {
-      "name": "Saab B",
-      "ticker": "SAAB B",
+      "name": "NCAB Group",
+      "ticker": "NCAB",
       "aliases": [
-        "Saab AB",
-        "Saab"
+        "NCAB Group"
       ],
-      "order_book_id": "5401",
-      "annual_revenue_sek": null,
-      "feeds": [
-        "https://www.saab.com/newsroom/press-releases"
-      ],
-      "source_type": "official_investor_relations"
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
+      "segment_effective": "2026-01-02",
+      "feeds": []
     },
     {
-      "name": "Acconeer",
-      "ticker": "ACCON",
+      "name": "Better Collective",
+      "ticker": "BETCO",
       "aliases": [
-        "Acconeer"
+        "Better Collective"
       ],
-      "order_book_id": "808452",
-      "annual_revenue_sek": null,
-      "feeds": [
-        "https://acconeer.com/investor_page/home/press-releases/"
-      ],
-      "source_type": "official_investor_relations"
-    },
-    {
-      "name": "PowerCell Sweden",
-      "ticker": "PCELL",
-      "aliases": [
-        "PowerCell Sweden",
-        "PowerCell"
-      ],
-      "order_book_id": "527998",
-      "annual_revenue_sek": null,
-      "feeds": [
-        "https://powercellgroup.com/investor/"
-      ],
-      "source_type": "official_investor_relations"
-    },
-    {
-      "name": "Scandinavian Astor Group",
-      "ticker": "ASTOR",
-      "aliases": [
-        "Scandinavian Astor Group",
-        "Astor Group",
-        "Astor"
-      ],
-      "order_book_id": "1523003",
-      "annual_revenue_sek": null,
-      "feeds": [
-        "https://www.mfn.se/all/a/scandinavian-astor-group"
-      ],
-      "source_type": "official_investor_relations"
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
+      "segment_effective": "2026-01-02",
+      "feeds": []
     },
     {
       "name": "Ovzon",
@@ -67,33 +36,155 @@
       "feeds": [
         "https://www.ovzon.com/en/section/investors/press-releases/?regulatory=false"
       ],
-      "source_type": "official_investor_relations"
+      "source_type": "official_investor_relations",
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
+      "segment_effective": "2026-01-02"
     },
     {
-      "name": "GomSpace",
-      "ticker": "GOMX",
+      "name": "Karnell Group",
+      "ticker": "KARNEL B",
       "aliases": [
-        "GomSpace"
+        "Karnell Group"
       ],
-      "order_book_id": "667935",
-      "annual_revenue_sek": null,
-      "feeds": [
-        "https://gomspace.com/investor/news/press-releases/"
-      ],
-      "source_type": "official_investor_relations"
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
+      "segment_effective": "2026-01-02",
+      "feeds": []
     },
     {
-      "name": "AAC Clyde Space",
-      "ticker": "AAC",
+      "name": "Svedbergs Group",
+      "ticker": "SVED B",
       "aliases": [
-        "AAC Clyde Space"
+        "Svedbergs Group"
       ],
-      "order_book_id": "717421",
-      "annual_revenue_sek": null,
-      "feeds": [
-        "https://investor.aac-clyde.space/press-releases"
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
+      "segment_effective": "2026-01-02",
+      "feeds": []
+    },
+    {
+      "name": "Vicore Pharma",
+      "ticker": "VICO",
+      "aliases": [
+        "Vicore Pharma"
       ],
-      "source_type": "official_investor_relations"
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
+      "segment_effective": "2026-01-02",
+      "feeds": []
+    },
+    {
+      "name": "Nelly Group",
+      "ticker": "NELLY",
+      "aliases": [
+        "Nelly Group"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
+      "segment_effective": "2026-01-02",
+      "feeds": []
+    },
+    {
+      "name": "Egetis Therapeutics",
+      "ticker": "EGTX",
+      "aliases": [
+        "Egetis Therapeutics"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
+      "segment_effective": "2026-01-02",
+      "feeds": []
+    },
+    {
+      "name": "Sedana Medical",
+      "ticker": "SEDANA",
+      "aliases": [
+        "Sedana Medical"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
+      "segment_effective": "2026-01-02",
+      "feeds": []
+    },
+    {
+      "name": "Eolus",
+      "ticker": "EOLUS B",
+      "aliases": [
+        "Eolus"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
+      "segment_effective": "2026-01-02",
+      "feeds": []
+    },
+    {
+      "name": "Cinclus Pharma",
+      "ticker": "CINCLUS",
+      "aliases": [
+        "Cinclus Pharma"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
+      "segment_effective": "2026-01-02",
+      "feeds": []
+    },
+    {
+      "name": "Rottneros",
+      "ticker": "RROS",
+      "aliases": [
+        "Rottneros"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
+      "segment_effective": "2026-01-02",
+      "feeds": []
+    },
+    {
+      "name": "Pricer",
+      "ticker": "PRIC B",
+      "aliases": [
+        "Pricer"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
+      "segment_effective": "2026-01-02",
+      "feeds": []
+    },
+    {
+      "name": "Bactiguard",
+      "ticker": "BACTI B",
+      "aliases": [
+        "Bactiguard"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
+      "segment_effective": "2026-01-02",
+      "feeds": []
+    },
+    {
+      "name": "Profoto",
+      "ticker": "PRFO",
+      "aliases": [
+        "Profoto"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
+      "segment_effective": "2026-01-02",
+      "feeds": []
     },
     {
       "name": "MilDef",
@@ -107,33 +198,11 @@
       "feeds": [
         "https://investors.mildef.com/news-room/press-releases/?lang=en&m-page=0"
       ],
-      "source_type": "official_investor_relations"
-    },
-    {
-      "name": "INVISIO",
-      "ticker": "IVSO",
-      "aliases": [
-        "INVISIO"
-      ],
-      "order_book_id": "43788",
-      "annual_revenue_sek": null,
-      "feeds": [
-        "https://corp.invisio.com/news-and-events/press-releases/"
-      ],
-      "source_type": "official_investor_relations"
-    },
-    {
-      "name": "Clavister",
-      "ticker": "CLAV",
-      "aliases": [
-        "Clavister"
-      ],
-      "order_book_id": "480188",
-      "annual_revenue_sek": null,
-      "feeds": [
-        "https://www.clavister.com/company/investor-relations/"
-      ],
-      "source_type": "official_investor_relations"
+      "source_type": "official_investor_relations",
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://attachment.news.eu.nasdaq.com/a3f02bcd5d42f4f2e8687516fb6bfcefa",
+      "segment_effective": "2026-08-31"
     }
   ]
 }

@@ -14,7 +14,8 @@ import xml.etree.ElementTree as ET
 
 CONFIG_PATH = Path(__file__).with_name('news_watchlist.json')
 KEYWORDS = (
-    'order', 'orders', 'beställning', 'beställningar', 'kontrakt', 'contract',
+    'höjer prognosen', 'raises guidance', 'höjd prognos', 'raised guidance',
+    'myndighetsgodkännande', 'regulatory approval', 'order', 'orders', 'beställning', 'beställningar', 'kontrakt', 'contract',
     'avtal', 'agreement', 'ramavtal', 'framework agreement', 'upphandling',
     'förvärv', 'acquisition', 'acquires', 'acquired', 'merger', 'fusion',
     'strategiskt samarbete', 'strategic partnership', 'samarbete', 'partnership',
@@ -248,7 +249,7 @@ def scan_detailed(config=None, now=None, fetch=None, max_age_hours=24):
         try:
             items = extract_items(fetch(url), source_url=url)
             raw_count = len(items)
-            if len(companies) == 1:
+            if len(companies) == 1 and companies[0].get('source_type') == 'official_investor_relations':
                 items = [dict(item, _feed_company=companies[0]['name']) for item in items]
         except Exception as exc:
             names = ', '.join(company['name'] for company in companies)

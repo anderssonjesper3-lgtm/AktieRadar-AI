@@ -1,6 +1,6 @@
 import unittest
 from datetime import datetime, timezone
-from news_ai_pilot import run_news_pilot, score_news, explain_news
+from news_ai_pilot import run_news_pilot, score_news, explain_news, candidate_kind, smart_exit, simulated_result
 
 class NewsPilotTests(unittest.IsolatedAsyncioTestCase):
     async def test_only_interesting_verified_issuer_fetches_quotes(self):
@@ -30,6 +30,18 @@ class NewsPilotTests(unittest.IsolatedAsyncioTestCase):
         case, risk = explain_news({'title':'Testbolag receives order'}, 70)
         self.assertIn('intäkter', case)
         self.assertIn('ordervärde', risk)
+
+    def test_exit_and_costs(self):
+        self.assertEqual(smart_exit(100, 105, 105), 'BEHÅLL')
+        self.assertEqual(smart_exit(100, 105, 103), 'SMART EXIT')
+        self.assertEqual(smart_exit(100, 100, 98), 'STOPP')
+        self.assertEqual(simulated_result(100, 105, 10, 5)['net_sek'], 40)
+
+    def test_delayed_gate(self):
+        q = {'candles':[{}], 'signal':{'kind':'KÖP-KANDIDAT'}, 'last_candle_age_minutes':15}
+        self.assertEqual(candidate_kind(q), 'KÖP-KANDIDAT (FÖRDRÖJD)')
+        q['last_candle_age_minutes'] = 30
+        self.assertEqual(candidate_kind(q), 'NYHET-VAKTA')
 
     def test_risk_overrides_positive(self):
         self.assertEqual(score_news({'title':'Receives order', 'description':'letter of intent'})[0],0)

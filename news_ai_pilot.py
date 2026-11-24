@@ -34,6 +34,32 @@ def explain_news(item, score):
         return 'En bindande order kan öka framtida intäkter och orderstock.', 'Kontrollera ordervärde relativt omsättning, leveranstid och lönsamhet.'
     return 'Ett regulatoriskt godkännande kan minska kommersiell osäkerhet.', 'Kontrollera villkor, marknadsstorlek och tid till intäkter.'
 
+def candidate_kind(quote):
+    age = quote.get('last_candle_age_minutes')
+    signal = quote.get('signal') or {}
+    if (not quote.get('error') and quote.get('candles')
+            and isinstance(age, (int, float)) and 0 <= age <= 20
+            and signal.get('kind') == 'KÖP-KANDIDAT'):
+        return 'KÖP-KANDIDAT (FÖRDRÖJD)'
+    return 'NYHET-VAKTA'
+
+def smart_exit(entry, peak, current, stop_pct=1.0, trail_pct=1.0):
+    if min(entry, peak, current, stop_pct, trail_pct) <= 0 or peak < entry:
+        raise ValueError('Ogiltiga priser eller riskgränser')
+    if current <= entry * (1 - stop_pct / 100):
+        return 'STOPP'
+    if peak >= entry * 1.02 and current <= peak * (1 - trail_pct / 100):
+        return 'SMART EXIT'
+    return 'BEHÅLL'
+
+def simulated_result(entry, exit_price, quantity, fee=0, slippage_pct=0):
+    if min(entry, exit_price, quantity) <= 0 or min(fee, slippage_pct) < 0 or slippage_pct >= 100:
+        raise ValueError('Ogiltiga affärsvärden')
+    cost = entry * quantity * (1 + slippage_pct / 100) + fee
+    proceeds = exit_price * quantity * (1 - slippage_pct / 100) - fee
+    return {'net_sek': round(proceeds - cost, 2),
+            'net_pct': round(100 * (proceeds - cost) / cost, 2)}
+
 async def run_news_pilot(config, now=None, fetch=None, quote=None, max_age_hours=24):
     now = now or datetime.now(timezone.utc)
     eligible = [c for c in config['companies']
@@ -62,7 +88,7 @@ async def run_news_pilot(config, now=None, fetch=None, quote=None, max_age_hours
                 quotes[name] = {'candles': [], 'error': type(exc).__name__}
         q = quotes[name]
         item['quote'] = q
-        item['kind'] = 'NYHET-VAKTA'
+        item['kind'] = candidate_kind(q)
         item['economic_case'], item['risk'] = explain_news(item, item['score'])
     return {'candidates': list(candidates.values()), 'eligible_count': len(eligible),
             'failures': failures, 'diagnostics': diagnostics, 'quote_count': len(quotes)}

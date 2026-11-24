@@ -92,3 +92,48 @@ async def run_news_pilot(config, now=None, fetch=None, quote=None, max_age_hours
         item['economic_case'], item['risk'] = explain_news(item, item['score'])
     return {'candidates': list(candidates.values()), 'eligible_count': len(eligible),
             'failures': failures, 'diagnostics': diagnostics, 'quote_count': len(quotes)}
+
+
+def update_paper_journal(journal, candidates, observations, fee=0, slippage_pct=0.1):
+    """Update caller-owned state; delayed paper observations only."""
+    import math
+    positions = journal.setdefault('positions', {})
+    closed = journal.setdefault('closed', [])
+    seen = journal.setdefault('seen', [])
+    events = []
+    for name, q in observations.items():
+        p = positions.get(name)
+        if not p or q.get('error'):
+            continue
+        for candle in sorted(q.get('candles', []), key=lambda c: c['time']):
+            stamp = candle['time'].isoformat()
+            price = float(candle['close'])
+            if stamp <= p['last_time'] or not math.isfinite(price) or price <= 0:
+                continue
+            p['last_time'] = stamp
+            p['peak'] = max(p['peak'], price)
+            decision = smart_exit(p['entry'], p['peak'], price)
+            if decision != 'BEHÅLL':
+                trade = dict(p, exit_price=price, exit_time=stamp, exit_reason=decision,
+                             **simulated_result(p['entry'], price, p['quantity'], fee, slippage_pct))
+                closed.append(trade)
+                del positions[name]
+                events.append(dict(company=name, kind=decision, time=stamp))
+                break
+    for item in candidates:
+        name = item['company']
+        if item['kind'] != 'KÖP-KANDIDAT (FÖRDRÖJD)' or name in positions or item['id'] in seen:
+            continue
+        q = item['quote']
+        if candidate_kind(q) != item['kind']:
+            continue
+        candle = max(q['candles'], key=lambda c: c['time'])
+        price = float(candle['close'])
+        if not math.isfinite(price) or price <= 0 or price > 5000:
+            continue
+        stamp = candle['time'].isoformat()
+        positions[name] = dict(company=name, entry=price, peak=price, quantity=int(5000 // price),
+                               last_time=stamp, entry_time=stamp, news_id=item['id'])
+        seen.append(item['id'])
+        events.append(dict(company=name, kind='SIMULERAT KÖP', time=stamp))
+    return events

@@ -26,6 +26,11 @@ a,b,c = st.columns(3)
 a.metric('Verifierat segment i listan', result['eligible_count'])
 b.metric('Intressanta nyheter', len(result['candidates']))
 c.metric('Aktier med begärd kursdata', result['quote_count'])
+config = load_config()
+covered = sum(bool(c.get('feeds')) for c in config['companies'] if c.get('segment_verified') and c.get('segment') in ('Mid Cap', 'Small Cap'))
+st.caption(f'Konfigurerade nyhetskällor: {covered}/{result["eligible_count"]} verifierade bolag')
+if not config.get('universe_complete'):
+    st.warning('Bolagslistan är ofullständig; siffrorna avser endast pilotlistan.')
 if not result['eligible_count']:
     st.warning('Bolagsuniversum ännu inte verifierat. Ingen aktiv bevakning.')
 elif result['failures']:

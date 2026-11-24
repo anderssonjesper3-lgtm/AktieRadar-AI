@@ -1,6 +1,6 @@
 import unittest
 from datetime import datetime, timezone
-from news_ai_pilot import run_news_pilot, score_news
+from news_ai_pilot import run_news_pilot, score_news, explain_news
 
 class NewsPilotTests(unittest.IsolatedAsyncioTestCase):
     async def test_only_interesting_verified_issuer_fetches_quotes(self):
@@ -25,6 +25,11 @@ class NewsPilotTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(len(result['candidates']), 1)
         self.assertEqual(calls, ['Testbolag'])
         self.assertEqual(result['candidates'][0]['kind'], 'NYHET-VAKTA')
+
+    def test_economic_explanation(self):
+        case, risk = explain_news({'title':'Testbolag receives order'}, 70)
+        self.assertIn('intäkter', case)
+        self.assertIn('ordervärde', risk)
 
     def test_risk_overrides_positive(self):
         self.assertEqual(score_news({'title':'Receives order', 'description':'letter of intent'})[0],0)

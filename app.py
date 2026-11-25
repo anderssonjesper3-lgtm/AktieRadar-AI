@@ -57,6 +57,24 @@ for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','M
         st.write(item['economic_case'])
         st.markdown('**Risk att kontrollera**')
         st.write(item['risk'])
+        profile = item.get('company_profile', {})
+        if profile:
+            st.markdown('**Bolagsinformation**')
+            for key, label in [('totalRevenue','Omsättning'),('marketCap','Börsvärde'),('totalCash','Kassa'),('totalDebt','Skulder')]:
+                value = profile.get(key)
+                if isinstance(value,(int,float)):
+                    currency = profile.get('currency' if key=='marketCap' else 'financialCurrency') or 'valuta okänd'
+                    st.write(f'{label}: {value/1e6:,.1f} miljoner {currency}')
+            if profile.get('industry'):
+                st.write(profile['industry'])
+            if profile.get('source'):
+                st.link_button('Bolagsdata · Yahoo Finance',profile['source'])
+            if profile.get('status') != 'ok':
+                st.caption('Bolagsdata saknas eller är ofullständig.')
+            comparison = item.get('order_comparison')
+            if comparison:
+                st.write(f"Belopp relativt omsättning: {comparison['revenue_ratio_pct']} %")
+                st.caption(comparison['note'])
         st.link_button('Originalkälla', item['url'])
         st.caption('Regelbaserad rubrikbedömning, inte kursprognos.')
 with st.expander('Källkontroll'):

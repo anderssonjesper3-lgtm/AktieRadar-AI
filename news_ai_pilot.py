@@ -169,7 +169,7 @@ def assess_impact(item):
         return dict(direction='Positiv', importance='Möjligen hög', economic_case=case, risk=risk)
     return dict(direction='Oklar', importance='Ej fastställd', economic_case='Rubriken räcker inte för att fastställa ekonomisk påverkan.', risk='Läs originalmeddelandet och kontrollera finansiella uppgifter.')
 
-def run_news_only(config, now=None, fetch=None, max_age_hours=24):
+def run_news_only(config, now=None, fetch=None, max_age_hours=24, profile_fetch=None):
     eligible = [c for c in config['companies'] if c.get('segment_verified') is True
                 and c.get('segment') in ('Mid Cap', 'Small Cap')]
     matches, failures, diagnostics = scan_detailed(
@@ -179,6 +179,18 @@ def run_news_only(config, now=None, fetch=None, max_age_hours=24):
         key = (item['company'], ' '.join(item['title'].casefold().split()))
         if key not in unique:
             unique[key] = dict(item, **assess_impact(item))
+    from company_context import company_profile, order_comparison
+    companies = {c['name']: c for c in eligible}
+    profiles = {}
+    for item in unique.values():
+        if item['direction'] == 'Oklar':
+            continue
+        name = item['company']
+        if name not in profiles:
+            # Synthetic news tests never require external financial requests.
+            profiles[name] = (profile_fetch or company_profile)(companies[name]) if fetch is None or profile_fetch else {'status':'not requested'}
+        item['company_profile'] = profiles[name]
+        item['order_comparison'] = order_comparison(item, profiles[name])
     return dict(items=sorted(unique.values(), key=lambda x: x['published'], reverse=True),
                 eligible_count=len(eligible), failures=failures, diagnostics=diagnostics,
                 duplicates=len(matches)-len(unique), quote_count=0)

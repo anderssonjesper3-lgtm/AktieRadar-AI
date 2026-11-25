@@ -2,6 +2,8 @@ import pandas as pd
 import streamlit as st
 from news_scanner import load_config
 from news_ai_pilot import run_news_only
+from news_monitor import interval_minutes
+from datetime import datetime, timezone
 
 st.set_page_config(page_title='AktieRadar News AI', page_icon='📡', layout='wide')
 st.title('📡 AktieRadar News AI')
@@ -47,4 +49,6 @@ for item in result['items']:
 with st.expander('Källkontroll'):
     st.write(f"Dubbletter: {result['duplicates']}")
     st.dataframe(pd.DataFrame(result['diagnostics']))
-st.caption('Uppdatering vid öppning eller knapptryckning. Cache 5 minuter; ingen bakgrundsbevakning ännu.')
+st.subheader('Bevakningsschema · svensk tid')
+st.table(pd.DataFrame([('07.00–09.30', '5 min'), ('09.30–16.30', '10 min'), ('16.30–18.00', '5 min'), ('18.00–07.00', '15 min')], columns=['Tid', 'Intervall']))
+st.caption(f"Planerat intervall just nu: {interval_minutes(datetime.now(timezone.utc))} min. Bakgrundsschemat aktiveras först på huvudgrenen. Manuell uppdatering finns alltid.")

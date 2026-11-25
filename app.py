@@ -18,7 +18,7 @@ st.markdown("""<style>
 [data-testid="stCaptionContainer"] p {color:#d1dbe8 !important;}
 </style>""", unsafe_allow_html=True)
 st.title('📡 AktieRadar News AI')
-st.caption('Stockholm Mid Cap & Small Cap · Nyhetspilot')
+st.caption('Stockholm Mid Cap & Small Cap · Nyhetsradar')
 st.info('Nyheter och ekonomisk bedömning. Ingen kursinsamling eller handel i denna version.')
 
 @st.cache_data(ttl=300, show_spinner=False)
@@ -37,11 +37,14 @@ except Exception as exc:
 config = load_config()
 covered = sum(bool(c.get('feeds')) for c in config['companies'] if c.get('segment_verified') and c.get('segment') in ('Mid Cap', 'Small Cap'))
 a,b,c = st.columns(3)
-a.metric('Bolag i pilotlistan', result['eligible_count'])
+a.metric('Bolag i bevakningslistan', result['eligible_count'])
+mid_count = sum(c.get('segment') == 'Mid Cap' and c.get('segment_verified') for c in config['companies'])
+small_count = sum(c.get('segment') == 'Small Cap' and c.get('segment_verified') for c in config['companies'])
+st.caption(f'Mid Cap: {mid_count} · Small Cap: {small_count}')
 b.metric('Gemensamma källor', len(config.get('shared_feeds', [])))
 c.metric('Nyheter senaste 24 h', len(result['items']))
 if not config.get('universe_complete'):
-    st.warning('Ofullständig bolagstäckning. Gemensam Cision-källa är experimentell.')
+    st.warning('Utökad bevakningslista. Fullständig börs- och nyhetskälletäckning är inte verifierad.')
 if result['failures']:
     st.warning('Källfel: bevakningen är ofullständig.')
 if not result['items']:

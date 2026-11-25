@@ -182,8 +182,15 @@ def run_news_only(config, now=None, fetch=None, max_age_hours=24, profile_fetch=
     from company_context import company_profile, order_comparison
     companies = {c['name']: c for c in eligible}
     profiles = {}
+    from article_context import read_article, article_facts
     for item in unique.values():
-        if item['direction'] == 'Oklar':
+        article = read_article(item['url']) if fetch is None else {'status':'not requested'}
+        item['article_status'] = article['status']
+        item['article_facts'] = article_facts(item['title'], article)
+        if article['status'] == 'ok':
+            enriched = dict(item, description=article['text'])
+            item.update(assess_impact(enriched))
+        if item['direction'] == 'Oklar' and article['status'] != 'ok':
             continue
         name = item['company']
         if name not in profiles:

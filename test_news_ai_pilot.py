@@ -119,3 +119,13 @@ class ScheduleTests(unittest.TestCase):
                 stamp = datetime(2026,month,15,hour,minute,tzinfo=tz).astimezone(timezone.utc)
                 self.assertEqual(interval_minutes(stamp), expected)
                 self.assertEqual(scheduled_due(stamp), minute % expected == 0)
+
+
+class CompanyContextTests(unittest.TestCase):
+    def test_order_comparison(self):
+        from company_context import order_comparison
+        item = {'title':'Bolaget får order på 100 MSEK'}
+        profile = {'totalRevenue':250000000,'financialCurrency':'SEK'}
+        self.assertEqual(order_comparison(item,profile)['revenue_ratio_pct'],40)
+        self.assertIsNone(order_comparison(item,dict(profile,financialCurrency='USD')))
+        self.assertIsNone(order_comparison(item,{}))

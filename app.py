@@ -19,7 +19,7 @@ st.markdown("""<style>
 </style>""", unsafe_allow_html=True)
 st.title('📡 AktieRadar News AI')
 st.caption('Stockholm Mid Cap & Small Cap · Nyhetsradar')
-st.info('Nyheter och ekonomisk bedömning. Ingen kursinsamling eller handel i denna version.')
+
 
 @st.cache_data(ttl=300, show_spinner=False)
 def snapshot():
@@ -44,11 +44,11 @@ st.caption(f'Mid Cap: {mid_count} · Small Cap: {small_count}')
 b.metric('Gemensamma källor', len(config.get('shared_feeds', [])))
 c.metric('Nyheter senaste 24 h', len(result['items']))
 if not config.get('universe_complete'):
-    st.warning('Utökad bevakningslista. Fullständig börs- och nyhetskälletäckning är inte verifierad.')
+    st.caption('Fullständig nyhetstäckning är inte verifierad.')
 if result['failures']:
-    st.warning('Källfel: bevakningen är ofullständig.')
+    st.write('⚠️ Källfel: bevakningen är ofullständig.')
 if not result['items']:
-    st.info('Inga matchade nyheter vid senaste kontrollen.')
+    st.write('Inga matchade nyheter vid senaste kontrollen.')
 st.subheader('Senaste nyhetsspår')
 for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','Möjligen hög'), x['published']), reverse=True):
     with st.container(border=True):

@@ -1,33 +1,25 @@
-# AktieRadar AI – Saab B v0.2
+# AktieRadar News AI – pilot
 
-En webbaserad Streamlit-prototyp som översätter användarens **Saab B Momentum Scanner v1** från Pine Script v6 till Python.
-
-## Vad den gör
-- EMA 9/21, Wilder RSI 14, MACD 12/26/9 och volym-SMA 20.
-- Bullish engulfing, hammer, 15-minuterstrend och poängsystemet 0–100.
-- VAKTA-händelser och KÖP på avslutade femminutersstaplar.
-- Graf och export av signaler.
-- Syntetisk demodata, eller valfri CSV med femminuterskurser.
+Nyhetsdriven Streamlit-prototyp för Nasdaq Stockholm Mid Cap och Small Cap. Inga automatiska order.
 
 ## Starta lokalt
-Installera Python (helst 3.10+) och kör i projektmappen:
 
 ```bash
-python3 -m pip install -r requirements.txt
-python3 -m streamlit run app.py
+python -m pip install -r requirements.txt
+python -m streamlit run app.py
 ```
 
-## Publicera som webbsida
-Lägg `app.py`, `scanner.py` och `requirements.txt` i ett privat eller publikt GitHub-repo. Skapa sedan en app på Streamlit Community Cloud och välj `app.py` som startfil. Publicering och kostnader beror på tjänstens aktuella villkor. Ladda inte upp privata kontouppgifter eller känsliga CSV-filer i ett publikt repo.
+## Funktioner
+- `news_watchlist.json`: bolag, segmentverifiering och konfigurerade nyhetskällor. Endast verifierade segment aktiveras.
+- `news_scanner.py`: nyhetsinsamling, tidsfilter, källdiagnostik och dubblettfilter.
+- `news_ai_pilot.py`: regelbaserad katalysatorbedömning, ekonomisk motivering, risk och villkorade köpkandidater. Kursfel blockerar inte nyhetsbedömningen.
+- `multi_engine.py`: återanvänd kursmotor; kursdata hämtas för relevanta kandidater och öppna simulerade positioner.
+- `app.py`: nyhetskort, källkontroll och experimentell sessionsjournal.
 
-## CSV-format
-```csv
-timestamp,open,high,low,close,volume
-2026-11-12 09:00:00,100.0,100.2,99.8,100.1,5000
-2026-11-12 09:05:00,100.1,100.5,100.0,100.4,7200
-```
+## Begränsningar före publicering
 
-Använd verkliga **5-minuters OHLCV-staplar**, där `timestamp` är stapelns **starttid** i svensk lokal börstid. Behåll minst några dagars historik för indikatoruppvärmning. Ladda bara upp avslutade staplar för att jämföra signalerna med TradingView. Marknadsdata och rättigheter måste kontrolleras separat.
+Bolagslistan är inte fullständig. Källornas faktiska täckning och användningsvillkor måste verifieras. Regelpoäng är inte sannolikheter och analysen omfattar inte nödvändigtvis hela pressmeddelandet. Kursdata kan vara fördröjd; köp kräver kursobservation efter publicering och högst 20 minuters ålder. Simulerade resultat är inte exekverbara priser. Smart Exit har riskstopp och följer uppgångar över 2 procent utan fast vinsthemtagning. Journalen är sessionsbaserad, inte permanent. Automatisk bakgrundsbevakning och Telegram är ännu inte anslutna till piloten.
 
-## Viktiga begränsningar
-Ingen realtidskälla, ingen Avanza-inloggning, ingen orderläggning och inga historiska vinst-/förlustberäkningar. Syntetiska kurser och signaler är enbart test. TradingViews exakta indikatorstartvärden och sessionsregler kan ge små skillnader; jämför mot Pine innan användning. VAKTA kan intrabar fladdra i TradingView; den här versionen beräknar endast avslutade staplar.
+## Test och driftsättning
+
+Kör `python -m pytest` lokalt; äldre tester kan fortfarande finnas i grenen. Kontrollera pilotens GitHub Actions-resultat separat. För Streamlit Community Cloud ska pilotgrenen `news-ai-pilot` och startfilen `app.py` väljas. Detta dokument bekräftar inte att en driftsättning har genomförts. Publicera inga autentiseringsuppgifter eller privata data. Äldre scannerjobb måste avvecklas separat vid övergången.

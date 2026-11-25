@@ -3,6 +3,7 @@ import hashlib
 import json
 import re
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 from email.utils import parsedate_to_datetime
 from html import unescape
 from html.parser import HTMLParser
@@ -156,6 +157,8 @@ class _CompanyNewsHTMLParser(HTMLParser):
 
 def extract_items(xml_bytes, source_url=None):
     raw = xml_bytes.decode('utf-8', errors='replace') if isinstance(xml_bytes, bytes) else str(xml_bytes)
+    if urlparse(source_url or '').hostname == 'news.cision.com' and ('<html' in raw[:3000].casefold() or '<!doctype html' in raw[:3000].casefold()):
+        return extract_cision_html(raw, source_url)
     if '<html' in raw[:3000].casefold() or '<!doctype html' in raw[:3000].casefold():
         parser = _CompanyNewsHTMLParser(source_url or 'https://example.invalid/')
         parser.feed(raw)
@@ -245,11 +248,16 @@ def scan_detailed(config=None, now=None, fetch=None, max_age_hours=24):
     results = []
     failures = []
     diagnostics = []
+    shared = set(config.get('shared_feeds', []))
+    for url in shared:
+        feed_companies[url] = config['companies']
     for url, companies in feed_companies.items():
         try:
             items = extract_items(fetch(url), source_url=url)
             raw_count = len(items)
-            if len(companies) == 1 and companies[0].get('source_type') == 'official_investor_relations':
+            if url in shared and not items:
+                raise ValueError('Shared feed returned no parseable entries')
+            if url not in shared and len(companies) == 1 and companies[0].get('source_type') == 'official_investor_relations':
                 items = [dict(item, _feed_company=companies[0]['name']) for item in items]
         except Exception as exc:
             names = ', '.join(company['name'] for company in companies)
@@ -284,3 +292,38 @@ def scan_detailed(config=None, now=None, fetch=None, max_age_hours=24):
 def scan(config=None, now=None, fetch=None, max_age_hours=24):
     matches, failures, _ = scan_detailed(config=config, now=now, fetch=fetch, max_age_hours=max_age_hours)
     return matches, failures
+
+
+def extract_cision_html(raw, source_url):
+    """Match a headline to a timestamp within the same anchor, never a nearby article."""
+    class Parser(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=True)
+            self.active = None
+            self.items = []
+        def handle_starttag(self, tag, attrs):
+            if tag == 'a':
+                self.active = [dict(attrs).get('href', ''), []]
+        def handle_data(self, data):
+            if self.active is not None:
+                self.active[1].append(data)
+        def handle_endtag(self, tag):
+            if tag != 'a' or self.active is None:
+                return
+            href, parts = self.active
+            self.active = None
+            link = urljoin(source_url, href)
+            if urlparse(link).hostname != 'news.cision.com' or ',c' not in link:
+                return
+            body = ' '.join(' '.join(parts).split())
+            match = re.search(r'(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s+([A-Za-z]{3}\s+\d{1,2},\s+20\d{2}\s+\d{2}:\d{2})\s+(?:CET|CEST)', body)
+            if not match:
+                return
+            date = datetime.strptime(match.group(1), '%b %d, %Y %H:%M').replace(tzinfo=ZoneInfo('Europe/Stockholm')).astimezone(timezone.utc)
+            title = body[:match.start()].strip()
+            if title:
+                self.items.append(dict(title=title, link=link, date=date,
+                    description=body[match.end():].strip(), metadata=urlparse(link).path))
+    parser = Parser()
+    parser.feed(raw)
+    return parser.items

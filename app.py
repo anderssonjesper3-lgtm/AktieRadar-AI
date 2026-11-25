@@ -57,12 +57,14 @@ for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','M
         st.write({'Positiv':'🟢','Negativ':'🔴','Blandad':'🟡','Osäker':'🟡'}.get(item['direction'],'⚪') + ' ' + item['direction'])
         st.caption(f"Publicerad: {item['published']} · {item['direction']} · Betydelse: {item['importance']}")
         st.caption('Originaltext: '+('Hämtad' if item.get('article_status')=='ok' else 'Ej tillgänglig eller ej verifierad'))
+        st.markdown('**Vad har hänt?**')
+        st.write(item.get('summary_sv','Svensk sammanfattning saknas.'))
         facts = item.get('article_facts',{})
         if facts.get('excerpts'):
-            st.markdown('**Viktiga uppgifter ur originalnyheten**')
-            for excerpt in facts['excerpts']:
-                st.write(excerpt)
-            st.caption(facts['note'])
+            with st.expander('Viktiga uppgifter ur originalnyheten'):
+                for excerpt in facts['excerpts']:
+                    st.write(excerpt)
+                st.caption(facts['note'])
         st.markdown('**Ekonomisk påverkan**')
         st.write(item['economic_case'])
         st.markdown('**Risk att kontrollera**')

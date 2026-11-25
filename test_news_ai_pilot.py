@@ -87,3 +87,23 @@ class NewsOnlyTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class SharedNewsTests(unittest.TestCase):
+    def test_shared_cision_single_fetch_and_impact(self):
+        from news_ai_pilot import run_news_only
+        url = 'https://news.cision.com/'
+        html = '<html><a href="/ovzon/r/contract,c123">Ovzon awarded contract Wed, Nov 25, 2026 09:05 CET Contract value disclosed</a></html>'
+        calls = []
+        def fetch(link):
+            calls.append(link)
+            return html.encode()
+        config = {'shared_feeds': [url], 'companies': [
+            {'name': 'Ovzon', 'aliases': ['Ovzon'], 'segment': 'Mid Cap', 'segment_verified': True},
+            {'name': 'MilDef', 'aliases': ['MilDef'], 'segment': 'Mid Cap', 'segment_verified': True}]}
+        result = run_news_only(config, now=datetime(2026,11,25,10,tzinfo=timezone.utc), fetch=fetch)
+        self.assertEqual(calls, [url])
+        self.assertEqual(len(result['items']), 1)
+        self.assertEqual(result['items'][0]['company'], 'Ovzon')
+        self.assertEqual(result['items'][0]['direction'], 'Positiv')
+        self.assertEqual(result['quote_count'], 0)

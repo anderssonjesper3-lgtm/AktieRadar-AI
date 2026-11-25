@@ -107,3 +107,15 @@ class SharedNewsTests(unittest.TestCase):
         self.assertEqual(result['items'][0]['company'], 'Ovzon')
         self.assertEqual(result['items'][0]['direction'], 'Positiv')
         self.assertEqual(result['quote_count'], 0)
+
+
+class ScheduleTests(unittest.TestCase):
+    def test_intervals(self):
+        from news_monitor import interval_minutes, scheduled_due
+        from zoneinfo import ZoneInfo
+        tz = ZoneInfo('Europe/Stockholm')
+        for month in (1, 7):
+            for hour, minute, expected in [(6,59,15),(7,0,5),(9,29,5),(9,30,10),(16,29,10),(16,30,5),(18,0,15)]:
+                stamp = datetime(2026,month,15,hour,minute,tzinfo=tz).astimezone(timezone.utc)
+                self.assertEqual(interval_minutes(stamp), expected)
+                self.assertEqual(scheduled_due(stamp), minute % expected == 0)

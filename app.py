@@ -6,6 +6,14 @@ from news_monitor import interval_minutes
 from datetime import datetime, timezone
 
 st.set_page_config(page_title='AktieRadar News AI', page_icon='📡', layout='wide')
+st.markdown("""<style>
+.stApp {background:#101b2b;color:#f1f5f9;}
+[data-testid="stHeader"] {background:#101b2b;}
+.stApp p,.stApp label,.stApp h1,.stApp h2,.stApp h3,[data-testid="stMetricValue"],[data-testid="stMetricLabel"] {color:#f1f5f9;}
+[data-testid="stCaptionContainer"] p {color:#cbd5e1;}
+.stButton button,.stLinkButton a {background:#e2e8f0;color:#10243b;border-radius:10px;}
+.stButton button p,.stLinkButton a p {color:#10243b;}
+</style>""", unsafe_allow_html=True)
 st.title('📡 AktieRadar News AI')
 st.caption('Stockholm Mid Cap & Small Cap · Nyhetspilot')
 st.info('Nyheter och ekonomisk bedömning. Ingen kursinsamling eller handel i denna version.')
@@ -35,10 +43,12 @@ if result['failures']:
     st.warning('Källfel: bevakningen är ofullständig.')
 if not result['items']:
     st.info('Inga matchade nyheter vid senaste kontrollen.')
-for item in result['items']:
+st.subheader('Senaste nyhetsspår')
+for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','Möjligen hög'), x['published']), reverse=True):
     with st.container(border=True):
         st.subheader(item['company'])
-        st.write(item['title'])
+        st.markdown('**'+item['title']+'**')
+        st.write({'Positiv':'🟢','Negativ':'🔴','Blandad':'🟡','Osäker':'🟡'}.get(item['direction'],'⚪') + ' ' + item['direction'])
         st.caption(f"Publicerad: {item['published']} · {item['direction']} · Betydelse: {item['importance']}")
         st.markdown('**Ekonomisk påverkan**')
         st.write(item['economic_case'])

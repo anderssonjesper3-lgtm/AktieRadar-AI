@@ -1,13 +1,13 @@
 import argparse
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from news_scanner import load_config
 from news_ai_pilot import run_news_only
 
 def alert_text(item):
-    return ('NYHETSSPÅR | ' + item['company'] + '\n' + item['title'] + '\n'
+    return ('🔔 NY BOLAGSNYHET | ' + item['company'] + '\n' + item['title'] + '\n'
             + 'Bedömning: ' + item['direction'] + '\n' + item['economic_case']
             + '\nRisk: ' + item['risk'] + '\n' + item['url']
             + '\nRegelbaserad bedömning – inte köpsignal.')
@@ -44,7 +44,7 @@ def main():
         state = Path(args.state)
         seen = set(json.loads(state.read_text())) if state.exists() else set()
         for item in result['items']:
-            if item['direction'] == 'Oklar' or item['id'] in seen:
+            if item['id'] in seen or not timedelta(0) <= datetime.now(timezone.utc)-item['published'] <= timedelta(hours=12):
                 continue
             telegram_send(alert_text(item))
             seen.add(item['id'])

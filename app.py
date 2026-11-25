@@ -25,10 +25,10 @@ config = load_config()
 covered = sum(bool(c.get('feeds')) for c in config['companies'] if c.get('segment_verified') and c.get('segment') in ('Mid Cap', 'Small Cap'))
 a,b,c = st.columns(3)
 a.metric('Bolag i pilotlistan', result['eligible_count'])
-b.metric('Bolag med källa', covered)
+b.metric('Gemensamma källor', len(config.get('shared_feeds', [])))
 c.metric('Nyheter senaste 24 h', len(result['items']))
 if not config.get('universe_complete'):
-    st.warning('Ofullständig bolagstäckning. Gemensamma nyhetskällor ännu inte anslutna.')
+    st.warning('Ofullständig bolagstäckning. Gemensam Cision-källa är experimentell.')
 if result['failures']:
     st.warning('Källfel: bevakningen är ofullständig.')
 if not result['items']:

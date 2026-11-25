@@ -37,3 +37,24 @@ def article_facts(title, article):
     terms = r'\b(purchase[d]?|bought|sold|sale|acquired|disposed|köpt|sålt|förvärvat|avyttrat|order|contract|kontrakt|MSEK|million|miljoner|shares|aktier)\b'
     excerpts = [s.strip()[:600] for s in sentences if re.search(terms,s,re.I)][:4]
     return {'excerpts':excerpts,'note':'Utdrag ur originaltexten; transaktionens riktning och belopp måste framgå uttryckligen.'}
+
+
+def swedish_summary(item, article):
+    title = item.get('title','').casefold()
+    body = article.get('text','').casefold() if article.get('status') == 'ok' else ''
+    if any(x in title for x in ('notification of trade','insider','insyn')):
+        buy = bool(re.search(r'\b(purchased|purchase|bought|köpt)\b',body))
+        sell = bool(re.search(r'\b(sold|sale|sålt)\b',body))
+        direction = 'aktieköp' if buy and not sell else 'aktieförsäljning' if sell and not buy else 'oklar transaktionsriktning'
+        return 'Insynsanmälan: texten indikerar '+direction+'. Kontrollera originalet. En insynsaffär påverkar normalt inte bolagets intäkter direkt.'
+    for terms, summary in [
+        (('profit warning','vinstvarning','lowers guidance'),'Bolaget meddelar en vinstvarning eller sänkt prognos.'),
+        (('raises guidance','höjer prognosen'),'Bolaget meddelar en höjd prognos.'),
+        (('letter of intent','avsiktsförklaring'),'Nyheten gäller en avsiktsförklaring.'),
+        (('share issue','rights issue','nyemission'),'Nyheten gäller en aktieemission.'),
+        (('order','contract','kontrakt'),'Nyheten gäller en order eller ett avtal.'),
+        (('interim report','delårsrapport'),'Bolaget har publicerat en delårsrapport.'),
+        (('acquisition','förvärv'),'Nyheten gäller ett förvärv.')]:
+        if any(t in title for t in terms):
+            return summary+' '+item.get('economic_case','')
+    return 'Bolaget har publicerat ett meddelande. Innehållet kan inte sammanfattas säkert automatiskt; se originalutdragen.'

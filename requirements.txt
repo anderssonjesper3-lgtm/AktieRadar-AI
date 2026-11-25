@@ -7,3 +7,5 @@ plotly>=5.20,<7
 pytest>=8,<10
 
 yfinance>=0.2.65,<2
+
+beautifulsoup4>=4.12,<5

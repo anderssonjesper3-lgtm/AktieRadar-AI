@@ -150,3 +150,35 @@ def update_paper_journal(journal, candidates, observations, fee=0, slippage_pct=
         seen.append(item['id'])
         events.append(dict(company=name, kind='SIMULERAT KÖP', time=stamp))
     return events
+
+
+def assess_impact(item):
+    """Conservative headline-based assessment; not a price forecast."""
+    title = item.get('title', '').casefold()
+    rules = [
+        (('vinstvarning', 'profit warning', 'sänker prognosen', 'lowers guidance'), 'Negativ', 'Hög', 'Lägre förväntat resultat kan minska värderingen.', 'Kontrollera prognosändringens storlek.'),
+        (('nyemission', 'share issue', 'rights issue'), 'Blandad', 'Hög', 'Nytt kapital stärker likviditeten men kan späda ut ägandet.', 'Kontrollera emissionsvillkor och kapitalbehov.'),
+        (('avsiktsförklaring', 'letter of intent', 'non-binding', 'icke-bindande'), 'Osäker', 'Medel', 'Möjlig framtida affär, ännu inte säkerställda intäkter.', 'Kontrollera bindande avtal.'),
+    ]
+    for phrases, direction, importance, case, risk in rules:
+        if any(p in title for p in phrases):
+            return dict(direction=direction, importance=importance, economic_case=case, risk=risk)
+    score, reason = score_news(item)
+    if score >= 70:
+        case, risk = explain_news(item, score)
+        return dict(direction='Positiv', importance='Möjligen hög', economic_case=case, risk=risk)
+    return dict(direction='Oklar', importance='Ej fastställd', economic_case='Rubriken räcker inte för att fastställa ekonomisk påverkan.', risk='Läs originalmeddelandet och kontrollera finansiella uppgifter.')
+
+def run_news_only(config, now=None, fetch=None, max_age_hours=24):
+    eligible = [c for c in config['companies'] if c.get('segment_verified') is True
+                and c.get('segment') in ('Mid Cap', 'Small Cap')]
+    matches, failures, diagnostics = scan_detailed(
+        {'companies': eligible}, now=now, fetch=fetch, max_age_hours=max_age_hours)
+    unique = {}
+    for item in matches:
+        key = (item['company'], ' '.join(item['title'].casefold().split()))
+        if key not in unique:
+            unique[key] = dict(item, **assess_impact(item))
+    return dict(items=sorted(unique.values(), key=lambda x: x['published'], reverse=True),
+                eligible_count=len(eligible), failures=failures, diagnostics=diagnostics,
+                duplicates=len(matches)-len(unique), quote_count=0)

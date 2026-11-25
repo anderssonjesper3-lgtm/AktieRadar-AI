@@ -204,5 +204,8 @@
       "segment_source": "https://attachment.news.eu.nasdaq.com/a3f02bcd5d42f4f2e8687516fb6bfcefa",
       "segment_effective": "2026-08-31"
     }
+  ],
+  "shared_feeds": [
+    "https://news.cision.com/"
   ]
 }

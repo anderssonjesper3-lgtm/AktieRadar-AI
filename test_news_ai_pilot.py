@@ -65,5 +65,25 @@ class NewsPilotTests(unittest.IsolatedAsyncioTestCase):
     def test_risk_overrides_positive(self):
         self.assertEqual(score_news({'title':'Receives order', 'description':'letter of intent'})[0],0)
 
+
+class NewsOnlyTests(unittest.TestCase):
+    def test_impact_directions(self):
+        from news_ai_pilot import assess_impact
+        for title, direction in [('Bolaget erhåller order', 'Positiv'),
+                                 ('Bolaget sänker prognosen', 'Negativ'),
+                                 ('Bolaget genomför nyemission', 'Blandad'),
+                                 ('Bolaget tecknar avsiktsförklaring', 'Osäker'),
+                                 ('Årsstämma', 'Oklar')]:
+            self.assertEqual(assess_impact({'title': title})['direction'], direction)
+
+    def test_no_price_requests(self):
+        from news_ai_pilot import run_news_only
+        from unittest.mock import patch
+        with patch('news_ai_pilot.analyze_company', side_effect=AssertionError('Unexpected price request')):
+            result = run_news_only({'companies': []})
+        self.assertEqual(result['quote_count'], 0)
+        self.assertEqual(result['items'], [])
+
+
 if __name__ == '__main__':
     unittest.main()

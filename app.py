@@ -13,6 +13,9 @@ st.markdown("""<style>
 [data-testid="stCaptionContainer"] p {color:#cbd5e1;}
 .stButton button,.stLinkButton a {background:#e2e8f0;color:#10243b;border-radius:10px;}
 .stButton button p,.stLinkButton a p {color:#10243b;}
+[data-testid="stAlert"] {background:#23364b !important;color:#f1f5f9 !important;}
+[data-testid="stAlert"] * {color:#f1f5f9 !important;}
+[data-testid="stCaptionContainer"] p {color:#d1dbe8 !important;}
 </style>""", unsafe_allow_html=True)
 st.title('📡 AktieRadar News AI')
 st.caption('Stockholm Mid Cap & Small Cap · Nyhetspilot')
@@ -61,4 +64,4 @@ with st.expander('Källkontroll'):
     st.dataframe(pd.DataFrame(result['diagnostics']))
 st.subheader('Bevakningsschema · svensk tid')
 st.table(pd.DataFrame([('07.00–09.30', '5 min'), ('09.30–16.30', '10 min'), ('16.30–18.00', '5 min'), ('18.00–07.00', '15 min')], columns=['Tid', 'Intervall']))
-st.caption(f"Planerat intervall just nu: {interval_minutes(datetime.now(timezone.utc))} min. Bakgrundsschemat aktiveras först på huvudgrenen. Manuell uppdatering finns alltid.")
+st.caption(f"Planerat intervall just nu: {interval_minutes(datetime.now(timezone.utc))} min. Schemalagd kontroll körs separat. Appens vy uppdateras vid omladdning eller knapptryckning.")

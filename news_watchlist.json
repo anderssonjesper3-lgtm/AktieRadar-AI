@@ -203,6 +203,2226 @@
       "segment_verified": true,
       "segment_source": "https://attachment.news.eu.nasdaq.com/a3f02bcd5d42f4f2e8687516fb6bfcefa",
       "segment_effective": "2026-08-31"
+    },
+    {
+      "name": "AcadeMedia",
+      "ticker": "ACAD",
+      "aliases": [
+        "AcadeMedia"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Acast",
+      "ticker": "ACAST",
+      "aliases": [
+        "Acast"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Alligo",
+      "ticker": "ALLIGO B",
+      "aliases": [
+        "Alligo"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Ambea",
+      "ticker": "AMBEA",
+      "aliases": [
+        "Ambea"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Apotea",
+      "ticker": "APOTEA",
+      "aliases": [
+        "Apotea"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Arctic Paper",
+      "ticker": "ARP",
+      "aliases": [
+        "Arctic Paper"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Arjo",
+      "ticker": "ARJO B",
+      "aliases": [
+        "Arjo"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Attendo",
+      "ticker": "ATT",
+      "aliases": [
+        "Attendo"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Avarda Bank",
+      "ticker": "AVARDA",
+      "aliases": [
+        "Avarda Bank"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Bergman & Beving",
+      "ticker": "BERG B",
+      "aliases": [
+        "Bergman & Beving"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Besqab",
+      "ticker": "BESQAB",
+      "aliases": [
+        "Besqab"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "BHG Group",
+      "ticker": "BHG",
+      "aliases": [
+        "BHG Group"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "BICO Group",
+      "ticker": "BICO",
+      "aliases": [
+        "BICO Group"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "BioGaia",
+      "ticker": "BIOG B",
+      "aliases": [
+        "BioGaia"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "BioInvent",
+      "ticker": "BINV",
+      "aliases": [
+        "BioInvent"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Bonava",
+      "ticker": "BONAV B",
+      "aliases": [
+        "Bonava"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Boozt",
+      "ticker": "BOOZT",
+      "aliases": [
+        "Boozt"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Brinova Fastigheter",
+      "ticker": "BRIN B",
+      "aliases": [
+        "Brinova Fastigheter"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "BTS Group",
+      "ticker": "BTS B",
+      "aliases": [
+        "BTS Group"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Byggmax",
+      "ticker": "BMAX",
+      "aliases": [
+        "Byggmax"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Catella",
+      "ticker": "CAT B",
+      "aliases": [
+        "Catella"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Cavotec",
+      "ticker": "CCC",
+      "aliases": [
+        "Cavotec"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "CellaVision",
+      "ticker": "CEVI",
+      "aliases": [
+        "CellaVision"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Cibus",
+      "ticker": "CIBUS",
+      "aliases": [
+        "Cibus"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Cloetta",
+      "ticker": "CLA B",
+      "aliases": [
+        "Cloetta"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Coor",
+      "ticker": "COOR",
+      "aliases": [
+        "Coor"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "CTT Systems",
+      "ticker": "CTT",
+      "aliases": [
+        "CTT Systems"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Diös Fastigheter",
+      "ticker": "DIOS",
+      "aliases": [
+        "Diös Fastigheter"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Duni",
+      "ticker": "DUNI",
+      "aliases": [
+        "Duni"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Dustin",
+      "ticker": "DUST",
+      "aliases": [
+        "Dustin"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Dynavox Group",
+      "ticker": "DYVOX",
+      "aliases": [
+        "Dynavox Group"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Eastnine",
+      "ticker": "EAST",
+      "aliases": [
+        "Eastnine"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Elanders",
+      "ticker": "ELAN B",
+      "aliases": [
+        "Elanders"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Emilshus",
+      "ticker": "EMIL B",
+      "aliases": [
+        "Emilshus"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Enea",
+      "ticker": "ENEA",
+      "aliases": [
+        "Enea"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Enity Holding",
+      "ticker": "ENITY",
+      "aliases": [
+        "Enity Holding"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Ependion",
+      "ticker": "EPEN",
+      "aliases": [
+        "Ependion"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Ework Group",
+      "ticker": "EWRK",
+      "aliases": [
+        "Ework Group"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Fagerhult",
+      "ticker": "FAG",
+      "aliases": [
+        "Fagerhult"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Fasadgruppen",
+      "ticker": "FG",
+      "aliases": [
+        "Fasadgruppen"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Flat Capital",
+      "ticker": "FLAT B",
+      "aliases": [
+        "Flat Capital"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Flerie",
+      "ticker": "FLERIE",
+      "aliases": [
+        "Flerie"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "FM Mattsson",
+      "ticker": "FMM B",
+      "aliases": [
+        "FM Mattsson"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Genova Property Group",
+      "ticker": "GPG",
+      "aliases": [
+        "Genova Property Group"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Gentoo Media",
+      "ticker": "G2M",
+      "aliases": [
+        "Gentoo Media"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Green Landscaping",
+      "ticker": "GREEN",
+      "aliases": [
+        "Green Landscaping"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Hansa Biopharma",
+      "ticker": "HNSA",
+      "aliases": [
+        "Hansa Biopharma"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Hanza",
+      "ticker": "HANZA",
+      "aliases": [
+        "Hanza"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Heba Fastighets",
+      "ticker": "HEBA B",
+      "aliases": [
+        "Heba Fastighets"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Hexatronic",
+      "ticker": "HTRO",
+      "aliases": [
+        "Hexatronic"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Hoist Finance",
+      "ticker": "HOFI",
+      "aliases": [
+        "Hoist Finance"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Humana",
+      "ticker": "HUM",
+      "aliases": [
+        "Humana"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Humble Group",
+      "ticker": "HUMBLE",
+      "aliases": [
+        "Humble Group"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Instalco",
+      "ticker": "INSTAL",
+      "aliases": [
+        "Instalco"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Intea Fastigheter",
+      "ticker": "INTEA B",
+      "aliases": [
+        "Intea Fastigheter"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Intrum",
+      "ticker": "INTRUM",
+      "aliases": [
+        "Intrum"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Inwido",
+      "ticker": "INWI",
+      "aliases": [
+        "Inwido"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "ITAB Group",
+      "ticker": "ITAB",
+      "aliases": [
+        "ITAB Group"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "John Mattson",
+      "ticker": "JOMA",
+      "aliases": [
+        "John Mattson"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "K-Fast Holding",
+      "ticker": "KFAST B",
+      "aliases": [
+        "K-Fast Holding"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "KABE Group",
+      "ticker": "KABE B",
+      "aliases": [
+        "KABE Group"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Karnov Group",
+      "ticker": "KAR",
+      "aliases": [
+        "Karnov Group"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Knowit",
+      "ticker": "KNOW",
+      "aliases": [
+        "Knowit"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Lime Technologies",
+      "ticker": "LIME",
+      "aliases": [
+        "Lime Technologies"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Linc",
+      "ticker": "LINC",
+      "aliases": [
+        "Linc"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Linjemontage",
+      "ticker": "LMGAB",
+      "aliases": [
+        "Linjemontage"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Logistea",
+      "ticker": "LOGI B",
+      "aliases": [
+        "Logistea"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "MedCap",
+      "ticker": "MCAP",
+      "aliases": [
+        "MedCap"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "MEKO",
+      "ticker": "MEKO",
+      "aliases": [
+        "MEKO"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Meren Energy",
+      "ticker": "MER",
+      "aliases": [
+        "Meren Energy"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Momentum Group",
+      "ticker": "MMGR B",
+      "aliases": [
+        "Momentum Group"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Morrow Bank",
+      "ticker": "MORROW",
+      "aliases": [
+        "Morrow Bank"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Nederman",
+      "ticker": "NMAN",
+      "aliases": [
+        "Nederman"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Neobo Fastigheter",
+      "ticker": "NEOBO",
+      "aliases": [
+        "Neobo Fastigheter"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Net Insight",
+      "ticker": "NETI B",
+      "aliases": [
+        "Net Insight"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Nivika Fastigheter",
+      "ticker": "NIVI B",
+      "aliases": [
+        "Nivika Fastigheter"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Nobia",
+      "ticker": "NOBI",
+      "aliases": [
+        "Nobia"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Norion Bank",
+      "ticker": "NORION",
+      "aliases": [
+        "Norion Bank"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Orrön Energy",
+      "ticker": "ORRON",
+      "aliases": [
+        "Orrön Energy"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Platzer Fastigheter",
+      "ticker": "PLAZ B",
+      "aliases": [
+        "Platzer Fastigheter"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "PowerCell",
+      "ticker": "PCELL",
+      "aliases": [
+        "PowerCell"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Prisma Properties",
+      "ticker": "PRISMA",
+      "aliases": [
+        "Prisma Properties"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Proact IT Group",
+      "ticker": "PACT",
+      "aliases": [
+        "Proact IT Group"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Ratos",
+      "ticker": "RATO B",
+      "aliases": [
+        "Ratos"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "RaySearch Laboratories",
+      "ticker": "RAY B",
+      "aliases": [
+        "RaySearch Laboratories"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Rejlers",
+      "ticker": "REJL B",
+      "aliases": [
+        "Rejlers"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Revolution Race",
+      "ticker": "RVRC",
+      "aliases": [
+        "Revolution Race"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Rusta",
+      "ticker": "RUSTA",
+      "aliases": [
+        "Rusta"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Salix Group",
+      "ticker": "SALIX",
+      "aliases": [
+        "Salix Group"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Scandi Standard",
+      "ticker": "SCST",
+      "aliases": [
+        "Scandi Standard"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Sdiptech",
+      "ticker": "SDIP B",
+      "aliases": [
+        "Sdiptech"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Silex Microsystems",
+      "ticker": "SILEX",
+      "aliases": [
+        "Silex Microsystems"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Acrinova",
+      "ticker": "ACRI B",
+      "aliases": [
+        "Acrinova"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Actic",
+      "ticker": "ATIC",
+      "aliases": [
+        "Actic"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Active Biotech",
+      "ticker": "ACTI",
+      "aliases": [
+        "Active Biotech"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Alligator Bioscience",
+      "ticker": "ATORX",
+      "aliases": [
+        "Alligator Bioscience"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Annehem Fastigheter",
+      "ticker": "ANNE B",
+      "aliases": [
+        "Annehem Fastigheter"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Arla Plast",
+      "ticker": "ARPL",
+      "aliases": [
+        "Arla Plast"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Ascelia Pharma",
+      "ticker": "ACE",
+      "aliases": [
+        "Ascelia Pharma"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "B3 Consulting Group",
+      "ticker": "B3",
+      "aliases": [
+        "B3 Consulting Group"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Balco Group",
+      "ticker": "BALCO",
+      "aliases": [
+        "Balco Group"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "BE Group",
+      "ticker": "BEGR",
+      "aliases": [
+        "BE Group"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Berner Industrier",
+      "ticker": "BERNER B",
+      "aliases": [
+        "Berner Industrier"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Björn Borg",
+      "ticker": "BORG",
+      "aliases": [
+        "Björn Borg"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Bong",
+      "ticker": "BONG",
+      "aliases": [
+        "Bong"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Boule Diagnostics",
+      "ticker": "BOUL",
+      "aliases": [
+        "Boule Diagnostics"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Bulten",
+      "ticker": "BULTEN",
+      "aliases": [
+        "Bulten"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "C-RAD",
+      "ticker": "CRAD B",
+      "aliases": [
+        "C-RAD"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Cantargia",
+      "ticker": "CANTA",
+      "aliases": [
+        "Cantargia"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Carasent",
+      "ticker": "CARA",
+      "aliases": [
+        "Carasent"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Catena Media",
+      "ticker": "CTM",
+      "aliases": [
+        "Catena Media"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Concejo",
+      "ticker": "CNCJO B",
+      "aliases": [
+        "Concejo"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "CTEK",
+      "ticker": "CTEK",
+      "aliases": [
+        "CTEK"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Dedicare",
+      "ticker": "DEDI",
+      "aliases": [
+        "Dedicare"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Duroc",
+      "ticker": "DURC B",
+      "aliases": [
+        "Duroc"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Ellos Group",
+      "ticker": "ELLOS",
+      "aliases": [
+        "Ellos Group"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Elon",
+      "ticker": "ELON",
+      "aliases": [
+        "Elon"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Eltel",
+      "ticker": "ELTEL",
+      "aliases": [
+        "Eltel"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Enad Global 7",
+      "ticker": "EG7",
+      "aliases": [
+        "Enad Global 7"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Eniro Group",
+      "ticker": "ENRO",
+      "aliases": [
+        "Eniro Group"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Episurf Medical",
+      "ticker": "EPIS B",
+      "aliases": [
+        "Episurf Medical"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "EQL Pharma",
+      "ticker": "EQL",
+      "aliases": [
+        "EQL Pharma"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Fastator",
+      "ticker": "FASTAT",
+      "aliases": [
+        "Fastator"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Ferronordic",
+      "ticker": "FNM",
+      "aliases": [
+        "Ferronordic"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Fortinova Fastigheter",
+      "ticker": "FNOVA B",
+      "aliases": [
+        "Fortinova Fastigheter"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "G5 Entertainment",
+      "ticker": "G5EN",
+      "aliases": [
+        "G5 Entertainment"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Garo",
+      "ticker": "GARO",
+      "aliases": [
+        "Garo"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "HAKI Safety",
+      "ticker": "HAKI B",
+      "aliases": [
+        "HAKI Safety"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Havsfrun Investment",
+      "ticker": "HAV B",
+      "aliases": [
+        "Havsfrun Investment"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Image Systems",
+      "ticker": "IS",
+      "aliases": [
+        "Image Systems"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Immunovia",
+      "ticker": "IMMNOV",
+      "aliases": [
+        "Immunovia"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Infant Bacterial Therapeutics",
+      "ticker": "IBT B",
+      "aliases": [
+        "Infant Bacterial Therapeutics"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Infrea",
+      "ticker": "INFREA",
+      "aliases": [
+        "Infrea"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Inission",
+      "ticker": "INISS B",
+      "aliases": [
+        "Inission"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "INQ Group",
+      "ticker": "INQ",
+      "aliases": [
+        "INQ Group"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "IRLAB Therapeutics",
+      "ticker": "IRLAB A",
+      "aliases": [
+        "IRLAB Therapeutics"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Isofol Medical",
+      "ticker": "ISOFOL",
+      "aliases": [
+        "Isofol Medical"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "K2A Knaust & Andersson",
+      "ticker": "K2A B",
+      "aliases": [
+        "K2A Knaust & Andersson"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Lammhults Design Group",
+      "ticker": "LAMM B",
+      "aliases": [
+        "Lammhults Design Group"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Malmbergs Elektriska",
+      "ticker": "MEAB B",
+      "aliases": [
+        "Malmbergs Elektriska"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Mangold",
+      "ticker": "MANG",
+      "aliases": [
+        "Mangold"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Medivir",
+      "ticker": "MVIR",
+      "aliases": [
+        "Medivir"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Mendus",
+      "ticker": "IMMU",
+      "aliases": [
+        "Mendus"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Midsona",
+      "ticker": "MSON B",
+      "aliases": [
+        "Midsona"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Moberg Pharma",
+      "ticker": "MOB",
+      "aliases": [
+        "Moberg Pharma"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Moment Group",
+      "ticker": "MOMENT",
+      "aliases": [
+        "Moment Group"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "MSAB",
+      "ticker": "MSAB B",
+      "aliases": [
+        "MSAB"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "mySafety Group",
+      "ticker": "SAFETY B",
+      "aliases": [
+        "mySafety Group"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Nanologica",
+      "ticker": "NICA",
+      "aliases": [
+        "Nanologica"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "NAXS",
+      "ticker": "NAXS",
+      "aliases": [
+        "NAXS"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Netel",
+      "ticker": "NETEL",
+      "aliases": [
+        "Netel"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Nordisk Bergteknik",
+      "ticker": "NORB B",
+      "aliases": [
+        "Nordisk Bergteknik"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Novotek",
+      "ticker": "NTEK B",
+      "aliases": [
+        "Novotek"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Nyorda",
+      "ticker": "NYOR",
+      "aliases": [
+        "Nyorda"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Oncopeptides",
+      "ticker": "ONCO",
+      "aliases": [
+        "Oncopeptides"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Orexo",
+      "ticker": "ORX",
+      "aliases": [
+        "Orexo"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Pierce Group",
+      "ticker": "PIERCE",
+      "aliases": [
+        "Pierce Group"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "PION Group",
+      "ticker": "PION B",
+      "aliases": [
+        "PION Group"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Precise Biometrics",
+      "ticker": "PREC",
+      "aliases": [
+        "Precise Biometrics"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Prevas",
+      "ticker": "PREV B",
+      "aliases": [
+        "Prevas"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Profilgruppen",
+      "ticker": "PROF B",
+      "aliases": [
+        "Profilgruppen"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Q-linea",
+      "ticker": "QLINEA",
+      "aliases": [
+        "Q-linea"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Qliro",
+      "ticker": "QLIRO",
+      "aliases": [
+        "Qliro"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Railcare Group",
+      "ticker": "RAIL",
+      "aliases": [
+        "Railcare Group"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Saniona",
+      "ticker": "SANION",
+      "aliases": [
+        "Saniona"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Seafire",
+      "ticker": "SEAF",
+      "aliases": [
+        "Seafire"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Sensys Gatso Group",
+      "ticker": "SGG",
+      "aliases": [
+        "Sensys Gatso Group"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Senzime",
+      "ticker": "SEZI",
+      "aliases": [
+        "Senzime"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "SinterCast",
+      "ticker": "SINT",
+      "aliases": [
+        "SinterCast"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Sivers Semiconductors",
+      "ticker": "SIVE",
+      "aliases": [
+        "Sivers Semiconductors"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Sleep Cycle",
+      "ticker": "SLEEP",
+      "aliases": [
+        "Sleep Cycle"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Softronic",
+      "ticker": "SOF B",
+      "aliases": [
+        "Softronic"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Solid Försäkring",
+      "ticker": "SFAB",
+      "aliases": [
+        "Solid Försäkring"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Starbreeze",
+      "ticker": "STAR B",
+      "aliases": [
+        "Starbreeze"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Stockwik",
+      "ticker": "STWK",
+      "aliases": [
+        "Stockwik"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Studsvik",
+      "ticker": "SVIK",
+      "aliases": [
+        "Studsvik"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "SynAct Pharma",
+      "ticker": "SYNACT",
+      "aliases": [
+        "SynAct Pharma"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Tobii",
+      "ticker": "TOBII",
+      "aliases": [
+        "Tobii"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Transtema",
+      "ticker": "TRANS",
+      "aliases": [
+        "Transtema"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Vivesto",
+      "ticker": "VIVE",
+      "aliases": [
+        "Vivesto"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Wall to Wall Group",
+      "ticker": "WTW A",
+      "aliases": [
+        "Wall to Wall Group"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Wise Group",
+      "ticker": "WISE",
+      "aliases": [
+        "Wise Group"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Wästbygg Gruppen",
+      "ticker": "WBGR B",
+      "aliases": [
+        "Wästbygg Gruppen"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Xbrane Biopharma",
+      "ticker": "XBRANE",
+      "aliases": [
+        "Xbrane Biopharma"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Xspray Pharma",
+      "ticker": "XSPRAY",
+      "aliases": [
+        "Xspray Pharma"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
     }
   ],
   "shared_feeds": [

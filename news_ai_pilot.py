@@ -182,7 +182,7 @@ def run_news_only(config, now=None, fetch=None, max_age_hours=24, profile_fetch=
     from company_context import company_profile, order_comparison
     companies = {c['name']: c for c in eligible}
     profiles = {}
-    from article_context import read_article, article_facts
+    from article_context import read_article, article_facts, swedish_summary
     for item in unique.values():
         article = read_article(item['url']) if fetch is None else {'status':'not requested'}
         item['article_status'] = article['status']
@@ -190,6 +190,7 @@ def run_news_only(config, now=None, fetch=None, max_age_hours=24, profile_fetch=
         if article['status'] == 'ok':
             enriched = dict(item, description=article['text'])
             item.update(assess_impact(enriched))
+        item['summary_sv'] = swedish_summary(item, article)
         if item['direction'] == 'Oklar' and article['status'] != 'ok':
             continue
         name = item['company']

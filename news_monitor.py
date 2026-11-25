@@ -2,6 +2,7 @@ import argparse
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 from news_scanner import load_config
 from news_ai_pilot import run_news_only
 
@@ -11,12 +12,29 @@ def alert_text(item):
             + '\nRisk: ' + item['risk'] + '\n' + item['url']
             + '\nRegelbaserad bedömning – inte köpsignal.')
 
+def interval_minutes(now):
+    local = now.astimezone(ZoneInfo('Europe/Stockholm'))
+    minute = local.hour * 60 + local.minute
+    if 420 <= minute < 570 or 990 <= minute < 1080:
+        return 5
+    if 570 <= minute < 990:
+        return 10
+    return 15
+
+def scheduled_due(now):
+    local = now.astimezone(ZoneInfo('Europe/Stockholm'))
+    return local.minute % interval_minutes(now) == 0
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--live-check', action='store_true')
     parser.add_argument('--send', action='store_true')
     parser.add_argument('--state', default='news_seen.json')
+    parser.add_argument('--scheduled-at', help='ISO timestamp of intended schedule slot')
     args = parser.parse_args()
+    if args.scheduled_at and not scheduled_due(datetime.fromisoformat(args.scheduled_at)):
+        print('Outside selected polling interval')
+        return
     result = run_news_only(load_config())
     print(json.dumps(result, default=str, ensure_ascii=False))
     if args.send:

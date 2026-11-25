@@ -36,6 +36,8 @@ def main():
         print('Outside selected polling interval')
         return
     result = run_news_only(load_config())
+    from news_followup import advance, load_state, save_state
+    save_state(advance(load_state(), result['items'], load_config(), datetime.now(timezone.utc)))
     print(json.dumps(result, default=str, ensure_ascii=False))
     if args.send:
         from aktieradar_telegram import telegram_send

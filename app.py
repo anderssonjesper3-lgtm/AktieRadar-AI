@@ -34,6 +34,16 @@ try:
 except Exception as exc:
     st.error(f'Nyhetskontroll misslyckades: {type(exc).__name__}')
     st.stop()
+from news_followup import load_state, stamp
+try:
+    stored = load_state()
+except (ValueError, OSError):
+    stored = {}
+now = datetime.now(timezone.utc)
+stored = {k:v for k,v in stored.items() if (now-stamp(v['first_seen'])).total_seconds()<43200}
+merged = {v['item']['id']:dict(v['item'],published=stamp(v['item']['published'])) for v in stored.values()}
+merged.update({i['id']:i for i in result['items']})
+result = dict(result,items=list(merged.values()))
 config = load_config()
 covered = sum(bool(c.get('feeds')) for c in config['companies'] if c.get('segment_verified') and c.get('segment') in ('Mid Cap', 'Small Cap'))
 a,b,c = st.columns(3)
@@ -87,6 +97,17 @@ for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','M
             if comparison:
                 st.write(f"Belopp relativt omsättning: {comparison['revenue_ratio_pct']} %")
                 st.caption(comparison['note'])
+        st.markdown('**Marknadens reaktion**')
+        entry = stored.get(item['id'],{})
+        observations = entry.get('observations',{})
+        if not observations:
+            st.write('Väntar på schemalagd kurskontroll.')
+        for slot, obs in sorted(observations.items(),key=lambda pair:int(pair[0])):
+            st.write(f"+{slot} min: {obs['status']}")
+            if obs['status']=='OK':
+                st.write(f"Kursreaktion: {obs['change_pct']:+.2f} % · Relativ volym: {obs['relative_volume']:.2f}×")
+                st.write(obs['momentum']+' momentum · '+obs['reaction'])
+                st.caption(f"Stapelslut: {obs['bar_end']} · Dataålder vid kontroll: {obs['age_minutes']} min")
         st.link_button('Originalkälla', item['url'])
         st.caption('Regelbaserad bedömning med originalutdrag när tillgängliga, inte kursprognos.')
 with st.expander('Källkontroll'):

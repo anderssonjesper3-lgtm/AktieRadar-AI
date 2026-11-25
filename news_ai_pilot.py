@@ -79,7 +79,7 @@ async def run_news_pilot(config, now=None, fetch=None, quote=None, max_age_hours
                 if c.get('segment') in ('Mid Cap', 'Small Cap')
                 and c.get('segment_verified') is True]
     matches, failures, diagnostics = scan_detailed(
-        {'companies': eligible}, now=now, fetch=fetch, max_age_hours=max_age_hours)
+        {'companies': eligible, 'shared_feeds': config.get('shared_feeds', [])}, now=now, fetch=fetch, max_age_hours=max_age_hours)
     companies = {c['name']: c for c in eligible}
     candidates = {}
     for item in matches:
@@ -173,7 +173,7 @@ def run_news_only(config, now=None, fetch=None, max_age_hours=24):
     eligible = [c for c in config['companies'] if c.get('segment_verified') is True
                 and c.get('segment') in ('Mid Cap', 'Small Cap')]
     matches, failures, diagnostics = scan_detailed(
-        {'companies': eligible}, now=now, fetch=fetch, max_age_hours=max_age_hours)
+        {'companies': eligible, 'shared_feeds': config.get('shared_feeds', [])}, now=now, fetch=fetch, max_age_hours=max_age_hours)
     unique = {}
     for item in matches:
         key = (item['company'], ' '.join(item['title'].casefold().split()))

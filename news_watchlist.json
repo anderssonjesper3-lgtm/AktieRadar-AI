@@ -3582,6 +3582,7 @@
     }
   ],
   "shared_feeds": [
-    "https://news.cision.com/"
+    "https://news.cision.com/",
+    "https://mfn.se/all"
   ]
 }

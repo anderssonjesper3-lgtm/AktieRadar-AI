@@ -125,7 +125,19 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "API-nyckel saknas"
     },
-    "observations": {}
+    "observations": {
+      "20": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "35": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "50": {
+        "status": "För gammal kursdata",
+        "age_minutes": 60.2,
+        "checked_at": "2026-11-26T17:30:11.991736+00:00"
+      }
+    }
   },
   "NEWS:31c971a9d078faa954374fb3": {
     "first_seen": "2026-11-26T16:28:03.451167+00:00",
@@ -173,7 +185,19 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "API-nyckel saknas"
     },
-    "observations": {}
+    "observations": {
+      "20": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "35": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "50": {
+        "status": "För gammal kursdata",
+        "age_minutes": 60.2,
+        "checked_at": "2026-11-26T17:30:11.991736+00:00"
+      }
+    }
   },
   "NEWS:e7c8ff5439b783984fc7e666": {
     "first_seen": "2026-11-26T16:28:03.451167+00:00",
@@ -218,6 +242,18 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "API-nyckel saknas"
     },
-    "observations": {}
+    "observations": {
+      "20": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "35": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "50": {
+        "status": "För gammal kursdata",
+        "age_minutes": 60.2,
+        "checked_at": "2026-11-26T17:30:11.991736+00:00"
+      }
+    }
   }
 }

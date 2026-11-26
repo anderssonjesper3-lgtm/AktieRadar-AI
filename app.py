@@ -4,6 +4,7 @@ from news_scanner import load_config
 from news_ai_pilot import run_news_only, deduplicate_news
 from news_monitor import interval_minutes
 from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo
 
 st.set_page_config(page_title='AktieRadar News AI', page_icon='📡', layout='wide')
 st.markdown("""<style>
@@ -71,7 +72,7 @@ for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','M
         st.subheader(item['company'])
         st.markdown('**'+item['title']+'**')
         st.write({'Positiv':'🟢','Negativ':'🔴','Blandad':'🟡','Osäker':'🟠'}.get(item['direction'],'⚪') + ' ' + item['direction'])
-        st.caption(f"Publicerad: {item['published']} · {item['direction']} · Betydelse: {item['importance']}")
+        st.caption(f"Publicerad: {stamp(item['published']).astimezone(ZoneInfo('Europe/Stockholm')):%Y-%m-%d %H:%M} svensk tid · {item['direction']} · Betydelse: {item['importance']}")
         st.caption('Originaltext: '+('Hämtad' if item.get('article_status')=='ok' else 'Ej tillgänglig eller ej verifierad'))
         st.caption(item.get('analysis_scope', 'Analysomfattning ej verifierad'))
         if item.get('article_chars'):

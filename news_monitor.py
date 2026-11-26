@@ -13,13 +13,8 @@ def alert_text(item):
             + '\nRegelbaserad bedömning – inte köpsignal.')
 
 def interval_minutes(now):
-    local = now.astimezone(ZoneInfo('Europe/Stockholm'))
-    minute = local.hour * 60 + local.minute
-    if 420 <= minute < 570 or 990 <= minute < 1080:
-        return 5
-    if 570 <= minute < 990:
-        return 10
-    return 15
+    # News may arrive outside trading hours; keep the same target cadence.
+    return 5
 
 def scheduled_due(now):
     local = now.astimezone(ZoneInfo('Europe/Stockholm'))

@@ -2749,6 +2749,836 @@
       "segment_source": "https://aktieradar.se/small-cap/",
       "segment_verification": "third-party list, not exchange-verified",
       "feeds": []
+    },
+    {
+      "name": "4C Group",
+      "ticker": "4C",
+      "aliases": [
+        "4C Group"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "AAC Clyde Space",
+      "ticker": "AAC",
+      "aliases": [
+        "AAC Clyde Space"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Absolent Air Care",
+      "ticker": "ABSO",
+      "aliases": [
+        "Absolent Air Care"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Acarix",
+      "ticker": "ACARIX",
+      "aliases": [
+        "Acarix"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Acconeer",
+      "ticker": "ACCON",
+      "aliases": [
+        "Acconeer"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "AcouSort",
+      "ticker": "ACOU",
+      "aliases": [
+        "AcouSort"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Acroud",
+      "ticker": "ACROUD",
+      "aliases": [
+        "Acroud"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Acuvi",
+      "ticker": "ACUVI",
+      "aliases": [
+        "Acuvi"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Adtraction",
+      "ticker": "ADTR",
+      "aliases": [
+        "Adtraction"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Advenica",
+      "ticker": "ADVE",
+      "aliases": [
+        "Advenica"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Ages Industri",
+      "ticker": "AGES B",
+      "aliases": [
+        "Ages Industri"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Agtira",
+      "ticker": "AGTIRA B",
+      "aliases": [
+        "Agtira"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Aino Health",
+      "ticker": "AINO",
+      "aliases": [
+        "Aino Health"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Alcadon",
+      "ticker": "ALCA",
+      "aliases": [
+        "Alcadon"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "ALM Equity",
+      "ticker": "ALM",
+      "aliases": [
+        "ALM Equity"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Alpcot",
+      "ticker": "ALPCOT B",
+      "aliases": [
+        "Alpcot"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "AlzeCure Pharma",
+      "ticker": "ALZCUR",
+      "aliases": [
+        "AlzeCure Pharma"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Alzinova",
+      "ticker": "ALZ",
+      "aliases": [
+        "Alzinova"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Annexin Pharmaceuticals",
+      "ticker": "ANNX",
+      "aliases": [
+        "Annexin Pharmaceuticals"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Arcoma",
+      "ticker": "ARCOMA",
+      "aliases": [
+        "Arcoma"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Binero",
+      "ticker": "BINERO",
+      "aliases": [
+        "Binero"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Bioextrax",
+      "ticker": "BIOEX",
+      "aliases": [
+        "Bioextrax"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Biosergen",
+      "ticker": "BIOSGN",
+      "aliases": [
+        "Biosergen"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Biovica",
+      "ticker": "BIOVIC B",
+      "aliases": [
+        "Biovica"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Boho Group",
+      "ticker": "BOHO",
+      "aliases": [
+        "Boho Group"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Bokusgruppen",
+      "ticker": "BOKUS",
+      "aliases": [
+        "Bokusgruppen"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "BoMill",
+      "ticker": "BOMILL",
+      "aliases": [
+        "BoMill"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Bonäsudden",
+      "ticker": "BONAS",
+      "aliases": [
+        "Bonäsudden"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "BrainCool",
+      "ticker": "BRAIN",
+      "aliases": [
+        "BrainCool"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "BrightBid",
+      "ticker": "BRIGHT",
+      "aliases": [
+        "BrightBid"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Brilliant Future",
+      "ticker": "BRILL",
+      "aliases": [
+        "Brilliant Future"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Brock Milton Capital",
+      "ticker": "BMC",
+      "aliases": [
+        "Brock Milton Capital"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Bubbleroom",
+      "ticker": "BBROOM",
+      "aliases": [
+        "Bubbleroom"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "ByggPartner",
+      "ticker": "BYGGP",
+      "aliases": [
+        "ByggPartner",
+        "ByggPartner Gruppen",
+        "ByggPartnerGruppen"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "CAG Group",
+      "ticker": "CAG",
+      "aliases": [
+        "CAG Group"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "InCoax Networks",
+      "ticker": "INCOAX",
+      "aliases": [
+        "InCoax Networks"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Initiator Pharma",
+      "ticker": "INIT",
+      "aliases": [
+        "Initiator Pharma"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Integrum",
+      "ticker": "INTEG B",
+      "aliases": [
+        "Integrum"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Intervacc",
+      "ticker": "IVACC",
+      "aliases": [
+        "Intervacc"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Irisity",
+      "ticker": "IRIS",
+      "aliases": [
+        "Irisity"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "iZafe",
+      "ticker": "IZAFE B",
+      "aliases": [
+        "iZafe"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "JLT Mobile Computers",
+      "ticker": "JLT",
+      "aliases": [
+        "JLT Mobile Computers"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "K33",
+      "ticker": "K33",
+      "aliases": [
+        "K33"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Kakel Max",
+      "ticker": "KAKEL",
+      "aliases": [
+        "Kakel Max"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Kallebäck Property Invest",
+      "ticker": "KAPIAB",
+      "aliases": [
+        "Kallebäck Property Invest"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Kambi",
+      "ticker": "KAMBI",
+      "aliases": [
+        "Kambi"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "KB Components",
+      "ticker": "KBC",
+      "aliases": [
+        "KB Components"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "KebNi",
+      "ticker": "KEBNI B",
+      "aliases": [
+        "KebNi"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Kentima",
+      "ticker": "KENH",
+      "aliases": [
+        "Kentima"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Kinda Brave",
+      "ticker": "BRAVE",
+      "aliases": [
+        "Kinda Brave"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Kjell Group",
+      "ticker": "KJELL",
+      "aliases": [
+        "Kjell Group"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Klaria Pharma",
+      "ticker": "KLAR",
+      "aliases": [
+        "Klaria Pharma"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Skåne-möllan",
+      "ticker": "SKMO",
+      "aliases": [
+        "Skåne-möllan"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Smart Eye",
+      "ticker": "SEYE",
+      "aliases": [
+        "Smart Eye"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Solnaberg Property",
+      "ticker": "SOLNA",
+      "aliases": [
+        "Solnaberg Property"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "SolTech Energy",
+      "ticker": "SOLT",
+      "aliases": [
+        "SolTech Energy"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Sonetel",
+      "ticker": "SONE",
+      "aliases": [
+        "Sonetel"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Spago Nanomedical",
+      "ticker": "SPAGO",
+      "aliases": [
+        "Spago Nanomedical"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "SpectraCure",
+      "ticker": "SPEC",
+      "aliases": [
+        "SpectraCure"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "SpectrumOne",
+      "ticker": "SPEONE",
+      "aliases": [
+        "SpectrumOne"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Sprint Bioscience",
+      "ticker": "SPRINT",
+      "aliases": [
+        "Sprint Bioscience"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Stille",
+      "ticker": "STIL",
+      "aliases": [
+        "Stille"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Studentbostäder i Norden",
+      "ticker": "STUDBO",
+      "aliases": [
+        "Studentbostäder i Norden"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Surgical Science",
+      "ticker": "SUS",
+      "aliases": [
+        "Surgical Science"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Svenska Aerogel",
+      "ticker": "AERO",
+      "aliases": [
+        "Svenska Aerogel"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Clavister",
+      "ticker": "CLAV",
+      "aliases": [
+        "Clavister"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Coffee Stain Group",
+      "ticker": "COFFEE B",
+      "aliases": [
+        "Coffee Stain Group"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "NYAB",
+      "ticker": "NYAB",
+      "aliases": [
+        "NYAB"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Vertiseit",
+      "ticker": "VERT B",
+      "aliases": [
+        "Vertiseit"
+      ],
+      "segment": "First North",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/first-north/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
     }
   ],
   "shared_feeds": [

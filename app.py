@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 from news_scanner import load_config
-from news_ai_pilot import run_news_only
+from news_ai_pilot import run_news_only, deduplicate_news
 from news_monitor import interval_minutes
 from datetime import datetime, timezone, timedelta
 
@@ -43,7 +43,7 @@ now = datetime.now(timezone.utc)
 merged = {v['item']['id']:dict(v['item'],published=stamp(v['item']['published'])) for v in stored.values()}
 merged.update({i['id']:i for i in result['items']})
 active = [i for i in merged.values() if timedelta(0) <= now-stamp(i['published']) < timedelta(hours=24)]
-result = dict(result,items=active)
+result = dict(result,items=deduplicate_news(active))
 config = load_config()
 covered = sum(bool(c.get('feeds')) for c in config['companies'] if c.get('segment_verified') and c.get('segment') in ('Mid Cap', 'Small Cap', 'First North'))
 a,b,c = st.columns(3)
@@ -69,6 +69,9 @@ for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','M
         st.write({'Positiv':'🟢','Negativ':'🔴','Blandad':'🟡','Osäker':'🟡'}.get(item['direction'],'⚪') + ' ' + item['direction'])
         st.caption(f"Publicerad: {item['published']} · {item['direction']} · Betydelse: {item['importance']}")
         st.caption('Originaltext: '+('Hämtad' if item.get('article_status')=='ok' else 'Ej tillgänglig eller ej verifierad'))
+        st.caption(item.get('analysis_scope', 'Analysomfattning ej verifierad'))
+        if item.get('article_chars'):
+            st.caption(f"Hämtad text: {item['article_chars']} tecken")
         if item.get('news_type'):
             st.write('Nyhetstyp: ' + item['news_type'])
             if item.get('news_score') is not None:

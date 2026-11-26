@@ -74,6 +74,7 @@ for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','M
             st.write('Tillförlitlighet: ' + item.get('confidence', 'Ej bedömd'))
             st.write('Signal: ' + item.get('analysis_signal', 'AVVAKTA'))
             st.caption('Poängen är inte en sannolikhet för kursuppgång. ' + item.get('surprise', ''))
+        st.caption('AI-motor: ' + item.get('ai_status', 'Ej körd'))
         st.markdown('**Vad har hänt?**')
         st.write(item.get('summary_sv','Svensk sammanfattning saknas.'))
         facts = item.get('article_facts',{})

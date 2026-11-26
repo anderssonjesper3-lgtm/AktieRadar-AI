@@ -9,7 +9,7 @@ from html import unescape
 from html.parser import HTMLParser
 from urllib.parse import urljoin
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urlparse, unquote
 from urllib.request import Request, urlopen
 import xml.etree.ElementTree as ET
 
@@ -151,6 +151,7 @@ class _CompanyNewsHTMLParser(HTMLParser):
             results.append({
                 'title': unescape(title), 'link': href, 'date': published,
                 'description': nearby[:1500],
+                'metadata': ' '.join(re.split(r'[/_-]+', unquote(parsed_url.path))),
             })
         return results
 
@@ -214,10 +215,8 @@ def classify_news_detailed(item, company, now, max_age_hours=24):
         category = 'RISKNYHET'
     elif any(has_phrase(text, word) for word in KEYWORDS):
         category = 'ORDER/AVTAL – GRANSKA'
-    elif item.get('_feed_company') == company['name']:
-        category = 'BOLAGSNYHET – GRANSKA'
     else:
-        return None, 'ingen_relevant_nyhetskategori'
+        category = 'BOLAGSNYHET – GRANSKA'
     key = hashlib.sha256((company['name'] + '\n' + link).encode()).hexdigest()[:24]
     return {'kind': 'NYHET-VAKTA', 'category': category, 'company': company['name'],
             'title': item['title'][:180], 'description': item.get('description', '')[:4000], 'url': link, 'published': published,

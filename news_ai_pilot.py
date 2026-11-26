@@ -76,7 +76,7 @@ def simulated_result(entry, exit_price, quantity, fee=0, slippage_pct=0):
 async def run_news_pilot(config, now=None, fetch=None, quote=None, max_age_hours=24):
     now = now or datetime.now(timezone.utc)
     eligible = [c for c in config['companies']
-                if c.get('segment') in ('Mid Cap', 'Small Cap')
+                if c.get('segment') in ('Mid Cap', 'Small Cap', 'First North')
                 and c.get('segment_verified') is True]
     matches, failures, diagnostics = scan_detailed(
         {'companies': eligible, 'shared_feeds': config.get('shared_feeds', [])}, now=now, fetch=fetch, max_age_hours=max_age_hours)
@@ -171,7 +171,7 @@ def assess_impact(item):
 
 def run_news_only(config, now=None, fetch=None, max_age_hours=24, profile_fetch=None):
     eligible = [c for c in config['companies'] if c.get('segment_verified') is True
-                and c.get('segment') in ('Mid Cap', 'Small Cap')]
+                and c.get('segment') in ('Mid Cap', 'Small Cap', 'First North')]
     matches, failures, diagnostics = scan_detailed(
         {'companies': eligible, 'shared_feeds': config.get('shared_feeds', [])}, now=now, fetch=fetch, max_age_hours=max_age_hours)
     unique = {}

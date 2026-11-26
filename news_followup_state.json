@@ -279,5 +279,60 @@
         "checked_at": "2026-11-26T18:21:54.070113+00:00"
       }
     }
+  },
+  "NEWS:3a27a3cc1a3d16d0c3f62c47": {
+    "first_seen": "2026-11-26T19:30:47.095368+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "ORDER/AVTAL – GRANSKA",
+      "company": "Gentoo Media",
+      "title": "Notification of trade (updated)",
+      "description": "Jonas Warrer Petersen Holding ApS, a company owned by Jonas Warrer, CEO, PDMR and primary insider of Gentoo Media Inc., has today purchased 100,000 shares in Gentoo Media at a price of SEK 3.98 per share. This updates the press release issued on November 26, 2026 at 17:08 CET, which stated the number of shares purchased as 20,000. The total holding stated in that release was correct. After this transaction, Jonas Warrer holds 2,000,000 options, and Jonas Warrer and close associates of Jonas Warrer own 1,335,120 shares in Gentoo Media. For further information, please",
+      "url": "https://news.cision.com/gentoo-media-inc/r/notification-of-trade--updated-,c4429973",
+      "published": "2026-11-26 19:13:00+00:00",
+      "id": "NEWS:3a27a3cc1a3d16d0c3f62c47",
+      "direction": "Oklar",
+      "importance": "Låg eller osäker",
+      "economic_case": "En insynsaffär förändrar normalt inte bolagets intäkter direkt.",
+      "risk": "Kontrollera köpare, säljare, belopp och transaktionstyp.",
+      "article_status": "ok",
+      "article_text": "Notification of trade (updated) Thu, Nov 26, 2026 20:13 CET Report this content Jonas Warrer Petersen Holding ApS, a company owned by Jonas Warrer, CEO, PDMR and primary insider of Gentoo Media Inc., has today purchased 100,000 shares in Gentoo Media at a price of SEK 3.98 per share. This updates the press release issued on November 26, 2026 at 17:08 CET, which stated the number of shares purchased as 20,000. The total holding stated in that release was correct. After this transaction, Jonas Warrer holds 2,000,000 options, and Jonas Warrer and close associates of Jonas Warrer own 1,335,120 shares in Gentoo Media. For further information, please contact: Sebastian Mortensen, Head of Investor Relations, sebastian.mortensen@g2m.com About Gentoo Media Gentoo Media is a leading iGaming affiliate connecting operators with high-value players through premium lead generation and compliance solutions. Its portfolio includes AskGamblers, Time2Play, CasinoTopsOnline, WSN and Casinomeister—sites trusted by millions worldwide. Gentoo Media Inc. is listed on Nasdaq Stockholm under the ticker G2M. Visit www.gentoomedia.com to learn more. This information is disclosed pursuant to Article 19 of Regulation (EU) No 596/2014 (the Market Abuse Regulation) and Chapter 4 of the Swedish Financial Instruments Trading Act.",
+      "article_facts": {
+        "excerpts": [
+          "Notification of trade (updated) Thu, Nov 26, 2026 20:13 CET Report this content Jonas Warrer Petersen Holding ApS, a company owned by Jonas Warrer, CEO, PDMR and primary insider of Gentoo Media Inc., has today purchased 100,000 shares in Gentoo Media at a price of SEK 3.98 per share.",
+          "This updates the press release issued on November 26, 2026 at 17:08 CET, which stated the number of shares purchased as 20,000.",
+          "After this transaction, Jonas Warrer holds 2,000,000 options, and Jonas Warrer and close associates of Jonas Warrer own 1,335,120 shares in Gentoo Media."
+        ],
+        "note": "Utdrag ur originaltexten; transaktionens riktning och belopp måste framgå uttryckligen."
+      },
+      "summary_sv": "Insynsanmälan: texten indikerar aktieköp. Kontrollera originalet. En insynsaffär påverkar normalt inte bolagets intäkter direkt.",
+      "analysis_scope": "Hämtad artikeltext – fullständighet ej verifierad",
+      "article_chars": 1317,
+      "company_profile": {
+        "totalRevenue": 93259000,
+        "marketCap": 888186624,
+        "operatingMargins": 0.31763,
+        "totalCash": 2130000,
+        "totalDebt": 110877000,
+        "industry": "Gambling",
+        "financialCurrency": "EUR",
+        "currency": "SEK",
+        "longName": "Gentoo Media Inc.",
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/G2M.ST/",
+        "symbol": "G2M.ST"
+      },
+      "order_comparison": null,
+      "analysis_evidence": [
+        "Notification of trade (updated) Thu, Nov 26, 2026 20:13 CET Report this content Jonas Warrer Petersen Holding ApS, a company owned by Jonas Warrer, CEO, PDMR and primary insider of Gentoo Media Inc., has today purchased 100,000 shares in Gentoo Media at a price of SEK 3.98 per share."
+      ],
+      "news_type": "Insynsaffär",
+      "news_score": 25,
+      "confidence": "Medel",
+      "surprise": "Ej bedömd – historik och konsensus saknas",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
   }
 }

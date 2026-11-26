@@ -186,6 +186,7 @@ def run_news_only(config, now=None, fetch=None, max_age_hours=24, profile_fetch=
     for item in unique.values():
         article = read_article(item['url']) if fetch is None else {'status':'not requested'}
         item['article_status'] = article['status']
+        item['article_text'] = article.get('text', '')
         item['article_facts'] = article_facts(item['title'], article)
         if article['status'] == 'ok':
             enriched = dict(item, description=article['text'])
@@ -201,7 +202,7 @@ def run_news_only(config, now=None, fetch=None, max_age_hours=24, profile_fetch=
         item['order_comparison'] = order_comparison(item, profiles[name])
         item.update(detailed_assessment(item, article, profiles[name]))
         if fetch is None:
-            item.update(ai_assessment(item, article, profiles[name]))
+            item['ai_status'] = 'Regelbaserad analys – betald AI avstängd'
     return dict(items=sorted(unique.values(), key=lambda x: x['published'], reverse=True),
                 eligible_count=len(eligible), failures=failures, diagnostics=diagnostics,
                 duplicates=len(matches)-len(unique), quote_count=0)
@@ -220,12 +221,15 @@ def detailed_assessment(item, article, profile):
         (r'interim report|delårsrapport|year-end report|bokslut', 'Rapport', 'Oklar', 60, 'Resultat och prognos behöver jämföras med tidigare period och förväntningar.', 'Kontrollera kassaflöde, marginal och engångsposter.'),
         (r'acquisition|förvärv', 'Förvärv', 'Blandad', 60, 'Förvärv kan öka intäkter men även skulder och integrationsrisk.', 'Kontrollera köpeskilling och finansiering.'),
     ]
+    rules.insert(4, (r'(?:submission|submitted|application|ansökan|ansökt).{0,180}(?:ema|marketing authori[sz]ation|godkännande)|(?:ema|marketing authori[sz]ation).{0,180}(?:submission|application|ansökan)', 'Regulatorisk ansökan', 'Osäker', 60, 'En regulatorisk ansökan kan minska osäkerheten om framtida marknadstillträde, men är inte ett godkännande.', 'Kontrollera nuvarande godkännande, ansökans omfattning och myndighetens kommande beslut.'))
     matched = next((rule for rule in rules if re.search(rule[0], title)), None)
     # Body-only matches are tentative; boilerplate can mention unrelated events.
     body_match = False
     if matched is None and body:
-        matched = next((rule for rule in rules if re.search(rule[0], body[:4000])), None)
+        matched = next((rule for rule in rules if re.search(rule[0], body)), None)
         body_match = matched is not None
+    evidence = [s.strip() for s in re.split(r'(?<=[.!?])\s+', article.get('text', '')) if re.search(r'\b(?:SEK|EUR|USD|MSEK|million|miljoner|EMA|approval|authorization|authorisation|order|contract|revenue|omsättning|godkännande|ansökan|leverans|delivery)\b', s, re.I)]
+    item['analysis_evidence'] = evidence[:12]
     if matched is None:
         return dict(news_type='Övrigt', news_score=None, confidence='Låg',
                     surprise='Ej bedömd', analysis_signal='AVVAKTA')

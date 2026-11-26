@@ -18,7 +18,7 @@ st.markdown("""<style>
 [data-testid="stCaptionContainer"] p {color:#d1dbe8 !important;}
 </style>""", unsafe_allow_html=True)
 st.title('📡 AktieRadar News AI')
-st.caption('Stockholm Mid Cap & Small Cap · Nyhetsradar')
+st.caption('Stockholm Mid Cap · Small Cap · First North · Nyhetsradar')
 
 
 @st.cache_data(ttl=300, show_spinner=False)
@@ -45,12 +45,13 @@ merged = {v['item']['id']:dict(v['item'],published=stamp(v['item']['published'])
 merged.update({i['id']:i for i in result['items']})
 result = dict(result,items=list(merged.values()))
 config = load_config()
-covered = sum(bool(c.get('feeds')) for c in config['companies'] if c.get('segment_verified') and c.get('segment') in ('Mid Cap', 'Small Cap'))
+covered = sum(bool(c.get('feeds')) for c in config['companies'] if c.get('segment_verified') and c.get('segment') in ('Mid Cap', 'Small Cap', 'First North'))
 a,b,c = st.columns(3)
 a.metric('Bolag i bevakningslistan', result['eligible_count'])
 mid_count = sum(c.get('segment') == 'Mid Cap' and c.get('segment_verified') for c in config['companies'])
 small_count = sum(c.get('segment') == 'Small Cap' and c.get('segment_verified') for c in config['companies'])
-st.caption(f'Mid Cap: {mid_count} · Small Cap: {small_count}')
+first_count = sum(c.get('segment') == 'First North' and c.get('segment_verified') for c in config['companies'])
+st.caption(f'Mid Cap: {mid_count} · Small Cap: {small_count} · First North: {first_count}')
 b.metric('Gemensamma källor', len(config.get('shared_feeds', [])))
 c.metric('Nyheter senaste 24 h', len(result['items']))
 if not config.get('universe_complete'):

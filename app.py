@@ -67,6 +67,13 @@ for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','M
         st.write({'Positiv':'🟢','Negativ':'🔴','Blandad':'🟡','Osäker':'🟡'}.get(item['direction'],'⚪') + ' ' + item['direction'])
         st.caption(f"Publicerad: {item['published']} · {item['direction']} · Betydelse: {item['importance']}")
         st.caption('Originaltext: '+('Hämtad' if item.get('article_status')=='ok' else 'Ej tillgänglig eller ej verifierad'))
+        if item.get('news_type'):
+            st.write('Nyhetstyp: ' + item['news_type'])
+            if item.get('news_score') is not None:
+                st.metric('Nyhetens betydelse (regelbaserad)', str(item['news_score']) + '/100')
+            st.write('Tillförlitlighet: ' + item.get('confidence', 'Ej bedömd'))
+            st.write('Signal: ' + item.get('analysis_signal', 'AVVAKTA'))
+            st.caption('Poängen är inte en sannolikhet för kursuppgång. ' + item.get('surprise', ''))
         st.markdown('**Vad har hänt?**')
         st.write(item.get('summary_sv','Svensk sammanfattning saknas.'))
         facts = item.get('article_facts',{})

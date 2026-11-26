@@ -84,6 +84,13 @@ for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','M
                 for excerpt in facts['excerpts']:
                     st.write(excerpt)
                 st.caption(facts['note'])
+        if item.get('analysis_evidence'):
+            with st.expander('Underlag för nyhetsanalysen'):
+                for sentence in item['analysis_evidence']:
+                    st.write(sentence)
+        if item.get('article_text'):
+            with st.expander('Hämtad originaltext'):
+                st.write(item['article_text'])
         st.markdown('**Ekonomisk påverkan**')
         st.write(item['economic_case'])
         st.markdown('**Risk att kontrollera**')

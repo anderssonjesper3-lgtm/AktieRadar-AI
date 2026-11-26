@@ -82,10 +82,19 @@ def swedish_summary(item, article):
     title = item.get('title','').casefold()
     body = article.get('text','').casefold() if article.get('status') == 'ok' else ''
     if any(x in title for x in ('notification of trade','insider','insyn')):
-        buy = bool(re.search(r'\b(purchased|purchase|bought|köpt)\b',body))
-        sell = bool(re.search(r'\b(sold|sale|sålt)\b',body))
+        buy = bool(re.search(r'\b(purchased|purchase|bought|acquired|köpt|förvärvat)\b',body))
+        sell = bool(re.search(r'\b(sold|sale|disposed|sålt|avyttrat)\b',body))
         direction = 'aktieköp' if buy and not sell else 'aktieförsäljning' if sell and not buy else 'oklar transaktionsriktning'
-        return 'Insynsanmälan: texten indikerar '+direction+'. Kontrollera originalet. En insynsaffär påverkar normalt inte bolagets intäkter direkt.'
+        detail = ''
+        if direction != 'oklar transaktionsriktning':
+            quantities = re.findall(r'\b(\d[\d ,\u00a0]*)\s+(?:shares|aktier)\b', body)
+            prices = re.findall(r'\b(?:sek|kr)\s*(\d+[.,]\d+)|\b(\d+[.,]\d+)\s*(?:sek|kr)\b', body)
+            q = set(re.sub(r'[ ,\u00a0]', '', x) for x in quantities)
+            p = set((a or b).replace(',', '.') for a,b in prices)
+            if len(q)==1 and len(p)==1:
+                count, price = int(next(iter(q))), float(next(iter(p)))
+                detail = f' Möjligt transaktionsvärde: {count} aktier × {price:g} SEK = {count*price:,.0f} SEK. Kontrollera att priset avser en aktie.'
+        return 'Insynsanmälan: texten indikerar '+direction+detail+'. Kontrollera originalet. En insynsaffär påverkar normalt inte bolagets intäkter direkt.'
     for terms, summary in [
         (('profit warning','vinstvarning','lowers guidance'),'Bolaget meddelar en vinstvarning eller sänkt prognos.'),
         (('raises guidance','höjer prognosen'),'Bolaget meddelar en höjd prognos.'),

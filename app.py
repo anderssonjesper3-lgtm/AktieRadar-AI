@@ -64,13 +64,13 @@ st.subheader('Senaste nyhetsspår')
 st.caption('Endast nyheter publicerade under de senaste 24 timmarna visas här.')
 for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','Möjligen hög'), x['published']), reverse=True):
     direction = item.get('direction', 'Oklar')
-    marker = {'Positiv':'🟢', 'Negativ':'🔴', 'Blandad':'🟡', 'Osäker':'🟡', 'Oklar':'🟡'}.get(direction, '⚪')
+    marker = {'Positiv':'🟢', 'Negativ':'🔴', 'Blandad':'🟡', 'Osäker':'🟠', 'Oklar':'⚪'}.get(direction, '⚪')
     score = item.get('news_score')
     score_label = f'{score}/100' if score is not None else 'Ej poängsatt'
     with st.expander(f"{marker} {item['company']} · {direction} · {score_label}", expanded=False):
         st.subheader(item['company'])
         st.markdown('**'+item['title']+'**')
-        st.write({'Positiv':'🟢','Negativ':'🔴','Blandad':'🟡','Osäker':'🟡'}.get(item['direction'],'⚪') + ' ' + item['direction'])
+        st.write({'Positiv':'🟢','Negativ':'🔴','Blandad':'🟡','Osäker':'🟠'}.get(item['direction'],'⚪') + ' ' + item['direction'])
         st.caption(f"Publicerad: {item['published']} · {item['direction']} · Betydelse: {item['importance']}")
         st.caption('Originaltext: '+('Hämtad' if item.get('article_status')=='ok' else 'Ej tillgänglig eller ej verifierad'))
         st.caption(item.get('analysis_scope', 'Analysomfattning ej verifierad'))

@@ -30,10 +30,9 @@ def main():
     if args.scheduled_at and not scheduled_due(datetime.fromisoformat(args.scheduled_at)):
         print('Outside selected polling interval')
         return
+    started = datetime.now(timezone.utc)
     result = run_news_only(load_config())
-    from news_followup import advance, load_state, save_state
-    save_state(advance(load_state(), result['items'], load_config(), datetime.now(timezone.utc)))
-    print(json.dumps(result, default=str, ensure_ascii=False))
+    analysis_done = datetime.now(timezone.utc)
     if args.send:
         from aktieradar_telegram import telegram_send
         state = Path(args.state)
@@ -42,8 +41,13 @@ def main():
             if item['id'] in seen or not timedelta(0) <= datetime.now(timezone.utc)-item['published'] <= timedelta(hours=12):
                 continue
             telegram_send(alert_text(item))
+            confirmed = datetime.now(timezone.utc)
+            print(json.dumps({'event':'telegram_confirmed','id':item['id'],'published':item['published'].isoformat(),'scan_started':started.isoformat(),'batch_analysis_done':analysis_done.isoformat(),'confirmed':confirmed.isoformat(),'publication_to_telegram_seconds':round((confirmed-item['published']).total_seconds(),1)}, ensure_ascii=False), flush=True)
             seen.add(item['id'])
             state.write_text(json.dumps(sorted(seen)))
+    from news_followup import advance, load_state, save_state
+    save_state(advance(load_state(), result['items'], load_config(), datetime.now(timezone.utc)))
+    print(json.dumps(result, default=str, ensure_ascii=False))
     if args.live_check:
         shared = set(load_config().get('shared_feeds', []))
         if not any(d['feed'] in shared and d['status'] == 'OK' and d['raw_items'] > 0

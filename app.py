@@ -130,6 +130,12 @@ for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','M
 with st.expander('Källkontroll'):
     st.write(f"Dubbletter: {result['duplicates']}")
     st.dataframe(pd.DataFrame(result['diagnostics']))
+    for source in result['diagnostics']:
+        st.markdown('**' + source['feed'] + '**')
+        st.write(f"Inlästa: {source['raw_items']} · Matchade: {source['matched']}")
+        samples = source.get('sample_headlines', [])
+        if samples:
+            st.dataframe(pd.DataFrame(samples))
 st.subheader('Bevakningsschema · svensk tid')
 st.table(pd.DataFrame([('Hela dygnet', '5 min')], columns=['Tid', 'Planerat intervall']))
 st.caption(f"Planerat intervall just nu: {interval_minutes(datetime.now(timezone.utc))} min. Schemalagd kontroll körs separat. Appens vy uppdateras vid omladdning eller knapptryckning.")

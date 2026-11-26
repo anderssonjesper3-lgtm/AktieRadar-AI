@@ -150,7 +150,7 @@ class _CompanyNewsHTMLParser(HTMLParser):
             seen.add(href)
             results.append({
                 'title': unescape(title), 'link': href, 'date': published,
-                'description': nearby[:1500],
+                'description': '',
                 'metadata': ' '.join(re.split(r'[/_-]+', unquote(parsed_url.path))),
             })
         return results
@@ -205,7 +205,7 @@ def classify_news_detailed(item, company, now, max_age_hours=24):
     if parsed.scheme != 'https' or not parsed.hostname:
         return None, 'ogiltig_länk'
     text = item.get('title', '') + ' ' + item.get('description', '')
-    issuer_text = text + ' ' + item.get('metadata', '')
+    issuer_text = item.get('title', '') + ' ' + item.get('metadata', '') + ' ' + ' '.join(re.split(r'[/_-]+', unquote(parsed.path)))
     issuer_match = item.get('_feed_company') == company['name'] or any(
         has_phrase(issuer_text, alias) for alias in company['aliases']
     )
@@ -267,17 +267,25 @@ def scan_detailed(config=None, now=None, fetch=None, max_age_hours=24):
         rejects = {'datum_saknas': 0, 'utanför_datumintervall': 0, 'ogiltig_länk': 0,
                    'bolag_matchar_inte': 0, 'ingen_relevant_nyhetskategori': 0}
         for item in items:
+            item_matches = []
+            item_reasons = set()
             for company in companies:
                 match, reason = classify_news_detailed(item, company, now, max_age_hours=max_age_hours)
                 if match:
                     results.append(match)
+                    item_matches.append(company['name'])
                 elif reason in rejects:
+                    item_reasons.add(reason)
+            item['_matched_companies'] = item_matches
+            item['_rejection_reasons'] = sorted(item_reasons) if not item_matches else []
+            if not item_matches:
+                for reason in item_reasons:
                     rejects[reason] += 1
         samples = [
             {'title': (item.get('title') or '')[:140],
              'published': item.get('date').isoformat() if item.get('date') else 'SAKNAS',
-             'url': item.get('link', '')[:220]}
-            for item in items[:20]
+             'url': item.get('link', '')[:220], 'matched_companies': item.get('_matched_companies', []), 'rejection_reasons': item.get('_rejection_reasons', [])}
+            for item in items
         ]
         diagnostics.append({'feed': url, 'companies': ', '.join(c['name'] for c in companies),
                             'status': 'OK', 'raw_items': raw_count,

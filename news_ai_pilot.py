@@ -199,6 +199,50 @@ def run_news_only(config, now=None, fetch=None, max_age_hours=24, profile_fetch=
             profiles[name] = (profile_fetch or company_profile)(companies[name]) if fetch is None or profile_fetch else {'status':'not requested'}
         item['company_profile'] = profiles[name]
         item['order_comparison'] = order_comparison(item, profiles[name])
+        item.update(detailed_assessment(item, article, profiles[name]))
     return dict(items=sorted(unique.values(), key=lambda x: x['published'], reverse=True),
                 eligible_count=len(eligible), failures=failures, diagnostics=diagnostics,
                 duplicates=len(matches)-len(unique), quote_count=0)
+
+def detailed_assessment(item, article, profile):
+    """Conservative rule-based analysis; scores are not probabilities."""
+    title = item.get('title', '').casefold()
+    body = article.get('text', '').casefold() if article.get('status') == 'ok' else ''
+    rules = [
+        (r'profit warning|vinstvarning|lowers guidance|sänker prognosen', 'Prognossänkning', 'Negativ', 85, 'Lägre förväntat resultat kan pressa värderingen.', 'Jämför ny och tidigare prognos.'),
+        (r'rights issue|share issue|nyemission', 'Emission', 'Blandad', 75, 'Kapitaltillskott kan stärka likviditeten men späda ut ägandet.', 'Kontrollera rabatt, utspädning och kapitalbehov.'),
+        (r'notification of trade|insider transaction|insyn', 'Insynsaffär', 'Oklar', 25, 'En insynsaffär förändrar normalt inte bolagets intäkter direkt.', 'Kontrollera köpare, säljare, belopp och transaktionstyp.'),
+        (r'letter of intent|avsiktsförklaring|non-binding|icke-bindande', 'Avsiktsförklaring', 'Osäker', 40, 'Framtida intäkter är ännu inte säkerställda.', 'Kontrollera bindande villkor.'),
+        (r'raises guidance|raised guidance|höjer prognosen|höjd prognos', 'Prognoshöjning', 'Positiv', 85, 'Högre förväntat resultat kan stödja värderingen.', 'Jämför med tidigare prognos och marknadsförväntningar.'),
+        (r'awarded contract|receives order|secures order|vinner order|erhåller order|tilldelas kontrakt', 'Order', 'Positiv', 70, 'En bindande order kan öka framtida intäkter.', 'Kontrollera marginal, leveranstid och bindande villkor.'),
+        (r'interim report|delårsrapport|year-end report|bokslut', 'Rapport', 'Oklar', 60, 'Resultat och prognos behöver jämföras med tidigare period och förväntningar.', 'Kontrollera kassaflöde, marginal och engångsposter.'),
+        (r'acquisition|förvärv', 'Förvärv', 'Blandad', 60, 'Förvärv kan öka intäkter men även skulder och integrationsrisk.', 'Kontrollera köpeskilling och finansiering.'),
+    ]
+    matched = next((rule for rule in rules if re.search(rule[0], title)), None)
+    # Body-only matches are tentative; boilerplate can mention unrelated events.
+    body_match = False
+    if matched is None and body:
+        matched = next((rule for rule in rules if re.search(rule[0], body[:4000])), None)
+        body_match = matched is not None
+    if matched is None:
+        return dict(news_type='Övrigt', news_score=None, confidence='Låg',
+                    surprise='Ej bedömd', analysis_signal='AVVAKTA')
+    _, kind, direction, score, case, risk = matched
+    if body_match or not body:
+        direction = 'Osäker'
+        score = min(score, 49)
+    if kind == 'Order' and re.search(r'non.binding|icke.bindande|subject to approval|villkorat|cancelled|avbeställ|not received', body):
+        direction, score = 'Osäker', min(score, 40)
+        risk += ' Originaltexten innehåller möjliga villkor eller motstridiga uppgifter.'
+    comparison = item.get('order_comparison')
+    if kind == 'Order' and direction == 'Positiv' and comparison:
+        score = min(90, score + min(20, int(comparison['revenue_ratio_pct'])))
+    summary = item.get('summary_sv', '')
+    if kind != 'Insynsaffär':
+        summary = ('Möjlig nyhetstyp: ' if body_match else 'Nyhetstyp: ') + kind + '. ' + case
+    return dict(news_type=kind, news_score=score, direction=direction,
+                importance='Hög' if score >= 70 else 'Medel' if score >= 50 else 'Låg eller osäker',
+                economic_case=case, risk=risk, summary_sv=summary,
+                confidence='Medel' if body and not body_match else 'Låg',
+                surprise='Ej bedömd – historik och konsensus saknas',
+                analysis_signal='VAKTA' if direction == 'Positiv' and score >= 70 else 'AVVAKTA')

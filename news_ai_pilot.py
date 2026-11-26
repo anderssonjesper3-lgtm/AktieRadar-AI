@@ -222,7 +222,10 @@ def detailed_assessment(item, article, profile):
         (r'acquisition|förvärv', 'Förvärv', 'Blandad', 60, 'Förvärv kan öka intäkter men även skulder och integrationsrisk.', 'Kontrollera köpeskilling och finansiering.'),
     ]
     rules.insert(4, (r'(?:submission|submitted|application|ansökan|ansökt).{0,180}(?:ema|marketing authori[sz]ation|godkännande)|(?:ema|marketing authori[sz]ation).{0,180}(?:submission|application|ansökan)', 'Regulatorisk ansökan', 'Osäker', 60, 'En regulatorisk ansökan kan minska osäkerheten om framtida marknadstillträde, men är inte ett godkännande.', 'Kontrollera nuvarande godkännande, ansökans omfattning och myndighetens kommande beslut.'))
-    matched = next((rule for rule in rules if re.search(rule[0], title)), None)
+    rules.append((r'(?:received|receives|secured|secures|has won|erhållit|erhåller|vunnit|fått|mottagit).{0,80}(?:order|beställning|contract|kontrakt)', 'Order', 'Positiv', 70, 'En order kan bidra till framtida intäkter.', 'Kontrollera bindande villkor, marginal och leveranstid.'))
+    title_hits = [rule for rule in rules if re.search(rule[0], title)]
+    body_hits = [rule for rule in rules if re.search(rule[0], body)]
+    matched = next((rule for rule in title_hits if rule in body_hits), None) or next(iter(title_hits), None)
     # Body-only matches are tentative; boilerplate can mention unrelated events.
     body_match = False
     if matched is None and body:
@@ -237,6 +240,10 @@ def detailed_assessment(item, article, profile):
     if body_match or not body:
         direction = 'Osäker'
         score = min(score, 49)
+    conflicts = [rule[1] for rule in body_hits if rule[2] in ('Negativ', 'Blandad', 'Osäker') and rule[1] != kind]
+    if direction == 'Positiv' and conflicts:
+        direction, score = 'Osäker', min(score, 49)
+        risk += ' Originaltexten innehåller även: ' + ', '.join(conflicts) + '. Kontrollera sammanhanget.'
     if kind == 'Order' and re.search(r'non.binding|icke.bindande|subject to approval|villkorat|cancelled|avbeställ|not received', body):
         direction, score = 'Osäker', min(score, 40)
         risk += ' Originaltexten innehåller möjliga villkor eller motstridiga uppgifter.'
@@ -246,6 +253,10 @@ def detailed_assessment(item, article, profile):
     summary = item.get('summary_sv', '')
     if kind != 'Insynsaffär':
         summary = ('Möjlig nyhetstyp: ' if body_match else 'Nyhetstyp: ') + kind + '. ' + case
+        if comparison and kind == 'Order':
+            summary += f" Nämnt belopp motsvarar {comparison['revenue_ratio_pct']} % av rapporterad omsättning; kontrollera ordervärdet."
+        if body and re.search(r'immediate delivery|immediate deliveries|omgående leverans|omedelbar leverans', body):
+            summary += ' Originaltexten nämner omgående leverans.'
     return dict(news_type=kind, news_score=score, direction=direction,
                 importance='Hög' if score >= 70 else 'Medel' if score >= 50 else 'Låg eller osäker',
                 economic_case=case, risk=risk, summary_sv=summary,

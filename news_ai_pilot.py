@@ -169,14 +169,37 @@ def assess_impact(item):
         return dict(direction='Positiv', importance='Möjligen hög', economic_case=case, risk=risk)
     return dict(direction='Oklar', importance='Ej fastställd', economic_case='Rubriken räcker inte för att fastställa ekonomisk påverkan.', risk='Läs originalmeddelandet och kontrollera finansiella uppgifter.')
 
+def deduplicate_news(items):
+    # Conservative bilingual matching: same issuer, close publication and matching translated headline.
+    def signature(item):
+        t = item['title'].casefold()
+        for pattern, replacement in [
+            (r'\b(?:erhåller|erhållit|mottagit|får|receives|received|secures)\b', ' receive '),
+            (r'\b(?:beställning|orders)\b', ' order '),
+            (r'\b(?:miljoner kronor|million sek|msek)\b', ' msek '),
+            (r'\b(?:publicerar|publishes|releases)\b', ' publish '),
+            (r'\b(?:delårsrapport|interim report)\b', ' interimreport '),
+            (r'\b(?:en|ett|av|på|om|a|an|of|for|worth|the)\b', ' ')]:
+            t = re.sub(pattern, replacement, t)
+        return tuple(sorted(re.findall(r'\w+', t)))
+    def swedish(item):
+        return bool(re.search(r'[åäö]|\b(?:erhåller|publicerar|delårsrapport|meddelar|miljoner)\b', item['title'].casefold()))
+    out = []
+    for item in sorted(items, key=lambda i: (swedish(i), bool(i.get('article_text'))), reverse=True):
+        sig = signature(item)
+        if any(item['company'] == old['company'] and abs((item['published']-old['published']).total_seconds()) <= 120 and sig == signature(old) and len(sig)>=4 for old in out):
+            continue
+        out.append(item)
+    return out
+
 def run_news_only(config, now=None, fetch=None, max_age_hours=24, profile_fetch=None):
     eligible = [c for c in config['companies'] if c.get('segment_verified') is True
                 and c.get('segment') in ('Mid Cap', 'Small Cap', 'First North')]
     matches, failures, diagnostics = scan_detailed(
         {'companies': eligible, 'shared_feeds': config.get('shared_feeds', [])}, now=now, fetch=fetch, max_age_hours=max_age_hours)
     unique = {}
-    for item in matches:
-        key = (item['company'], ' '.join(item['title'].casefold().split()))
+    for item in deduplicate_news(matches):
+        key = item['id']
         if key not in unique:
             unique[key] = dict(item, **assess_impact(item))
     from company_context import company_profile, order_comparison
@@ -192,8 +215,8 @@ def run_news_only(config, now=None, fetch=None, max_age_hours=24, profile_fetch=
             enriched = dict(item, description=article['text'])
             item.update(assess_impact(enriched))
         item['summary_sv'] = swedish_summary(item, article)
-        if item['direction'] == 'Oklar' and article['status'] != 'ok':
-            continue
+        item['analysis_scope'] = 'Hämtad artikeltext – fullständighet ej verifierad' if article['status'] == 'ok' and item['article_text'] else 'Begränsad analys – endast rubrik'
+        item['article_chars'] = len(item['article_text'])
         name = item['company']
         if name not in profiles:
             # Synthetic news tests never require external financial requests.
@@ -201,6 +224,10 @@ def run_news_only(config, now=None, fetch=None, max_age_hours=24, profile_fetch=
         item['company_profile'] = profiles[name]
         item['order_comparison'] = order_comparison(item, profiles[name])
         item.update(detailed_assessment(item, article, profiles[name]))
+        if not item['article_text'] or article['status'] != 'ok':
+            item.update(analysis_signal='AVVAKTA', confidence='Låg', importance='Låg eller osäker')
+            if item.get('news_score') is not None:
+                item['news_score'] = min(49, item['news_score'])
         if fetch is None:
             item['ai_status'] = 'Regelbaserad analys – betald AI avstängd'
     return dict(items=sorted(unique.values(), key=lambda x: x['published'], reverse=True),

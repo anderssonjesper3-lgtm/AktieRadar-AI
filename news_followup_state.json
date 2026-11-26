@@ -136,6 +136,14 @@
         "status": "För gammal kursdata",
         "age_minutes": 60.2,
         "checked_at": "2026-11-26T17:30:11.991736+00:00"
+      },
+      "65": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "80": {
+        "status": "För gammal kursdata",
+        "age_minutes": 111.9,
+        "checked_at": "2026-11-26T18:21:54.070113+00:00"
       }
     }
   },
@@ -196,6 +204,14 @@
         "status": "För gammal kursdata",
         "age_minutes": 60.2,
         "checked_at": "2026-11-26T17:30:11.991736+00:00"
+      },
+      "65": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "80": {
+        "status": "För gammal kursdata",
+        "age_minutes": 111.9,
+        "checked_at": "2026-11-26T18:21:54.070113+00:00"
       }
     }
   },
@@ -253,6 +269,14 @@
         "status": "För gammal kursdata",
         "age_minutes": 60.2,
         "checked_at": "2026-11-26T17:30:11.991736+00:00"
+      },
+      "65": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "80": {
+        "status": "För gammal kursdata",
+        "age_minutes": 111.9,
+        "checked_at": "2026-11-26T18:21:54.070113+00:00"
       }
     }
   }

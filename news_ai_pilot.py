@@ -187,7 +187,7 @@ def deduplicate_news(items):
     out = []
     for item in sorted(items, key=lambda i: (swedish(i), bool(i.get('article_text'))), reverse=True):
         sig = signature(item)
-        if any(item['company'] == old['company'] and abs((item['published']-old['published']).total_seconds()) <= 120 and sig == signature(old) and len(sig)>=4 for old in out):
+        if any(item['company'] == old['company'] and abs((item['published']-old['published']).total_seconds()) <= 900 and sig == signature(old) and len(sig)>=4 for old in out):
             continue
         out.append(item)
     return out
@@ -250,6 +250,7 @@ def detailed_assessment(item, article, profile):
     ]
     rules.insert(4, (r'(?:submission|submitted|application|ansökan|ansökt).{0,180}(?:ema|marketing authori[sz]ation|godkännande)|(?:ema|marketing authori[sz]ation).{0,180}(?:submission|application|ansökan)', 'Regulatorisk ansökan', 'Osäker', 60, 'En regulatorisk ansökan kan minska osäkerheten om framtida marknadstillträde, men är inte ett godkännande.', 'Kontrollera nuvarande godkännande, ansökans omfattning och myndighetens kommande beslut.'))
     rules.append((r'(?:received|receives|secured|secures|has won|erhållit|erhåller|vunnit|fått|mottagit).{0,80}(?:order|beställning|contract|kontrakt)', 'Order', 'Positiv', 70, 'En order kan bidra till framtida intäkter.', 'Kontrollera bindande villkor, marginal och leveranstid.'))
+    rules.append((r'nominated for|nominerad till|nominerats till|award nomination', 'Utmärkelse eller nominering', 'Positiv', 20, 'Kan stärka anseendet men innebär ingen bekräftad intäktsökning.', 'Ingen direkt ekonomisk effekt har fastställts.'))
     title_hits = [rule for rule in rules if re.search(rule[0], title)]
     body_hits = [rule for rule in rules if re.search(rule[0], body)]
     matched = next((rule for rule in title_hits if rule in body_hits), None) or next(iter(title_hits), None)

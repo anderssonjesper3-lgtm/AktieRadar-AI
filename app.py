@@ -3,7 +3,7 @@ import streamlit as st
 from news_scanner import load_config
 from news_ai_pilot import run_news_only
 from news_monitor import interval_minutes
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 st.set_page_config(page_title='AktieRadar News AI', page_icon='📡', layout='wide')
 st.markdown("""<style>
@@ -40,10 +40,10 @@ try:
 except (ValueError, OSError):
     stored = {}
 now = datetime.now(timezone.utc)
-stored = {k:v for k,v in stored.items() if (now-stamp(v['first_seen'])).total_seconds()<43200}
 merged = {v['item']['id']:dict(v['item'],published=stamp(v['item']['published'])) for v in stored.values()}
 merged.update({i['id']:i for i in result['items']})
-result = dict(result,items=list(merged.values()))
+active = [i for i in merged.values() if timedelta(0) <= now-stamp(i['published']) < timedelta(hours=24)]
+result = dict(result,items=active)
 config = load_config()
 covered = sum(bool(c.get('feeds')) for c in config['companies'] if c.get('segment_verified') and c.get('segment') in ('Mid Cap', 'Small Cap', 'First North'))
 a,b,c = st.columns(3)
@@ -61,6 +61,7 @@ if result['failures']:
 if not result['items']:
     st.write('Inga matchade nyheter vid senaste kontrollen.')
 st.subheader('Senaste nyhetsspår')
+st.caption('Endast nyheter publicerade under de senaste 24 timmarna visas här.')
 for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','Möjligen hög'), x['published']), reverse=True):
     with st.container(border=True):
         st.subheader(item['company'])
@@ -130,5 +131,5 @@ with st.expander('Källkontroll'):
     st.write(f"Dubbletter: {result['duplicates']}")
     st.dataframe(pd.DataFrame(result['diagnostics']))
 st.subheader('Bevakningsschema · svensk tid')
-st.table(pd.DataFrame([('07.00–09.30', '5 min'), ('09.30–16.30', '10 min'), ('16.30–18.00', '5 min'), ('18.00–07.00', '15 min')], columns=['Tid', 'Intervall']))
+st.table(pd.DataFrame([('Hela dygnet', '5 min')], columns=['Tid', 'Planerat intervall']))
 st.caption(f"Planerat intervall just nu: {interval_minutes(datetime.now(timezone.utc))} min. Schemalagd kontroll körs separat. Appens vy uppdateras vid omladdning eller knapptryckning.")

@@ -1240,7 +1240,9 @@
       "name": "Revolution Race",
       "ticker": "RVRC",
       "aliases": [
-        "Revolution Race"
+        "Revolution Race",
+        "RVRC Holding",
+        "RevolutionRace"
       ],
       "segment": "Mid Cap",
       "segment_verified": true,
@@ -2417,6 +2419,330 @@
       "ticker": "XSPRAY",
       "aliases": [
         "Xspray Pharma"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Byggmästare A J Ahlström",
+      "ticker": "AJA B",
+      "aliases": [
+        "Byggmästare A J Ahlström"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Cynca Nordic",
+      "ticker": "CYNCA",
+      "aliases": [
+        "Cynca Nordic"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "NOTE",
+      "ticker": "NOTE",
+      "aliases": [
+        "NOTE"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "SBB",
+      "ticker": "SBB B",
+      "aliases": [
+        "SBB"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "SmartCraft",
+      "ticker": "SMCRT",
+      "aliases": [
+        "SmartCraft"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Stendörren Fastigheter",
+      "ticker": "STEF B",
+      "aliases": [
+        "Stendörren Fastigheter"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Stenhus Fastigheter",
+      "ticker": "SFAST",
+      "aliases": [
+        "Stenhus Fastigheter"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Stillfront",
+      "ticker": "SF",
+      "aliases": [
+        "Stillfront"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Stockholm Nordtech Group",
+      "ticker": "NTECH",
+      "aliases": [
+        "Stockholm Nordtech Group"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Storytel",
+      "ticker": "STORY B",
+      "aliases": [
+        "Storytel"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Sveafastigheter",
+      "ticker": "SVEAF B",
+      "aliases": [
+        "Sveafastigheter"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Swedish Logistic Property",
+      "ticker": "SLP B",
+      "aliases": [
+        "Swedish Logistic Property"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Synsam",
+      "ticker": "SYNSAM",
+      "aliases": [
+        "Synsam"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Traction",
+      "ticker": "TRAC B",
+      "aliases": [
+        "Traction"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Trianon",
+      "ticker": "TRIAN B",
+      "aliases": [
+        "Trianon"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Tången Industrikapital",
+      "ticker": "TANGEN B",
+      "aliases": [
+        "Tången Industrikapital"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "VBG Group",
+      "ticker": "VBG B",
+      "aliases": [
+        "VBG Group"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "VEF",
+      "ticker": "VEFAB",
+      "aliases": [
+        "VEF"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Viaplay",
+      "ticker": "VPLAY B",
+      "aliases": [
+        "Viaplay"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Viscaria",
+      "ticker": "VISC",
+      "aliases": [
+        "Viscaria"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "VNV Global",
+      "ticker": "VNV",
+      "aliases": [
+        "VNV Global"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Volati",
+      "ticker": "VOLO",
+      "aliases": [
+        "Volati"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "XANO Industri",
+      "ticker": "XANO B",
+      "aliases": [
+        "XANO Industri"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Xvivo Perfusion",
+      "ticker": "XVIVO",
+      "aliases": [
+        "Xvivo Perfusion"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Öresund",
+      "ticker": "ORES",
+      "aliases": [
+        "Öresund"
+      ],
+      "segment": "Mid Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/mid-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "KDventures",
+      "ticker": "KDV B",
+      "aliases": [
+        "KDventures"
+      ],
+      "segment": "Small Cap",
+      "segment_verified": true,
+      "segment_source": "https://aktieradar.se/small-cap/",
+      "segment_verification": "third-party list, not exchange-verified",
+      "feeds": []
+    },
+    {
+      "name": "Keo Capital",
+      "ticker": "KEOC",
+      "aliases": [
+        "Keo Capital"
       ],
       "segment": "Small Cap",
       "segment_verified": true,

@@ -46,6 +46,27 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "API-nyckel saknas"
     },
-    "observations": {}
+    "observations": {
+      "20": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "35": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "50": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "65": {
+        "status": "OK",
+        "bar_end": "2026-11-26T15:45:00+01:00",
+        "age_minutes": 32.3,
+        "interval_minutes": 15,
+        "change_pct": -1.64,
+        "relative_volume": 0.14,
+        "momentum": "Svagt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-26T15:17:15.393468+00:00"
+      }
+    }
   }
 }

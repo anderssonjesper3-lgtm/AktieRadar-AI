@@ -11,7 +11,7 @@ class NoRedirect(HTTPRedirectHandler):
 @lru_cache(maxsize=256)
 def read_article(url):
     p = urlparse(url)
-    if p.scheme != 'https' or p.hostname != 'news.cision.com' or p.username or p.password or p.port not in (None,443):
+    if p.scheme != 'https' or p.hostname not in ('news.cision.com', 'mfn.se', 'www.mfn.se') or p.username or p.password or p.port not in (None,443):
         return {'status':'unsupported source'}
     try:
         with build_opener(NoRedirect()).open(Request(url,headers={'User-Agent':'AktieRadar NewsMonitor'}),timeout=10) as response:

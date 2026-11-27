@@ -259,6 +259,8 @@ def run_news_only(config, now=None, fetch=None, max_age_hours=24, profile_fetch=
             diagnostics.append(dict(feed='TED', companies='Bevakningslistan', status='FEL', raw_items=0, matched=0, error=type(exc).__name__))
     unique = {}
     for item in deduplicate_news(matches):
+        if item.get('title', '').strip().casefold() == item.get('company', '').strip().casefold():
+            continue
         key = item['id']
         if key not in unique:
             unique[key] = dict(item, **assess_impact(item))
@@ -314,6 +316,16 @@ def detailed_assessment(item, article, profile):
     rules.append((r'(?:received|receives|secured|secures|has won|erhållit|erhåller|vunnit|fått|mottagit).{0,80}(?:order|beställning|contract|kontrakt)', 'Order', 'Positiv', 70, 'En order kan bidra till framtida intäkter.', 'Kontrollera bindande villkor, marginal och leveranstid.'))
     rules.append((r'nominated for|nominerad till|nominerats till|award nomination', 'Utmärkelse eller nominering', 'Positiv', 20, 'Kan stärka anseendet men innebär ingen bekräftad intäktsökning.', 'Ingen direkt ekonomisk effekt har fastställts.'))
     rules.insert(5, (r'(?:signs?|signed|awarded|wins?|secured|entered into|tecknar|tecknat|ingår|ingått|tilldelats).{0,100}(?:framework agreements?|ramavtal)', 'Ramavtal', 'Positiv', 60, 'Ramavtal öppnar för framtida uppdrag men garanterar inte beställningar eller intäkter.', 'Kontrollera avropsvillkor, löptid, eventuellt garanterat värde och marginaler.'))
+    rules.extend([
+        (r'extraordinary general meeting|extra bolagsstämma|annual general meeting|årsstämma', 'Bolagsstämma', 'Neutral', 15, 'Administrativ nyhet; besluten kan dock ha ekonomisk betydelse.', 'Kontrollera beslut om kapital, utdelning och ägarförändringar.'),
+        (r'investor summit|investor conference|investerarkonferens|investerarpresentation', 'Investerarevent', 'Neutral', 15, 'Synlighet bland investerare men ingen bekräftad intäkt.', 'Kontrollera om nya ekonomiska uppgifter presenterats.'),
+        (r'donates?|skänker|donation', 'Samhällsinitiativ', 'Neutral', 5, 'Ingen tydlig direkt kurspåverkan.', 'Kontrollera eventuell materiell kostnad.'),
+        (r'technology advancements|tekniska framsteg|framsteg inom|product launch|produktlansering', 'Produktutveckling', 'Positiv', 30, 'Tekniska framsteg kan stärka konkurrenskraften.', 'Kommersiell effekt är inte bekräftad.'),
+        (r'share redemption|aktieinlösen|share buyback|återköp av aktier|repurchase of shares', 'Kapitalåterföring', 'Blandad', 55, 'Kapitalåterföring kan gynna kvarvarande ägare men minskar likviditeten.', 'Kontrollera pris, finansiering och omfattning.'),
+        (r'financial calendar|finansiell kalender|notice of annual|kallelse till', 'Rutinmeddelande', 'Neutral', 5, 'Administrativ information.', 'Ingen direkt ekonomisk effekt fastställd.'),
+        (r'met (?:its |the )?primary endpoint|uppnådde primärt effektmått', 'Studieresultat', 'Positiv', 75, 'Uppnått primärt effektmått kan minska utvecklingsrisk.', 'Kontrollera säkerhet, effektstorlek och statistisk signifikans.'),
+        (r'failed to meet (?:its |the )?primary endpoint|uppnådde inte primärt effektmått', 'Studieresultat', 'Negativ', 85, 'Missat primärt effektmått kan öka utvecklingsrisk.', 'Kontrollera studiedesign och fortsatta planer.'),
+    ])
     title_hits = [rule for rule in rules if re.search(rule[0], title)]
     body_hits = [rule for rule in rules if re.search(rule[0], body)]
     matched = next((rule for rule in title_hits if rule in body_hits), None) or next(iter(title_hits), None)
@@ -334,11 +346,11 @@ def detailed_assessment(item, article, profile):
         return dict(news_type='Övrigt', news_score=None, confidence='Låg',
                     surprise='Ej bedömd', analysis_signal='AVVAKTA')
     _, kind, direction, score, case, risk = matched
-    if body_match or not body:
+    if (body_match or not body) and direction != 'Neutral':
         direction = 'Osäker'
         score = min(score, 49)
     conflicts = [rule[1] for rule in body_hits if rule[2] in ('Negativ', 'Blandad', 'Osäker') and rule[1] != kind]
-    if direction == 'Positiv' and conflicts:
+    if direction == 'Positiv' and any(rule[1] in conflicts for rule in title_hits):
         direction, score = 'Osäker', min(score, 49)
         risk += ' Originaltexten innehåller även: ' + ', '.join(conflicts) + '. Kontrollera sammanhanget.'
     if kind in ('Order', 'Ramavtal') and re.search(r'non.binding|icke.bindande|subject to approval|villkorat|cancelled|avbeställ|not received', body):

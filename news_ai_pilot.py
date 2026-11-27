@@ -224,7 +224,7 @@ def ted_awards(companies, now):
     end = now.strftime('%Y%m%d')
     query = f'publication-date = ({start} <> {end}) AND notice-type IN (can-standard can-social can-desg can-tran)'
     for page in range(1, 21):
-        payload = dict(query=query, fields=['publication-number','publication-date','winner-name','buyer-name','notice-title'], page=page, limit=250, scope='ALL')
+        payload = dict(query=query, fields=['publication-number','publication-date','winner-name','buyer-name','notice-title','result-value-notice','result-value-cur-notice','result-framework-maximum-value-notice','result-framework-maximum-value-cur-notice'], page=page, limit=250, scope='ALL')
         req = Request('https://api.ted.europa.eu/v3/notices/search', data=json.dumps(payload).encode(), headers={'Content-Type':'application/json','Accept':'application/json'})
         with urlopen(req, timeout=20) as response: data = json.load(response)
         rows = data['notices']
@@ -246,7 +246,7 @@ def ted_awards(companies, now):
                 subject = (titles or ['Ej angivet'])[0]
                 body = f'TED anger {winner} som vinnande leverantör. Beställare: {buyer or "Ej angiven"}. Upphandling: {subject}. Publiceringsdatum: {day}. Exakt publiceringstid saknas.'
                 key = hashlib.sha256((company+number).encode()).hexdigest()[:24]
-                out.append(dict(id='TED:'+key, company=company, title=f'{company}: tilldelningsbeslut – {subject}'[:180], description=body, published=published, publication_precision='day', url='https://ted.europa.eu/sv/notice/-/detail/'+number, kind='NYHET-VAKTA', category='UPPHANDLING', source='TED', procurement_buyer=buyer, procurement_winner=winner, procurement_number=number, procurement_text=body))
+                out.append(dict(id='TED:'+key, company=company, title=f'{company}: tilldelningsbeslut – {subject}'[:180], description=body, published=published, publication_precision='day', url='https://ted.europa.eu/sv/notice/-/detail/'+number, kind='NYHET-VAKTA', category='UPPHANDLING', source='TED', procurement_buyer=buyer, procurement_winner=winner, procurement_number=number, procurement_text=body, procurement_values={k:row.get(k) for k in ('result-value-notice','result-value-cur-notice','result-framework-maximum-value-notice','result-framework-maximum-value-cur-notice')}))
         if len(rows)<250: return out
     raise RuntimeError('TED pagination limit reached')
 
@@ -295,6 +295,32 @@ def run_news_only(config, now=None, fetch=None, max_age_hours=24, profile_fetch=
         item.update(detailed_assessment(item, article, profiles[name]))
         if item.get('source') == 'TED':
             item.update(news_type='Offentlig upphandling', direction='Positiv', news_score=55, importance='Medel', confidence='Medel', analysis_signal='AVVAKTA', summary_sv=item['procurement_text'], economic_case='Tilldelning kan ge framtida intäkter. Ekonomisk storlek är ännu inte fastställd.', risk='Kontrollera avtalstecknande, överprövning, avrop och leverantörens andel. Exakt publiceringstid saknas.', analysis_scope='Strukturerad TED-information – ej fullständig avtalstext')
+        if item.get('source') == 'TED':
+            import math
+            values = item.get('procurement_values', {})
+            def single(value):
+                if isinstance(value, list) and len(value) == 1:
+                    return single(value[0])
+                return value if isinstance(value, (str, int, float)) else None
+            comparisons = []
+            for field, label in [('result-value-notice','Annonsens tilldelningsvärde'), ('result-framework-maximum-value-notice','Ramavtalets maximala värde')]:
+                currency = single(values.get(field.replace('-notice','-cur-notice')))
+                try:
+                    amount = float(single(values.get(field)))
+                except (ValueError, TypeError):
+                    continue
+                if not math.isfinite(amount) or amount <= 0 or not isinstance(currency,str):
+                    continue
+                row = dict(label=label, amount=amount, currency=currency.upper())
+                profile = profiles[name]
+                for key, cur, dest in [('totalRevenue','financialCurrency','revenue_pct'),('marketCap','currency','market_cap_pct')]:
+                    base = profile.get(key)
+                    if isinstance(base,(int,float)) and math.isfinite(base) and base>0 and str(profile.get(cur,'')).upper()==row['currency']:
+                        row[dest] = round(100*amount/base,2)
+                comparisons.append(row)
+            item['procurement_comparisons'] = comparisons
+            if comparisons:
+                item['economic_case'] = 'Annonsvärdet kan jämföras med koncernens storlek, men leverantörens andel och årliga intäkt är inte verifierade.'
         if not item['article_text'] or article['status'] != 'ok':
             item.update(analysis_signal='AVVAKTA', confidence='Låg', importance='Låg eller osäker')
             if item.get('news_score') is not None:

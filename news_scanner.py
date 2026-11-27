@@ -151,6 +151,7 @@ class _CompanyNewsHTMLParser(HTMLParser):
             results.append({
                 'title': unescape(title), 'link': href, 'date': published,
                 'description': '',
+                'publication_precision': 'unknown' if published.hour == 0 and published.minute == 0 else 'approximate',
                 'metadata': ' '.join(re.split(r'[/_-]+', unquote(parsed_url.path))),
             })
         return results
@@ -183,7 +184,7 @@ def extract_items(xml_bytes, source_url=None):
         entries.append({'title': unescape(fields.get('title', '')),
                         'link': fields.get('link', ''),
                         'date': parse_date(fields.get('pubDate') or fields.get('published') or fields.get('updated')),
-                        'description': unescape(fields.get('description') or fields.get('summary') or ''),
+                        'publication_precision': 'exact' if re.search(r'\d{1,2}:\d{2}.*(?:Z|[+-]\d{2}:?\d{2}|GMT|UTC) or fields.get('summary') or ''),
                         'metadata': ' '.join(' '.join(node.itertext()).split()) + ' ' +
                                     ' '.join(str(v) for el in node.iter() for v in el.attrib.values())})
     return entries
@@ -220,7 +221,7 @@ def classify_news_detailed(item, company, now, max_age_hours=24):
     key = hashlib.sha256((company['name'] + '\n' + link).encode()).hexdigest()[:24]
     return {'kind': 'NYHET-VAKTA', 'category': category, 'company': company['name'],
             'title': item['title'][:180], 'description': item.get('description', '')[:4000], 'url': link, 'published': published,
-            'id': 'NEWS:' + key}, 'match'
+            'publication_precision': item.get('publication_precision', 'unknown'), 'id': 'NEWS:' + key}, 'match'
 
 
 def classify_news(item, company, now, max_age_hours=24):
@@ -228,7 +229,7 @@ def classify_news(item, company, now, max_age_hours=24):
     return match
 
 
-def scan_detailed(config=None, now=None, fetch=None, max_age_hours=24):
+def scan_detailed(config=None, now=None, fetch=None, max_age_hours=24, on_match=None):
     """Fetch each unique RSS feed once, then match its items to configured issuers."""
     config = config if config is not None else load_config()
     now = now or datetime.now(timezone.utc)
@@ -279,7 +280,172 @@ def scan_detailed(config=None, now=None, fetch=None, max_age_hours=24):
                 for company in companies:
                     match, reason = classify_news_detailed(item, company, now if fetch is not default_fetch else datetime.now(timezone.utc), max_age_hours=max_age_hours)
                     if match:
+                        match['detected_at'] = datetime.now(timezone.utc).isoformat()
                         results.append(match)
+                        if on_match is not None:
+                            on_match(match)
+                        item_matches.append(company['name'])
+                    elif reason in rejects:
+                        item_reasons.add(reason)
+                item['_matched_companies'] = item_matches
+                item['_rejection_reasons'] = sorted(item_reasons) if not item_matches else []
+                if not item_matches:
+                    for reason in item_reasons:
+                        rejects[reason] += 1
+            samples = [
+                {'title': (item.get('title') or '')[:140],
+                 'published': item.get('date').isoformat() if item.get('date') else 'SAKNAS',
+                 'url': item.get('link', '')[:220], 'matched_companies': item.get('_matched_companies', []), 'rejection_reasons': item.get('_rejection_reasons', [])}
+                for item in items
+            ]
+            diagnostics.append({'feed': url, 'companies': ', '.join(c['name'] for c in companies),
+                                'status': 'OK', 'raw_items': raw_count,
+                                'matched': len(results) - before_count, **rejects,
+                                'sample_headlines': samples, 'error': ''})
+
+    unique = {item['id']: item for item in results}
+    return list(unique.values()), failures, diagnostics
+
+
+def scan(config=None, now=None, fetch=None, max_age_hours=24):
+    matches, failures, _ = scan_detailed(config=config, now=now, fetch=fetch, max_age_hours=max_age_hours)
+    return matches, failures
+
+
+def extract_cision_html(raw, source_url):
+    """Match a headline to a timestamp within the same anchor, never a nearby article."""
+    class Parser(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=True)
+            self.active = None
+            self.items = []
+        def handle_starttag(self, tag, attrs):
+            if tag == 'a':
+                self.active = [dict(attrs).get('href', ''), []]
+        def handle_data(self, data):
+            if self.active is not None:
+                self.active[1].append(data)
+        def handle_endtag(self, tag):
+            if tag != 'a' or self.active is None:
+                return
+            href, parts = self.active
+            self.active = None
+            link = urljoin(source_url, href)
+            if urlparse(link).hostname != 'news.cision.com' or ',c' not in link:
+                return
+            body = ' '.join(' '.join(parts).split())
+            match = re.search(r'(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s+([A-Za-z]{3}\s+\d{1,2},\s+20\d{2}\s+\d{2}:\d{2})\s+(?:CET|CEST)', body)
+            if not match:
+                return
+            date = datetime.strptime(match.group(1), '%b %d, %Y %H:%M').replace(tzinfo=ZoneInfo('Europe/Stockholm')).astimezone(timezone.utc)
+            title = body[:match.start()].strip()
+            if title:
+                self.items.append(dict(title=title, link=link, date=date,
+                    publication_precision='exact', description=body[match.end():].strip(), metadata=urlparse(link).path))
+    parser = Parser()
+    parser.feed(raw)
+    return parser.items
+, fields.get('pubDate') or fields.get('published') or '') else 'unknown',
+                        'description': unescape(fields.get('description') or fields.get('summary') or ''),
+                        'metadata': ' '.join(' '.join(node.itertext()).split()) + ' ' +
+                                    ' '.join(str(v) for el in node.iter() for v in el.attrib.values())})
+    return entries
+
+
+def has_phrase(text, phrase):
+    return bool(re.search(r'(?<!\w)' + re.escape(phrase.casefold()) + r'(?!\w)', text.casefold()))
+
+
+def classify_news_detailed(item, company, now, max_age_hours=24):
+    published = item.get('date')
+    if published is None:
+        return None, 'datum_saknas'
+    age = now - published
+    if not timedelta(0) <= age <= timedelta(hours=max_age_hours):
+        return None, 'utanför_datumintervall'
+    link = item.get('link', '')
+    parsed = urlparse(link)
+    if parsed.scheme != 'https' or not parsed.hostname:
+        return None, 'ogiltig_länk'
+    text = item.get('title', '') + ' ' + item.get('description', '')
+    issuer_text = item.get('title', '') + ' ' + item.get('metadata', '') + ' ' + ' '.join(re.split(r'[/_-]+', unquote(parsed.path)))
+    issuer_match = item.get('_feed_company') == company['name'] or any(
+        has_phrase(issuer_text, alias) for alias in company['aliases']
+    )
+    if not issuer_match:
+        return None, 'bolag_matchar_inte'
+    if any(has_phrase(text, word) for word in RISK_WORDS):
+        category = 'RISKNYHET'
+    elif any(has_phrase(text, word) for word in KEYWORDS):
+        category = 'ORDER/AVTAL – GRANSKA'
+    else:
+        category = 'BOLAGSNYHET – GRANSKA'
+    key = hashlib.sha256((company['name'] + '\n' + link).encode()).hexdigest()[:24]
+    return {'kind': 'NYHET-VAKTA', 'category': category, 'company': company['name'],
+            'title': item['title'][:180], 'description': item.get('description', '')[:4000], 'url': link, 'published': published,
+            'id': 'NEWS:' + key}, 'match'
+
+
+def classify_news(item, company, now, max_age_hours=24):
+    match, _ = classify_news_detailed(item, company, now, max_age_hours=max_age_hours)
+    return match
+
+
+def scan_detailed(config=None, now=None, fetch=None, max_age_hours=24, on_match=None):
+    """Fetch each unique RSS feed once, then match its items to configured issuers."""
+    config = config if config is not None else load_config()
+    now = now or datetime.now(timezone.utc)
+
+    def default_fetch(url):
+        request = Request(url, headers={'User-Agent': 'AktieRadar/6.0 NewsMonitor'})
+        with urlopen(request, timeout=15) as response:
+            return response.read(2_000_000)
+
+    fetch = fetch or default_fetch
+    feed_companies = {}
+    for company in config['companies']:
+        for url in company.get('feeds', []):
+            feed_companies.setdefault(url, []).append(company)
+
+    results = []
+    failures = []
+    diagnostics = []
+    shared = set(config.get('shared_feeds', []))
+    for url in shared:
+        feed_companies[url] = config['companies']
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    def fetch_items(url):
+        return extract_items(fetch(url), source_url=url)
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        futures = {pool.submit(fetch_items, url): url for url in feed_companies}
+        for future in as_completed(futures):
+            url = futures[future]
+            companies = feed_companies[url]
+            try:
+                items = future.result()
+                raw_count = len(items)
+                if url in shared and not items:
+                    raise ValueError('Shared feed returned no parseable entries')
+                if url not in shared and len(companies) == 1 and companies[0].get('source_type') == 'official_investor_relations':
+                    items = [dict(item, _feed_company=companies[0]['name']) for item in items]
+            except Exception as exc:
+                names = ', '.join(company['name'] for company in companies)
+                failures.append((names, type(exc).__name__))
+                diagnostics.append({'feed': url, 'companies': names, 'status': 'FEL', 'raw_items': 0, 'matched': 0, 'error': type(exc).__name__})
+                continue
+            before_count = len(results)
+            rejects = {'datum_saknas': 0, 'utanför_datumintervall': 0, 'ogiltig_länk': 0,
+                       'bolag_matchar_inte': 0, 'ingen_relevant_nyhetskategori': 0}
+            for item in items:
+                item_matches = []
+                item_reasons = set()
+                for company in companies:
+                    match, reason = classify_news_detailed(item, company, now if fetch is not default_fetch else datetime.now(timezone.utc), max_age_hours=max_age_hours)
+                    if match:
+                        match['detected_at'] = datetime.now(timezone.utc).isoformat()
+                        results.append(match)
+                        if on_match is not None:
+                            on_match(match)
                         item_matches.append(company['name'])
                     elif reason in rejects:
                         item_reasons.add(reason)

@@ -251,15 +251,19 @@ def ted_awards(companies, now):
     raise RuntimeError('TED pagination limit reached')
 
 
-def run_news_only(config, now=None, fetch=None, max_age_hours=24, profile_fetch=None):
+def run_news_only(config, now=None, fetch=None, max_age_hours=24, profile_fetch=None, on_match=None):
     eligible = [c for c in config['companies'] if c.get('segment_verified') is True
                 and c.get('segment') in ('Mid Cap', 'Small Cap', 'First North')]
     matches, failures, diagnostics = scan_detailed(
-        {'companies': eligible, 'shared_feeds': config.get('shared_feeds', [])}, now=now, fetch=fetch, max_age_hours=max_age_hours)
+        {'companies': eligible, 'shared_feeds': config.get('shared_feeds', [])}, now=now, fetch=fetch, max_age_hours=max_age_hours, on_match=on_match)
     if fetch is None:
         try:
             ted = ted_awards(eligible, now or datetime.now(timezone.utc))
             matches.extend(ted)
+            for item in ted:
+                item['detected_at'] = datetime.now(timezone.utc).isoformat()
+                if on_match is not None:
+                    on_match(item)
             diagnostics.append(dict(feed='TED', companies='Bevakningslistan', status='OK', raw_items=len(ted), matched=len(ted), error=''))
         except Exception as exc:
             failures.append(('TED', type(exc).__name__))

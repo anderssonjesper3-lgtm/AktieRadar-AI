@@ -3566,7 +3566,24 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/first-north/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiaries": [
+        "Dovre Solutions AS",
+        "Sitema",
+        "Sitema Oy",
+        "Niskasen Maansiirto",
+        "Niskasen Maansiirto Oy"
+      ],
+      "subsidiary_verification": {
+        "status": "partial",
+        "checked_on": "2026-11-27",
+        "sources": [
+          "https://nyabgroup.com/en/our-brands/",
+          "https://nyabgroup.com/sv/nyhetsrum/nyabs-dotterbolag-dovre-solutions-tecknar-fyra-ramavtal-med-bane-nor/",
+          "https://nyabgroup.com/app/uploads/2024/03/NYAB-Annual-Report-2023.pdf"
+        ],
+        "note": "Three confirmed operating subsidiaries; legal suffixes for Finnish entities also appear in 2023 annual report. Not exhaustive."
+      }
     },
     {
       "name": "Vertiseit",

@@ -78,12 +78,12 @@ for ted in [i for i in all_items if i.get('source')=='TED']:
         press = candidates[0]
         press.setdefault('related_procurements',[]).append(ted)
         hidden.add(ted['id'])
-active = [i for i in all_items if i['id'] not in hidden and (timedelta(0) <= now-stamp(i['published']) < timedelta(hours=12) or any(timedelta(0)<=now-stamp(t['published'])<timedelta(hours=12) for t in i.get('related_procurements',[])))]
+active = [i for i in all_items if i['id'] not in hidden and (timedelta(0) <= now-stamp(i['published']) < timedelta(hours=24) or any(timedelta(0)<=now-stamp(t['published'])<timedelta(hours=24) for t in i.get('related_procurements',[])))]
 result = dict(result,items=active)
 config = load_config()
 covered = sum(bool(c.get('feeds')) for c in config['companies'] if c.get('segment_verified') and c.get('segment') in ('Mid Cap', 'Small Cap', 'First North'))
 a,b,c = st.columns(3)
-a.metric('Nyheter · 12 h', len(result['items']))
+a.metric('Nyheter · 24 h', len(result['items']))
 mid_count = sum(c.get('segment') == 'Mid Cap' and c.get('segment_verified') for c in config['companies'])
 small_count = sum(c.get('segment') == 'Small Cap' and c.get('segment_verified') for c in config['companies'])
 first_count = sum(c.get('segment') == 'First North' and c.get('segment_verified') for c in config['companies'])
@@ -98,7 +98,7 @@ if result['failures']:
 if not result['items']:
     st.write('Inga matchade nyheter vid senaste kontrollen.')
 st.subheader('Marknadspuls')
-st.caption('Endast nyheter publicerade under de senaste 12 timmarna visas här.')
+st.caption('Endast nyheter publicerade under de senaste 24 timmarna visas här.')
 for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','Möjligen hög'), x['published']), reverse=True):
     direction = item.get('direction', 'Oklar')
     marker = {'Positiv':'green', 'Negativ':'red', 'Blandad':'yellow', 'Osäker':'orange', 'Oklar':'gray'}.get(direction, 'gray')

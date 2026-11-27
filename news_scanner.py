@@ -250,47 +250,54 @@ def scan_detailed(config=None, now=None, fetch=None, max_age_hours=24):
     shared = set(config.get('shared_feeds', []))
     for url in shared:
         feed_companies[url] = config['companies']
-    for url, companies in feed_companies.items():
-        try:
-            items = extract_items(fetch(url), source_url=url)
-            raw_count = len(items)
-            if url in shared and not items:
-                raise ValueError('Shared feed returned no parseable entries')
-            if url not in shared and len(companies) == 1 and companies[0].get('source_type') == 'official_investor_relations':
-                items = [dict(item, _feed_company=companies[0]['name']) for item in items]
-        except Exception as exc:
-            names = ', '.join(company['name'] for company in companies)
-            failures.append((names, type(exc).__name__))
-            diagnostics.append({'feed': url, 'companies': names, 'status': 'FEL', 'raw_items': 0, 'matched': 0, 'error': type(exc).__name__})
-            continue
-        before_count = len(results)
-        rejects = {'datum_saknas': 0, 'utanför_datumintervall': 0, 'ogiltig_länk': 0,
-                   'bolag_matchar_inte': 0, 'ingen_relevant_nyhetskategori': 0}
-        for item in items:
-            item_matches = []
-            item_reasons = set()
-            for company in companies:
-                match, reason = classify_news_detailed(item, company, now, max_age_hours=max_age_hours)
-                if match:
-                    results.append(match)
-                    item_matches.append(company['name'])
-                elif reason in rejects:
-                    item_reasons.add(reason)
-            item['_matched_companies'] = item_matches
-            item['_rejection_reasons'] = sorted(item_reasons) if not item_matches else []
-            if not item_matches:
-                for reason in item_reasons:
-                    rejects[reason] += 1
-        samples = [
-            {'title': (item.get('title') or '')[:140],
-             'published': item.get('date').isoformat() if item.get('date') else 'SAKNAS',
-             'url': item.get('link', '')[:220], 'matched_companies': item.get('_matched_companies', []), 'rejection_reasons': item.get('_rejection_reasons', [])}
-            for item in items
-        ]
-        diagnostics.append({'feed': url, 'companies': ', '.join(c['name'] for c in companies),
-                            'status': 'OK', 'raw_items': raw_count,
-                            'matched': len(results) - before_count, **rejects,
-                            'sample_headlines': samples, 'error': ''})
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    def fetch_items(url):
+        return extract_items(fetch(url), source_url=url)
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        futures = {pool.submit(fetch_items, url): url for url in feed_companies}
+        for future in as_completed(futures):
+            url = futures[future]
+            companies = feed_companies[url]
+            try:
+                items = future.result()
+                raw_count = len(items)
+                if url in shared and not items:
+                    raise ValueError('Shared feed returned no parseable entries')
+                if url not in shared and len(companies) == 1 and companies[0].get('source_type') == 'official_investor_relations':
+                    items = [dict(item, _feed_company=companies[0]['name']) for item in items]
+            except Exception as exc:
+                names = ', '.join(company['name'] for company in companies)
+                failures.append((names, type(exc).__name__))
+                diagnostics.append({'feed': url, 'companies': names, 'status': 'FEL', 'raw_items': 0, 'matched': 0, 'error': type(exc).__name__})
+                continue
+            before_count = len(results)
+            rejects = {'datum_saknas': 0, 'utanför_datumintervall': 0, 'ogiltig_länk': 0,
+                       'bolag_matchar_inte': 0, 'ingen_relevant_nyhetskategori': 0}
+            for item in items:
+                item_matches = []
+                item_reasons = set()
+                for company in companies:
+                    match, reason = classify_news_detailed(item, company, now if fetch is not default_fetch else datetime.now(timezone.utc), max_age_hours=max_age_hours)
+                    if match:
+                        results.append(match)
+                        item_matches.append(company['name'])
+                    elif reason in rejects:
+                        item_reasons.add(reason)
+                item['_matched_companies'] = item_matches
+                item['_rejection_reasons'] = sorted(item_reasons) if not item_matches else []
+                if not item_matches:
+                    for reason in item_reasons:
+                        rejects[reason] += 1
+            samples = [
+                {'title': (item.get('title') or '')[:140],
+                 'published': item.get('date').isoformat() if item.get('date') else 'SAKNAS',
+                 'url': item.get('link', '')[:220], 'matched_companies': item.get('_matched_companies', []), 'rejection_reasons': item.get('_rejection_reasons', [])}
+                for item in items
+            ]
+            diagnostics.append({'feed': url, 'companies': ', '.join(c['name'] for c in companies),
+                                'status': 'OK', 'raw_items': raw_count,
+                                'matched': len(results) - before_count, **rejects,
+                                'sample_headlines': samples, 'error': ''})
 
     unique = {item['id']: item for item in results}
     return list(unique.values()), failures, diagnostics

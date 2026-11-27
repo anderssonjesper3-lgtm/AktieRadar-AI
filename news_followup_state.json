@@ -696,7 +696,13 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "Regelbaserad analys – betald AI avstängd"
     },
-    "observations": {}
+    "observations": {
+      "50": {
+        "status": "För gammal kursdata",
+        "age_minutes": 54.7,
+        "checked_at": "2026-11-27T11:39:40.057320+00:00"
+      }
+    }
   },
   "NEWS:ede3b5b9c959443b5dda9a1b": {
     "first_seen": "2026-11-27T10:42:47.826139+00:00",
@@ -748,7 +754,25 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "Regelbaserad analys – betald AI avstängd"
     },
-    "observations": {}
+    "observations": {
+      "50": {
+        "status": "OK",
+        "bar_end": "2026-11-27T12:30:00+01:00",
+        "age_minutes": 9.7,
+        "interval_minutes": 5,
+        "change_pct": 0.72,
+        "relative_volume": 0.07,
+        "momentum": "Svagt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T11:39:40.057320+00:00"
+      },
+      "20": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "35": {
+        "status": "Kontrolltillfälle missat"
+      }
+    }
   },
   "NEWS:a46a22f7c88ec09791ba0c6f": {
     "first_seen": "2026-11-27T10:42:47.826139+00:00",
@@ -801,7 +825,25 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "Regelbaserad analys – betald AI avstängd"
     },
-    "observations": {}
+    "observations": {
+      "50": {
+        "status": "OK",
+        "bar_end": "2026-11-27T12:30:00+01:00",
+        "age_minutes": 9.7,
+        "interval_minutes": 5,
+        "change_pct": -2.9,
+        "relative_volume": 0.01,
+        "momentum": "Svagt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T11:39:40.057320+00:00"
+      },
+      "20": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "35": {
+        "status": "Kontrolltillfälle missat"
+      }
+    }
   },
   "NEWS:8597aa71c28782453b9f3763": {
     "first_seen": "2026-11-27T10:42:47.826139+00:00",
@@ -853,7 +895,25 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "Regelbaserad analys – betald AI avstängd"
     },
-    "observations": {}
+    "observations": {
+      "50": {
+        "status": "OK",
+        "bar_end": "2026-11-27T12:35:00+01:00",
+        "age_minutes": 4.7,
+        "interval_minutes": 5,
+        "change_pct": 0.41,
+        "relative_volume": 0.12,
+        "momentum": "Positivt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T11:39:40.057320+00:00"
+      },
+      "20": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "35": {
+        "status": "Kontrolltillfälle missat"
+      }
+    }
   },
   "NEWS:5638079c00fbc421785070c2": {
     "first_seen": "2026-11-27T10:42:47.826139+00:00",
@@ -899,7 +959,25 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "Regelbaserad analys – betald AI avstängd"
     },
-    "observations": {}
+    "observations": {
+      "50": {
+        "status": "OK",
+        "bar_end": "2026-11-27T12:30:00+01:00",
+        "age_minutes": 9.7,
+        "interval_minutes": 5,
+        "change_pct": 0.72,
+        "relative_volume": 0.07,
+        "momentum": "Svagt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T11:39:40.057320+00:00"
+      },
+      "20": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "35": {
+        "status": "Kontrolltillfälle missat"
+      }
+    }
   },
   "NEWS:15ef114e0e17bbf954fbf7a8": {
     "first_seen": "2026-11-27T10:42:47.826139+00:00",
@@ -953,7 +1031,25 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "Regelbaserad analys – betald AI avstängd"
     },
-    "observations": {}
+    "observations": {
+      "50": {
+        "status": "OK",
+        "bar_end": "2026-11-27T12:30:00+01:00",
+        "age_minutes": 9.7,
+        "interval_minutes": 5,
+        "change_pct": 0.72,
+        "relative_volume": 0.07,
+        "momentum": "Svagt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T11:39:40.057320+00:00"
+      },
+      "20": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "35": {
+        "status": "Kontrolltillfälle missat"
+      }
+    }
   },
   "NEWS:25b5a7c11349a053289d772b": {
     "first_seen": "2026-11-27T10:42:47.826139+00:00",
@@ -999,7 +1095,25 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "Regelbaserad analys – betald AI avstängd"
     },
-    "observations": {}
+    "observations": {
+      "50": {
+        "status": "OK",
+        "bar_end": "2026-11-27T12:30:00+01:00",
+        "age_minutes": 9.7,
+        "interval_minutes": 5,
+        "change_pct": -2.9,
+        "relative_volume": 0.01,
+        "momentum": "Svagt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T11:39:40.057320+00:00"
+      },
+      "20": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "35": {
+        "status": "Kontrolltillfälle missat"
+      }
+    }
   },
   "NEWS:2ba41fff4439830122640892": {
     "first_seen": "2026-11-27T10:42:47.826139+00:00",
@@ -1062,7 +1176,25 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "Regelbaserad analys – betald AI avstängd"
     },
-    "observations": {}
+    "observations": {
+      "50": {
+        "status": "OK",
+        "bar_end": "2026-11-27T12:30:00+01:00",
+        "age_minutes": 9.7,
+        "interval_minutes": 5,
+        "change_pct": -2.9,
+        "relative_volume": 0.01,
+        "momentum": "Svagt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T11:39:40.057320+00:00"
+      },
+      "20": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "35": {
+        "status": "Kontrolltillfälle missat"
+      }
+    }
   },
   "NEWS:7b8e23b3b02422fc4366a30b": {
     "first_seen": "2026-11-27T10:42:47.826139+00:00",
@@ -1112,7 +1244,25 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "Regelbaserad analys – betald AI avstängd"
     },
-    "observations": {}
+    "observations": {
+      "50": {
+        "status": "OK",
+        "bar_end": "2026-11-27T12:25:00+01:00",
+        "age_minutes": 14.7,
+        "interval_minutes": 5,
+        "change_pct": 5.96,
+        "relative_volume": 1.0,
+        "momentum": "Positivt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T11:39:40.057320+00:00"
+      },
+      "20": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "35": {
+        "status": "Kontrolltillfälle missat"
+      }
+    }
   },
   "NEWS:57806310a4b0b045d20361c2": {
     "first_seen": "2026-11-27T10:42:47.826139+00:00",
@@ -1158,7 +1308,25 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "Regelbaserad analys – betald AI avstängd"
     },
-    "observations": {}
+    "observations": {
+      "50": {
+        "status": "OK",
+        "bar_end": "2026-11-27T12:35:00+01:00",
+        "age_minutes": 4.7,
+        "interval_minutes": 5,
+        "change_pct": 0.41,
+        "relative_volume": 0.12,
+        "momentum": "Positivt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T11:39:40.057320+00:00"
+      },
+      "20": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "35": {
+        "status": "Kontrolltillfälle missat"
+      }
+    }
   },
   "NEWS:b41e048cc5a74887ddedd351": {
     "first_seen": "2026-11-27T10:42:47.826139+00:00",
@@ -1208,7 +1376,13 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "Regelbaserad analys – betald AI avstängd"
     },
-    "observations": {}
+    "observations": {
+      "50": {
+        "status": "För gammal kursdata",
+        "age_minutes": 114.7,
+        "checked_at": "2026-11-27T11:39:40.057320+00:00"
+      }
+    }
   },
   "NEWS:c29e337114d8c9e360957425": {
     "first_seen": "2026-11-27T10:42:47.826139+00:00",
@@ -1258,6 +1432,12 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "Regelbaserad analys – betald AI avstängd"
     },
-    "observations": {}
+    "observations": {
+      "50": {
+        "status": "För gammal kursdata",
+        "age_minutes": 114.7,
+        "checked_at": "2026-11-27T11:39:40.057320+00:00"
+      }
+    }
   }
 }

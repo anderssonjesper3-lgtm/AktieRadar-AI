@@ -119,8 +119,50 @@
       "segment_effective": "2026-01-02",
       "feeds": [],
       "subsidiary_verification": {
-        "status": "pending"
-      }
+        "status": "partial_historical",
+        "checked_on": "2026-11-27",
+        "as_of": "2025-12-31",
+        "sources": [
+          "https://storage.mfn.se/1000a24a-6c6b-4912-9c75-c6576cb2407f/en-karnell-annual-report-2025.pdf",
+          "https://karnell.se/en/our-companies/"
+        ],
+        "note": "33 names as printed in note 44, p.104, direct and indirect holdings with varying ownership percentages. Current portfolio page corroborates operating brands, not exact legal ownership. Tekniseri Suzhou omitted because full legal name unclear. 2026 additions including OBA and lighting business not yet legally verified. No post-year-end ownership independently confirmed; spelling of Haco Rehabsservice and LundHalsey as printed requires registry check."
+      },
+      "subsidiaries": [
+        "Tekniseri Nordic AB",
+        "Tekniseri Group Oy",
+        "Tekniseri Oy",
+        "Sealmaker Finland Oy",
+        "AB Svenska Maskinskyltfabriken",
+        "Autori group AB",
+        "Autori Oy",
+        "Simfas Sweden AB",
+        "Re-board Group AB",
+        "Re-board Technology AB",
+        "Vebe Teknik AB",
+        "KL Mechanics Oy",
+        "Rotomon Holding Oy",
+        "Rotomon Oy",
+        "Drivex AB",
+        "Drivex AS",
+        "Timeka Finland Oy",
+        "Timeka Oy",
+        "Suomen Tekniikkapalvelu Oy",
+        "Karnell Finland Oy",
+        "Sähkö-Jokinen Oy",
+        "Männistö Oy Metallituote",
+        "Vagnsteknik i Karlshamn AB",
+        "Plalite Ltd",
+        "Karnell Sverige AB",
+        "Ojop Sweden AB",
+        "NE Engineering Holding Ltd",
+        "NE Engineering Ltd",
+        "Haco Tellus AB",
+        "Haco Rehabsservice AB",
+        "Warwick SAS Medical Ltd",
+        "Warwick SASCo Ltd",
+        "LundHalsey (Console System) Ltd"
+      ]
     },
     {
       "name": "Svedbergs Group",

@@ -13,8 +13,50 @@
       "segment_effective": "2026-01-02",
       "feeds": [],
       "subsidiary_verification": {
-        "status": "pending"
-      }
+        "status": "partial_historical",
+        "checked_on": "2026-11-27",
+        "as_of": "2025-12-31",
+        "sources": [
+          "https://investors.ncabgroup.com/en/wp-content/uploads/sites/2/2026/04/ncab-annual-and-sustainability-report-2025-260410.pdf",
+          "https://www.ncabgroup.com/contact/"
+        ],
+        "note": "Names from consolidated subsidiary table and note 51 in 2025 annual report. Direct and indirect holdings, Macedonia 70%. Current contact page confirms business presence but not individual legal ownership. Elmatica AS omitted because note 51 has no 2025 carrying amount and status requires clarification; inconsistent Spain/Macedonia names across notes require further verification. No ownership after 2025-12-31 independently confirmed; not exhaustive."
+      },
+      "subsidiaries": [
+        "NCAB Group Sweden AB",
+        "NCAB Group Norway AS",
+        "NCAB Group Denmark A/S",
+        "NCAB Group Finland OY",
+        "NCAB Group Estonia OÜ",
+        "NCAB Group France SAS",
+        "NCAB Group Germany GmbH",
+        "B&B Leiterplattenservice GmbH",
+        "NCAB Group Spain S.A.U",
+        "NCAB Group Italy S.r.l.",
+        "NCAB Group DVS S.r.l.",
+        "DVS Pacific Ltd",
+        "NCAB Group Macedonia D.o.o",
+        "NCAB Group Polska Sp. Z.o.o.",
+        "NCAB Group Portugal S.A",
+        "NCAB Group South East Asia SDN BHD",
+        "Multi-Teknik Mönsterkort AB",
+        "Multi-Teknik LTU",
+        "NCAB Group UK Ltd",
+        "NCAB Group Kestrel Ltd",
+        "NCAB Group USA Inc.",
+        "Bare Board Group Inc.",
+        "Phase 3 Technologies Inc.",
+        "NCAB Group Benelux B.V",
+        "Flatfield Germany GmbH",
+        "Elmatica GmbH",
+        "NCAB Group AG",
+        "NCAB Group Switzerland AG",
+        "NCAB Group SR d.o.o",
+        "NCAB Group Austria GmbH",
+        "3PD BV",
+        "NCAB Group Belgium BV",
+        "NCAB Group Asia Ltd."
+      ]
     },
     {
       "name": "Better Collective",

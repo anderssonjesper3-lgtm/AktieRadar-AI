@@ -1610,8 +1610,34 @@
       "segment_verification": "third-party list, not exchange-verified",
       "feeds": [],
       "subsidiary_verification": {
-        "status": "pending"
-      }
+        "status": "partial_historical",
+        "checked_on": "2026-11-27",
+        "as_of": "2025-12-31",
+        "sources": [
+          "https://storage.mfn.se/d192d2b0-c131-43ca-a585-ef9fe6a34a14/proact-it-group-annual-and-sustainability-report-2025.pdf",
+          "https://www.proact.eu/news/proact-publishes-its-annual-and-sustainability-report-for-2025",
+          "https://www.proact.eu/contact-us"
+        ],
+        "note": "2025 annual report note 17 lists 13 wholly owned direct subsidiaries; note 1 confirms Proact Deutschland GmbH indirectly owned. Current contact page corroborates operations and UK/Belgian name variants, not current legal ownership. Other indirect subsidiaries including acquisitions require further verification; ownership after 2025-12-31 not independently confirmed."
+      },
+      "subsidiaries": [
+        "Proact IT Sweden AB",
+        "Proact IT Norge AS",
+        "Proact Finland OY",
+        "Proact Systems A/S",
+        "Proact Finance AB",
+        "Proact IT Latvia SIA",
+        "Proact Netherlands B.V.",
+        "Proact Estonia AS",
+        "Proact IT (UK) Ltd",
+        "Proact Belgium BVBA",
+        "Proact Czech Republic, s.r.o.",
+        "Proact U.S. LLC",
+        "Proact IT Germany GmbH",
+        "Proact Deutschland GmbH",
+        "Proact IT UK Ltd",
+        "Proact Belgium BV"
+      ]
     },
     {
       "name": "Ratos",

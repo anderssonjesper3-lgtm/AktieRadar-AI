@@ -842,8 +842,19 @@
       "segment_verification": "third-party list, not exchange-verified",
       "feeds": [],
       "subsidiary_verification": {
-        "status": "pending"
-      }
+        "status": "complete_as_of_report",
+        "checked_on": "2026-11-27",
+        "as_of": "2025-12-31",
+        "sources": [
+          "https://storage.mfn.se/59d837f3-9a99-4bb3-b3cb-17499c6efaa2/eng-ctt-ar-2025-final.pdf",
+          "https://www.ctt.se/articles/mfn_news/annual-report-2025-ctt-systems-ab-publ/",
+          "https://storage.mfn.se/dc7175ef-3f53-4295-a86e-4b7b7ce34dc3/ctt-systems-ab-delarsrapport-q3-2026.pdf"
+        ],
+        "note": "2025 annual report notes 2 and 14 disclose one dormant US subsidiary, Delaware ID 3486106, 100% owned at 2025-12-31. Q3 2026 report states no significant events during the year or after period end but does not explicitly reconfirm subsidiary ownership. Current legal status and ownership not independently verified; low procurement relevance while dormant."
+      },
+      "subsidiaries": [
+        "CTT Systems Inc."
+      ]
     },
     {
       "name": "Diös Fastigheter",

@@ -179,6 +179,13 @@ def deduplicate_news(items):
             (r'\b(?:miljoner kronor|million sek|msek)\b', ' msek '),
             (r'\b(?:publicerar|publishes|releases)\b', ' publish '),
             (r'\b(?:delårsrapport|interim report)\b', ' interimreport '),
+            (r'\b(?:kommuniké från extra bolagsstämma|bulletin from the extraordinary general meeting)\b', ' meetingbulletin '),
+            (r'\b(?:utvalt att presentera vid|selected to present at)\b', ' selectedpresent '),
+            (r'\b(?:visar framsteg inom termisk ablation|to showcase thermal ablation technology advancements)\b', ' thermalablationadvance '),
+            (r'\b(?:ramavtal|framework agreements?)\b', ' frameworkagreement '),
+            (r'\b(?:tecknar|signs)\b', ' signs '),
+            (r'\b(?:fyra|four)\b', ' 4 '),
+            (r'\b(?:med|with|vid|at)\b', ' with '),
             (r'\b(?:en|ett|av|på|om|a|an|of|for|worth|the)\b', ' ')]:
             t = re.sub(pattern, replacement, t)
         return tuple(sorted(re.findall(r'\w+', t)))
@@ -187,7 +194,7 @@ def deduplicate_news(items):
     out = []
     for item in sorted(items, key=lambda i: (swedish(i), bool(i.get('article_text'))), reverse=True):
         sig = signature(item)
-        if any(item['company'] == old['company'] and abs((item['published']-old['published']).total_seconds()) <= 900 and sig == signature(old) and len(sig)>=4 for old in out):
+        if any(item['company'] == old['company'] and abs((item['published']-old['published']).total_seconds()) <= 900 and sig == signature(old) and (len(sig)>=4 or (len(sig)>=2 and any(t in sig for t in ('meetingbulletin','selectedpresent','thermalablationadvance')))) for old in out):
             continue
         out.append(item)
     return out
@@ -375,6 +382,27 @@ def detailed_assessment(item, article, profile):
             summary += f" Nämnt belopp motsvarar {comparison['revenue_ratio_pct']} % av rapporterad omsättning; kontrollera ordervärdet."
         if body and re.search(r'immediate delivery|immediate deliveries|omgående leverans|omedelbar leverans', body):
             summary += ' Originaltexten nämner omgående leverans.'
+    if body:
+        original = article.get('text', '')
+        economic_sentences = []
+        for sentence in re.split(r'(?<=[.!?])\s+|\n+', original):
+            sentence = sentence.strip()
+            if not sentence or len(sentence) > 1000:
+                continue
+            if re.search(r'\b(?:contract value|order value|avtalsvärde|ordervärde|net sales|nettoomsättning|revenue|omsättning|margin|marginal|cash flow|kassaflöde|financing|finansiering|delivery|leverans|guaranteed|garanterad|minimum purchase|minimum volume|avrop|call.off)\b', sentence, re.I):
+                economic_sentences.append(sentence)
+        item['economic_evidence'] = economic_sentences[:8]
+        if kind in ('Order', 'Ramavtal'):
+            if re.search(r'no guaranteed (?:volume|value|orders)|no minimum (?:purchase|volume)|inga garanterade (?:volymer|beställningar)|utan garanterad volym', body):
+                case += ' Texten anger att garanterad volym eller beställning saknas.'
+                score = min(score, 55)
+            if economic_sentences:
+                summary += ' Ekonomiskt underlag ur originaltexten: ' + economic_sentences[0][:350]
+            else:
+                risk += ' Inga tydliga ekonomiska avtalsuppgifter identifierades.'
+        elif kind in ('Kapitalåterföring', 'Emission', 'Förvärv', 'Rapport') and economic_sentences:
+            summary += ' Ekonomiskt underlag ur originaltexten: ' + economic_sentences[0][:350]
+    item['analysis_version'] = '2.1'
     return dict(news_type=kind, news_score=score, direction=direction,
                 importance='Hög' if score >= 70 else 'Medel' if score >= 50 else 'Låg eller osäker',
                 economic_case=case, risk=risk, summary_sv=summary,

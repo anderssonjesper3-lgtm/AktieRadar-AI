@@ -124,7 +124,12 @@ for item in sorted(result['items'], key=lambda x: (feed_time(x)[0], stamp(x['pub
         st.subheader(item['company'])
         st.markdown('**'+item['title']+'**')
         st.write({'Positiv':'🟢','Negativ':'🔴','Blandad':'🟡','Osäker':'🟠'}.get(item['direction'],'⚪') + ' ' + item['direction'])
-        st.caption(f"Publicerad: {stamp(item['published']).astimezone(ZoneInfo('Europe/Stockholm')):%Y-%m-%d %H:%M} svensk tid · {item['direction']} · Betydelse: {item['importance']}")
+        publication = stamp(item['published'])
+        if item.get('publication_precision') == 'exact':
+            publication_label = publication.astimezone(ZoneInfo('Europe/Stockholm')).strftime('%Y-%m-%d %H:%M') + ' svensk tid'
+        else:
+            publication_label = publication.date().isoformat() + ' (exakt tid ej verifierad)'
+        st.caption(f"Publicerad: {publication_label} · {item['direction']} · Betydelse: {item['importance']}")
         st.caption('Originaltext: '+('Hämtad' if item.get('article_status')=='ok' else 'Ej tillgänglig eller ej verifierad'))
         st.caption(item.get('analysis_scope', 'Analysomfattning ej verifierad'))
         if item.get('article_chars'):

@@ -119,7 +119,8 @@ for item in sorted(result['items'], key=lambda x: (feed_time(x)[0], stamp(x['pub
     marker = {'Positiv':'green', 'Negativ':'red', 'Blandad':'yellow', 'Osäker':'orange', 'Oklar':'gray'}.get(direction, 'gray')
     score = item.get('news_score')
     score_label = f'{score}/100' if score is not None else 'Ej poängsatt'
-    with st.expander(f"{time_label} · :{marker}[▌] **{item['company']}** · {direction} · :{marker}[{score_label}]", expanded=False):
+    source_label = ' · 🏛 UPPHANDLING' if item.get('source') == 'TED' else ''
+    with st.expander(f"{time_label} · :{marker}[▌] **{item['company']}** · {direction} · :{marker}[{score_label}]{source_label}", expanded=False):
         st.subheader(item['company'])
         st.markdown('**'+item['title']+'**')
         st.write({'Positiv':'🟢','Negativ':'🔴','Blandad':'🟡','Osäker':'🟠'}.get(item['direction'],'⚪') + ' ' + item['direction'])
@@ -159,6 +160,19 @@ for item in sorted(result['items'], key=lambda x: (feed_time(x)[0], stamp(x['pub
                 st.write(related.get('procurement_text',''))
                 st.link_button('Tilldelningsannons · '+related.get('procurement_number',related['id']),related['url'])
             st.write('Pressmeddelande · '+item['title'])
+        for tender in ([item] if item.get('source') == 'TED' else []) + item.get('related_procurements', []):
+            st.markdown('**Upphandlingsvärde · TED**')
+            st.caption('Annonsvärde, inte verifierad intäkt för vinnaren. Jämförelse endast i samma valuta.')
+            if not tender.get('procurement_comparisons'):
+                st.write('Värde saknas eller kunde inte tolkas entydigt.')
+            for value in tender.get('procurement_comparisons', []):
+                st.write(f"{value['label']}: {value['amount']:,.0f} {value['currency']}")
+                if 'revenue_pct' in value:
+                    st.write(f"Andel av årsomsättning: {value['revenue_pct']:.2f} %")
+                if 'market_cap_pct' in value:
+                    st.write(f"Andel av börsvärde: {value['market_cap_pct']:.2f} %")
+            if item.get('source') == 'TED':
+                st.caption('Inget matchat pressmeddelande')
         st.markdown('**Ekonomisk påverkan**')
         st.write(item['economic_case'])
         st.markdown('**Risk att kontrollera**')

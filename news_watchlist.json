@@ -48,8 +48,22 @@
       "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
       "segment_effective": "2026-01-02",
       "subsidiary_verification": {
-        "status": "pending"
-      }
+        "status": "complete_as_of_report",
+        "checked_on": "2026-11-27",
+        "as_of": "2026-03-31",
+        "sources": [
+          "https://www.ovzon.com/en/wp-content/uploads/sites/4/2026/04/ovzon2025-eng-utskriftsversion-1.pdf",
+          "https://www.ovzon.com/en/wp-content/uploads/sites/4/2026/04/sv-ovzon-q126-260423.pdf"
+        ],
+        "note": "All four subsidiaries disclosed in 2025 annual report note M11 (100% direct or indirect) and corroborated by Q1 2026 note 13. Five search names include documented Ltd variant. Ownership after 2026-03-31 not independently verified."
+      },
+      "subsidiaries": [
+        "Ovzon Sweden AB",
+        "OverHorizon OHO 1 Limited",
+        "Ovzon US, LLC",
+        "Ovzon LLC",
+        "OverHorizon OHO 1 Ltd"
+      ]
     },
     {
       "name": "Karnell Group",

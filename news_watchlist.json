@@ -973,8 +973,27 @@
       "segment_verification": "third-party list, not exchange-verified",
       "feeds": [],
       "subsidiary_verification": {
-        "status": "pending"
-      }
+        "status": "partial_historical",
+        "checked_on": "2026-11-28",
+        "as_of": "2025-12-31",
+        "sources": [
+          "https://storage.mfn.se/a/enea/3be8c16c-aea1-46ba-965f-63f5f5a8a65e/enea-annual-report-2025.pdf",
+          "https://www.enea.com/contact-us/"
+        ],
+        "note": "Annual report 2025 note 17 p.71 lists 11 wholly owned group companies, of which ten retained as search names. Aptilo Networks AB excluded because note 17 confirms merger into Enea Software AB in January 2026. Current contact page corroborates operating presence in several countries but does not establish current legal ownership; other office locations not added without legal entity verification. Ownership after reporting date not independently confirmed."
+      },
+      "subsidiaries": [
+        "Enea Software AB",
+        "Enea GmbH",
+        "Enea KK",
+        "Enea Polyhedra Ltd",
+        "Enea Software SRL",
+        "Enea Software SAS",
+        "Enea Software Inc.",
+        "Enea Software Ltd",
+        "Enea Software GmbH",
+        "Enea Software d.o.o."
+      ]
     },
     {
       "name": "Enity Holding",

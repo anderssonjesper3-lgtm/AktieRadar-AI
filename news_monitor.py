@@ -31,20 +31,50 @@ def main():
         print('Outside selected polling interval')
         return
     started = datetime.now(timezone.utc)
-    result = run_news_only(load_config())
-    analysis_done = datetime.now(timezone.utc)
+    config = load_config()
+    notify = None
     if args.send:
         from aktieradar_telegram import telegram_send
         state = Path(args.state)
         seen = set(json.loads(state.read_text())) if state.exists() else set()
-        for item in result['items']:
-            if item['id'] in seen or not timedelta(0) <= datetime.now(timezone.utc)-item['published'] <= timedelta(hours=24):
-                continue
-            telegram_send(alert_text(item))
+        def notify(item):
+            if item['id'] in seen:
+                return
+            detected = datetime.fromisoformat(item['detected_at'])
+            published = item['published']
+            exact = item.get('publication_precision') == 'exact'
+            if exact and not timedelta(0) <= detected-published <= timedelta(hours=24):
+                return
+            local = ZoneInfo('Europe/Stockholm')
+            pub = published.astimezone(local).strftime('%Y-%m-%d %H:%M') if exact else published.date().isoformat() + ' (exakt tid ej verifierad)'
+            message = ('🔔 SNABBNOTIS – VAKTA | ' + item['company'] + '\n'
+                       + item['title'] + '\nPublicerad: ' + pub
+                       + '\nUpptäckt: ' + detected.astimezone(local).strftime('%H:%M:%S')
+                       + '\n' + item['url'] + '\nPreliminär nyhet – djupanalys återstår, inte köpsignal.')
+            sent_at = datetime.now(timezone.utc)
+            try:
+                telegram_send(message)
+            except RuntimeError:
+                print(json.dumps({'event':'telegram_failed','id':item['id']}), flush=True)
+                return
             confirmed = datetime.now(timezone.utc)
-            print(json.dumps({'event':'telegram_confirmed','id':item['id'],'published':item['published'].isoformat(),'scan_started':started.isoformat(),'batch_analysis_done':analysis_done.isoformat(),'confirmed':confirmed.isoformat(),'publication_to_telegram_seconds':round((confirmed-item['published']).total_seconds(),1)}, ensure_ascii=False), flush=True)
             seen.add(item['id'])
-            state.write_text(json.dumps(sorted(seen)))
+            temp = state.with_suffix('.tmp')
+            temp.write_text(json.dumps(sorted(seen)))
+            temp.replace(state)
+            print(json.dumps({'event':'telegram_confirmed','id':item['id'],
+                'published':published.isoformat() if exact else None,
+                'publication_precision':item.get('publication_precision','unknown'),
+                'scan_started':started.isoformat(),'detected_at':detected.isoformat(),
+                'send_started':sent_at.isoformat(),'confirmed':confirmed.isoformat(),
+                'detection_to_telegram_seconds':round((confirmed-detected).total_seconds(),3),
+                'telegram_api_seconds':round((confirmed-sent_at).total_seconds(),3),
+                'publication_to_telegram_seconds':round((confirmed-published).total_seconds(),1) if exact else None}, ensure_ascii=False), flush=True)
+    result = run_news_only(config, on_match=notify)
+    if notify is not None:
+        for item in result['items']:
+            if item.get('detected_at'):
+                notify(item)
     from news_followup import advance, load_state, save_state
     save_state(advance(load_state(), result['items'], load_config(), datetime.now(timezone.utc)))
     print(json.dumps(result, default=str, ensure_ascii=False))

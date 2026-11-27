@@ -6,20 +6,30 @@ from news_monitor import interval_minutes
 from datetime import datetime, timezone, timedelta
 from zoneinfo import ZoneInfo
 
-st.set_page_config(page_title='AktieRadar News AI', page_icon='📡', layout='wide')
+st.set_page_config(page_title='MidCap News', page_icon='📈', layout='wide')
 st.markdown("""<style>
-.stApp {background:#101b2b;color:#f1f5f9;}
-[data-testid="stHeader"] {background:#101b2b;}
-.stApp p,.stApp label,.stApp h1,.stApp h2,.stApp h3,[data-testid="stMetricValue"],[data-testid="stMetricLabel"] {color:#f1f5f9;}
-[data-testid="stCaptionContainer"] p {color:#cbd5e1;}
-.stButton button,.stLinkButton a {background:#e2e8f0;color:#10243b;border-radius:10px;}
-.stButton button p,.stLinkButton a p {color:#10243b;}
-[data-testid="stAlert"] {background:#23364b !important;color:#f1f5f9 !important;}
-[data-testid="stAlert"] * {color:#f1f5f9 !important;}
-[data-testid="stCaptionContainer"] p {color:#d1dbe8 !important;}
-</style>""", unsafe_allow_html=True)
-st.title('📡 AktieRadar News AI')
-st.caption('Stockholm Mid Cap · Small Cap · First North · Nyhetsradar')
+.stApp, [data-testid="stHeader"] {background:#0B1424;color:#F1F5F9;}
+.stApp p,.stApp label,.stApp h1,.stApp h2,.stApp h3 {color:#F1F5F9;}
+[data-testid="stCaptionContainer"] p {color:#B9C9DB !important;}
+[data-testid="stMetric"] {background:#17263B;border:1px solid #263B50;border-radius:14px;padding:14px;}
+[data-testid="stMetricValue"] {color:#26D9C7 !important;font-weight:700;}
+[data-testid="stMetricLabel"] * {color:#CBD5E1 !important;}
+[data-testid="stExpander"] details {background:#17263B;border:1px solid #263B50;border-radius:12px;}
+[data-testid="stExpander"] summary {padding:14px;color:#F1F5F9;}
+[data-testid="stExpander"] summary p {color:#F1F5F9;font-weight:600;}
+.stButton button,.stLinkButton a {background:#26D9C7;color:#0B1424;border:0;border-radius:10px;}
+.stButton button p,.stLinkButton a p {color:#0B1424;font-weight:600;}
+[data-testid="stAlert"] {background:#23364b !important;}
+[data-testid="stAlert"] * {color:#F1F5F9 !important;}
+.brand {display:flex;align-items:center;gap:14px;margin:8px 0 20px;}
+.brand-name {font-size:clamp(24px,5vw,38px);font-weight:800;letter-spacing:1px;color:#26D9C7;}
+.brand-sub {color:#CBD5E1;font-size:14px;}
+.brand-status {color:#26D9C7;font-size:12px;letter-spacing:1.5px;font-weight:600;}
+</style>
+<div class="brand"><svg width="52" height="52" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="12" fill="#173A43"/><path d="M6 25 H14 L20 11 L27 36 L34 21 H42" stroke="#26D9C7" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><div class="brand-name">MIDCAP NEWS</div><div class="brand-sub">Svensk börsbevakning</div></div></div>
+<div class="brand-status">● NYHETSRADAR</div>
+""", unsafe_allow_html=True)
+st.caption('Mid Cap · Small Cap · First North')
 
 
 @st.cache_data(ttl=300, show_spinner=False)
@@ -48,27 +58,28 @@ result = dict(result,items=deduplicate_news(active))
 config = load_config()
 covered = sum(bool(c.get('feeds')) for c in config['companies'] if c.get('segment_verified') and c.get('segment') in ('Mid Cap', 'Small Cap', 'First North'))
 a,b,c = st.columns(3)
-a.metric('Bolag i bevakningslistan', result['eligible_count'])
+a.metric('Nyheter · 12 h', len(result['items']))
 mid_count = sum(c.get('segment') == 'Mid Cap' and c.get('segment_verified') for c in config['companies'])
 small_count = sum(c.get('segment') == 'Small Cap' and c.get('segment_verified') for c in config['companies'])
 first_count = sum(c.get('segment') == 'First North' and c.get('segment_verified') for c in config['companies'])
 st.caption(f'Mid Cap: {mid_count} · Small Cap: {small_count} · First North: {first_count}')
-b.metric('Gemensamma källor', len(config.get('shared_feeds', [])))
-c.metric('Nyheter senaste 12 h', len(active))
+b.metric('Positiva', sum(i.get('direction') == 'Positiv' for i in result['items']))
+c.metric('Hög potential', sum(i.get('direction') == 'Positiv' and (i.get('news_score') or 0) >= 70 for i in result['items']))
+st.caption(f"Bevakningslista: {result['eligible_count']} bolag · Gemensamma källor: {len(config.get('shared_feeds', []))} · Hög potential = positiv och minst 70 poäng, inte kursprognos.")
 if not config.get('universe_complete'):
     st.caption('Fullständig nyhetstäckning är inte verifierad.')
 if result['failures']:
     st.write('⚠️ Källfel: bevakningen är ofullständig.')
 if not result['items']:
     st.write('Inga matchade nyheter vid senaste kontrollen.')
-st.subheader('Senaste nyhetsspår')
+st.subheader('Marknadspuls')
 st.caption('Endast nyheter publicerade under de senaste 12 timmarna visas här.')
 for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','Möjligen hög'), x['published']), reverse=True):
     direction = item.get('direction', 'Oklar')
-    marker = {'Positiv':'🟢', 'Negativ':'🔴', 'Blandad':'🟡', 'Osäker':'🟠', 'Oklar':'⚪'}.get(direction, '⚪')
+    marker = {'Positiv':'green', 'Negativ':'red', 'Blandad':'yellow', 'Osäker':'orange', 'Oklar':'gray'}.get(direction, 'gray')
     score = item.get('news_score')
     score_label = f'{score}/100' if score is not None else 'Ej poängsatt'
-    with st.expander(f"{marker} {item['company']} · {direction} · {score_label}", expanded=False):
+    with st.expander(f":{marker}[▌] **{item['company']}** · {direction} · :{marker}[{score_label}]", expanded=False):
         st.subheader(item['company'])
         st.markdown('**'+item['title']+'**')
         st.write({'Positiv':'🟢','Negativ':'🔴','Blandad':'🟡','Osäker':'🟠'}.get(item['direction'],'⚪') + ' ' + item['direction'])

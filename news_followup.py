@@ -50,7 +50,7 @@ def advance(state, items, config, now, fetch=quotes):
     state = {k:v for k,v in state.items() if now-stamp(v['first_seen']) < timedelta(days=7)}
     companies = {c['name']:c for c in config['companies']}
     for item in items:
-        if now-stamp(item['published']) >= timedelta(hours=12):
+        if now-stamp(item['published']) >= timedelta(hours=24):
             continue
         key = item['id']
         if key not in state:
@@ -58,6 +58,8 @@ def advance(state, items, config, now, fetch=quotes):
     cache = {}
     for entry in state.values():
         item = entry['item']
+        if now-stamp(entry['first_seen']) >= timedelta(hours=24):
+            continue
         elapsed = (now-stamp(entry['first_seen'])).total_seconds()/60
         due = [s for s in SLOTS if s<=elapsed and entry['observations'].get(str(s), {}).get('status') not in ('OK', 'Kontrolltillfälle missat')]
         if not due:

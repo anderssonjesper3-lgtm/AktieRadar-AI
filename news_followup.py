@@ -47,7 +47,7 @@ def observe(frame, published, now, minutes):
             'reaction':'Positiv reaktion' if change>0 and relative>=1.5 and ema9.iloc[-1]>ema21.iloc[-1] else 'Ingen tydlig positiv bekräftelse'}
 
 def advance(state, items, config, now, fetch=quotes):
-    state = {k:v for k,v in state.items() if now-stamp(v['first_seen']) < timedelta(hours=12)}
+    state = {k:v for k,v in state.items() if now-stamp(v['first_seen']) < timedelta(days=7)}
     companies = {c['name']:c for c in config['companies']}
     for item in items:
         if now-stamp(item['published']) >= timedelta(hours=12):
@@ -59,12 +59,10 @@ def advance(state, items, config, now, fetch=quotes):
     for entry in state.values():
         item = entry['item']
         elapsed = (now-stamp(entry['first_seen'])).total_seconds()/60
-        due = [s for s in SLOTS if s<=elapsed and str(s) not in entry['observations']]
+        due = [s for s in SLOTS if s<=elapsed and entry['observations'].get(str(s), {}).get('status') not in ('OK', 'Kontrolltillfälle missat')]
         if not due:
             continue
-        # Never pretend missed slots were measured historically.
-        for s in due[:-1]:
-            entry['observations'][str(s)] = {'status':'Kontrolltillfälle missat'}
+        # Retry missing observations; do not label a current quote as an earlier observation.
         slot = due[-1]
         ticker = companies.get(item['company'],{}).get('ticker','').replace(' ','-')
         result = {'status':'Börssymbol saknas'}
@@ -80,6 +78,9 @@ def advance(state, items, config, now, fetch=quotes):
                 except Exception as exc:
                     result = {'status':'Kursfel: '+type(exc).__name__}
         entry['observations'][str(slot)] = dict(result,checked_at=now.isoformat())
+        if result['status'] == 'OK':
+            for s in due[:-1]:
+                entry['observations'][str(s)] = {'status':'Kontrolltillfälle missat'}
     return state
 
 def save_state(state,path=STATE):

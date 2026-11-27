@@ -251,6 +251,7 @@ def detailed_assessment(item, article, profile):
     rules.insert(4, (r'(?:submission|submitted|application|ansökan|ansökt).{0,180}(?:ema|marketing authori[sz]ation|godkännande)|(?:ema|marketing authori[sz]ation).{0,180}(?:submission|application|ansökan)', 'Regulatorisk ansökan', 'Osäker', 60, 'En regulatorisk ansökan kan minska osäkerheten om framtida marknadstillträde, men är inte ett godkännande.', 'Kontrollera nuvarande godkännande, ansökans omfattning och myndighetens kommande beslut.'))
     rules.append((r'(?:received|receives|secured|secures|has won|erhållit|erhåller|vunnit|fått|mottagit).{0,80}(?:order|beställning|contract|kontrakt)', 'Order', 'Positiv', 70, 'En order kan bidra till framtida intäkter.', 'Kontrollera bindande villkor, marginal och leveranstid.'))
     rules.append((r'nominated for|nominerad till|nominerats till|award nomination', 'Utmärkelse eller nominering', 'Positiv', 20, 'Kan stärka anseendet men innebär ingen bekräftad intäktsökning.', 'Ingen direkt ekonomisk effekt har fastställts.'))
+    rules.insert(5, (r'(?:signs?|signed|awarded|wins?|secured|entered into|tecknar|tecknat|ingår|ingått|tilldelats).{0,100}(?:framework agreements?|ramavtal)', 'Ramavtal', 'Positiv', 60, 'Ramavtal öppnar för framtida uppdrag men garanterar inte beställningar eller intäkter.', 'Kontrollera avropsvillkor, löptid, eventuellt garanterat värde och marginaler.'))
     title_hits = [rule for rule in rules if re.search(rule[0], title)]
     body_hits = [rule for rule in rules if re.search(rule[0], body)]
     matched = next((rule for rule in title_hits if rule in body_hits), None) or next(iter(title_hits), None)
@@ -281,6 +282,12 @@ def detailed_assessment(item, article, profile):
     summary = item.get('summary_sv', '')
     if kind != 'Insynsaffär':
         summary = ('Möjlig nyhetstyp: ' if body_match else 'Nyhetstyp: ') + kind + '. ' + case
+        if kind == 'Ramavtal':
+            summary = item['company'] + ': ' + case
+            match = re.search(r'\b(one|two|three|four|five|six|ett|två|tre|fyra|fem|sex|\d+)\s+(?:framework agreements?|ramavtal)\s+(?:with|med)\s+([^.!?\n]{2,100})', item.get('title',''), re.I)
+            if match:
+                number = {'one':'ett','two':'två','three':'tre','four':'fyra','five':'fem','six':'sex'}.get(match[1].lower(),match[1])
+                summary = f"{item['company']} meddelar att {number} ramavtal tecknats med {match[2]}. " + case
         if comparison and kind == 'Order':
             summary += f" Nämnt belopp motsvarar {comparison['revenue_ratio_pct']} % av rapporterad omsättning; kontrollera ordervärdet."
         if body and re.search(r'immediate delivery|immediate deliveries|omgående leverans|omedelbar leverans', body):

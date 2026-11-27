@@ -110,7 +110,7 @@ def feed_time(item):
     candidates = [received_time(item)] + [received_time(t) for t in item.get('related_procurements', [])]
     return max(candidates, key=lambda pair: pair[0])
 
-for item in sorted(result['items'], key=lambda x: feed_time(x)[0], reverse=True):
+for item in sorted(result['items'], key=lambda x: (feed_time(x)[0], stamp(x['published'])), reverse=True):
     received, recorded = feed_time(item)
     local_received = received.astimezone(ZoneInfo('Europe/Stockholm'))
     time_label = local_received.strftime('%H:%M') if recorded or item.get('publication_precision') != 'day' else local_received.strftime('%d/%m')

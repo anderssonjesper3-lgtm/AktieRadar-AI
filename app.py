@@ -53,8 +53,33 @@ except (ValueError, OSError):
 now = datetime.now(timezone.utc)
 merged = {v['item']['id']:dict(v['item'],published=stamp(v['item']['published'])) for v in stored.values()}
 merged.update({i['id']:i for i in result['items']})
-active = [i for i in merged.values() if timedelta(0) <= now-stamp(i['published']) < timedelta(hours=12)]
-result = dict(result,items=deduplicate_news(active))
+# Only group cross-source reports when the buyer and a distinctive subject match.
+import re
+def words(s):
+    return set(re.findall(r'[^\W_]{4,}', s.casefold())) - {'contract','contracts','framework','agreement','agreements','ramavtal','upphandling','tilldelningsbeslut','services','service','order','awarded'}
+def same_deal(ted, press):
+    if ted['company'] != press['company'] or press.get('source') == 'TED':
+        return False
+    if abs((stamp(ted['published'])-stamp(press['published'])).total_seconds()) > 7*86400:
+        return False
+    buyer = ted.get('procurement_buyer','').strip()
+    body = press['title']+' '+press.get('article_text','')
+    if not buyer or ';' in buyer or not re.search(r'(?<!\w)'+re.escape(buyer)+r'(?!\w)',body,re.I):
+        return False
+    subject = ted['title'].split(' – ',1)[-1]
+    shared = words(subject) & words(press['title'])
+    shared -= words(buyer) | words(ted['company'])
+    return len(shared) >= 2 or bool(ted.get('procurement_number') and ted['procurement_number'] in body)
+all_items = deduplicate_news(list(merged.values()))
+hidden = set()
+for ted in [i for i in all_items if i.get('source')=='TED']:
+    candidates = [p for p in all_items if same_deal(ted,p)]
+    if len(candidates)==1:
+        press = candidates[0]
+        press.setdefault('related_procurements',[]).append(ted)
+        hidden.add(ted['id'])
+active = [i for i in all_items if i['id'] not in hidden and (timedelta(0) <= now-stamp(i['published']) < timedelta(hours=12) or any(timedelta(0)<=now-stamp(t['published'])<timedelta(hours=12) for t in i.get('related_procurements',[])))]
+result = dict(result,items=active)
 config = load_config()
 covered = sum(bool(c.get('feeds')) for c in config['companies'] if c.get('segment_verified') and c.get('segment') in ('Mid Cap', 'Small Cap', 'First North'))
 a,b,c = st.columns(3)
@@ -111,6 +136,14 @@ for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','M
         if item.get('article_text'):
             with st.expander('Hämtad originaltext'):
                 st.write(item['article_text'])
+        if item.get('related_procurements'):
+            st.markdown('**Samlad affärsinformation**')
+            st.caption('Automatisk koppling baserad på beställare och innehåll – kontrollera att det är samma kontrakt. Beloppen summeras inte.')
+            for related in sorted(item['related_procurements'],key=lambda x:stamp(x['published'])):
+                st.write('TED · '+stamp(related['published']).date().isoformat()+' · '+related['title'])
+                st.write(related.get('procurement_text',''))
+                st.link_button('Tilldelningsannons · '+related.get('procurement_number',related['id']),related['url'])
+            st.write('Pressmeddelande · '+item['title'])
         st.markdown('**Ekonomisk påverkan**')
         st.write(item['economic_case'])
         st.markdown('**Risk att kontrollera**')

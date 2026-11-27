@@ -99,12 +99,27 @@ if not result['items']:
     st.write('Inga matchade nyheter vid senaste kontrollen.')
 st.subheader('Marknadspuls')
 st.caption('Endast nyheter publicerade under de senaste 24 timmarna visas här.')
-for item in sorted(result['items'], key=lambda x: (x['importance'] in ('Hög','Möjligen hög'), x['published']), reverse=True):
+def received_time(item):
+    entry = stored.get(item['id'], {})
+    try:
+        return stamp(entry['first_seen']), True
+    except (KeyError, TypeError, ValueError):
+        return stamp(item['published']), False
+
+def feed_time(item):
+    candidates = [received_time(item)] + [received_time(t) for t in item.get('related_procurements', [])]
+    return max(candidates, key=lambda pair: pair[0])
+
+for item in sorted(result['items'], key=lambda x: feed_time(x)[0], reverse=True):
+    received, recorded = feed_time(item)
+    local_received = received.astimezone(ZoneInfo('Europe/Stockholm'))
+    time_label = local_received.strftime('%H:%M') if recorded or item.get('publication_precision') != 'day' else local_received.strftime('%d/%m')
+    time_label += '' if recorded else ' (publ.)'
     direction = item.get('direction', 'Oklar')
     marker = {'Positiv':'green', 'Negativ':'red', 'Blandad':'yellow', 'Osäker':'orange', 'Oklar':'gray'}.get(direction, 'gray')
     score = item.get('news_score')
     score_label = f'{score}/100' if score is not None else 'Ej poängsatt'
-    with st.expander(f":{marker}[▌] **{item['company']}** · {direction} · :{marker}[{score_label}]", expanded=False):
+    with st.expander(f"{time_label} · :{marker}[▌] **{item['company']}** · {direction} · :{marker}[{score_label}]", expanded=False):
         st.subheader(item['company'])
         st.markdown('**'+item['title']+'**')
         st.write({'Positiv':'🟢','Negativ':'🔴','Blandad':'🟡','Osäker':'🟠'}.get(item['direction'],'⚪') + ' ' + item['direction'])

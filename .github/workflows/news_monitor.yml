@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  actions: read
 concurrency:
   group: news-radar-monitor
   cancel-in-progress: false
@@ -17,6 +18,12 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
+      - name: Capture workflow creation time
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          created=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" --jq .created_at) || created=''
+          echo "RADAR_RUN_CREATED_AT=$created" >> "$GITHUB_ENV"
       - run: python news_monitor.py --live-check --send
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -29,6 +36,7 @@ jobs:
             git config user.email "news-radar@users.noreply.github.com"
             git add news_followup_state.json
             if [ -f news_seen.json ]; then git add news_seen.json; fi
+            if [ -f news_latency.json ]; then git add news_latency.json; fi
             if ! git diff --cached --quiet; then
               git commit -m "Update news observation state"
               git pull --rebase origin main

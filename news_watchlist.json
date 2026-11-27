@@ -299,8 +299,56 @@
       "segment_verification": "third-party list, not exchange-verified",
       "feeds": [],
       "subsidiary_verification": {
-        "status": "pending"
-      }
+        "status": "partial_historical",
+        "checked_on": "2026-11-27",
+        "as_of": "2025-12-31",
+        "sources": [
+          "https://www.alligo.com/en/wp-content/uploads/sites/2/2026/05/alligo-annual-and-sustainability-report-2025.pdf"
+        ],
+        "note": "Note 27, excludes dissolved and merged entities; subsequent changes not verified."
+      },
+      "subsidiaries": [
+        "Alligo Holding AB",
+        "Mercus Yrkeskläder AB",
+        "TriffiQ Företagsprofilering AB",
+        "Reklamproffsen Skandinavien AB",
+        "Company Line AB",
+        "Souvenirer i Norr AB",
+        "Swedol AB",
+        "Swedol Förvaltning AB",
+        "IP Hjälte AB",
+        "Magnusson Agentur AB",
+        "Profeel Sweden AB",
+        "Profilföretaget Z-profil AB",
+        "Kents Textiltryck i Halmstad AB",
+        "Olympus Profile i Uddevalla AB",
+        "Topline Aktiebolag",
+        "Topline Kalmar Aktiebolag",
+        "Svets och Tillbehör i Sverige AB",
+        "Svetspartner i Malmö AB",
+        "New Promotion Sverige AB",
+        "Aktiebolaget Sundholm Welding",
+        "T. Brantestig Svetsmaskinservice AB",
+        "Corema Svets & Industriprodukter AB",
+        "Corema Fasteners AB",
+        "Corema Sundsvall AB",
+        "Svenska Batterilagret AB",
+        "Galaxi Företagsreklam Aktiebolag",
+        "Broderiet i Kungsbacka Aktiebolag",
+        "TOOLS AS",
+        "Tore Vagle AS",
+        "Workwear AS",
+        "Respond Profilering & Firmagaver AS",
+        "PGP AS",
+        "TOOLS Finland Oy",
+        "TOOLS Fastigheter Holding Oy",
+        "Metaplan Oy",
+        "Kitakone Oy",
+        "Pirilä Group Oy",
+        "Tampereen Pirkka-Hitsi Oy",
+        "Hämeen Teollisuuspalvelu Oy",
+        "Riihimäen Teollisuuspalvelu OY"
+      ]
     },
     {
       "name": "Ambea",

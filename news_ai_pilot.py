@@ -262,6 +262,12 @@ def detailed_assessment(item, article, profile):
         body_match = matched is not None
     evidence = [s.strip() for s in re.split(r'(?<=[.!?])\s+', article.get('text', '')) if re.search(r'\b(?:SEK|EUR|USD|MSEK|million|miljoner|EMA|approval|authorization|authorisation|order|contract|revenue|omsättning|godkännande|ansökan|leverans|delivery)\b', s, re.I)]
     item['analysis_evidence'] = evidence[:12]
+    if body:
+        facts = []
+        for sentence in re.split(r'(?<=[.!?])\s+', article.get('text', '')):
+            if re.search(r'\b(?:framework agreements?|ramavtal|contract value|avtalsvärde|call.off|avrop|duration|löptid|years?|år|guaranteed|garanterad)\b', sentence, re.I):
+                facts.append(sentence.strip())
+        item['contract_evidence'] = facts[:8]
     if matched is None:
         return dict(news_type='Övrigt', news_score=None, confidence='Låg',
                     surprise='Ej bedömd', analysis_signal='AVVAKTA')
@@ -273,7 +279,7 @@ def detailed_assessment(item, article, profile):
     if direction == 'Positiv' and conflicts:
         direction, score = 'Osäker', min(score, 49)
         risk += ' Originaltexten innehåller även: ' + ', '.join(conflicts) + '. Kontrollera sammanhanget.'
-    if kind == 'Order' and re.search(r'non.binding|icke.bindande|subject to approval|villkorat|cancelled|avbeställ|not received', body):
+    if kind in ('Order', 'Ramavtal') and re.search(r'non.binding|icke.bindande|subject to approval|villkorat|cancelled|avbeställ|not received', body):
         direction, score = 'Osäker', min(score, 40)
         risk += ' Originaltexten innehåller möjliga villkor eller motstridiga uppgifter.'
     comparison = item.get('order_comparison')
@@ -288,6 +294,9 @@ def detailed_assessment(item, article, profile):
             if match:
                 number = {'one':'ett','two':'två','three':'tre','four':'fyra','five':'fem','six':'sex'}.get(match[1].lower(),match[1])
                 summary = f"{item['company']} meddelar att {number} ramavtal tecknats med {match[2]}. " + case
+        if kind == 'Ramavtal' and body:
+            if not re.search(r'(?:contract value|agreement value|avtalsvärde|ordervärde)', body):
+                summary += ' Inget uttryckligt avtalsvärde identifierades automatiskt.'
         if comparison and kind == 'Order':
             summary += f" Nämnt belopp motsvarar {comparison['revenue_ratio_pct']} % av rapporterad omsättning; kontrollera ordervärdet."
         if body and re.search(r'immediate delivery|immediate deliveries|omgående leverans|omedelbar leverans', body):

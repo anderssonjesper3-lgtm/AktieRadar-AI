@@ -1708,8 +1708,31 @@
       "segment_verification": "third-party list, not exchange-verified",
       "feeds": [],
       "subsidiary_verification": {
-        "status": "pending"
-      }
+        "status": "partial_historical",
+        "checked_on": "2026-11-27",
+        "as_of": "2025-12-31",
+        "sources": [
+          "https://www.raysearchlabs.com/contentassets/007f5a625ff7419ba9f26308b8adfe8d/raysearch_ar25_sve_final.pdf",
+          "https://www.raysearchlabs.com/contact/"
+        ],
+        "note": "All 12 entities in annual report 2025 note 16; Belgium 99% plus 1% via France; Canada dormant at reporting date. Contact page confirms operating presence of other 11 and two alternative names. Current ownership after reporting date not independently verified. Canada retained as historical search name."
+      },
+      "subsidiaries": [
+        "RaySearch Americas Inc",
+        "RaySearch Belgium BV",
+        "RaySearch France SAS",
+        "RaySearch UK Ltd",
+        "RaySearch Germany GmbH",
+        "RaySearch Singapore Pte Ltd",
+        "RaySearch Japan K.K.",
+        "RaySearch India Private Limited",
+        "RaySearch Korea LLC.",
+        "RaySearch (Shanghai) Medical Device Co., Ltd",
+        "RaySearch Australia Pty Ltd",
+        "RaySearch Canada Inc",
+        "RaySearch UK Limited",
+        "RaySearch Americas, Inc."
+      ]
     },
     {
       "name": "Rejlers",

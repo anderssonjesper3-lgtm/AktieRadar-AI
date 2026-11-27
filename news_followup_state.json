@@ -701,6 +701,11 @@
         "status": "För gammal kursdata",
         "age_minutes": 54.7,
         "checked_at": "2026-11-27T11:39:40.057320+00:00"
+      },
+      "80": {
+        "status": "För gammal kursdata",
+        "age_minutes": 45.7,
+        "checked_at": "2026-11-27T12:45:40.139431+00:00"
       }
     }
   },
@@ -770,6 +775,20 @@
         "status": "Kontrolltillfälle missat"
       },
       "35": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "80": {
+        "status": "OK",
+        "bar_end": "2026-11-27T13:45:00+01:00",
+        "age_minutes": 0.7,
+        "interval_minutes": 5,
+        "change_pct": 0.48,
+        "relative_volume": 0.0,
+        "momentum": "Svagt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T12:45:40.139431+00:00"
+      },
+      "65": {
         "status": "Kontrolltillfälle missat"
       }
     }
@@ -842,6 +861,20 @@
       },
       "35": {
         "status": "Kontrolltillfälle missat"
+      },
+      "80": {
+        "status": "OK",
+        "bar_end": "2026-11-27T13:45:00+01:00",
+        "age_minutes": 0.7,
+        "interval_minutes": 5,
+        "change_pct": -2.9,
+        "relative_volume": 0.3,
+        "momentum": "Svagt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T12:45:40.139431+00:00"
+      },
+      "65": {
+        "status": "Kontrolltillfälle missat"
       }
     }
   },
@@ -912,6 +945,20 @@
       },
       "35": {
         "status": "Kontrolltillfälle missat"
+      },
+      "80": {
+        "status": "OK",
+        "bar_end": "2026-11-27T13:45:00+01:00",
+        "age_minutes": 0.7,
+        "interval_minutes": 5,
+        "change_pct": 0.21,
+        "relative_volume": 0.23,
+        "momentum": "Positivt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T12:45:40.139431+00:00"
+      },
+      "65": {
+        "status": "Kontrolltillfälle missat"
       }
     }
   },
@@ -975,6 +1022,20 @@
         "status": "Kontrolltillfälle missat"
       },
       "35": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "80": {
+        "status": "OK",
+        "bar_end": "2026-11-27T13:45:00+01:00",
+        "age_minutes": 0.7,
+        "interval_minutes": 5,
+        "change_pct": 0.48,
+        "relative_volume": 0.0,
+        "momentum": "Svagt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T12:45:40.139431+00:00"
+      },
+      "65": {
         "status": "Kontrolltillfälle missat"
       }
     }
@@ -1048,6 +1109,20 @@
       },
       "35": {
         "status": "Kontrolltillfälle missat"
+      },
+      "80": {
+        "status": "OK",
+        "bar_end": "2026-11-27T13:45:00+01:00",
+        "age_minutes": 0.7,
+        "interval_minutes": 5,
+        "change_pct": 0.48,
+        "relative_volume": 0.0,
+        "momentum": "Svagt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T12:45:40.139431+00:00"
+      },
+      "65": {
+        "status": "Kontrolltillfälle missat"
       }
     }
   },
@@ -1111,6 +1186,20 @@
         "status": "Kontrolltillfälle missat"
       },
       "35": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "80": {
+        "status": "OK",
+        "bar_end": "2026-11-27T13:45:00+01:00",
+        "age_minutes": 0.7,
+        "interval_minutes": 5,
+        "change_pct": -2.9,
+        "relative_volume": 0.3,
+        "momentum": "Svagt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T12:45:40.139431+00:00"
+      },
+      "65": {
         "status": "Kontrolltillfälle missat"
       }
     }
@@ -1193,6 +1282,20 @@
       },
       "35": {
         "status": "Kontrolltillfälle missat"
+      },
+      "80": {
+        "status": "OK",
+        "bar_end": "2026-11-27T13:45:00+01:00",
+        "age_minutes": 0.7,
+        "interval_minutes": 5,
+        "change_pct": -2.9,
+        "relative_volume": 0.3,
+        "momentum": "Svagt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T12:45:40.139431+00:00"
+      },
+      "65": {
+        "status": "Kontrolltillfälle missat"
       }
     }
   },
@@ -1261,6 +1364,20 @@
       },
       "35": {
         "status": "Kontrolltillfälle missat"
+      },
+      "80": {
+        "status": "OK",
+        "bar_end": "2026-11-27T13:45:00+01:00",
+        "age_minutes": 0.7,
+        "interval_minutes": 5,
+        "change_pct": 7.06,
+        "relative_volume": 0.06,
+        "momentum": "Positivt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T12:45:40.139431+00:00"
+      },
+      "65": {
+        "status": "Kontrolltillfälle missat"
       }
     }
   },
@@ -1325,6 +1442,20 @@
       },
       "35": {
         "status": "Kontrolltillfälle missat"
+      },
+      "80": {
+        "status": "OK",
+        "bar_end": "2026-11-27T13:45:00+01:00",
+        "age_minutes": 0.7,
+        "interval_minutes": 5,
+        "change_pct": 0.21,
+        "relative_volume": 0.23,
+        "momentum": "Positivt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T12:45:40.139431+00:00"
+      },
+      "65": {
+        "status": "Kontrolltillfälle missat"
       }
     }
   },
@@ -1381,6 +1512,11 @@
         "status": "För gammal kursdata",
         "age_minutes": 114.7,
         "checked_at": "2026-11-27T11:39:40.057320+00:00"
+      },
+      "80": {
+        "status": "För gammal kursdata",
+        "age_minutes": 180.7,
+        "checked_at": "2026-11-27T12:45:40.139431+00:00"
       }
     }
   },
@@ -1437,7 +1573,323 @@
         "status": "För gammal kursdata",
         "age_minutes": 114.7,
         "checked_at": "2026-11-27T11:39:40.057320+00:00"
+      },
+      "80": {
+        "status": "För gammal kursdata",
+        "age_minutes": 180.7,
+        "checked_at": "2026-11-27T12:45:40.139431+00:00"
       }
     }
+  },
+  "NEWS:456f879e98cfd8e0dd4aa713": {
+    "first_seen": "2026-11-27T12:45:40.139431+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "ORDER/AVTAL – GRANSKA",
+      "company": "Clavister",
+      "title": "Clavister säkrar kontrakt på 450 MSEK från BAE Systems för Clavister CyberArmour",
+      "description": "",
+      "url": "https://mfn.se/a/clavister/clavister-sakrar-kontrakt-pa-450-msek-fran-bae-systems-for-clavister-cyberarmour",
+      "published": "2026-11-27 00:00:00+00:00",
+      "id": "NEWS:456f879e98cfd8e0dd4aa713",
+      "direction": "Oklar",
+      "importance": "Ej fastställd",
+      "economic_case": "Rubriken räcker inte för att fastställa ekonomisk påverkan.",
+      "risk": "Läs originalmeddelandet och kontrollera finansiella uppgifter.",
+      "article_status": "ok",
+      "article_text": "Clavister säkrar kontrakt på 450 MSEK från BAE Systems för Clavister CyberArmour 2026-11-27 13:23:00 Örnsköldsvik, Sverige – 27 november 2026 – Clavister, en ledande europeisk aktör inom cybersäkerhet för verksamhetskritiska tillämpningar, meddelar idag att bolaget har tilldelats ett kontrakt på 450 MSEK av BAE Systems för leverans av Clavister CyberArmour som säker digital ryggrad i CV90-fordon inom det multinationella upphandlingsprogrammet ”Nordic Edition”. Det nya avtalet bygger vidare på Clavister CyberArmours etablerade roll i CV90:s interna kommunikationsinfrastruktur. Genom avtalet ingår lösningen i Nordic Edition-programmet, samtidigt som användningen i varje fordon utökas till att omfatta fler användningsområden och funktioner. Leveranser planeras inledas under 2028, och intäkterna fördelas över flera år. Nordic Edition-programmet samordnar anskaffningen av CV90-fordon för flera nationer. För Clavister innebär kontraktet en betydande utökning av det etablerade samarbetet med BAE Systems och ger långsiktig förutsägbarhet i försvarsverksamhetens leveranser. CV90 är en högt digitaliserad stridsfordonsplattform med avancerade fordonssystem och nätverksbaserade funktioner. Dessa system är beroende av en motståndskraftig digital infrastruktur som kopplar samman utrustningen ombord, överför kritiska data och skyddar kommunikationen mot cyberhot. Clavister CyberArmour tillhandahåller fordonets Ethernet- och IP-baserade nätverksinfrastruktur, kopplar samman systemen ombord och strömförsörjer många av de anslutna enheterna. Dessa funktioner kombineras med samtliga säkerhetsfunktioner i Clavisters brandväggsteknik. Därmed förenas nätverkskommunikation, strömförsörjning och cyberskydd i en lösning utvecklad för krävande militära miljöer. CyberArmour utgör på så sätt en integrerad del av hur fordonets digitala system fungerar och kommunicerar. John Vestberg, vd för Clavister, kommenterar: ”Det här kontraktet är en viktig milstolpe i vårt samarbete med BAE Systems. CyberArmour utgör CV90:s säkra digitala ryggrad genom att koppla samman systemen ombord, strömförsörja enheter och skydda kritisk kommunikation. Den utökade rollen i Nordic Edition-programmet visar förtroendet för vår teknik som en integrerad del av fordonet. Det visar också hur vår strategi att bygga in vår teknik i etablerade försvarsplattformar omsätts i betydande affärer när anskaffningsprogrammen växer. Vi ser fram emot att stödja BAE Systems under de kommande åren.” Avtalet stärker Clavisters position som europeisk leverantör av säker digital infrastruktur till försvarsindustrin och understryker den växande betydelsen av integrerade nätverks- och cybersäkerhetslösningar i moderna stridsfordon. Om Clavister Clavister är ett svenskt cybersäkerhetsföretag som har skyddat kunder med samhällskritisk verksamhet i över två decennier. Med huvudkontor i Örnsköldsvik är Clavister en av pionjärerna bakom de första brandväggarna och levererar idag adaptiva, högpresterande cybersäkerhetslösningar för kunder inom framförallt offentlig sektor, energi, telekom och försvar. Aktien, Clavister AB, är noterad på Nasdaq First North Growth Market. FNCA Sweden AB är bolagets Certified Advisor. För ytterligare information, besök gärna https://www.clavister.com/ och följ oss på våra officiella LinkedIn- och YouTube-kanaler. För ytterligare information, vänligen kontakta: Clavister: John Vestberg, VD och Koncernchef E-post: john.vestberg@clavister.com Denna information är sådan information som Clavister AB är skyldigt att offentliggöra enligt EU:s marknadsmissbruksförordning. Informationen lämnades, genom ovanstående kontaktpersoners försorg, för offentliggörande den 2026-11-27 13:23 CET. Bifogade filer Clavister säkrar kontrakt på 450 MSEK från BAE Systems för Clavister CyberArmour Källa MFN",
+      "article_facts": {
+        "excerpts": [
+          "Clavister säkrar kontrakt på 450 MSEK från BAE Systems för Clavister CyberArmour 2026-11-27 13:23:00 Örnsköldsvik, Sverige – 27 november 2026 – Clavister, en ledande europeisk aktör inom cybersäkerhet för verksamhetskritiska tillämpningar, meddelar idag att bolaget har tilldelats ett kontrakt på 450 MSEK av BAE Systems för leverans av Clavister CyberArmour som säker digital ryggrad i CV90-fordon inom det multinationella upphandlingsprogrammet ”Nordic Edition”.",
+          "Bifogade filer Clavister säkrar kontrakt på 450 MSEK från BAE Systems för Clavister CyberArmour Källa MFN"
+        ],
+        "note": "Utdrag ur originaltexten; transaktionens riktning och belopp måste framgå uttryckligen."
+      },
+      "summary_sv": "Nyheten gäller en order eller ett avtal. Rubriken räcker inte för att fastställa ekonomisk påverkan.",
+      "analysis_scope": "Hämtad artikeltext – fullständighet ej verifierad",
+      "article_chars": 3799,
+      "company_profile": {
+        "totalRevenue": 298811008,
+        "marketCap": 1873846656,
+        "operatingMargins": 0.105550006,
+        "totalCash": 25562000,
+        "totalDebt": 148139008,
+        "industry": "Software - Infrastructure",
+        "financialCurrency": "SEK",
+        "currency": "SEK",
+        "longName": "Clavister Holding AB (publ.)",
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/CLAV.ST/",
+        "symbol": "CLAV.ST"
+      },
+      "order_comparison": {
+        "mentioned_amount_sek": 450000000.0,
+        "revenue_ratio_pct": 150.6,
+        "note": "Belopp nämnt i rubriken jämfört med rapporterad omsättning; inte verifierat ordervärde eller årlig intäkt."
+      },
+      "analysis_evidence": [
+        "Clavister säkrar kontrakt på 450 MSEK från BAE Systems för Clavister CyberArmour 2026-11-27 13:23:00 Örnsköldsvik, Sverige – 27 november 2026 – Clavister, en ledande europeisk aktör inom cybersäkerhet för verksamhetskritiska tillämpningar, meddelar idag att bolaget har tilldelats ett kontrakt på 450 MSEK av BAE Systems för leverans av Clavister CyberArmour som säker digital ryggrad i CV90-fordon inom det multinationella upphandlingsprogrammet ”Nordic Edition”.",
+        "Bifogade filer Clavister säkrar kontrakt på 450 MSEK från BAE Systems för Clavister CyberArmour Källa MFN"
+      ],
+      "contract_evidence": [
+        "Leveranser planeras inledas under 2028, och intäkterna fördelas över flera år."
+      ],
+      "news_type": "Övrigt",
+      "news_score": null,
+      "confidence": "Låg",
+      "surprise": "Ej bedömd",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
+  },
+  "NEWS:3f129260f821800e453f9a00": {
+    "first_seen": "2026-11-27T12:45:40.139431+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "BOLAGSNYHET – GRANSKA",
+      "company": "Linjemontage",
+      "title": "Linjemontage receives an award decision of approximately SEK 1 billion over three and a half years from Svenska kraftnät",
+      "description": "",
+      "url": "https://mfn.se/a/linjemontage/linjemontage-receives-an-award-decision-of-approximately-sek-1-billion-over-three-and-a-half-years-from-svenska-kraftnat",
+      "published": "2026-11-27 00:00:00+00:00",
+      "id": "NEWS:3f129260f821800e453f9a00",
+      "direction": "Oklar",
+      "importance": "Ej fastställd",
+      "economic_case": "Rubriken räcker inte för att fastställa ekonomisk påverkan.",
+      "risk": "Läs originalmeddelandet och kontrollera finansiella uppgifter.",
+      "article_status": "ok",
+      "article_text": "Linjemontage receives an award decision of approximately SEK 1 billion over three and a half years from Svenska kraftnät 2026-11-27 13:11:00 INSIDE INFORMATION: Linjemontage i Grästorp AB (publ) (\"Linjemontage\" or the \"Company\"), one of Sweden’s leading pure-play EPC providers within power infrastructure, has today received an award decision in a public procurement process from Svenska kraftnät relating to the construction of a new 400 kV power line between Oskarshamn municipality and Nybro municipality (the \"Project\"). The Project runs over three and a half years and has an estimated contract value of approximately SEK 1 billion. The award for the Project is subject to a statutory standstill period, which means that an agreement may be entered into no earlier than ten days from today. The project involves approximately 98 kilometres of power line between Ekhyddan in Oskarshamn municipality and Nybro in Nybro municipality, and aims to strengthen the transmission grid, increase capacity and operational reliability, and reduce the risk of power cuts in the region. In recent years, Linjemontage has been awarded several major transmission projects by Svenska kraftnät. Among other things, the company is responsible for the construction of the new 400/220 kV substations in Plenninge and Jälla, outside Uppsala, which form part of Svenska kraftnät’s Uppsala package. “The expansion and modernisation of the electricity grid is essential for industrial growth and Sweden’s continued electrification. The new transmission line between Ekhyddan and Nybro strengthens electricity transmission in southern Sweden and helps balance supply across the region. This is one of the largest transmission projects we have been awarded to date and, together with our ongoing substation projects in Jälla and Plenninge, demonstrates our ability to deliver large-scale and technically complex high-voltage projects. We thank Svenska kraftnät for the continued confidence in us and look forward to applying our expertise and experience to building a stronger electricity grid.” says Anders Åkerberg, CEO of Linjemontage. The project is expected to commence at the end of 2026 and is scheduled for completion in June 2030. The works include, amongst other things, excavation and groundworks, foundation construction, the assembly and erection of steel pylons, cable laying, and the commissioning of the new facility. The award decision regarding the Project is subject to a mandatory ten-day standstill period under the Act on Procurement in the Utilities Sectors (Sw. Lag (2016:1146) om upphandling inom försörjningssektorerna ), which means that a contract may be entered into no earlier than after the standstill period has expired. During this period, the decision may be subject to review, and the outcome of the Project therefore cannot be guaranteed. The Company will inform the market of any changes in the Project process in accordance with the (EU) Market Abuse Regulation 596/2014 (MAR). During the fourth quarter 2026, Linjemontage has also been awarded six new contracts with a total value of approximately SEK 314 million, in addition to those already announced in press releases. That total includes an award decision of approximately SEK 132 million that is currently under standstill period, and will be separately announced when the contract is signed. This information constitutes inside information as defined in the (EU) Market Abuse Regulation 596/2014 (MAR), which Linjemontage i Grästorp AB (publ) is required to disclose in accordance with MAR. The information was submitted for publication by the contact person listed below, at 2026-11-27 13:11 CET. Contacts Thomas Hendel, CFO at Linjemontage ir@linjemontage.se About Us Linjemontage is a Swedish pure-play EPC provider within power infrastructure, enabling the modernisation and expansion of the Nordic electricity grid. The company provides turnkey solutions within substations and transmission and distribution networks, with capabilities across the entire project value chain and specialist high-voltage expertise up to 400 kV. The company currently has approximately 400 employees. Operations are primarily conducted in Sweden and Norway, complemented by a business branch in Croatia and an operation centre in India. Linjemontage was founded in Grästorp in 1993 and the company’s shares have been listed on Nasdaq Stockholm since 2026. For more information, visit www.linjemontage.se Forward-looking statements This press release contains forward-looking statements that may relate to the Company’s intentions, assessments, or expectations regarding the Company’s future results, financial position, liquidity, development, outlook, expected growth, strategies, and opportunities, as well as the markets in which the Company operates. Forward-looking statements are statements that do not relate to historical facts and can be identified by the use of terms such as “believes,” “expects,” “anticipates,” “intends,” “estimates,” “will,” “may,” “assumes,” “should,” “could,” and, in each case, the negatives thereof, or similar expressions. The forward-looking statements in this press release are based on various assumptions, which in several cases are based on further assumptions. Although the Company believes that the assumptions reflected in these forward-looking statements are reasonable, there can be no guarantee that they will materialize or that they are correct. Since these assumptions are based on estimates and are subject to risks and uncertainties, the actual results or outcomes may, for many different reasons, differ materially from those indicated in the forward-looking statements. Such risks, uncertainties, contingencies, and other material factors may cause actual events to differ materially from the expectations expressed or implied in this press release through the forward-looking statements. The Company does not guarantee that the assumptions underlying the forward-looking statements in this press release are correct, and readers of this press release should not unduly rely on the forward-looking statements contained herein. The information, opinions, and forward-looking statements expressly or implicitly contained herein are provided solely as of the date of this press release and are subject to change. Neither the Company nor any other party undertakes to review, update, confirm, or publicly announce any revision to any forward-looking statement to reflect events that occur or circumstances that arise regarding the content of this press release, unless required by law or Nasdaq's Nordic Main Market Rulebook for Issuers of Shares. Attachments Linjemontage receives an award decision of approximately SEK 1 billion over three and a half years from Svenska kraftnät Källa MFN",
+      "article_facts": {
+        "excerpts": [
+          "The Project runs over three and a half years and has an estimated contract value of approximately SEK 1 billion.",
+          "Lag (2016:1146) om upphandling inom försörjningssektorerna ), which means that a contract may be entered into no earlier than after the standstill period has expired.",
+          "During the fourth quarter 2026, Linjemontage has also been awarded six new contracts with a total value of approximately SEK 314 million, in addition to those already announced in press releases.",
+          "That total includes an award decision of approximately SEK 132 million that is currently under standstill period, and will be separately announced when the contract is signed."
+        ],
+        "note": "Utdrag ur originaltexten; transaktionens riktning och belopp måste framgå uttryckligen."
+      },
+      "summary_sv": "Bolaget har publicerat ett meddelande. Innehållet kan inte sammanfattas säkert automatiskt; se originalutdragen.",
+      "analysis_scope": "Hämtad artikeltext – fullständighet ej verifierad",
+      "article_chars": 6800,
+      "company_profile": {
+        "totalRevenue": 3045499904,
+        "marketCap": 2692110080,
+        "operatingMargins": 0.054279998,
+        "totalCash": 245700000,
+        "totalDebt": 80800000,
+        "industry": "Engineering & Construction",
+        "financialCurrency": "SEK",
+        "currency": "SEK",
+        "longName": null,
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/LMGAB.ST/",
+        "symbol": "LMGAB.ST"
+      },
+      "order_comparison": null,
+      "analysis_evidence": [
+        "Linjemontage receives an award decision of approximately SEK 1 billion over three and a half years from Svenska kraftnät 2026-11-27 13:11:00 INSIDE INFORMATION: Linjemontage i Grästorp AB (publ) (\"Linjemontage\" or the \"Company\"), one of Sweden’s leading pure-play EPC providers within power infrastructure, has today received an award decision in a public procurement process from Svenska kraftnät relating to the construction of a new 400 kV power line between Oskarshamn municipality and Nybro municipality (the \"Project\").",
+        "The Project runs over three and a half years and has an estimated contract value of approximately SEK 1 billion.",
+        "Lag (2016:1146) om upphandling inom försörjningssektorerna ), which means that a contract may be entered into no earlier than after the standstill period has expired.",
+        "During the fourth quarter 2026, Linjemontage has also been awarded six new contracts with a total value of approximately SEK 314 million, in addition to those already announced in press releases.",
+        "That total includes an award decision of approximately SEK 132 million that is currently under standstill period, and will be separately announced when the contract is signed.",
+        "Attachments Linjemontage receives an award decision of approximately SEK 1 billion over three and a half years from Svenska kraftnät Källa MFN"
+      ],
+      "contract_evidence": [
+        "Linjemontage receives an award decision of approximately SEK 1 billion over three and a half years from Svenska kraftnät 2026-11-27 13:11:00 INSIDE INFORMATION: Linjemontage i Grästorp AB (publ) (\"Linjemontage\" or the \"Company\"), one of Sweden’s leading pure-play EPC providers within power infrastructure, has today received an award decision in a public procurement process from Svenska kraftnät relating to the construction of a new 400 kV power line between Oskarshamn municipality and Nybro municipality (the \"Project\").",
+        "The Project runs over three and a half years and has an estimated contract value of approximately SEK 1 billion.",
+        "In recent years, Linjemontage has been awarded several major transmission projects by Svenska kraftnät.",
+        "During this period, the decision may be subject to review, and the outcome of the Project therefore cannot be guaranteed.",
+        "Attachments Linjemontage receives an award decision of approximately SEK 1 billion over three and a half years from Svenska kraftnät Källa MFN"
+      ],
+      "news_type": "Övrigt",
+      "news_score": null,
+      "confidence": "Låg",
+      "surprise": "Ej bedömd",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
+  },
+  "NEWS:a3ea5e8354f8f5478793c38b": {
+    "first_seen": "2026-11-27T12:45:40.139431+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "BOLAGSNYHET – GRANSKA",
+      "company": "Linjemontage",
+      "title": "Linjemontage erhåller ett tilldelningsbeslut om cirka 1 MDSEK över tre och ett halvt år från Svenska kraftnät",
+      "description": "",
+      "url": "https://mfn.se/a/linjemontage/linjemontage-erhaller-ett-tilldelningsbeslut-om-cirka-1-mdsek-over-tre-och-ett-halvt-ar-fran-svenska-kraftnat",
+      "published": "2026-11-27 00:00:00+00:00",
+      "id": "NEWS:a3ea5e8354f8f5478793c38b",
+      "direction": "Oklar",
+      "importance": "Ej fastställd",
+      "economic_case": "Rubriken räcker inte för att fastställa ekonomisk påverkan.",
+      "risk": "Läs originalmeddelandet och kontrollera finansiella uppgifter.",
+      "article_status": "ok",
+      "article_text": "Linjemontage erhåller ett tilldelningsbeslut om cirka 1 MDSEK över tre och ett halvt år från Svenska kraftnät 2026-11-27 13:11:00 INSIDERINFORMATION: Linjemontage i Grästorp AB (publ) (\"Linjemontage\" eller \"Bolaget\"), en av Sveriges ledande helhetsleverantörer inom kraftinfrastruktur, har idag erhållit ett tilldelningsbeslut i en offentlig upphandling från Svenska kraftnät, avseende nybyggnation av en 400 kV luftledning mellan Oskarshamns kommun och Nybro kommun (\"Projektet\"). Projektet löper över cirka tre och ett halvt år och har ett uppskattat kontraktsvärde om cirka 1 MDSEK. Tilldelningen av Projektet är belagd med en lagstadgad avtalsspärr, vilket innebär att avtal kan tecknas tidigast om tio dagar från idag. Projektet omfattar cirka 98 kilometer luftledning mellan Ekhyddan i Oskarshamns kommun och Nybro i Nybro kommun och syftar till att förstärka transmissionsnätet, öka kapacitet och driftsäkerhet samt minska risken för strömavbrott i regionen. Linjemontage har under senare år tilldelats flera större projekt inom transmissionsnätet från Svenska kraftnät. Bolaget ansvarar bland annat för byggnationen av de nya 400/220 kV-stationerna i Plenninge och Jälla utanför Uppsala, som ingår i Svenska kraftnäts Uppsalapaket. ” Utbyggnaden och moderniseringen av elnätet är avgörande för industrins möjligheter att växa och för Sveriges fortsatta elektrifiering. Den nya ledningen mellan Ekhyddan och Nybro stärker elöverföringen i södra Sverige och bidrar till en bättre balans i regionens elförsörjning. Det är ett av de största uppdragen vi hittills har tilldelats inom transmission, och tillsammans med våra pågående stationsprojekt i Jälla och Plenninge visar det vår förmåga att ta ansvar för stora och tekniskt komplexa högspänningsprojekt. Vi tackar Svenska kraftnät för det fortsatta förtroendet och ser fram emot att omsätta vår kompetens och erfarenhet i ett starkare elnät.” säger Anders Åkerberg, VD för Linjemontage. Projektstart förväntas påbörjas i slutet av 2026 och projektet beräknas vara slutfört i juni 2030. Arbetena inkluderar bland annat schakt- och grundläggningsarbeten, byggnation av fundament, montering och resning av stålstolpar, lindragning samt driftsättning av den nya anläggningen. Tilldelningsbeslutet avseende Projektet omfattas av en obligatorisk avtalsspärr om tio dagar enligt lag (2016:1146) om upphandling inom försörjningssektorerna, vilket innebär att avtal tidigast kan ingås efter att avtalsspärren löpt ut. Under denna period kan beslutet komma att överprövas och utfallet av Projektet kan därför inte garanteras. Bolaget kommer att informera marknaden om eventuella förändringar i processen för Projektet i enlighet med (EU) marknadsmissbruksförordningen 596/2014 (MAR). Under det fjärde kvartalet 2026 har Linjemontage även tilldelats sex nya kontrakt till ett sammanlagt värde om cirka 314 MSEK utöver vad som redan har meddelats i pressmeddelanden. I den summan inkluderas ett tilldelningsbeslut om cirka 132 MSEK som för närvarande omfattas av en tio dagars avtalsspärr. Detta projekt kommer att pressmeddelas separat när kontraktet har signerats. Denna information utgör insiderinformation enligt definitionen i (EU) marknadsmissbruksförordningen 596/2014 (MAR) som Linjemontage i Grästorp AB (publ) är skyldigt att offentliggöra enligt MAR. Informationen lämnades för offentliggörande genom nedanstående kontaktpersoners försorg, för offentliggörande den 2026-11-27 13:11 CET. Kontakter Thomas Hendel, CFO på Linjemontage ir@linjemontage.se Om oss Linjemontage är en svensk renodlad EPC-leverantör inom kraftinfrastruktur som möjliggör modernisering och utbyggnad av elnätet. Bolaget erbjuder helhetslösningar inom ställverk och transmissions- och distributionsnät, med kapacitet genom hela projektvärdekedjan och specialistkompetens inom högspänning upp till 400 kV. Bolaget har idag ca 400 medarbetare. Verksamheten bedrivs i Sverige och Norge, med en kompletterande filial i Kroatien och ett verksamhetscenter i Indien. Linjemontage grundades i Grästorp 1993 och bolagets aktier är sedan 2026 noterade på Nasdaq Stockholm. För mer information, besök www.linjemontage.se Framåtriktade uttalanden Detta pressmeddelande innehåller framåtriktade uttalanden som kan avse Bolagets avsikter, bedömningar eller förväntningar avseende Bolagets framtida resultat, finansiella ställning, likviditet, utveckling, utsikter, förväntad tillväxt, strategier och möjligheter samt de marknader inom vilka Bolaget är verksamt. Framåtriktade uttalanden är uttalanden som inte avser historiska fakta och kan identifieras av att de innehåller uttryck som \"anser\", \"förväntar\", \"förutser\", \"avser\", \"uppskattar\", \"kommer\", \"kan\", \"förutsätter\", \"bör\" \"skulle kunna\" och, i varje fall, negationer därav, eller liknande uttryck. De framåtriktade uttalandena i detta pressmeddelande är baserade på olika antaganden, vilka i flera fall baseras på ytterligare antaganden. Även om Bolaget anser att de antaganden som reflekteras i dessa framåtriktade uttalanden är rimliga, kan det inte garanteras att de kommer att infalla eller att de är korrekta. Då dessa antaganden baseras på antaganden eller uppskattningar och är föremål för risker och osäkerheter kan det faktiska resultatet eller utfallet, av många olika anledningar, komma att avvika väsentligt från vad som framgår av de framåtriktade uttalandena. Sådana risker, osäkerheter, eventualiteter och andra väsentliga faktorer kan medföra att den faktiska händelseutvecklingen avviker väsentligt från de förväntningar som uttryckligen eller underförstått anges i detta pressmeddelande genom de framåtriktade uttalandena. Bolaget garanterar inte att de antaganden som ligger till grund för de framåtriktade uttalandena i detta pressmeddelande är korrekta och varje läsare av pressmeddelandet bör inte opåkallat förlita sig på de framåtriktade uttalandena i detta pressmeddelande. Den information, de uppfattningar och framåtriktade uttalanden som uttryckligen eller underförstått framgår häri lämnas endast per dagen för detta pressmeddelande och kan komma att förändras. Varken Bolaget eller någon annan åtar sig att se över, uppdatera, bekräfta eller offentligt meddela någon revidering av något framåtriktat uttalande för att återspegla händelser som inträffar eller omständigheter som förekommer avseende innehållet i detta pressmeddelande, såtillvida det inte krävs enligt lag eller Nasdaq Stockholms regelverk för aktieemittenter på huvudmarknaden. Bifogade filer Linjemontage erhåller ett tilldelningsbeslut om cirka 1 MDSEK över tre och ett halvt år från Svenska kraftnät Källa MFN",
+      "article_facts": {
+        "excerpts": [
+          "Under det fjärde kvartalet 2026 har Linjemontage även tilldelats sex nya kontrakt till ett sammanlagt värde om cirka 314 MSEK utöver vad som redan har meddelats i pressmeddelanden.",
+          "I den summan inkluderas ett tilldelningsbeslut om cirka 132 MSEK som för närvarande omfattas av en tio dagars avtalsspärr.",
+          "Linjemontage grundades i Grästorp 1993 och bolagets aktier är sedan 2026 noterade på Nasdaq Stockholm."
+        ],
+        "note": "Utdrag ur originaltexten; transaktionens riktning och belopp måste framgå uttryckligen."
+      },
+      "summary_sv": "Bolaget har publicerat ett meddelande. Innehållet kan inte sammanfattas säkert automatiskt; se originalutdragen.",
+      "analysis_scope": "Hämtad artikeltext – fullständighet ej verifierad",
+      "article_chars": 6584,
+      "company_profile": {
+        "totalRevenue": 3045499904,
+        "marketCap": 2692110080,
+        "operatingMargins": 0.054279998,
+        "totalCash": 245700000,
+        "totalDebt": 80800000,
+        "industry": "Engineering & Construction",
+        "financialCurrency": "SEK",
+        "currency": "SEK",
+        "longName": null,
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/LMGAB.ST/",
+        "symbol": "LMGAB.ST"
+      },
+      "order_comparison": null,
+      "analysis_evidence": [
+        "Under det fjärde kvartalet 2026 har Linjemontage även tilldelats sex nya kontrakt till ett sammanlagt värde om cirka 314 MSEK utöver vad som redan har meddelats i pressmeddelanden.",
+        "I den summan inkluderas ett tilldelningsbeslut om cirka 132 MSEK som för närvarande omfattas av en tio dagars avtalsspärr."
+      ],
+      "contract_evidence": [
+        "Linjemontage erhåller ett tilldelningsbeslut om cirka 1 MDSEK över tre och ett halvt år från Svenska kraftnät 2026-11-27 13:11:00 INSIDERINFORMATION: Linjemontage i Grästorp AB (publ) (\"Linjemontage\" eller \"Bolaget\"), en av Sveriges ledande helhetsleverantörer inom kraftinfrastruktur, har idag erhållit ett tilldelningsbeslut i en offentlig upphandling från Svenska kraftnät, avseende nybyggnation av en 400 kV luftledning mellan Oskarshamns kommun och Nybro kommun (\"Projektet\").",
+        "Projektet löper över cirka tre och ett halvt år och har ett uppskattat kontraktsvärde om cirka 1 MDSEK.",
+        "Linjemontage har under senare år tilldelats flera större projekt inom transmissionsnätet från Svenska kraftnät.",
+        "Bifogade filer Linjemontage erhåller ett tilldelningsbeslut om cirka 1 MDSEK över tre och ett halvt år från Svenska kraftnät Källa MFN"
+      ],
+      "news_type": "Övrigt",
+      "news_score": null,
+      "confidence": "Låg",
+      "surprise": "Ej bedömd",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
+  },
+  "NEWS:6cbd97a8d18235e0848df25a": {
+    "first_seen": "2026-11-27T12:45:40.139431+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "BOLAGSNYHET – GRANSKA",
+      "company": "Clavister",
+      "title": "Clavister AB",
+      "description": "",
+      "url": "https://mfn.se/all/a/clavister",
+      "published": "2026-11-27 00:00:00+00:00",
+      "id": "NEWS:6cbd97a8d18235e0848df25a",
+      "direction": "Oklar",
+      "importance": "Låg eller osäker",
+      "economic_case": "Rubriken räcker inte för att fastställa ekonomisk påverkan.",
+      "risk": "Läs originalmeddelandet och kontrollera finansiella uppgifter.",
+      "article_status": "article not identified",
+      "article_text": "",
+      "article_facts": {},
+      "summary_sv": "Bolaget har publicerat ett meddelande. Innehållet kan inte sammanfattas säkert automatiskt; se originalutdragen.",
+      "analysis_scope": "Begränsad analys – endast rubrik",
+      "article_chars": 0,
+      "company_profile": {
+        "totalRevenue": 298811008,
+        "marketCap": 1873846656,
+        "operatingMargins": 0.105550006,
+        "totalCash": 25562000,
+        "totalDebt": 148139008,
+        "industry": "Software - Infrastructure",
+        "financialCurrency": "SEK",
+        "currency": "SEK",
+        "longName": "Clavister Holding AB (publ.)",
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/CLAV.ST/",
+        "symbol": "CLAV.ST"
+      },
+      "order_comparison": null,
+      "analysis_evidence": [],
+      "news_type": "Övrigt",
+      "news_score": null,
+      "confidence": "Låg",
+      "surprise": "Ej bedömd",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
+  },
+  "NEWS:ce15906059c61ea47c1b0df1": {
+    "first_seen": "2026-11-27T12:45:40.139431+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "ORDER/AVTAL – GRANSKA",
+      "company": "Clavister",
+      "title": "Clavister Secures 450 MSEK Contract from BAE Systems for Clavister CyberArmour",
+      "description": "",
+      "url": "https://mfn.se/a/clavister/clavister-secures-450-msek-contract-from-bae-systems-for-clavister-cyberarmour",
+      "published": "2026-11-27 00:00:00+00:00",
+      "id": "NEWS:ce15906059c61ea47c1b0df1",
+      "direction": "Positiv",
+      "importance": "Hög",
+      "economic_case": "En order kan bidra till framtida intäkter.",
+      "risk": "Kontrollera bindande villkor, marginal och leveranstid.",
+      "article_status": "ok",
+      "article_text": "Clavister Secures 450 MSEK Contract from BAE Systems for Clavister CyberArmour 2026-11-27 13:23:00 Örnsköldsvik, Sweden – 27 November 2026 – Clavister, a leader in European cybersecurity for mission-critical applications, today announces that it has been awarded a 450 MSEK contract by BAE Systems to supply Clavister CyberArmour as the secure digital backbone of CV90 vehicles in the multi-nation procurement programme commonly referred to as “Nordic Edition”. The new agreement builds on Clavister CyberArmour’s established role in the CV90’s onboard communications infrastructure, bringing the solution to the Nordic Edition programme and expanding its scope within each vehicle to cover additional use cases and capabilities. Deliveries are scheduled to begin in 2028, with revenue to be recognised over several years. The Nordic Edition programme brings together procurement of CV90 vehicles for multiple nations. For Clavister, the contract represents a significant expansion of its established relationship with BAE Systems and provides long-term delivery visibility within its defence business. The CV90 is a highly digitalised combat platform, integrating advanced vehicle systems and networked capabilities. These systems depend on a resilient digital infrastructure that connects onboard equipment, carries critical data and protects communications against cyber threats. Clavister CyberArmour provides the vehicle’s Ethernet and IP networking infrastructure, connecting onboard systems and supplying power to many of the connected devices. It combines these functions with the full security capabilities of Clavister’s firewall technology, bringing networking, device power and cyber protection together in a solution designed for demanding military environments. This makes CyberArmour an integral part of how the vehicle’s digital systems operate and communicate. John Vestberg, CEO of Clavister, commented: “This contract marks a major milestone in our collaboration with BAE Systems. CyberArmour forms the secure digital backbone of the CV90, connecting its onboard systems, powering devices and protecting critical communications. Its expanded role in the Nordic Edition programme demonstrates the trust placed in our technology as an integral part of the vehicle. It also shows how our strategy of embedding our technology into established defence platforms translates into substantial business as procurement programmes expand. We look forward to supporting BAE Systems over the coming years.” The agreement reinforces Clavister’s position as a European provider of secure digital infrastructure for the defence industry and highlights the growing importance of integrated networking and cybersecurity in modern combat vehicles. About Clavister Clavister is a Swedish cybersecurity company that has protected mission-critical customers for over two decades. Headquartered in Örnsköldsvik, Sweden, Clavister pioneered one of the first firewalls and continues to deliver adaptive, high-performance cybersecurity solutions for public sector, energy, telecom and defence customers. The stock, Clavister AB, is listed at Nasdaq First North Growth Market. FNCA Sweden AB is the Company’s Certified Advisor. For additional information, please visit https://www.clavister.com/ , and follow us on our official LinkedIn and YouTube channels. For further information, please contact: Clavister: John Vestberg , President and CEO Email: john.vestberg@clavister.com This information is information that Clavister AB is obliged to make public pursuant to the EU Market Abuse Regulation. The information was submitted for publication, through the agency of the contact persons set out above, at 2026-11-27 13:23 CET. Attachments Clavister Secures 450 MSEK Contract from BAE Systems for Clavister CyberArmour Källa MFN",
+      "article_facts": {
+        "excerpts": [
+          "Clavister Secures 450 MSEK Contract from BAE Systems for Clavister CyberArmour 2026-11-27 13:23:00 Örnsköldsvik, Sweden – 27 November 2026 – Clavister, a leader in European cybersecurity for mission-critical applications, today announces that it has been awarded a 450 MSEK contract by BAE Systems to supply Clavister CyberArmour as the secure digital backbone of CV90 vehicles in the multi-nation procurement programme commonly referred to as “Nordic Edition”.",
+          "For Clavister, the contract represents a significant expansion of its established relationship with BAE Systems and provides long-term delivery visibility within its defence business.",
+          "John Vestberg, CEO of Clavister, commented: “This contract marks a major milestone in our collaboration with BAE Systems.",
+          "Attachments Clavister Secures 450 MSEK Contract from BAE Systems for Clavister CyberArmour Källa MFN"
+        ],
+        "note": "Utdrag ur originaltexten; transaktionens riktning och belopp måste framgå uttryckligen."
+      },
+      "summary_sv": "Nyhetstyp: Order. En order kan bidra till framtida intäkter. Nämnt belopp motsvarar 150.6 % av rapporterad omsättning; kontrollera ordervärdet. Ekonomiskt underlag ur originaltexten: Deliveries are scheduled to begin in 2028, with revenue to be recognised over several years.",
+      "analysis_scope": "Hämtad artikeltext – fullständighet ej verifierad",
+      "article_chars": 3821,
+      "company_profile": {
+        "totalRevenue": 298811008,
+        "marketCap": 1873846656,
+        "operatingMargins": 0.105550006,
+        "totalCash": 25562000,
+        "totalDebt": 148139008,
+        "industry": "Software - Infrastructure",
+        "financialCurrency": "SEK",
+        "currency": "SEK",
+        "longName": "Clavister Holding AB (publ.)",
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/CLAV.ST/",
+        "symbol": "CLAV.ST"
+      },
+      "order_comparison": {
+        "mentioned_amount_sek": 450000000.0,
+        "revenue_ratio_pct": 150.6,
+        "note": "Belopp nämnt i rubriken jämfört med rapporterad omsättning; inte verifierat ordervärde eller årlig intäkt."
+      },
+      "analysis_evidence": [
+        "Clavister Secures 450 MSEK Contract from BAE Systems for Clavister CyberArmour 2026-11-27 13:23:00 Örnsköldsvik, Sweden – 27 November 2026 – Clavister, a leader in European cybersecurity for mission-critical applications, today announces that it has been awarded a 450 MSEK contract by BAE Systems to supply Clavister CyberArmour as the secure digital backbone of CV90 vehicles in the multi-nation procurement programme commonly referred to as “Nordic Edition”.",
+        "Deliveries are scheduled to begin in 2028, with revenue to be recognised over several years.",
+        "For Clavister, the contract represents a significant expansion of its established relationship with BAE Systems and provides long-term delivery visibility within its defence business.",
+        "John Vestberg, CEO of Clavister, commented: “This contract marks a major milestone in our collaboration with BAE Systems.",
+        "Attachments Clavister Secures 450 MSEK Contract from BAE Systems for Clavister CyberArmour Källa MFN"
+      ],
+      "contract_evidence": [
+        "Deliveries are scheduled to begin in 2028, with revenue to be recognised over several years.",
+        "We look forward to supporting BAE Systems over the coming years.” The agreement reinforces Clavister’s position as a European provider of secure digital infrastructure for the defence industry and highlights the growing importance of integrated networking and cybersecurity in modern combat vehicles."
+      ],
+      "economic_evidence": [
+        "Deliveries are scheduled to begin in 2028, with revenue to be recognised over several years.",
+        "For Clavister, the contract represents a significant expansion of its established relationship with BAE Systems and provides long-term delivery visibility within its defence business."
+      ],
+      "analysis_version": "2.1",
+      "news_type": "Order",
+      "news_score": 90,
+      "confidence": "Medel",
+      "surprise": "Ej bedömd – historik och konsensus saknas",
+      "analysis_signal": "VAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
   }
 }

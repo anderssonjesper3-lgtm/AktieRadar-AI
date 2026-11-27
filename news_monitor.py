@@ -38,7 +38,7 @@ def main():
         state = Path(args.state)
         seen = set(json.loads(state.read_text())) if state.exists() else set()
         for item in result['items']:
-            if item['id'] in seen or not timedelta(0) <= datetime.now(timezone.utc)-item['published'] <= timedelta(hours=12):
+            if item['id'] in seen or not timedelta(0) <= datetime.now(timezone.utc)-item['published'] <= timedelta(hours=24):
                 continue
             telegram_send(alert_text(item))
             confirmed = datetime.now(timezone.utc)

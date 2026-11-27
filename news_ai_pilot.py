@@ -194,7 +194,6 @@ def deduplicate_news(items):
 
 
 def ted_awards(companies, now):
-    """Public TED results, date precision only; no paid API."""
     import json, hashlib, unicodedata
     from datetime import timedelta
     from urllib.request import Request, urlopen
@@ -206,7 +205,46 @@ def ted_awards(companies, now):
     def norm(s):
         s = unicodedata.normalize('NFKC', s).casefold()
         s = re.sub(r'[^\w]+', ' ', s).strip()
-        return re.sub(r'\s+(?:ab publ|ab|as|oyj|oy|asa|ltd|aktiebolag)config, now=None, fetch=None, max_age_hours=24, profile_fetch=None):
+        return re.sub(r'\s+(?:ab publ|ab|as|oyj|oy|asa|ltd|aktiebolag)$', '', s).strip()
+    aliases = {}
+    for co in companies:
+        names = [co['name']] + co.get('aliases', []) + co.get('subsidiaries', [])
+        if norm(co['name']) == 'nyab': names += ['Dovre Solutions AS']
+        for name in names:
+            if len(norm(name)) >= 4: aliases.setdefault(norm(name), set()).add(co['name'])
+    out = []
+    start = (now-timedelta(days=1)).strftime('%Y%m%d')
+    end = now.strftime('%Y%m%d')
+    query = f'publication-date = ({start} <> {end}) AND notice-type IN (can-standard can-social can-desg can-tran)'
+    for page in range(1, 21):
+        payload = dict(query=query, fields=['publication-number','publication-date','winner-name','buyer-name','notice-title'], page=page, limit=250, scope='ALL')
+        req = Request('https://api.ted.europa.eu/v3/notices/search', data=json.dumps(payload).encode(), headers={'Content-Type':'application/json','Accept':'application/json'})
+        with urlopen(req, timeout=20) as response: data = json.load(response)
+        rows = data['notices']
+        for row in rows:
+            number = str(row.get('publication-number',''))
+            if not re.fullmatch(r'\d+-\d{4}', number): continue
+            rawdate = str(row.get('publication-date',''))[:10]
+            try: day = datetime.fromisoformat(rawdate).date()
+            except ValueError: continue
+            published = datetime.combine(day, datetime.min.time(), tzinfo=timezone.utc)
+            winners = strings(row.get('winner-name'))
+            buyers = strings(row.get('buyer-name'))
+            titles = strings(row.get('notice-title'))
+            for winner in set(winners):
+                matches = aliases.get(norm(winner), set())
+                if len(matches) != 1: continue
+                company = next(iter(matches))
+                buyer = '; '.join(dict.fromkeys(buyers))[:300]
+                subject = (titles or ['Ej angivet'])[0]
+                body = f'TED anger {winner} som vinnande leverantör. Beställare: {buyer or "Ej angiven"}. Upphandling: {subject}. Publiceringsdatum: {day}. Exakt publiceringstid saknas.'
+                key = hashlib.sha256((company+number).encode()).hexdigest()[:24]
+                out.append(dict(id='TED:'+key, company=company, title=f'{company}: tilldelningsbeslut – {subject}'[:180], description=body, published=published, publication_precision='day', url='https://ted.europa.eu/sv/notice/-/detail/'+number, kind='NYHET-VAKTA', category='UPPHANDLING', source='TED', procurement_buyer=buyer, procurement_winner=winner, procurement_number=number, procurement_text=body))
+        if len(rows)<250: return out
+    raise RuntimeError('TED pagination limit reached')
+
+
+def run_news_only(config, now=None, fetch=None, max_age_hours=24, profile_fetch=None):
     eligible = [c for c in config['companies'] if c.get('segment_verified') is True
                 and c.get('segment') in ('Mid Cap', 'Small Cap', 'First North')]
     matches, failures, diagnostics = scan_detailed(

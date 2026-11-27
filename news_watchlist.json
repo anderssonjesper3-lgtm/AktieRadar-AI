@@ -1729,8 +1729,22 @@
       "segment_verification": "third-party list, not exchange-verified",
       "feeds": [],
       "subsidiary_verification": {
-        "status": "pending"
-      }
+        "status": "complete_as_of_report",
+        "checked_on": "2026-11-27",
+        "as_of": "2025-12-31",
+        "sources": [
+          "https://storage.mfn.se/ef23ad34-7d4d-48ea-8860-b7913cffab62/powercell-ar2025-eng.pdf",
+          "https://powercellgroup.com/contact/"
+        ],
+        "note": "All four consolidated subsidiaries in 2025 annual report note 15, each 100% directly owned, corroborated by parent note 10. Current contact page confirms German and US offices and US comma variant; does not establish current legal ownership. China LTD appears in parent note 10 with no carrying amount and is absent from consolidated note 15; excluded pending clarification. Distributors excluded. Ownership after 2025-12-31 not independently verified."
+      },
+      "subsidiaries": [
+        "Powercell Deutschland GmbH",
+        "Powercell Warrants One AB",
+        "Powercell Norway AS",
+        "Powercell Inc.",
+        "Powercell, Inc."
+      ]
     },
     {
       "name": "Prisma Properties",

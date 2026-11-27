@@ -176,8 +176,30 @@
       "segment_effective": "2026-01-02",
       "feeds": [],
       "subsidiary_verification": {
-        "status": "pending"
-      }
+        "status": "partial_historical",
+        "checked_on": "2026-11-27",
+        "as_of": "2025-12-31",
+        "sources": [
+          "https://www.svedbergsgroup.com/en/wp-content/uploads/sites/5/2026/09/svedbergs-group-asr-2025-eng-1.pdf",
+          "https://mfn.se/a/svedbergs/svedbergs-group-slutfor-forvarvet-av-majoritetsandel-i-tjeckiska-badrumskoncernen-ubc-s-r-o.iframe",
+          "https://www.svedbergsgroup.com/en/wp-content/uploads/sites/5/2026/01/q3-rapport-2026.pdf"
+        ],
+        "note": "Nine legal names from 2025 directors' report, p.36, including holding companies. Three Czech entities from issuer closing announcement 2026-06-08 (initial 80% acquisition of UBC group); Q3 2026 report corroborates continued consolidation. Exact individual Czech ownership percentages and current ownership of historical entities not independently verified; indirect subsidiaries not exhaustively mapped."
+      },
+      "subsidiaries": [
+        "Svedbergs i Dalstorp AB",
+        "Macro Design AB",
+        "Svedbergs Oy",
+        "Cassøe A/S",
+        "Svedbergs UK Ltd",
+        "Roper Rhodes Ltd",
+        "Svedbergs Group NL B.V.",
+        "Thebalux Holding B.V.",
+        "Svedbergs Group International AB",
+        "UBC s.r.o.",
+        "Polysan s.r.o.",
+        "Sapho Manufactory s.r.o."
+      ]
     },
     {
       "name": "Vicore Pharma",

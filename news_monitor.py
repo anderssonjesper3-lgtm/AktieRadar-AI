@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -32,6 +33,18 @@ def main():
         return
     started = datetime.now(timezone.utc)
     config = load_config()
+    timing_path = Path('news_latency.json')
+    timing = json.loads(timing_path.read_text()) if timing_path.exists() else []
+    def record(event):
+        timing.append(event)
+        tmp = timing_path.with_suffix('.tmp')
+        tmp.write_text(json.dumps(timing[-2000:], ensure_ascii=False))
+        tmp.replace(timing_path)
+        print(json.dumps(event, ensure_ascii=False), flush=True)
+    created = os.getenv('RADAR_RUN_CREATED_AT')
+    run_created = datetime.fromisoformat(created.replace('Z', '+00:00')) if created else None
+    record(dict(event='scan_started', scan_started=started.isoformat(), run_created_at=created,
+                run_creation_to_scan_seconds=(started-run_created).total_seconds() if run_created else None))
     notify = None
     if args.send:
         from aktieradar_telegram import telegram_send
@@ -62,14 +75,14 @@ def main():
             temp = state.with_suffix('.tmp')
             temp.write_text(json.dumps(sorted(seen)))
             temp.replace(state)
-            print(json.dumps({'event':'telegram_confirmed','id':item['id'],
+            record({'event':'telegram_confirmed','id':item['id'],
                 'published':published.isoformat() if exact else None,
                 'publication_precision':item.get('publication_precision','unknown'),
                 'scan_started':started.isoformat(),'detected_at':detected.isoformat(),
                 'send_started':sent_at.isoformat(),'confirmed':confirmed.isoformat(),
                 'detection_to_telegram_seconds':round((confirmed-detected).total_seconds(),3),
                 'telegram_api_seconds':round((confirmed-sent_at).total_seconds(),3),
-                'publication_to_telegram_seconds':round((confirmed-published).total_seconds(),1) if exact else None}, ensure_ascii=False), flush=True)
+                'publication_to_telegram_seconds':round((confirmed-published).total_seconds(),1) if exact else None})
     result = run_news_only(config, on_match=notify)
     if notify is not None:
         for item in result['items']:
@@ -77,6 +90,7 @@ def main():
                 notify(item)
     from news_followup import advance, load_state, save_state
     save_state(advance(load_state(), result['items'], load_config(), datetime.now(timezone.utc)))
+    record(dict(event='scan_finished', scan_started=started.isoformat(), seconds=(datetime.now(timezone.utc)-started).total_seconds(), sources=len(result['diagnostics']), failures=len(result['failures'])))
     print(json.dumps(result, default=str, ensure_ascii=False))
     if args.live_check:
         shared = set(load_config().get('shared_feeds', []))

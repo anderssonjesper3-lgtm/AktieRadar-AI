@@ -985,8 +985,25 @@
       "segment_verification": "third-party list, not exchange-verified",
       "feeds": [],
       "subsidiary_verification": {
-        "status": "pending"
-      }
+        "status": "partial_historical",
+        "checked_on": "2026-11-27",
+        "as_of": "2025-12-31",
+        "sources": [
+          "https://www.eworkgroup.com/hubfs/03%20Investors/annual%20reports%20EN/Ework%20Group%20Annual%20and%20Sustainability%20Report%202025.pdf?hsLang=en",
+          "https://www.eworkgroup.com/sv/vara-kontor"
+        ],
+        "note": "Seven direct wholly owned subsidiaries in 2025 annual report p.72; Belgian SRL variant from p.83. Current Swedish office page corroborates operations in nine countries, not current legal ownership. Germany and Netherlands legal entities and any post-year-end changes not verified; omitted. No ownership after 2025-12-31 independently verified."
+      },
+      "subsidiaries": [
+        "Ework Group Finland OY",
+        "Ework Group Denmark ApS",
+        "Ework Group Norway AS",
+        "Ework Group Poland Sp. z o.o.",
+        "Ework Group Public AB",
+        "Ework Group Slovakia, s.r.o.",
+        "Ework Group Belgium BV",
+        "Ework Group Belgium SRL"
+      ]
     },
     {
       "name": "Fagerhult",

@@ -1474,8 +1474,24 @@
       "segment_verification": "third-party list, not exchange-verified",
       "feeds": [],
       "subsidiary_verification": {
-        "status": "pending"
-      }
+        "status": "complete_as_of_report",
+        "checked_at": "2026-11-27",
+        "ownership_as_of": "2025-12-31",
+        "sources": [
+          "https://netinsight.net/wp-content/uploads/2025/09/Net-Insight-Annual-report-2025.pdf",
+          "https://netinsight.net/wp-content/uploads/2025/09/Net-Insight-Arsredovisning-2025.pdf",
+          "https://netinsight.net/sv/investors/rapporter/"
+        ],
+        "scope": "Five entities listed in note 22, all 100% owned at reporting date; Swedish original used for Consulting AB spelling. Singapore entity also listed on current corporate website.",
+        "uncertainty": "Ownership after 2025-12-31 not independently confirmed; current website confirms Singapore operating presence only. Other immaterial entities may not be listed."
+      },
+      "subsidiaries": [
+        "Net Insight Consulting AB",
+        "Net Insight Pte. Ltd.",
+        "Net Insight UK Ltd",
+        "Net Insight Inc",
+        "Net Insight Holding AB"
+      ]
     },
     {
       "name": "Nivika Fastigheter",

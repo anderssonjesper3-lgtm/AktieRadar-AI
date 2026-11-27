@@ -459,7 +459,31 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "Regelbaserad analys – betald AI avstängd"
     },
-    "observations": {}
+    "observations": {
+      "80": {
+        "status": "OK",
+        "bar_end": "2026-11-27T11:30:00+01:00",
+        "age_minutes": 12.8,
+        "interval_minutes": 5,
+        "change_pct": -1.98,
+        "relative_volume": 0.04,
+        "momentum": "Svagt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T10:42:47.826139+00:00"
+      },
+      "20": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "35": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "50": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "65": {
+        "status": "Kontrolltillfälle missat"
+      }
+    }
   },
   "NEWS:e46486f79fbbef168fb948e2": {
     "first_seen": "2026-11-27T08:42:30.588819+00:00",
@@ -505,7 +529,31 @@
       "analysis_signal": "AVVAKTA",
       "ai_status": "Regelbaserad analys – betald AI avstängd"
     },
-    "observations": {}
+    "observations": {
+      "80": {
+        "status": "OK",
+        "bar_end": "2026-11-27T11:30:00+01:00",
+        "age_minutes": 12.8,
+        "interval_minutes": 5,
+        "change_pct": -1.98,
+        "relative_volume": 0.04,
+        "momentum": "Svagt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T10:42:47.826139+00:00"
+      },
+      "20": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "35": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "50": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "65": {
+        "status": "Kontrolltillfälle missat"
+      }
+    }
   },
   "NEWS:dc19eb8a6d2188e9ceb5ec89": {
     "first_seen": "2026-11-27T08:42:30.588819+00:00",
@@ -565,6 +613,648 @@
       "news_score": 49,
       "confidence": "Låg",
       "surprise": "Ej bedömd – historik och konsensus saknas",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {
+      "80": {
+        "status": "OK",
+        "bar_end": "2026-11-27T11:30:00+01:00",
+        "age_minutes": 12.8,
+        "interval_minutes": 5,
+        "change_pct": -1.98,
+        "relative_volume": 0.04,
+        "momentum": "Svagt",
+        "reaction": "Ingen tydlig positiv bekräftelse",
+        "checked_at": "2026-11-27T10:42:47.826139+00:00"
+      },
+      "20": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "35": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "50": {
+        "status": "Kontrolltillfälle missat"
+      },
+      "65": {
+        "status": "Kontrolltillfälle missat"
+      }
+    }
+  },
+  "NEWS:2c2ae185b0be88a8e2685121": {
+    "first_seen": "2026-11-27T10:42:47.826139+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "ORDER/AVTAL – GRANSKA",
+      "company": "Gentoo Media",
+      "title": "Gentoo Media - Notification of trade",
+      "description": "MJ Foundation Fundacja Rodzinna, an entity closely associated with Mateusz Juroszek (Board Member and primary insider of Gentoo Media Inc.), yesterday acquired 42 100 shares in Gentoo Media at an average price of SEK 3,9806 per share. Following this transaction, MJ Foundation Fundacja Rodzinna holds 22 660 032 shares, representing 16,82% of the total outstanding shares and voting rights in Gentoo Media Inc. Total holdings by close associates of Mateusz Juroszek now stand at 29 103 058 shares. For further information, please contact: Sebastian Mortensen, Investor Relations,",
+      "url": "https://news.cision.com/gentoo-media-inc/r/gentoo-media---notification-of-trade,c4430186",
+      "published": "2026-11-27 09:59:00+00:00",
+      "id": "NEWS:2c2ae185b0be88a8e2685121",
+      "direction": "Oklar",
+      "importance": "Låg eller osäker",
+      "economic_case": "En insynsaffär förändrar normalt inte bolagets intäkter direkt.",
+      "risk": "Kontrollera köpare, säljare, belopp och transaktionstyp.",
+      "article_status": "ok",
+      "article_text": "Gentoo Media - Notification of trade Fri, Nov 27, 2026 10:59 CET Report this content MJ Foundation Fundacja Rodzinna, an entity closely associated with Mateusz Juroszek (Board Member and primary insider of Gentoo Media Inc.), yesterday acquired 42 100 shares in Gentoo Media at an average price of SEK 3,9806 per share. Following this transaction, MJ Foundation Fundacja Rodzinna holds 22 660 032 shares, representing 16,82% of the total outstanding shares and voting rights in Gentoo Media Inc. Total holdings by close associates of Mateusz Juroszek now stand at 29 103 058 shares. For further information, please contact: Sebastian Mortensen, Investor Relations, sebastian.mortensen@g2m.com About Gentoo Media Gentoo Media is a leading iGaming affiliate connecting operators with high-value players through premium lead generation and compliance solutions. Its portfolio includes AskGamblers, Time2Play, CasinoTopsOnline, WSN and Casinomeister—sites trusted by millions worldwide. Gentoo Media Inc. is listed on Nasdaq Stockholm under the ticker G2M. Visit www.gentoomedia.com to learn more. This information is disclosed pursuant to Article 19 of Regulation (EU) No 596/2014 (the Market Abuse Regulation) and Chapter 4 of the Swedish Financial Instruments Trading Act.",
+      "article_facts": {
+        "excerpts": [
+          "Gentoo Media - Notification of trade Fri, Nov 27, 2026 10:59 CET Report this content MJ Foundation Fundacja Rodzinna, an entity closely associated with Mateusz Juroszek (Board Member and primary insider of Gentoo Media Inc.), yesterday acquired 42 100 shares in Gentoo Media at an average price of SEK 3,9806 per share.",
+          "Following this transaction, MJ Foundation Fundacja Rodzinna holds 22 660 032 shares, representing 16,82% of the total outstanding shares and voting rights in Gentoo Media Inc.",
+          "Total holdings by close associates of Mateusz Juroszek now stand at 29 103 058 shares."
+        ],
+        "note": "Utdrag ur originaltexten; transaktionens riktning och belopp måste framgå uttryckligen."
+      },
+      "summary_sv": "Insynsanmälan: texten indikerar aktieköp. Kontrollera originalet. En insynsaffär påverkar normalt inte bolagets intäkter direkt.",
+      "analysis_scope": "Hämtad artikeltext – fullständighet ej verifierad",
+      "article_chars": 1271,
+      "company_profile": {
+        "totalRevenue": 93259000,
+        "marketCap": 870422912,
+        "operatingMargins": 0.34397,
+        "totalCash": 2130000,
+        "totalDebt": 110877000,
+        "industry": "Gambling",
+        "financialCurrency": "EUR",
+        "currency": "SEK",
+        "longName": "Gentoo Media Inc.",
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/G2M.ST/",
+        "symbol": "G2M.ST"
+      },
+      "order_comparison": null,
+      "analysis_evidence": [
+        "Gentoo Media - Notification of trade Fri, Nov 27, 2026 10:59 CET Report this content MJ Foundation Fundacja Rodzinna, an entity closely associated with Mateusz Juroszek (Board Member and primary insider of Gentoo Media Inc.), yesterday acquired 42 100 shares in Gentoo Media at an average price of SEK 3,9806 per share."
+      ],
+      "contract_evidence": [],
+      "news_type": "Insynsaffär",
+      "news_score": 25,
+      "confidence": "Medel",
+      "surprise": "Ej bedömd – historik och konsensus saknas",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
+  },
+  "NEWS:ede3b5b9c959443b5dda9a1b": {
+    "first_seen": "2026-11-27T10:42:47.826139+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "BOLAGSNYHET – GRANSKA",
+      "company": "RaySearch Laboratories",
+      "title": "RaySearch visar framsteg inom termisk ablation på RSNA 2026",
+      "description": "",
+      "url": "https://mfn.se/a/raysearch-laboratories/raysearch-visar-framsteg-inom-termisk-ablation-pa-rsna-2026",
+      "published": "2026-11-27 00:00:00+00:00",
+      "id": "NEWS:ede3b5b9c959443b5dda9a1b",
+      "direction": "Oklar",
+      "importance": "Ej fastställd",
+      "economic_case": "Rubriken räcker inte för att fastställa ekonomisk påverkan.",
+      "risk": "Läs originalmeddelandet och kontrollera finansiella uppgifter.",
+      "article_status": "ok",
+      "article_text": "RaySearch visar framsteg inom termisk ablation på RSNA 2026 2026-11-27 11:25:00 RaySearch Laboratories AB (publ) deltar i den årliga RSNA-mässan i Chicago, Illinois, den 29 november-2 december. I monter #4951 kan besökare ta del av RaySearchs senaste mjukvarulösningar för termisk ablation, boka produktdemonstrationer och få veta mer om hur RaySearchs satsning på interventionell och diagnostisk radiologi bidrar till en sammanhållen cancervård. RaySearchs lösning för att verifiera behandlingsresultat vid termisk ablation har utvecklats i samarbete med ledande cancercentrum. Lösningen kombinerar deformabel bildregistrering och Deep Learning-segmentering (DLS) för att stödja avancerade ablationsbehandlingar genom automatiserade och effektiva arbetsflöden. Optimala ablationsmarginaler är en viktig faktor för att förbättra den lokala tumörkontrollen vid termisk ablation. I den randomiserade fas 2-studien COVER-ALL, som genomfördes vid The University of Texas MD Anderson Cancer Center (1), jämfördes ablationsmarginalerna mellan två grupper av patienter med levertumörer. I den ena gruppen bedömdes marginalen med RaySearchs avancerade mjukvara och i den andra genom traditionell visuell bedömning. Studien syftade till att undersöka om mjukvarubaserad bedömning kunde förbättra ablationsmarginalerna. Med mjukvarubaserad bedömning uppnåddes optimala ablationsmarginaler i 84 procent av fallen och endast 4 procent av patienterna uppvisade lokal tumörprogression. I gruppen med visuell bedömning uppnåddes optimala marginaler i endast 15 procent av fallen, och 15 procent uppvisade lokal tumörprogression. I RaySearchs monter kan besökare möta våra experter och ta del av den senaste utvecklingen inom termisk ablation. Här presenteras också RayWorld – RaySearchs lösningar för en sammanhållen cancervård, som används vid fler än 1 200 kliniker världen över. Lösningarna kan stödja det kliniska arbetet och bidra till att forma framtidens interventionella onkologi. RayStation®* är ett avancerat dosplaneringssystem (TPS), känt för sin oöverträffade snabbhet, precision och sitt stöd för ett brett spektrum av behandlingsmetoder. RayCare®* är nästa generations onkologiinformationssystem (OIS), utformat för att samordna och effektivisera kliniska arbetsflöden över specialitetsgränserna och möjliggöra automatisering även utanför dosplaneringen. RayIntelligence® är ett onkologiskt analyssystem (OAS) som gör det möjligt för cancerkliniker att samla in, strukturera och analysera data från hela den kliniska verksamheten. Läs mer om RaySearchs aktiviteter under mässan här . ”RaySearch har länge varit ledande inom strålonkologi, och nu tar vi med oss vår expertis inom avancerad mjukvara och automatiserade arbetsflöden in i interventionell onkologi. Genom att stödja termisk ablation med innovativ teknik för behandlingsverifiering vill vi ge kliniker bättre beslutsunderlag och i förlängningen bidra till bättre vård för patienterna”, säger Johan Löf, grundare och vd för RaySearch. ”RSNA 2026 är ett utmärkt tillfälle att dela vår vision om en mer sammanhållen och heltäckande cancervård.” (1) Odisio B, Albuquerque J, Lin Y et al. Mjukvarubaserad respektive visuell bedömning av den minsta ablationsmarginalen hos patienter med levertumörer som genomgår perkutan termisk ablation (COVER-ALL): en randomiserad fas 2-studie För mer information, kontakta: Matt Miley, Head of Marketing, RaySearch Laboratories AB Tel: +46 (0) 8 510 530 00 marketing@raysearchlabs.com Carolina Strömlid, Head of Investor Relations, RaySearch Laboratories AB Tel: +46 (0) 708 807 173 ir@raysearchlabs.com Om RaySearch RaySearch Laboratories AB (publ) är ett medicintekniskt företag som utvecklar innovativa mjukvarulösningar för att förbättra cancervården. RaySearch marknadsför RayStation®** dosplaneringssystem (TPS) och onkologiinformationssystemet (OIS) RayCare®**. De senaste tilläggen i RaySearchs produktlinje är RayIntelligence® och RayCommand®**. RayIntelligence är ett analyssystem för onkologi som cancerkliniker kan använda för att samla in, strukturera och analysera data. Behandlingsstyrsystemet (TCS) RayCommand är utformat som en länk mellan behandlingsmaskinen och systemen för dosplanering och onkologiinformation. Programvara från RaySearch har sålts till drygt 1 200 kliniker i 54 länder. Företaget grundades år 2000 som en avknoppning från Karolinska Institutet i Stockholm och aktien är noterad på Nasdaq Stockholm sedan 2003 (STO: RAY B). Mer information finns på raysearchlabs.com . Följ oss på: LinkedIn YouTube * Inte tillgänglig för klinisk användning eller kommersiell försäljning i USA. ** RaySearchs produkter och funktioner kan vara under fortsatt utveckling och/eller föremål för regulatorisk granskning och är eventuellt inte godkända i alla jurisdiktioner. Vissa av de produkter eller funktioner som beskrivs är eventuellt inte tillgängliga för klinisk användning eller försäljning i USA eller Kanada. Bifogade filer RaySearch visar framsteg inom termisk ablation på RSNA 2026 Källa MFN",
+      "article_facts": {
+        "excerpts": [],
+        "note": "Utdrag ur originaltexten; transaktionens riktning och belopp måste framgå uttryckligen."
+      },
+      "summary_sv": "Bolaget har publicerat ett meddelande. Innehållet kan inte sammanfattas säkert automatiskt; se originalutdragen.",
+      "analysis_scope": "Hämtad artikeltext – fullständighet ej verifierad",
+      "article_chars": 5012,
+      "company_profile": {
+        "totalRevenue": 1332300032,
+        "marketCap": 5612219392,
+        "operatingMargins": 0.23238,
+        "totalCash": 158300000,
+        "totalDebt": 406000000,
+        "industry": "Health Information Services",
+        "financialCurrency": "SEK",
+        "currency": "SEK",
+        "longName": "RaySearch Laboratories AB (publ)",
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/RAY-B.ST/",
+        "symbol": "RAY-B.ST"
+      },
+      "order_comparison": null,
+      "analysis_evidence": [],
+      "contract_evidence": [
+        "Företaget grundades år 2000 som en avknoppning från Karolinska Institutet i Stockholm och aktien är noterad på Nasdaq Stockholm sedan 2003 (STO: RAY B)."
+      ],
+      "news_type": "Övrigt",
+      "news_score": null,
+      "confidence": "Låg",
+      "surprise": "Ej bedömd",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
+  },
+  "NEWS:a46a22f7c88ec09791ba0c6f": {
+    "first_seen": "2026-11-27T10:42:47.826139+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "BOLAGSNYHET – GRANSKA",
+      "company": "Alligator Bioscience",
+      "title": "Kommuniké från extra bolagsstämma i Alligator Bioscience AB",
+      "description": "",
+      "url": "https://mfn.se/a/alligator-bioscience/kommunike-fran-extra-bolagsstamma-i-alligator-bioscience-ab-6",
+      "published": "2026-11-27 00:00:00+00:00",
+      "id": "NEWS:a46a22f7c88ec09791ba0c6f",
+      "direction": "Osäker",
+      "importance": "Låg eller osäker",
+      "economic_case": "Kapitaltillskott kan stärka likviditeten men späda ut ägandet.",
+      "risk": "Kontrollera rabatt, utspädning och kapitalbehov.",
+      "article_status": "ok",
+      "article_text": "Kommuniké från extra bolagsstämma i Alligator Bioscience AB 2026-11-27 10:30:00 Idag, den 27 november 2026, hölls extra bolagsstämma i Alligator Bioscience AB. Nedan följer en sammanfattning av de beslut som fattades. Beslut om (A) riktad emission av stamaktier (utjämningsemission); (B) ändring av bolagsordningen; och (C) sammanläggning av stamaktier Stämman beslutade i enlighet med styrelsens förslag om sammanläggning av stamaktier (s.k. omvänd split) innebärande att tusen (1 000) befintliga stamaktier sammanläggs till en (1) stamaktie (1:1 000). Syftet med sammanläggningen är att uppnå ett för bolaget ändamålsenligt antal aktier. För att möjliggöra sammanläggningen och åstadkomma ett jämnt kvotvärde efter sammanläggningen beslutade stämman även om en riktad emission av stamaktier (utjämningsemission). Genom utjämningsemissionen ökar bolagets aktiekapital med 0,76 kronor genom nyemission av 152 nya stamaktier till en teckningskurs om 0,005 kronor per aktie, motsvarande aktiens kvotvärde. Rätt att teckna de nya stamaktierna tillkommer, med avvikelse från aktieägarnas företrädesrätt, endast Vator Securities AB. Skälet till avvikelsen från aktieägarnas företrädesrätt och till att teckningskursen motsvarar kvotvärdet är att emissionen genomförs för att åstadkomma ett totalt antal stamaktier i bolaget som är jämnt delbart med sammanläggningskvoten och därmed ett jämnt kvotvärde efter sammanläggningen. Sammanläggningen innebär att antalet stamaktier, som efter den riktade emissionen (utjämningsemissionen) uppgår till totalt 3 568 107 000 stycken, minskas till totalt 3 568 107 stycken. Sammanläggningen innebär samtidigt att aktiens kvotvärde ökar från 0,005 kronor till 5 kronor. För att möjliggöra sammanläggningen beslutades det även om ändring av bolagsordningens § 5 så att gränserna för antalet aktier i bolaget ändras till lägst 3 000 000 och högst 12 000 000. Styrelsen bemyndigades att fastställa avstämningsdag för sammanläggningen, vilken dock inte får infalla före den tidpunkt då beslutet om sammanläggningen har registrerats vid Bolagsverket. Vidare information om förfarandet vid sammanläggningen kommer att offentliggöras i samband med att styrelsen beslutar om avstämningsdag. Beslut om bemyndigande för styrelsen att besluta om emissioner av teckningsoptioner Stämman beslutade att bemyndiga styrelsen att, inom ramen för bolagsordningens gränser, fram till nästa årsstämma, vid ett eller flera tillfällen, med avvikelse från aktieägarnas företrädesrätt, besluta om emission av teckningsoptioner. Rätt att teckna teckningsoptionerna ska endast tillkomma Fenja Capital II A/S (” Fenja Capital ”). Teckningsoptionerna ska ges ut vederlagsfritt. Syftet med bemyndigandet samt skälen till avvikelsen från aktieägarnas företrädesrätt och att teckningsoptionerna ges ut vederlagsfritt är att uppfylla bolagets åtaganden gentemot Fenja Capital enligt det låneavtal som bolaget och Fenja Capital ingick i juli 2026 (och som närmare beskrivs i bolagets pressmeddelanden från den 23 juli 2026 och den 29 september 2026). Enligt låneavtalet har Fenja Capital erhållit teckningsoptioner serie 2026/2031. Teckningsoptionerna omfattas av villkor som innehåller omräkningsvillkor som innebär ett s.k. ”fullt utspädningsskydd” innebärande att Fenja Capital, med vissa undantag, ska kompenseras vid särskilda bolagshändelser så att Fenja Capital alltid har rätt att tilldelas ytterligare teckningsoptioner så att de teckningsoptioner som Fenja Capital innehar sammantaget ger samma utspädning som teckningsoptionerna representerade omedelbart före bolagshändelsen, beräknat på antalet utestående stamaktier i bolaget. Fenja Capital har enligt låneavtalet även rätt att påkalla omräkning av redan utgivna teckningsoptioner serie 2026/2031 vilket kan komma att fordra utgivande av nya teckningsoptioner av samma serie för att ersätta de redan utgivna teckningsoptionerna. Val och arvodering av styrelse Stämman beslutade i enlighet med valberedningens förslag att styrelsen ska bestå av tre ordinarie ledamöter valda av stämman. Stämman beslutade vidare i enlighet med valberedningens förslag att omvälja Hans-Peter Ostler och Anna Törner som styrelseledamöter samt att välja Søren Bregenholt som ny styrelseledamot. Hans-Peter Ostler omvaldes som styrelseordförande. De tidigare styrelseledamöterna Denise Goode och Jörg Möller var inte föreslagna för omval. I anslutning till stämman avgick även arbetstagarrepresentanten Karin Nordbladh från sin plats i styrelsen. Stämman beslutade härtill i enlighet med valberedningens förslag om sänkt styrelsearvode innebärande att arvode till styrelsen ska utgå med 455 000 kr till styrelseordföranden och med 210 000 kr till var och en av övriga ledamöter som inte är anställda av bolaget. Arvode för utskottsarbete ska oförändrat utgå med 125 000 kr till revisionsutskottets ordförande, med 50 000 kr till envar av övriga ledamöter i revisionsutskottet, med 50 000 kr till ersättningsutskottets ordförande och med 25 000 kr till envar av övriga ledamöter i ersättningsutskottet. Søren Bregenholt ska inte erhålla något styrelse- eller utskottsarvode för den tid han kvarstår som anställd verkställande direktör i bolaget, det vill säga till och med den 31 december 2026, och de reducerade arvodena tillämpas från och med den extra bolagsstämman till nästa årsstämma, fördelat pro rata. Lund den 27 november 2026 Alligator Bioscience AB (publ) För mer information, vänligen kontakta: Søren Bregenholt, vd E-post: soren.bregenholt@alligatorbioscience.com Telefon: 046 540 82 00 Denna information lämnades, genom ovanstående kontaktpersons försorg, för offentliggörande den 27 november 2026 kl. 10:30. Bifogade filer Kommuniké från extra bolagsstämma i Alligator Bioscience AB Källa MFN",
+      "article_facts": {
+        "excerpts": [
+          "Syftet med sammanläggningen är att uppnå ett för bolaget ändamålsenligt antal aktier.",
+          "För att möjliggöra sammanläggningen beslutades det även om ändring av bolagsordningens § 5 så att gränserna för antalet aktier i bolaget ändras till lägst 3 000 000 och högst 12 000 000."
+        ],
+        "note": "Utdrag ur originaltexten; transaktionens riktning och belopp måste framgå uttryckligen."
+      },
+      "summary_sv": "Möjlig nyhetstyp: Emission. Kapitaltillskott kan stärka likviditeten men späda ut ägandet.",
+      "analysis_scope": "Hämtad artikeltext – fullständighet ej verifierad",
+      "article_chars": 5747,
+      "company_profile": {
+        "totalRevenue": 915000,
+        "marketCap": 23906314,
+        "operatingMargins": -103.31038,
+        "totalCash": 41250000,
+        "totalDebt": 27780000,
+        "industry": "Biotechnology",
+        "financialCurrency": "SEK",
+        "currency": "SEK",
+        "longName": "Alligator Bioscience AB (publ)",
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/ATORX.ST/",
+        "symbol": "ATORX.ST"
+      },
+      "order_comparison": null,
+      "analysis_evidence": [],
+      "contract_evidence": [],
+      "news_type": "Emission",
+      "news_score": 49,
+      "confidence": "Låg",
+      "surprise": "Ej bedömd – historik och konsensus saknas",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
+  },
+  "NEWS:8597aa71c28782453b9f3763": {
+    "first_seen": "2026-11-27T10:42:47.826139+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "BOLAGSNYHET – GRANSKA",
+      "company": "Heba Fastighets",
+      "title": "Heba skänker elverk till Ukraina inför vintern och uppmanar fler fastighetsbolag att bidra",
+      "description": "",
+      "url": "https://mfn.se/a/heba-fastighets/heba-skanker-elverk-till-ukraina-infor-vintern-och-uppmanar-fler-fastighetsbolag-att-bidra",
+      "published": "2026-11-27 00:00:00+00:00",
+      "id": "NEWS:8597aa71c28782453b9f3763",
+      "direction": "Oklar",
+      "importance": "Ej fastställd",
+      "economic_case": "Rubriken räcker inte för att fastställa ekonomisk påverkan.",
+      "risk": "Läs originalmeddelandet och kontrollera finansiella uppgifter.",
+      "article_status": "ok",
+      "article_text": "Heba skänker elverk till Ukraina inför vintern och uppmanar fler fastighetsbolag att bidra 2026-11-27 10:00:00 Heba Fastighets AB donerar 31 elverk till Ukraina. Donationen samordnas av Myndigheten för civilt försvar, som ombesörjer att bidraget matchar de behov ukrainska myndigheter har rapporterat in. Med insatsen vill Heba bidra till att människor i Ukraina klarar den kommande vintern. Nu hoppas vi att fler svenska fastighetsbolag följer efter. Angreppen mot Ukrainas energiinfrastruktur har gång på gång lämnat människor utan el och värme. När kylan nu kommer blir situationen ännu svårare. Elverk är en av de typer av utrustning som behövs för att hålla samhällsviktig verksamhet igång när elnätet slås ut. Vi arbetar varje dag med att skapa trygga hem, och vi vet hur avgörande el och värme är för att vardagen ska fungera. För många människor i Ukraina är det ingen självklarhet i vinter. Kan vi bidra till att göra situationen lite lättare, så ska vi göra det, säger Johan Vogel, styrelseordförande i Heba. Det här är ett konkret sätt för ett fastighetsbolag att hjälpa till. Myndigheten för civilt försvar ser till att det som skänks motsvarar verkliga behov och kommer fram. Jag hoppas att fler fastighetsbolag tar efter, för ju fler vi är som bidrar, desto större blir effekten, säger Johan Vogel. Så fungerar donationer via Myndigheten för civilt försvar Företag och organisationer i Sverige kan skänka materiel och utrustning till Ukraina via Myndigheten för civilt försvar. Myndigheten matchar varje donation mot de behov Ukraina har efterfrågat, främst via EU:s civilskyddsmekanism, och samordnar transporten, som bekostas av EU och/eller myndigheten. Donationerna har hjälpt ukrainska myndigheter att upprätthålla samhällsviktig verksamhet. Företag som vill bidra kan läsa mer: Myndigheten för civilt försvar För mer information kontakta Johan Vogel, styrelseordförande Heba Fastighets AB, +46 70 753 48 11, johan.vogel@hebafast.se Patrik Emanuelsson, vd Heba Fastighets AB, +46 72 582 30 01, patrik.emanuelsson@hebafast.se Om Heba Heba är en långsiktig och erfaren fastighetsägare som utvecklar, äger och förvaltar bostäder och samhällsfastigheter med centrala lägen i Stockholmsregionen och Mälardalen. Genom kunskap och digital infrastruktur erbjuder vi hållbara bostäder som fungerar optimalt — där människor kan leva sina liv fullt ut, nöjda och trygga. Vi skapar värde för hyresgäster, aktieägare och samhälle genom att arbeta proaktivt och bli lite bättre — varje dag, varje vecka, varje år. Heba grundades 1952 och är sedan 1994 noterat på Nasdaq Stockholm AB Nordic Mid Cap. Läs mer på: hebafast.se Bifogade bilder Bild Heba skänker elverk till Ukraina Bifogade filer Heba skänker elverk till Ukraina inför vintern och uppmanar fler fastighetsbolag att bidra Källa MFN",
+      "article_facts": {
+        "excerpts": [],
+        "note": "Utdrag ur originaltexten; transaktionens riktning och belopp måste framgå uttryckligen."
+      },
+      "summary_sv": "Bolaget har publicerat ett meddelande. Innehållet kan inte sammanfattas säkert automatiskt; se originalutdragen.",
+      "analysis_scope": "Hämtad artikeltext – fullständighet ej verifierad",
+      "article_chars": 2797,
+      "company_profile": {
+        "totalRevenue": 624659008,
+        "marketCap": 3747015424,
+        "operatingMargins": 0.66243,
+        "totalCash": 36300000,
+        "totalDebt": 7265900032,
+        "industry": "Real Estate Services",
+        "financialCurrency": "SEK",
+        "currency": "SEK",
+        "longName": "Heba Fastighets AB (publ)",
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/HEBA-B.ST/",
+        "symbol": "HEBA-B.ST"
+      },
+      "order_comparison": null,
+      "analysis_evidence": [],
+      "contract_evidence": [
+        "Vi skapar värde för hyresgäster, aktieägare och samhälle genom att arbeta proaktivt och bli lite bättre — varje dag, varje vecka, varje år."
+      ],
+      "news_type": "Övrigt",
+      "news_score": null,
+      "confidence": "Låg",
+      "surprise": "Ej bedömd",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
+  },
+  "NEWS:5638079c00fbc421785070c2": {
+    "first_seen": "2026-11-27T10:42:47.826139+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "BOLAGSNYHET – GRANSKA",
+      "company": "RaySearch Laboratories",
+      "title": "RaySearch Laboratories",
+      "description": "",
+      "url": "https://mfn.se/all/a/raysearch-laboratories",
+      "published": "2026-11-27 00:00:00+00:00",
+      "id": "NEWS:5638079c00fbc421785070c2",
+      "direction": "Oklar",
+      "importance": "Låg eller osäker",
+      "economic_case": "Rubriken räcker inte för att fastställa ekonomisk påverkan.",
+      "risk": "Läs originalmeddelandet och kontrollera finansiella uppgifter.",
+      "article_status": "article not identified",
+      "article_text": "",
+      "article_facts": {},
+      "summary_sv": "Bolaget har publicerat ett meddelande. Innehållet kan inte sammanfattas säkert automatiskt; se originalutdragen.",
+      "analysis_scope": "Begränsad analys – endast rubrik",
+      "article_chars": 0,
+      "company_profile": {
+        "totalRevenue": 1332300032,
+        "marketCap": 5612219392,
+        "operatingMargins": 0.23238,
+        "totalCash": 158300000,
+        "totalDebt": 406000000,
+        "industry": "Health Information Services",
+        "financialCurrency": "SEK",
+        "currency": "SEK",
+        "longName": "RaySearch Laboratories AB (publ)",
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/RAY-B.ST/",
+        "symbol": "RAY-B.ST"
+      },
+      "order_comparison": null,
+      "analysis_evidence": [],
+      "news_type": "Övrigt",
+      "news_score": null,
+      "confidence": "Låg",
+      "surprise": "Ej bedömd",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
+  },
+  "NEWS:15ef114e0e17bbf954fbf7a8": {
+    "first_seen": "2026-11-27T10:42:47.826139+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "BOLAGSNYHET – GRANSKA",
+      "company": "RaySearch Laboratories",
+      "title": "RaySearch to showcase thermal ablation technology advancements at RSNA 2026",
+      "description": "",
+      "url": "https://mfn.se/a/raysearch-laboratories/raysearch-to-showcase-thermal-ablation-technology-advancements-at-rsna-2026",
+      "published": "2026-11-27 00:00:00+00:00",
+      "id": "NEWS:15ef114e0e17bbf954fbf7a8",
+      "direction": "Oklar",
+      "importance": "Ej fastställd",
+      "economic_case": "Rubriken räcker inte för att fastställa ekonomisk påverkan.",
+      "risk": "Läs originalmeddelandet och kontrollera finansiella uppgifter.",
+      "article_status": "ok",
+      "article_text": "RaySearch to showcase thermal ablation technology advancements at RSNA 2026 2026-11-27 11:25:00 RaySearch Laboratories AB (publ) will participate in the annual RSNA Meeting in Chicago, Illinois, November 29 - December 2. At booth #4951, visitors can explore RaySearch’s latest software solutions in thermal ablation, book product demonstrations, and learn how RaySearch is expanding into interventional and diagnostic radiology to support comprehensive cancer care. RaySearch's thermal ablation confirmation solution was developed in collaboration with leading cancer centers. By combining deformable image registration and Deep Learning Segmentation (DLS), it empowers clinicians to confidently deliver state-of-the-art ablation treatments through automated and streamlined workflows. Achieving optimal ablation margins is a key factor in improving local tumor control when opting for thermal ablation as treatment approach. The COVER-ALL randomized, phase 2, superiority trial conducted at The University of Texas MD Anderson Cancer Center (1) compared the ablative margins in patients with liver tumors using our advanced image-guided ablation solution versus the margins from traditional visual assessment. Software-based assessment achieved optimal ablation margins in 84% of cases, and only 4% of patients showed local tumor progression. In the visual assessment group, optimal ablation margins were achieved in only 15% of cases, and 15% of patients showed local tumor progression. Visitors are welcome to RaySearch's booth to learn the latest about thermal ablation directly from our experts. Visitors will also be able to explore RayWorld, RaySearch's connected approach to comprehensive cancer care, with solutions used in more than 1,200 clinics worldwide. Our solutions can support clinical practice and shape the future of interventional oncology. RayStation®*, a cutting-edge treatment planning system (TPS), is known for its unmatched speed, precision, and support for a wide range of therapies. RayCare®*, the next-generation oncology information system (OIS) designed to unify and streamline clinical workflows across disciplines, brings automation beyond the treatment plan. RayIntelligence® is an oncology analytics system (OAS) that enables cancer clinics to collect, structure and analyze data from the entire clinical ecosystem. More information about RaySearch's activities at the event is available here . “RaySearch has long been a leader in radiation oncology, and we are bringing our expertise in advanced software and workflow automation to interventional oncology. By supporting thermal ablation with innovative confirmation technology, we aim to support clinicians in making more informed decisions and ultimately improve patient care,\" says Johan Löf, founder and CEO of RaySearch. \"RSNA 2026 is an excellent opportunity to share our vision for a more connected and comprehensive approach to cancer treatment.” (1) Odisio B, Albuquerque J, Lin Y et al. Software-based versus visual assessment of the minimal ablative margin in patients with liver tumours undergoing percutaneous thermal ablation (COVER-ALL): a randomised phase 2 trial For more information, please contact: Matt Miley, Head of Marketing, RaySearch Laboratories AB Tel: +46 (0) 8 510 530 00 marketing@raysearchlabs.com Carolina Strömlid, Head of Investor Relations, RaySearch Laboratories AB Tel: +46 (0) 708 807 173 ir@raysearchlabs.com About RaySearch RaySearch Laboratories AB (publ) is a medical technology company that develops innovative software solutions for improved cancer treatment. RaySearch markets the RayStation®* treatment planning system (TPS) and the oncology information system (OIS) RayCare®*. The most recent additions to the RaySearch product line are RayIntelligence® and RayCommand®**. RayIntelligence is an oncology analytics system (OAS) which enables cancer clinics to collect, structure and analyze data. RayCommand, a treatment control system (TCS), is designed to link the treatment machine and the treatment planning and oncology information systems. RaySearch’s software has been sold to over 1,200 clinics in 54 countries. The company was founded in 2000 as a spin-off from the Karolinska Institute in Stockholm and the share has been listed on Nasdaq Stockholm since 2003 (STO: RAY B). More information is available at raysearchlabs.com . Learn more about us on: LinkedIn YouTube *Not available for clinical use or commercial sale in the United States. **RaySearch products and functionalities may be under ongoing development and/or subject to regulatory review and may not be cleared or approved in all jurisdictions. Some products or functionalities described may not be available for clinical use or for sale in the United States or Canada. Attachments RaySearch to showcase thermal ablation technology advancements at RSNA 2026 Källa MFN",
+      "article_facts": {
+        "excerpts": [
+          "RaySearch’s software has been sold to over 1,200 clinics in 54 countries.",
+          "Learn more about us on: LinkedIn YouTube *Not available for clinical use or commercial sale in the United States.",
+          "Some products or functionalities described may not be available for clinical use or for sale in the United States or Canada."
+        ],
+        "note": "Utdrag ur originaltexten; transaktionens riktning och belopp måste framgå uttryckligen."
+      },
+      "summary_sv": "Bolaget har publicerat ett meddelande. Innehållet kan inte sammanfattas säkert automatiskt; se originalutdragen.",
+      "analysis_scope": "Hämtad artikeltext – fullständighet ej verifierad",
+      "article_chars": 4873,
+      "company_profile": {
+        "totalRevenue": 1332300032,
+        "marketCap": 5612219392,
+        "operatingMargins": 0.23238,
+        "totalCash": 158300000,
+        "totalDebt": 406000000,
+        "industry": "Health Information Services",
+        "financialCurrency": "SEK",
+        "currency": "SEK",
+        "longName": "RaySearch Laboratories AB (publ)",
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/RAY-B.ST/",
+        "symbol": "RAY-B.ST"
+      },
+      "order_comparison": null,
+      "analysis_evidence": [],
+      "contract_evidence": [],
+      "news_type": "Övrigt",
+      "news_score": null,
+      "confidence": "Låg",
+      "surprise": "Ej bedömd",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
+  },
+  "NEWS:25b5a7c11349a053289d772b": {
+    "first_seen": "2026-11-27T10:42:47.826139+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "BOLAGSNYHET – GRANSKA",
+      "company": "Alligator Bioscience",
+      "title": "Alligator Bioscience",
+      "description": "",
+      "url": "https://mfn.se/all/a/alligator-bioscience",
+      "published": "2026-11-27 00:00:00+00:00",
+      "id": "NEWS:25b5a7c11349a053289d772b",
+      "direction": "Oklar",
+      "importance": "Låg eller osäker",
+      "economic_case": "Rubriken räcker inte för att fastställa ekonomisk påverkan.",
+      "risk": "Läs originalmeddelandet och kontrollera finansiella uppgifter.",
+      "article_status": "article not identified",
+      "article_text": "",
+      "article_facts": {},
+      "summary_sv": "Bolaget har publicerat ett meddelande. Innehållet kan inte sammanfattas säkert automatiskt; se originalutdragen.",
+      "analysis_scope": "Begränsad analys – endast rubrik",
+      "article_chars": 0,
+      "company_profile": {
+        "totalRevenue": 915000,
+        "marketCap": 23906314,
+        "operatingMargins": -103.31038,
+        "totalCash": 41250000,
+        "totalDebt": 27780000,
+        "industry": "Biotechnology",
+        "financialCurrency": "SEK",
+        "currency": "SEK",
+        "longName": "Alligator Bioscience AB (publ)",
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/ATORX.ST/",
+        "symbol": "ATORX.ST"
+      },
+      "order_comparison": null,
+      "analysis_evidence": [],
+      "news_type": "Övrigt",
+      "news_score": null,
+      "confidence": "Låg",
+      "surprise": "Ej bedömd",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
+  },
+  "NEWS:2ba41fff4439830122640892": {
+    "first_seen": "2026-11-27T10:42:47.826139+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "BOLAGSNYHET – GRANSKA",
+      "company": "Alligator Bioscience",
+      "title": "Bulletin from the extraordinary general meeting in Alligator Bioscience AB",
+      "description": "",
+      "url": "https://mfn.se/a/alligator-bioscience/bulletin-from-the-extraordinary-general-meeting-in-alligator-bioscience-ab-6",
+      "published": "2026-11-27 00:00:00+00:00",
+      "id": "NEWS:2ba41fff4439830122640892",
+      "direction": "Oklar",
+      "importance": "Ej fastställd",
+      "economic_case": "Rubriken räcker inte för att fastställa ekonomisk påverkan.",
+      "risk": "Läs originalmeddelandet och kontrollera finansiella uppgifter.",
+      "article_status": "ok",
+      "article_text": "Bulletin from the extraordinary general meeting in Alligator Bioscience AB 2026-11-27 10:30:00 Today, on 27 November 2026, an extraordinary general meeting was held in Alligator Bioscience AB. A summary of the adopted resolutions follows below. Resolution on (A) directed issue of ordinary shares (equalization issue); (B) amendment of the Articles of Association; and (C) reverse split of ordinary shares The meeting resolved, in accordance with the board of directors' proposal, on a consolidation of ordinary shares (so-called reversed share split) whereby one thousand (1,000) existing ordinary shares are consolidated into one (1) ordinary share (1:1,000). The purpose of the reverse share split is to achieve an appropriate number of shares for the company. In order to enable the reverse share split and to achieve an even quota value after the reverse share split, the meeting also resolved on a directed issue of ordinary shares (equalization issue). Through the equalization issue, the company's share capital increases by SEK 0.76 through the issue of 152 new ordinary shares at a subscription price of SEK 0.005 per share, corresponding to the share's quota value. With deviation from the shareholders' preferential rights, the new ordinary shares can only be subscribed for by Vator Securities AB. The reason for the deviation from the shareholders' preferential rights and for setting the subscription price at the quota value is that the new issue is being carried out to achieve a total number of ordinary shares in the company that is evenly divisible by the consolidation ratio and thus to achieve an even quota value after the reverse share split. The reverse share split means that the number of ordinary shares, which after the directed issue (equalization issue) amounts to a total of 3,568,107,000, is reduced to a total of 3,568,107. The reverse share split also means that the quota value of the share increases from SEK 0.005 to SEK 5. To enable the reverse share split, it was also resolved to amend § 5 of the Articles of Association so that the limits for the number of shares in the company are changed to not less than 3,000,000 and not more than 12,000,000. The board of directors was authorized to determine the record date for the reverse share split, which may not be earlier than the date on which the resolution on the reverse share split has been registered with the Swedish Companies Registration Office. Further information on the procedure for the reverse share split will be published in connection with the board of directors' decision regarding the record date. Resolution on authorization for the board of directors to resolve on issues of warrants The meeting resolved to authorize the board of directors, within the limits set forth in the Articles of Association, up until the next annual general meeting, at one or several occasions, with deviation from the shareholders’ preferential rights, resolve to issue warrants. The right to subscribe for the warrants shall be granted solely to Fenja Capital II A/S (“ Fenja Capital ”). The warrants shall be issued free of charge. The purpose of the authorization and the reasons for the deviation from the shareholders' preferential rights and that the warrants are issued free of charge is to fulfil the company's obligations to Fenja Capital under the loan agreement entered into by the company and Fenja Capital in July 2026 (and as further described in the company's press releases from 23 July 2026 and 29 September 2026). According to the loan agreement, Fenja Capital has received warrants series 2026/2031. The warrants are subject to terms and conditions that contain  recalculation terms that entail a so-called “full dilution protection”, meaning that Fenja Capital, with certain exceptions, shall be compensated in the event of certain corporate actions so that Fenja Capital always has the right to be allocated additional warrants so that the warrants held by Fenja Capital together entail the same dilution as the warrants represented immediately prior to the corporate action, calculated on the number of outstanding ordinary shares in the company. According to the loan agreement, Fenja Capital also has the right to request recalculation of already issued warrants series 2026/2031, which may require the issuance of new warrants of the same series to replace the already issued warrants. Election of board members as well as remuneration for the board members The meeting resolved in accordance with the proposal from the Nomination Committee that the board shall consist of three ordinary board members elected by the general meeting. The meeting further resolved in accordance with the proposal from the Nomination Committee to re-elect Hans-Peter Ostler and Anna Törner as board members and to elect Søren Bregenholt as new board member. Hans-Peter Ostler was re-elected as Chairman of the board. The previous board members Denise Goode and Jörg Möller were not proposed for re-election. In connection with the meeting, the employee representative Karin Nordbladh resigned from her seat on the board. In addition to this, the meeting resolved in accordance with the proposal from the Nomination Committee regarding reduced board remuneration, meaning that remuneration to the board shall be paid with SEK 455,000 to the Chairman of the board of directors and with SEK 210,000 to each of the other board members who are not employed by the company. Remuneration for committee work shall be unchanged and be paid with SEK 125,000 to the Chairman of the Audit Committee, with SEK 50,000 to each of the other members of the Audit Committee, with SEK 50,000 to the Chairman of the Remuneration Committee and with SEK 25,000 to each of the other members of the Remuneration Committee. Søren Bregenholt shall not receive board or committee remuneration during the time he remains as CEO of the company, i.e. up to and including 31 December 2026. The reduced fees will apply from and including the extraordinary general meeting until the next annual general meeting, pro rata. Lund on 27 November 2026 Alligator Bioscience AB (publ) For more information, please contact: Søren Bregenholt, CEO E-mail: soren.bregenholt@alligatorbioscience.com Phone: +46 (0)46 540 82 00 This information was submitted for publication, through the agency of the contact person set out above, at 10:30 a.m. CET on 27 November 2026. Attachments Bulletin from the extraordinary general meeting in Alligator Bioscience AB Källa MFN",
+      "article_facts": {
+        "excerpts": [
+          "Resolution on (A) directed issue of ordinary shares (equalization issue); (B) amendment of the Articles of Association; and (C) reverse split of ordinary shares The meeting resolved, in accordance with the board of directors' proposal, on a consolidation of ordinary shares (so-called reversed share split) whereby one thousand (1,000) existing ordinary shares are consolidated into one (1) ordinary share (1:1,000).",
+          "The purpose of the reverse share split is to achieve an appropriate number of shares for the company.",
+          "In order to enable the reverse share split and to achieve an even quota value after the reverse share split, the meeting also resolved on a directed issue of ordinary shares (equalization issue).",
+          "Through the equalization issue, the company's share capital increases by SEK 0.76 through the issue of 152 new ordinary shares at a subscription price of SEK 0.005 per share, corresponding to the share's quota value."
+        ],
+        "note": "Utdrag ur originaltexten; transaktionens riktning och belopp måste framgå uttryckligen."
+      },
+      "summary_sv": "Bolaget har publicerat ett meddelande. Innehållet kan inte sammanfattas säkert automatiskt; se originalutdragen.",
+      "analysis_scope": "Hämtad artikeltext – fullständighet ej verifierad",
+      "article_chars": 6515,
+      "company_profile": {
+        "totalRevenue": 915000,
+        "marketCap": 23906314,
+        "operatingMargins": -103.31038,
+        "totalCash": 41250000,
+        "totalDebt": 27780000,
+        "industry": "Biotechnology",
+        "financialCurrency": "SEK",
+        "currency": "SEK",
+        "longName": "Alligator Bioscience AB (publ)",
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/ATORX.ST/",
+        "symbol": "ATORX.ST"
+      },
+      "order_comparison": null,
+      "analysis_evidence": [
+        "In order to enable the reverse share split and to achieve an even quota value after the reverse share split, the meeting also resolved on a directed issue of ordinary shares (equalization issue).",
+        "Through the equalization issue, the company's share capital increases by SEK 0.76 through the issue of 152 new ordinary shares at a subscription price of SEK 0.005 per share, corresponding to the share's quota value.",
+        "The reverse share split also means that the quota value of the share increases from SEK 0.005 to SEK 5.",
+        "Resolution on authorization for the board of directors to resolve on issues of warrants The meeting resolved to authorize the board of directors, within the limits set forth in the Articles of Association, up until the next annual general meeting, at one or several occasions, with deviation from the shareholders’ preferential rights, resolve to issue warrants.",
+        "The purpose of the authorization and the reasons for the deviation from the shareholders' preferential rights and that the warrants are issued free of charge is to fulfil the company's obligations to Fenja Capital under the loan agreement entered into by the company and Fenja Capital in July 2026 (and as further described in the company's press releases from 23 July 2026 and 29 September 2026).",
+        "In addition to this, the meeting resolved in accordance with the proposal from the Nomination Committee regarding reduced board remuneration, meaning that remuneration to the board shall be paid with SEK 455,000 to the Chairman of the board of directors and with SEK 210,000 to each of the other board members who are not employed by the company.",
+        "Remuneration for committee work shall be unchanged and be paid with SEK 125,000 to the Chairman of the Audit Committee, with SEK 50,000 to each of the other members of the Audit Committee, with SEK 50,000 to the Chairman of the Remuneration Committee and with SEK 25,000 to each of the other members of the Remuneration Committee."
+      ],
+      "contract_evidence": [],
+      "news_type": "Övrigt",
+      "news_score": null,
+      "confidence": "Låg",
+      "surprise": "Ej bedömd",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
+  },
+  "NEWS:7b8e23b3b02422fc4366a30b": {
+    "first_seen": "2026-11-27T10:42:47.826139+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "BOLAGSNYHET – GRANSKA",
+      "company": "G5 Entertainment",
+      "title": "G5 Entertainment: Value-accretive redemption signals confidence in cash flow",
+      "description": "",
+      "url": "https://mfn.se/a/redeye/g5-entertainment-value-accretive-redemption-signals-confidence-in-cash-flow",
+      "published": "2026-11-27 00:00:00+00:00",
+      "id": "NEWS:7b8e23b3b02422fc4366a30b",
+      "direction": "Oklar",
+      "importance": "Ej fastställd",
+      "economic_case": "Rubriken räcker inte för att fastställa ekonomisk påverkan.",
+      "risk": "Läs originalmeddelandet och kontrollera finansiella uppgifter.",
+      "article_status": "ok",
+      "article_text": "G5 Entertainment: Value-accretive redemption signals confidence in cash flow 2026-11-27 10:16:00 Redeye’s analyst just published a Research Note on G5 Entertainment. Click here to read the article Make sure to add G5 Entertainment to your Watchlist at Redeye and our analysts will notify you if anything relevant happens regarding your companies About Redeye Nordic Growth AB This is a press release from Redeye Nordic Growth AB, a equity research firm specializing in Nordic growth companies within Tech and Life Science. Redeye Nordic Growth is a part of the Redeye group, which also offers services within corporate finance advisory and fund management. https://services.redeye.se/ Attachments G5 Entertainment: Value-accretive redemption signals confidence in cash flow Källa MFN",
+      "article_facts": {
+        "excerpts": [],
+        "note": "Utdrag ur originaltexten; transaktionens riktning och belopp måste framgå uttryckligen."
+      },
+      "summary_sv": "Bolaget har publicerat ett meddelande. Innehållet kan inte sammanfattas säkert automatiskt; se originalutdragen.",
+      "analysis_scope": "Hämtad artikeltext – fullständighet ej verifierad",
+      "article_chars": 783,
+      "company_profile": {
+        "totalRevenue": 83077960,
+        "marketCap": 585369408,
+        "operatingMargins": 0.06514,
+        "totalCash": 26130000,
+        "totalDebt": 125000,
+        "industry": "Electronic Gaming & Multimedia",
+        "financialCurrency": "USD",
+        "currency": "SEK",
+        "longName": "G5 Entertainment AB (publ)",
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/G5EN.ST/",
+        "symbol": "G5EN.ST"
+      },
+      "order_comparison": null,
+      "analysis_evidence": [],
+      "contract_evidence": [],
+      "news_type": "Övrigt",
+      "news_score": null,
+      "confidence": "Låg",
+      "surprise": "Ej bedömd",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
+  },
+  "NEWS:57806310a4b0b045d20361c2": {
+    "first_seen": "2026-11-27T10:42:47.826139+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "BOLAGSNYHET – GRANSKA",
+      "company": "Heba Fastighets",
+      "title": "Heba Fastighets AB",
+      "description": "",
+      "url": "https://mfn.se/all/a/heba-fastighets",
+      "published": "2026-11-27 00:00:00+00:00",
+      "id": "NEWS:57806310a4b0b045d20361c2",
+      "direction": "Oklar",
+      "importance": "Låg eller osäker",
+      "economic_case": "Rubriken räcker inte för att fastställa ekonomisk påverkan.",
+      "risk": "Läs originalmeddelandet och kontrollera finansiella uppgifter.",
+      "article_status": "article not identified",
+      "article_text": "",
+      "article_facts": {},
+      "summary_sv": "Bolaget har publicerat ett meddelande. Innehållet kan inte sammanfattas säkert automatiskt; se originalutdragen.",
+      "analysis_scope": "Begränsad analys – endast rubrik",
+      "article_chars": 0,
+      "company_profile": {
+        "totalRevenue": 624659008,
+        "marketCap": 3747015424,
+        "operatingMargins": 0.66243,
+        "totalCash": 36300000,
+        "totalDebt": 7265900032,
+        "industry": "Real Estate Services",
+        "financialCurrency": "SEK",
+        "currency": "SEK",
+        "longName": "Heba Fastighets AB (publ)",
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/HEBA-B.ST/",
+        "symbol": "HEBA-B.ST"
+      },
+      "order_comparison": null,
+      "analysis_evidence": [],
+      "news_type": "Övrigt",
+      "news_score": null,
+      "confidence": "Låg",
+      "surprise": "Ej bedömd",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
+  },
+  "NEWS:b41e048cc5a74887ddedd351": {
+    "first_seen": "2026-11-27T10:42:47.826139+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "BOLAGSNYHET – GRANSKA",
+      "company": "AcouSort",
+      "title": "AcouSort selected to present at HealthTech Investor Summit",
+      "description": "",
+      "url": "https://mfn.se/a/acousort/acousort-selected-to-present-at-healthtech-investor-summit",
+      "published": "2026-11-27 00:00:00+00:00",
+      "id": "NEWS:b41e048cc5a74887ddedd351",
+      "direction": "Oklar",
+      "importance": "Ej fastställd",
+      "economic_case": "Rubriken räcker inte för att fastställa ekonomisk påverkan.",
+      "risk": "Läs originalmeddelandet och kontrollera finansiella uppgifter.",
+      "article_status": "ok",
+      "article_text": "AcouSort selected to present at HealthTech Investor Summit 2026-11-27 09:45:00 AcouSort has been invited to participate in the pitch program at the HealthTech Investor Summit in Bruges on December 1-2, where CEO Torsten Freltoft will present the company and its acoustofluidic technology to an audience of investors and industry representatives. The HealthTech Investor Summit brings together companies, investors and stakeholders within the healthtech and life science sectors. AcouSort’s participation provides an opportunity to present the company’s technology platform and commercial strategy, with a particular focus on the potential of acoustofluidics to enable automated and integrated sample preparation in future diagnostic and life science applications. “We are very pleased to have been invited to present AcouSort at the HealthTech Investor Summit. It is an excellent opportunity for presenting our technology and commercial strategy to an investor audience and to highlight the role we believe acoustofluidics can play in the continued automation of sample preparation in life science and diagnostics,” says Torsten Freltoft, CEO of AcouSort. FOR FURTHER INFORMATION ABOUT ACOUSORT, PLEASE CONTACT: Torsten Freltoft, CEO Telephone: +45 2045 0854 E-mail: torsten.freltoft@acousort.com ABOUT ACOUSORT AcouSort AB (corporate registration number 556824-1037) is an innovative technology company focusing on developing products and solutions for integrated preparation of biological samples. With the help of sound waves, the company's products can separate blood cells, concentrate, purify, and stain cells, exosomes, and bacteria from biological samples. The technology of the company's products is acoustofluidics, where sound waves and microfluidics enable automated handling of samples in a range of application areas, from research on new biomarkers to the development of new diagnostic systems for near-patient testing – so-called Point-of Care (POC) systems. The company's commercialization strategy is based on the already proven business model of providing separation modules to diagnostic system manufacturers for integrated sample preparation as well as to continue the commercialization of the company's research instruments. With the help of the company's products and development of point-of-care tests, new diagnostic systems and treatments are enabled, addressing some of the most challenging disease areas of our time: cancer, infectious diseases, and cardiovascular diseases. AcouSort is listed at Nasdaq First North Growth Market. The company’s Certified Adviser is Tapper Partners AB. Attachments AcouSort selected to present at HealthTech Investor Summit Källa MFN",
+      "article_facts": {
+        "excerpts": [],
+        "note": "Utdrag ur originaltexten; transaktionens riktning och belopp måste framgå uttryckligen."
+      },
+      "summary_sv": "Bolaget har publicerat ett meddelande. Innehållet kan inte sammanfattas säkert automatiskt; se originalutdragen.",
+      "analysis_scope": "Hämtad artikeltext – fullständighet ej verifierad",
+      "article_chars": 2694,
+      "company_profile": {
+        "totalRevenue": 8863000,
+        "marketCap": 58200732,
+        "operatingMargins": -1.4155499,
+        "totalCash": 6867000,
+        "totalDebt": 0,
+        "industry": "Biotechnology",
+        "financialCurrency": "SEK",
+        "currency": "SEK",
+        "longName": "AcouSort AB (publ)",
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/ACOU.ST/",
+        "symbol": "ACOU.ST"
+      },
+      "order_comparison": null,
+      "analysis_evidence": [],
+      "contract_evidence": [],
+      "news_type": "Övrigt",
+      "news_score": null,
+      "confidence": "Låg",
+      "surprise": "Ej bedömd",
+      "analysis_signal": "AVVAKTA",
+      "ai_status": "Regelbaserad analys – betald AI avstängd"
+    },
+    "observations": {}
+  },
+  "NEWS:c29e337114d8c9e360957425": {
+    "first_seen": "2026-11-27T10:42:47.826139+00:00",
+    "item": {
+      "kind": "NYHET-VAKTA",
+      "category": "BOLAGSNYHET – GRANSKA",
+      "company": "AcouSort",
+      "title": "AcouSort utvalt att presentera vid HealthTech Investor Summit",
+      "description": "",
+      "url": "https://mfn.se/a/acousort/acousort-utvalt-att-presentera-vid-healthtech-investor-summit",
+      "published": "2026-11-27 00:00:00+00:00",
+      "id": "NEWS:c29e337114d8c9e360957425",
+      "direction": "Oklar",
+      "importance": "Ej fastställd",
+      "economic_case": "Rubriken räcker inte för att fastställa ekonomisk påverkan.",
+      "risk": "Läs originalmeddelandet och kontrollera finansiella uppgifter.",
+      "article_status": "ok",
+      "article_text": "AcouSort utvalt att presentera vid HealthTech Investor Summit 2026-11-27 09:45:00 AcouSort har bjudits in att delta i pitchprogrammet vid HealthTech Investor Summit i Brygge den 1–2 december, där vd Torsten Freltoft kommer att presentera bolaget och dess akustofluidiska teknologi för en publik av investerare och branschrepresentanter. HealthTech Investor Summit samlar bolag, investerare och intressenter inom healthtech- och life science-sektorerna. AcouSorts deltagande ger en möjlighet att presentera bolagets teknologiplattform och kommersiella strategi, med särskilt fokus på akustofluidikens potential att möjliggöra automatiserad och integrerad provberedning i framtida tillämpningar inom diagnostik och life science. ”Vi är mycket glada över att ha blivit inbjudna att presentera AcouSort vid HealthTech Investor Summit. Det är ett utmärkt tillfälle att presentera vår teknologi och kommersiella strategi för en investerarpublik och att lyfta fram den roll vi tror att akustofluidik kan spela i den fortsatta automatiseringen av provberedning inom life science och diagnostik”, säger Torsten Freltoft, vd för AcouSort. FÖR YTTERLIGARE INFORMATION OM ACOUSORT, VÄNLIGEN KONTAKTA: Torsten Freltoft, vd Telefon: +45 2045 0854 E-post: torsten.freltoft@acousort.com OM ACOUSORT AcouSort AB (organisationsnummer 556824-1037) är ett innovativt teknologiföretag som fokuserar på att utveckla produkter och lösningar för integrerad hantering av biologiska prover. Med hjälp av ljudvågor kan företagets produkter separera blodceller från varandra, koncentrera, rena upp och färga in celler, exosomer och bakterier från biologiska prover. Teknologin bakom bolagets produkter är akustofluidik, där ljudvågor i kombination med mikrofluidik möjliggör automatiserad hantering av prover inom en rad applikationsområden från forskning kring nya biomarkörer till utveckling av nya diagnostiska system för patientnära testning – så kallade Point-of Care (POC) system. Bolagets kommersialiseringsstrategi bygger på den redan validerade affärsmodellen, att tillhandahålla separationsmoduler till diagnostiska systemtillverkare för integrerad provhantering så väl som att fortsätta kommersialiseringen av företagets forskningsinstrument. Med hjälp av bolagets produkter effektiviseras forskning och utveckling av patientnära tester, nya diagnostiska system och behandlingar som adresserar några av vår tids mest utmanade sjukdomsområden: cancer, infektionsmedicin och hjärt- och kärlsjukdomar. AcouSort AB är noterat på Nasdaq First North Growth Market. Bolagets Certified Adviser är Tapper Partners AB. Bifogade filer AcouSort utvalt att presentera vid HealthTech Investor Summit Källa MFN",
+      "article_facts": {
+        "excerpts": [],
+        "note": "Utdrag ur originaltexten; transaktionens riktning och belopp måste framgå uttryckligen."
+      },
+      "summary_sv": "Bolaget har publicerat ett meddelande. Innehållet kan inte sammanfattas säkert automatiskt; se originalutdragen.",
+      "analysis_scope": "Hämtad artikeltext – fullständighet ej verifierad",
+      "article_chars": 2678,
+      "company_profile": {
+        "totalRevenue": 8863000,
+        "marketCap": 58200732,
+        "operatingMargins": -1.4155499,
+        "totalCash": 6867000,
+        "totalDebt": 0,
+        "industry": "Biotechnology",
+        "financialCurrency": "SEK",
+        "currency": "SEK",
+        "longName": "AcouSort AB (publ)",
+        "status": "ok",
+        "source": "https://finance.yahoo.com/quote/ACOU.ST/",
+        "symbol": "ACOU.ST"
+      },
+      "order_comparison": null,
+      "analysis_evidence": [],
+      "contract_evidence": [],
+      "news_type": "Övrigt",
+      "news_score": null,
+      "confidence": "Låg",
+      "surprise": "Ej bedömd",
       "analysis_signal": "AVVAKTA",
       "ai_status": "Regelbaserad analys – betald AI avstängd"
     },

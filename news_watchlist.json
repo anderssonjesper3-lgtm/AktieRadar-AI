@@ -11,7 +11,10 @@
       "segment_verified": true,
       "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
       "segment_effective": "2026-01-02",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Better Collective",
@@ -23,7 +26,10 @@
       "segment_verified": true,
       "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
       "segment_effective": "2026-01-02",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Ovzon",
@@ -40,7 +46,10 @@
       "segment": "Mid Cap",
       "segment_verified": true,
       "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
-      "segment_effective": "2026-01-02"
+      "segment_effective": "2026-01-02",
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Karnell Group",
@@ -52,7 +61,10 @@
       "segment_verified": true,
       "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
       "segment_effective": "2026-01-02",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Svedbergs Group",
@@ -64,7 +76,10 @@
       "segment_verified": true,
       "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
       "segment_effective": "2026-01-02",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Vicore Pharma",
@@ -76,7 +91,10 @@
       "segment_verified": true,
       "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
       "segment_effective": "2026-01-02",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Nelly Group",
@@ -88,7 +106,10 @@
       "segment_verified": true,
       "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
       "segment_effective": "2026-01-02",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Egetis Therapeutics",
@@ -100,7 +121,10 @@
       "segment_verified": true,
       "segment_source": "https://view.news.eu.nasdaq.com/view?id=beea8b646fe73fc18cbd50835d7a6b6a6&lang=en",
       "segment_effective": "2026-01-02",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Sedana Medical",
@@ -202,7 +226,36 @@
       "segment": "Mid Cap",
       "segment_verified": true,
       "segment_source": "https://attachment.news.eu.nasdaq.com/a3f02bcd5d42f4f2e8687516fb6bfcefa",
-      "segment_effective": "2026-08-31"
+      "segment_effective": "2026-08-31",
+      "subsidiaries": [
+        "MilDef International AB",
+        "MilDef Products AB",
+        "MilDef Ltd",
+        "MilDef Inc",
+        "MilDef AS",
+        "MilDef Sweden AB",
+        "Sysint AS",
+        "MilDef A/S",
+        "MilDef Oy",
+        "MilDef Germany Holding GmbH",
+        "roda computer GmbH",
+        "roda computer SAS",
+        "Westek Technology Limited",
+        "Handheld Group AB",
+        "Handheld APAC Pty Ltd",
+        "Handheld Swiss GmbH",
+        "MilDef GmbH",
+        "MilDef UK Limited"
+      ],
+      "subsidiary_verification": {
+        "status": "partial_historical",
+        "checked_on": "2026-11-27",
+        "sources": [
+          "https://investors.mildef.com/wp-content/uploads/2026/04/MilDef-Annual-and-sustainability-report-2025-ENG.pdf",
+          "https://mildef.com/defense-insights/news/roda-and-westek-become-mildef/"
+        ],
+        "note": "2025 annual report note 14 and September 2026 legal name changes; current complete ownership not verified."
+      }
     },
     {
       "name": "AcadeMedia",
@@ -214,7 +267,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Acast",
@@ -226,7 +282,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Alligo",
@@ -238,7 +297,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Ambea",
@@ -250,7 +312,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Apotea",
@@ -262,7 +327,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Arctic Paper",
@@ -274,7 +342,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Arjo",
@@ -286,7 +357,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Attendo",
@@ -298,7 +372,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Avarda Bank",
@@ -310,7 +387,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Bergman & Beving",
@@ -322,7 +402,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Besqab",
@@ -334,7 +417,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "BHG Group",
@@ -346,7 +432,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "BICO Group",
@@ -358,7 +447,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "BioGaia",
@@ -370,7 +462,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "BioInvent",
@@ -382,7 +477,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Bonava",
@@ -394,7 +492,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Boozt",
@@ -406,7 +507,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Brinova Fastigheter",
@@ -418,7 +522,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "BTS Group",
@@ -430,7 +537,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Byggmax",
@@ -442,7 +552,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Catella",
@@ -454,7 +567,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Cavotec",
@@ -466,7 +582,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "CellaVision",
@@ -478,7 +597,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Cibus",
@@ -490,7 +612,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Cloetta",
@@ -502,7 +627,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Coor",
@@ -514,7 +642,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "CTT Systems",
@@ -526,7 +657,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Diös Fastigheter",
@@ -538,7 +672,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Duni",
@@ -550,7 +687,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Dustin",
@@ -562,7 +702,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Dynavox Group",
@@ -574,7 +717,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Eastnine",
@@ -586,7 +732,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Elanders",
@@ -598,7 +747,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Emilshus",
@@ -610,7 +762,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Enea",
@@ -622,7 +777,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Enity Holding",
@@ -634,7 +792,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Ependion",
@@ -646,7 +807,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Ework Group",
@@ -658,7 +822,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Fagerhult",
@@ -670,7 +837,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Fasadgruppen",
@@ -682,7 +852,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Flat Capital",
@@ -694,7 +867,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Flerie",
@@ -706,7 +882,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "FM Mattsson",
@@ -718,7 +897,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Genova Property Group",
@@ -730,7 +912,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Gentoo Media",
@@ -742,7 +927,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Green Landscaping",
@@ -754,7 +942,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Hansa Biopharma",
@@ -766,7 +957,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Hanza",
@@ -778,7 +972,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Heba Fastighets",
@@ -790,7 +987,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Hexatronic",
@@ -802,7 +1002,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Hoist Finance",
@@ -814,7 +1017,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Humana",
@@ -826,7 +1032,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Humble Group",
@@ -838,7 +1047,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Instalco",
@@ -850,7 +1062,43 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiaries": [
+        "APC Elinstallatören AB",
+        "BI-Vent AB",
+        "Dala Kylmekanik AB",
+        "Alf Näslunds Elinst AB",
+        "Forsséns EL AB",
+        "HPJ Welding Sweden AB",
+        "Installations Service AB",
+        "Klimatrör AB",
+        "Lampans Elinstallationer AB",
+        "Milen Ventilation AB",
+        "MSI-Järn AB",
+        "MSI-Rör AB",
+        "Rörgruppen AB",
+        "Rörmokaren AB",
+        "Pörtema AB Nyköping",
+        "AB Tidstad Rörinstallationer",
+        "Elektriker’n Asker AS",
+        "Romerike Elektro AS",
+        "Manglerud Rørleggerbedrift AS",
+        "Rørteft AS",
+        "Teknisk Ventilasjon AS",
+        "Sähkö-Arkia Oy",
+        "LVI-Paavola Oy",
+        "Insinööritoimisto Palosaari Oy",
+        "SATAM Oy",
+        "Twinputki Oy"
+      ],
+      "subsidiary_verification": {
+        "status": "partial_historical",
+        "checked_on": "2026-11-27",
+        "sources": [
+          "https://instalco.se/media/miepw3xj/instalco_annual-and-sustainability-report_2025.pdf"
+        ],
+        "note": "Selected identifiable names from 2025 report p143, not exhaustive; minority holding Fabri excluded."
+      }
     },
     {
       "name": "Intea Fastigheter",
@@ -862,7 +1110,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Intrum",
@@ -874,7 +1125,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Inwido",
@@ -886,7 +1140,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "ITAB Group",
@@ -898,7 +1155,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "John Mattson",
@@ -910,7 +1170,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "K-Fast Holding",
@@ -922,7 +1185,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "KABE Group",
@@ -934,7 +1200,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Karnov Group",
@@ -946,7 +1215,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Knowit",
@@ -958,7 +1230,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Lime Technologies",
@@ -970,7 +1245,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Linc",
@@ -982,7 +1260,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Linjemontage",
@@ -994,7 +1275,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Logistea",
@@ -1006,7 +1290,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "MedCap",
@@ -1018,7 +1305,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "MEKO",
@@ -1030,7 +1320,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Meren Energy",
@@ -1042,7 +1335,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Momentum Group",
@@ -1054,7 +1350,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Morrow Bank",
@@ -1066,7 +1365,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Nederman",
@@ -1078,7 +1380,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Neobo Fastigheter",
@@ -1090,7 +1395,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Net Insight",
@@ -1102,7 +1410,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Nivika Fastigheter",
@@ -1114,7 +1425,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Nobia",
@@ -1126,7 +1440,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Norion Bank",
@@ -1138,7 +1455,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Orrön Energy",
@@ -1150,7 +1470,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Platzer Fastigheter",
@@ -1162,7 +1485,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "PowerCell",
@@ -1174,7 +1500,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Prisma Properties",
@@ -1186,7 +1515,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Proact IT Group",
@@ -1198,7 +1530,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Ratos",
@@ -1210,7 +1545,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "RaySearch Laboratories",
@@ -1222,7 +1560,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Rejlers",
@@ -1234,7 +1575,33 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiaries": [
+        "Rejlers Sverige AB",
+        "Rejlers Energiprojekt AB",
+        "Rejlers Defence AB",
+        "Helenius AB",
+        "Solvina AB",
+        "Rejlers Finland Oy",
+        "Rejlers Building Oy",
+        "PM Rejlers Oy",
+        "SRT Oy",
+        "LK Paloninsinöörit Oy",
+        "Rejlers Norge AS",
+        "Rejlers Engineering AS",
+        "Rejlers Elsikkerhet AS",
+        "Omega Holtan AS",
+        "AJL AS",
+        "Karl Knudsen AS"
+      ],
+      "subsidiary_verification": {
+        "status": "partial_historical",
+        "checked_on": "2026-11-27",
+        "sources": [
+          "https://www.rejlers.com/app/uploads/sites/2/2025/04/Rejlers_AR24_SE_utskrift.pdf"
+        ],
+        "note": "Historical 2024 group disclosures; current ownership not verified; proposed Multiconsult merger not included."
+      }
     },
     {
       "name": "Revolution Race",
@@ -1248,7 +1615,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Rusta",
@@ -1260,7 +1630,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Salix Group",
@@ -1272,7 +1645,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Scandi Standard",
@@ -1284,7 +1660,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Sdiptech",
@@ -1296,7 +1675,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Silex Microsystems",
@@ -1308,7 +1690,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Acrinova",
@@ -2436,7 +2821,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Cynca Nordic",
@@ -2448,7 +2836,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "NOTE",
@@ -2460,7 +2851,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "SBB",
@@ -2472,7 +2866,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "SmartCraft",
@@ -2484,7 +2881,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Stendörren Fastigheter",
@@ -2496,7 +2896,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Stenhus Fastigheter",
@@ -2508,7 +2911,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Stillfront",
@@ -2520,7 +2926,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Stockholm Nordtech Group",
@@ -2532,7 +2941,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Storytel",
@@ -2544,7 +2956,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Sveafastigheter",
@@ -2556,7 +2971,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Swedish Logistic Property",
@@ -2568,7 +2986,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Synsam",
@@ -2580,7 +3001,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Traction",
@@ -2592,7 +3016,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Trianon",
@@ -2604,7 +3031,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Tången Industrikapital",
@@ -2616,7 +3046,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "VBG Group",
@@ -2628,7 +3061,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "VEF",
@@ -2640,7 +3076,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Viaplay",
@@ -2652,7 +3091,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Viscaria",
@@ -2664,7 +3106,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "VNV Global",
@@ -2676,7 +3121,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Volati",
@@ -2688,7 +3136,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "XANO Industri",
@@ -2700,7 +3151,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Xvivo Perfusion",
@@ -2712,7 +3166,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "Öresund",
@@ -2724,7 +3181,10 @@
       "segment_verified": true,
       "segment_source": "https://aktieradar.se/mid-cap/",
       "segment_verification": "third-party list, not exchange-verified",
-      "feeds": []
+      "feeds": [],
+      "subsidiary_verification": {
+        "status": "pending"
+      }
     },
     {
       "name": "KDventures",

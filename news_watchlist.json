@@ -857,8 +857,39 @@
       "segment_verification": "third-party list, not exchange-verified",
       "feeds": [],
       "subsidiary_verification": {
-        "status": "pending"
-      }
+        "status": "partial_historical",
+        "checked_on": "2026-11-28",
+        "as_of": "2025-12-31",
+        "sources": [
+          "https://www.coor.com/globalassets/coor-group/12-documents/annual-reports/eng/2025/en_coor_asr_2025.pdf",
+          "https://www.coor.se/en/supplier/invoicing/invoice-information/",
+          "https://www.coor.com/contact/",
+          "https://www.coor.com/"
+        ],
+        "note": "All 20 direct and indirect subsidiaries in annual report 2025 note 32, each 100% at 2025-12-31. Current supplier page confirms several Swedish legal names; contact page confirms operating presence, not individual ownership. Current homepage announces agreement to acquire Insider Group; completion and legal entities not verified, excluded. Individual ownership changes in 2026 not fully verified."
+      },
+      "subsidiaries": [
+        "Coor Service Management Group AB",
+        "Coor Service Management AB",
+        "Coor Service Management APS AB",
+        "Addici Security AB",
+        "Coor Service Management CTS AB",
+        "Coor ILV AB",
+        "Middlepoint AB",
+        "Sanmix AB",
+        "Coor Service Management LB 3 AB",
+        "Coor Service Management LB 4 AB",
+        "Coor Service Management A/S",
+        "Coor Service Management AS",
+        "Coor Cleaning Catering and Property AS",
+        "Coor Offshore AS",
+        "Coor Service Management Øst AS",
+        "Coor Service Management OY",
+        "Coor Service Management NV",
+        "Coor DOC NV",
+        "Addici Security NV",
+        "Coor Service Management OÜ"
+      ]
     },
     {
       "name": "CTT Systems",

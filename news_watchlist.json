@@ -752,8 +752,38 @@
       "segment_verification": "third-party list, not exchange-verified",
       "feeds": [],
       "subsidiary_verification": {
-        "status": "pending"
-      }
+        "status": "complete_as_of_report",
+        "checked_on": "2026-11-28",
+        "as_of": "2025-12-31",
+        "sources": [
+          "https://storage.mfn.se/6b626193-9114-4c8b-8f43-dd298ad492b5/annual-report-2025.pdf",
+          "https://www.cavotec.com/contact"
+        ],
+        "note": "All 21 entities in consolidated annual report 2025 note 3, p. 62, direct or indirect 100% ownership at 2025-12-31. Page 63 confirms Cavotec SA and Cavotec Swiss SA merged into Cavotec Switzerland SA and Cavotec Realty Norway AS liquidated; excluded. Current official contact page confirms Swedish parent but location map does not expose individual entities; ownership after 2025-12-31 not independently verified."
+      },
+      "subsidiaries": [
+        "Cavotec Australia Pty Ltd",
+        "Cavotec Cleantech Malaysia SDN. BHD.",
+        "Cavotec Germany GmbH",
+        "Cavotec Finland OY",
+        "Cavotec France RMS SA",
+        "Cavotec Group Holdings NV",
+        "Cavotec Hong Kong Ltd",
+        "Cavotec India Ltd",
+        "Cavotec International Ltd",
+        "Cavotec Micro-control AS",
+        "Cavotec FZE",
+        "Cavotec MoorMaster Ltd",
+        "Cavotec Nederland BV",
+        "Cavotec Realty Germany BV",
+        "Cavotec Switzerland SA",
+        "Cavotec Shanghai Ltd",
+        "Cavotec Singapore Pte Ltd",
+        "Cavotec Specimas SpA",
+        "Cavotec Sverige AB",
+        "Cavotec USA Inc.",
+        "Ipalco BV"
+      ]
     },
     {
       "name": "CellaVision",

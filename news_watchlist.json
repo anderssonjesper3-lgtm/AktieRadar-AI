@@ -1052,8 +1052,54 @@
       "segment_verification": "third-party list, not exchange-verified",
       "feeds": [],
       "subsidiary_verification": {
-        "status": "pending"
-      }
+        "status": "partial_historical",
+        "checked_on": "2026-11-28",
+        "as_of": "2025-12-31",
+        "sources": [
+          "https://storage.mfn.se/7c5ddb5a-9cb4-4c23-9b68-2051c04ce5a7/ependion-ars-och-hallbarhetsredovisning-2025.pdf",
+          "https://www.ependion.com/en/media/contacts",
+          "https://www.ependion.com/en/about-us/ceo-statement"
+        ],
+        "note": "2025 annual report note 14, year-end table: 36 of 37 disclosed legal names, all 100% group ownership as of 2025-12-31. Korenix omitted pending clarification of zero carrying value and current operating status. RazorSecure excluded as minority investment. Current contacts corroborate Beijer Electronics AB and Westermo Network Technologies AB; Q1 2026 CEO statement corroborates Welotec integration, not current individual legal ownership. Other post-year-end ownership not independently verified."
+      },
+      "subsidiaries": [
+        "Westermo Network Technologies AB",
+        "Westermo Data Communications AB",
+        "Westermo Fastighets AB",
+        "Westermo Data Communications A/S",
+        "Westermo Data Communications Ltd.",
+        "Westermo Data Communications GmbH",
+        "Westermo Data Communications SARL",
+        "Westermo Data Communications SL",
+        "Westermo Data Communications B.V.",
+        "Westermo Data Communications Pte Ltd.",
+        "Westermo Data Communications Pty Ltd.",
+        "Westermo India Private Ltd",
+        "Nera Management AG",
+        "Westermo Neratec AG",
+        "Virtual Access Holdings Ltd.",
+        "Westermo Ireland Limited",
+        "Virtual Access Technology Ltd.",
+        "Westermo Eltec GmbH",
+        "Westermo Germany Holding GmbH",
+        "Welotec GmbH",
+        "Beijer Electronics AB",
+        "Brodersen Automation AB",
+        "Beijer Electronics AS",
+        "Beijer Electronics A/S",
+        "Beijer Electronics GmbH",
+        "Smart-HMI GmbH",
+        "Beijer Electronics Trading (Shanghai) Co, Ltd",
+        "Beijer Electronics Corp.",
+        "Beijer Electronics Korea Co., Ltd.",
+        "Beijer Elektronik ve Tic. A.Ş",
+        "Beijer Electronics UK Ltd",
+        "Beijer Electronics B.V.",
+        "Beijer Electronics Automation AB",
+        "Beijer Group Holding Inc.",
+        "Beijer Electronics Inc.",
+        "Westermo Data Communications Inc."
+      ]
     },
     {
       "name": "Ework Group",

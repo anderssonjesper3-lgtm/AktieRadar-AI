@@ -959,8 +959,36 @@
       "segment_verification": "third-party list, not exchange-verified",
       "feeds": [],
       "subsidiary_verification": {
-        "status": "pending"
-      }
+        "status": "partial_historical",
+        "checked_on": "2026-11-28",
+        "as_of": "2026-08-31",
+        "sources": [
+          "https://www.dustingroup.com/sites/dustin/files/pr/202511182295-1.pdf",
+          "https://financialfilings.com/filings/dustin-group/annual-report/2026/76357077/",
+          "https://www.dustingroup.com/sv/node/1228",
+          "https://www.dustin.se/terms"
+        ],
+        "note": "All 17 direct and indirect holdings listed at 100% in official 2024/25 annual report note P8, page 121, and corroborated at 2026-08-31 by opened third-party reproduction of 2025/26 report note P8, page 123. Official 2025/26 publication notice opened; direct PDF could not be opened due to size limit. Current Swedish terms confirm Dustin Sverige AB legal name and registration number, not ownership. No individual ownership after 2026-08-31 independently verified. Mid Cap classification is from third-party list, not exchange-verified."
+      },
+      "subsidiaries": [
+        "Dustin AB",
+        "Dustin Belgium N.V.",
+        "Dustin Netherlands B.V.",
+        "Dustin Supply Chain Benelux B.V.",
+        "Dustin A/S",
+        "Dustin Finland Oy",
+        "Dustin NL B.V.",
+        "Dustin Norway AS",
+        "Dustin Supply Chain Netherlands B.V.",
+        "Dustin Sverige AB",
+        "Inventio.IT A/S",
+        "NORISK Beheer B.V.",
+        "NORISK Facilitair B.V.",
+        "Sincerus B.V.",
+        "Sincerus Consultancy B.V.",
+        "TopCrowd B.V.",
+        "Dustin NSMS B.V."
+      ]
     },
     {
       "name": "Dynavox Group",
